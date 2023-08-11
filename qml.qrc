@@ -1,0 +1,43 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>translator/England.qm</file>
+        <file>Style.qml</file>
+        <file>My_Settings.qml</file>
+        <file>Toast.qml</file>
+        <file>ToastManager.qml</file>
+        <file>Utils.qml</file>
+        <file>icons/moon_stars_light.svg</file>
+        <file>icons/test_icon.icns</file>
+        <file>pages/Home_Page.qml</file>
+        <file>Design_Values.qml</file>
+        <file>fonts/Circular_Std_Bold.ttf</file>
+        <file>fonts/CircularStd_Book.ttf</file>
+        <file>images/logo_white_trans.png</file>
+        <file>starts_elements/Splash_Screen.qml</file>
+        <file>starts_elements/Onboard_Screen.qml</file>
+        <file>App_Page.qml</file>
+        <file>test_qml.qml</file>
+        <file>icons/light_theme/home_2.svg</file>
+        <file>pages/Calib_Page.qml</file>
+        <file>pages/History_Page.qml</file>
+        <file>pages/Settings_Page.qml</file>
+        <file>pages/home_pages/Start_Task_Page.qml</file>
+        <file>pages/home_pages/Charts_Page.qml</file>
+        <file>icons/light_theme/navigation/add.svg</file>
+        <file>icons/light_theme/navigation/home.svg</file>
+        <file>icons/light_theme/navigation/setting.svg</file>
+        <file>icons/light_theme/navigation/edit.svg</file>
+        <file>icons/light_theme/navigation/document.svg</file>
+        <file>icons/light_theme/navigation/document_accent.svg</file>
+        <file>icons/light_theme/navigation/edit_accent.svg</file>
+        <file>icons/light_theme/navigation/home_accent.svg</file>
+        <file>icons/light_theme/navigation/setting_accent.svg</file>
+        <file>pages/home_pages/Drop_db_Page.qml</file>
+        <file>icons/light_theme/home_page/arrow_top.svg</file>
+        <file>icons/light_theme/top_bar/arrow_left.svg</file>
+        <file>icons/light_theme/top_bar/arrow_left_1.svg</file>
+        <file>icons/light_theme/top_bar/export.svg</file>
+        <file>icons/light_theme/top_bar/more.svg</file>
+    </qresource>
+</RCC>

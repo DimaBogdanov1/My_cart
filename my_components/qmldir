@@ -1,0 +1,20 @@
+module my_components
+
+# Elements
+Custom_Slider 1.0 Elements/Custom_Slider.qml
+Custom_Switch 1.0 Elements/Custom_Switch.qml
+Custom_Button 1.0 Elements/Custom_Button.qml
+Custom_Combobox 1.0 Elements/Custom_Combobox.qml
+Custom_Label 1.0 Elements/Custom_Label.qml
+Test_cmb 1.0 Elements/Test_cmb.qml
+
+
+# Animations
+Hover_Anim 1.0 Animations/Hover_Anim.qml
+Content_Up_Down_Anim 1.0  Animations/Content_Up_Down_Anim.qml
+Opacity_Anim 1.0 Animations/Opacity_Anim.qml
+
+Measure_Block 1.0 Measure_Block.qml
+Navigation_Element 1.0 Navigation_Element.qml
+
+Custom_TopBar 1.0 Custom_TopBar.qml

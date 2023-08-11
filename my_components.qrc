@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>my_components/qmldir</file>
+        <file>my_components/Elements/Custom_Button.qml</file>
+        <file>my_components/Elements/Custom_Slider.qml</file>
+        <file>my_components/Elements/Custom_Switch.qml</file>
+        <file>my_components/Navigation_Element.qml</file>
+        <file>my_components/Animations/Hover_Anim.qml</file>
+        <file>my_components/Animations/Content_Up_Down_Anim.qml</file>
+        <file>my_components/Animations/Opacity_Anim.qml</file>
+        <file>my_components/Elements/Custom_Combobox.qml</file>
+        <file>my_components/Elements/Custom_Label.qml</file>
+        <file>my_components/Measure_Block.qml</file>
+        <file>my_components/Custom_TopBar.qml</file>
+    </qresource>
+</RCC>
