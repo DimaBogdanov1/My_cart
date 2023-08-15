@@ -15,6 +15,10 @@ Item {
 
     property bool isNeedRectangle
 
+    property bool needTip
+
+    property string tip_text
+
     property string color_rec
 
     Rectangle{
@@ -30,6 +34,8 @@ Item {
         id: hover_Anim
         width: parent.width
         height: parent.height
+        needTip: root_Item.needTip
+        tip_text: root_Item.tip_text
 
         onClicked_Signal: {
 

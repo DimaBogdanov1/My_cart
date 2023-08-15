@@ -21,7 +21,7 @@ Rectangle {
 
         big_db.openDatabase(rep_path)
 
-        main_SwipeView.currentIndex = 1 // Переходим На Составление Задания
+        index_swipe_Home = 1 // Переходим На Составление Задания
         //index_Page = 1
     }
 

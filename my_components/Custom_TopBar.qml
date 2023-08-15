@@ -24,7 +24,7 @@ Item{
 
     function open_more(){ // Открываем Дополнительные Пункты
 
-        show_Anim.targets = [export_Element, more_Element]
+        show_Anim.targets = [export_Element, picket_Element, more_Element]
 
         start_anim(show_Anim, export_Element.opacity, 1)
 
@@ -47,7 +47,7 @@ Item{
 
     function hide_more(){ // Закрываем Дополнительные Пункты
 
-        hide_Anim.targets = [export_Element, more_Element]
+        hide_Anim.targets = [export_Element, picket_Element, more_Element]
 
         start_anim(hide_Anim, export_Element.opacity, 0)
 
@@ -69,7 +69,7 @@ Item{
                  width: ui.iconBlock_topBar_Size
                  height: parent.height
                  isNeedRectangle: true
-                 color_rec: Style.light_Color
+                 color_rec: Style.accentLight_Color
                  icon_path: "qrc:/icons/light_theme/top_bar/arrow_left_1.svg"
                  onClicked_Signal: {
 
@@ -83,7 +83,7 @@ Item{
                              hide_back()
                          }
 
-                         main_SwipeView.currentIndex-- // Откатываемся Назад
+                         index_swipe_Home-- // Откатываемся Назад
                      }
 
                  }
@@ -93,7 +93,7 @@ Item{
          }
 
          Row{
-             width: ui.iconBlock_topBar_Size * 2 + ui.top_bar_margin / 2
+             width: ui.iconBlock_topBar_Size * 3 + ui.top_bar_margin
              height: ui.iconBlock_topBar_Size
              anchors.right: parent.right
              anchors.verticalCenter: parent.verticalCenter
@@ -104,11 +104,29 @@ Item{
                  width: ui.iconBlock_topBar_Size
                  height: parent.height
                  isNeedRectangle: true
-                 color_rec: Style.light_Color
+                 color_rec: Style.accentLight_Color
                  icon_path: "qrc:/icons/light_theme/top_bar/export.svg"
+                 needTip: true
+                 tip_text: qsTr("Экспорт") + mytrans.emptyString
                  onClicked_Signal: {
 
                      toast.show("Экспорт", 3000, 1) // Показываем Тоcт
+
+                 }
+             }
+
+             Navigation_Element{
+                 id: picket_Element
+                 width: ui.iconBlock_topBar_Size
+                 height: parent.height
+                 isNeedRectangle: true
+                 color_rec: Style.accentLight_Color
+                 icon_path: "qrc:/icons/light_theme/top_bar/location.svg"
+                 needTip: true
+                 tip_text: qsTr("Отметить пикет") + mytrans.emptyString
+                 onClicked_Signal: {
+
+                    Work_with_chart.add_New_Picket()
 
                  }
              }
@@ -118,8 +136,9 @@ Item{
                  width: ui.iconBlock_topBar_Size
                  height: parent.height
                  isNeedRectangle: true
-                 color_rec: Style.light_Color
+                 color_rec: Style.accentLight_Color
                  icon_path: "qrc:/icons/light_theme/top_bar/more.svg"
+
                  onClicked_Signal: {
 
                      toast.show("Ещё", 3000, 1) // Показываем Тоcт

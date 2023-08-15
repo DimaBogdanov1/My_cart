@@ -1,15 +1,22 @@
 import QtQuick 2.0
 import QtGraphicalEffects 1.15
+
 import Style 1.0
+import my_components 1.0
 
 Item {
     id: root_Item
     width: parent.width
     height: parent.height
     clip: true
+
     signal clicked_Signal
 
     property int radius: ui.radius // Радиус Скругления Эффекта
+
+    property bool needTip
+
+    property string tip_text
 
     property bool outlined
 
@@ -35,6 +42,11 @@ Item {
 
     }
 
+
+    Custom_ToolTip{
+        id: toolTip
+        needTip: root_Item.needTip
+    }
 
     Rectangle {
         id: bg_Rectangle
@@ -71,21 +83,21 @@ Item {
     }
 
 
-
-
-
     MouseArea {
-        id:button
          anchors.fill: parent
          hoverEnabled: true
          acceptedButtons: Qt.LeftButton | Qt.RightButton
 
          onEntered: {
 
+             toolTip.show_ToolTip(tip_text)
+
              start_Anim(bg_Rectangle.opacity)
          }
 
          onExited: {
+
+             toolTip.close_ToolTip()
 
             stop_Anim(bg_Rectangle.opacity)
 

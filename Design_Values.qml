@@ -47,5 +47,9 @@ Item {
 
     readonly property int basic_spacing: 12 //
 
+
+    // График
+    readonly property int line_width: 2 // Ширина Линии Графика
+
 }
 

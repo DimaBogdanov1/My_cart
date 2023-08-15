@@ -879,9 +879,11 @@ qrc_qml.cpp: qml.qrc \
 		icons/light_theme/navigation/add.svg \
 		icons/light_theme/navigation/setting_accent.svg \
 		icons/light_theme/navigation/setting.svg \
+		icons/light_theme/utils/info.svg \
 		icons/light_theme/top_bar/arrow_left_1.svg \
 		icons/light_theme/top_bar/arrow_left.svg \
 		icons/light_theme/top_bar/export.svg \
+		icons/light_theme/top_bar/location.svg \
 		icons/light_theme/top_bar/more.svg \
 		icons/light_theme/home_page/arrow_top.svg \
 		pages/Settings_Page.qml \
@@ -895,18 +897,23 @@ qrc_qml.cpp: qml.qrc \
 
 qrc_my_components.cpp: my_components.qrc \
 		../../Qt/5.15.2/clang_64/bin/rcc \
-		my_components/Measure_Block.qml \
+		my_components/Content_Dialog.qml \
 		my_components/Navigation_Element.qml \
 		my_components/Custom_TopBar.qml \
 		my_components/qmldir \
+		my_components/Measure/Measure_Km.qml \
+		my_components/Measure/Measure_Block.qml \
+		my_components/Measure/Measure_Lines.qml \
 		my_components/Animations/Hover_Anim.qml \
 		my_components/Animations/Content_Up_Down_Anim.qml \
 		my_components/Animations/Opacity_Anim.qml \
 		my_components/Elements/Custom_Label.qml \
 		my_components/Elements/Custom_Switch.qml \
 		my_components/Elements/Custom_Combobox.qml \
+		my_components/Elements/Custom_ToolTip.qml \
 		my_components/Elements/Custom_Button.qml \
-		my_components/Elements/Custom_Slider.qml
+		my_components/Elements/Custom_Slider.qml \
+		my_components/Elements/Custom_Rectangle_Label.qml
 	/Users/dimabogdanov/Qt/5.15.2/clang_64/bin/rcc -name my_components my_components.qrc -o qrc_my_components.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h

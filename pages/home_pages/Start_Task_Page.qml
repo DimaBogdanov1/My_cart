@@ -57,7 +57,7 @@ Rectangle {
                 text_Button:  qsTr("Начать задание") + mytrans.emptyString
                 onClicked_Signal: {
 
-                    main_SwipeView.currentIndex = 2 // Переходим На График
+                    index_swipe_Home = 2 // Переходим На График
 
                    //homePage_Loader.index_Page = 2
                    toast.show("test click", 3000, 1) // Показываем Тоcт

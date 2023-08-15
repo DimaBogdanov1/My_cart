@@ -7,7 +7,7 @@ Item{
     property alias themes: themes
 
 
-    readonly property string orange_Color: "#E05C60"
+    readonly property string orange_Color: "#E05C60"//"#DF6C61"//"#E05C60"
     readonly property string orangeLight_Color: "#FAD5C7"
     readonly property string blue_Color: "#413B63"
     readonly property string dark_blue_Color: "#2C2348"
@@ -73,11 +73,11 @@ Item{
         ]  // Тестовая Тема
 
         readonly property var test_theme_2: [
-            "#6e5ef5", // Акцент Цвет
-            "#a29fff", // Лёгкий Акцент
-            "#343339",  // Цвет Текста
-             "#ceccfd",
-            "#f6f7fb", // Лёгкий Цвет
+            "#FEC980", // Акцент Цвет
+            "#0F0909", // Лёгкий Акцент
+            "#0F0909",  // Цвет Текста
+             "#FFF3E3",
+            "#0F0909", // Лёгкий Цвет
             white, // Цвет Фонов
             "#6f6bf9" // Акцент Цвет 2
 

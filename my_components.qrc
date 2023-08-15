@@ -10,7 +10,12 @@
         <file>my_components/Animations/Opacity_Anim.qml</file>
         <file>my_components/Elements/Custom_Combobox.qml</file>
         <file>my_components/Elements/Custom_Label.qml</file>
-        <file>my_components/Measure_Block.qml</file>
         <file>my_components/Custom_TopBar.qml</file>
+        <file>my_components/Measure/Measure_Block.qml</file>
+        <file>my_components/Measure/Measure_Lines.qml</file>
+        <file>my_components/Measure/Measure_Km.qml</file>
+        <file>my_components/Elements/Custom_ToolTip.qml</file>
+        <file>my_components/Elements/Custom_Rectangle_Label.qml</file>
+        <file>my_components/Content_Dialog.qml</file>
     </qresource>
 </RCC>

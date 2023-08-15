@@ -6,15 +6,21 @@ Custom_Switch 1.0 Elements/Custom_Switch.qml
 Custom_Button 1.0 Elements/Custom_Button.qml
 Custom_Combobox 1.0 Elements/Custom_Combobox.qml
 Custom_Label 1.0 Elements/Custom_Label.qml
-Test_cmb 1.0 Elements/Test_cmb.qml
-
+Custom_ToolTip 1.0 Elements/Custom_ToolTip.qml
+Custom_Rectangle_Label 1.0 Elements/Custom_Rectangle_Label.qml
 
 # Animations
 Hover_Anim 1.0 Animations/Hover_Anim.qml
 Content_Up_Down_Anim 1.0  Animations/Content_Up_Down_Anim.qml
 Opacity_Anim 1.0 Animations/Opacity_Anim.qml
 
-Measure_Block 1.0 Measure_Block.qml
+# Measure
+Measure_Block 1.0 Measure/Measure_Block.qml
+Measure_Lines 1.0 Measure/Measure_Lines.qml
+Measure_Km 1.0 Measure/Measure_Km.qml
+
 Navigation_Element 1.0 Navigation_Element.qml
 
 Custom_TopBar 1.0 Custom_TopBar.qml
+
+Content_Dialog 1.0 Content_Dialog.qml

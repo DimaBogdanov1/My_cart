@@ -4,7 +4,7 @@ import QtQuick.Controls 2.15
 
 import Style 1.0
 
-Label{ // Заголовок Для Физической Кнопки
+Label{
      anchors.fill: parent
      font.weight:  ui.font_weight_Smallsize
      font.family: custom_FontLoader.name

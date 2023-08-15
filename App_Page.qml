@@ -12,6 +12,8 @@ Item {
 
     property int index_Page: -1
 
+    property int index_swipe_Home: 2
+
     readonly property var sourcePages_Array: [
                                                "../pages/Home_Page.qml",
                                                "../pages/Calib_Page.qml",
@@ -66,7 +68,7 @@ Item {
                       icon_checked_path: "qrc:/icons/light_theme/navigation/home_accent.svg"
                       onClicked_Signal: {
 
-                          opacity_Anim.create_anim(0)  // Переходим На Старт
+                          opacity_Anim.create_page_anim(0)  // Переходим На Старт
 
                       }
                   }
@@ -80,7 +82,7 @@ Item {
                       icon_checked_path: "qrc:/icons/light_theme/navigation/edit_accent.svg"
                       onClicked_Signal: {
 
-                          opacity_Anim.create_anim(1) // Переходим На Калибровку
+                          opacity_Anim.create_page_anim(1) // Переходим На Калибровку
 
                       }
                   }
@@ -91,9 +93,12 @@ Item {
                       height: ui.iconBlock_Size
                       icon_path: "qrc:/icons/light_theme/navigation/add.svg"
                       onClicked_Signal: {
-                          toast.show("Добавление новой базы данных!", 3000, 1) // Показываем Тоcт
+
+                          dialog.open_dialog()
+                         // toast.show("Добавление новой базы данных!", 3000, 1) // Показываем Тоcт
 
                       }
+
                   }
 
                   Navigation_Element{
@@ -105,7 +110,7 @@ Item {
                       icon_checked_path: "qrc:/icons/light_theme/navigation/document_accent.svg"
                       onClicked_Signal: {
 
-                          opacity_Anim.create_anim(2) // Переходим В Историю
+                          opacity_Anim.create_page_anim(2) // Переходим В Историю
 
                       }
                   }
@@ -119,7 +124,7 @@ Item {
                       icon_checked_path: "qrc:/icons/light_theme/navigation/setting_accent.svg"
                       onClicked_Signal: {
 
-                          opacity_Anim.create_anim(3) // Переходим В Настройки
+                          opacity_Anim.create_page_anim(3) // Переходим В Настройки
 
                       }
                   }
@@ -197,5 +202,9 @@ Item {
 
     }
 
+    Content_Dialog{
+        id:dialog
+
+    }
 
 }

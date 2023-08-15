@@ -36,7 +36,7 @@ Item {
             id: main_SwipeView
             width: parent.width
             height: parent.height
-            currentIndex: 2
+            currentIndex: index_swipe_Home
             interactive: false
 
             onCurrentIndexChanged: {
@@ -125,7 +125,7 @@ Item {
 
                //  homePage_Loader.index_Page--
 
-                 main_SwipeView.currentIndex--
+                 index_swipe_Home--
 
              }
 
@@ -138,7 +138,7 @@ Item {
              onClicked: {
 
              //    homePage_Loader.index_Page++
-                 main_SwipeView.currentIndex++
+                 index_swipe_Home++
              }
 
          }

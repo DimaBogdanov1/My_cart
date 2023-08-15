@@ -40,7 +40,15 @@ Item {
             }
         }
 
-
+        ToolTip {
+                id: id_toolTip
+                contentItem: Text{
+                    color: "#21be2b"
+                }
+                background: Rectangle {
+                        border.color: "#21be2b"
+                    }
+        }
 
         Labs.Menu {
             id: helpMenu

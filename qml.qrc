@@ -39,5 +39,7 @@
         <file>icons/light_theme/top_bar/arrow_left_1.svg</file>
         <file>icons/light_theme/top_bar/export.svg</file>
         <file>icons/light_theme/top_bar/more.svg</file>
+        <file>icons/light_theme/top_bar/location.svg</file>
+        <file>icons/light_theme/utils/info.svg</file>
     </qresource>
 </RCC>

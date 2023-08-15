@@ -50,6 +50,14 @@ float delete_space(string sk){
 }
 
 
+void Work_with_chart::add_New_Picket()
+{
+    //  Здесь я беру текущий y графика и строю линию
+
+    emit newPicket_signal(60); // Отправляем Сигнал
+
+}
+
 void Work_with_chart::openCSV()
 {
 
