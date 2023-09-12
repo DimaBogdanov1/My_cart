@@ -28,10 +28,31 @@ LineSeries {
 
     property real x_finish
 
+    property var realValue_arr: []
+
+    onClicked: {
+
+        var point = measure_LineSeries.at(0);
+
+        console.log(point.x, point.y)
+
+        // console.log("onClicked: " +  measure_LineSeries)
+
+       // console.log("onClicked: " + point.x + ", " + point.y);
+
+    }
+
+    onPointAdded: {
+      //  var point = measure_LineSeries.at(index);
+        //console.log("новая точка " + point.x, point.y)
+    }
+
 
     // Добавляем Точку Для Линии Основной Линии
-    function addPoint(x, y) {
+    function addPoint(x, y, value) {
 
+        realValue_arr.push(value)
+        
         measure_LineSeries.append(x, y)
 
     }
@@ -47,11 +68,48 @@ LineSeries {
 
             chartView.series(border_arr[i]).append(x_start + step_x, 60)
 
-            step_x += (x_finish - x_start) / count
+            step_x += (x_finish - x_start) / (count - 1)
         }
     }
 
 
+    function get_value_by_y(index_point){
+
+        var point = measure_LineSeries.at(index_point);
+
+        console.log("Получившаяся точка = " + point.x, point.y)
+
+
+
+       /* for(var i = 0; i < measure_LineSeries.count; i++){
+
+            var last_point = measure_LineSeries.at(i);
+
+            var next_point = measure_LineSeries.at(i + 1);
+
+            if(last_point !== null && next_point !== null){
+
+                console.log("last = " + last_point + " next =" + next_point)
+
+                if(last_point.y < 70 && next_point.y > 70){
+
+
+                }
+            }
+
+        } */
+
+      /*  const excludeTypes = ["21"];
+        const procedure_types_number = 21;
+
+        console.log(excludeTypes.includes(procedure_types_number));
+
+        const procedure_types_string = "21"; */
+
+       // console.log(excludeTypes.includes(procedure_types_string));
+
+        return 7
+    }
 
     // Добавляем Линии Границы Параметра
     function create_BorderSeries(){
@@ -62,11 +120,11 @@ LineSeries {
 
             var name = line_name + "border_" + i
 
-            create_Line(x_start + step_x, 0, x_start + step_x, chartView.y_finish, Style.accentLight_Color, Qt.DotLine, name) // Создаём Границу
+            create_Line(x_start + step_x, 0, x_start + step_x, chartView.y_finish, Style.primaryDark_Color, Qt.DotLine, name) // Создаём Границу
 
             border_arr.push(name)
 
-            step_x += (x_finish - x_start) / count
+            step_x += (x_finish - x_start) / (count - 1)
         }
 
         create_middleLine(x_start + 2) // Сейчас Здесь Потом Перенесу
@@ -84,6 +142,7 @@ LineSeries {
         series.append(x_finish, y_finish);
 
     }
+
 
     // Создание Средней Линии Графика
    function create_middleLine(x_start){
@@ -112,17 +171,49 @@ LineSeries {
 
        var series = chartView.createSeries(ChartView.SeriesTypeLine, id, x_ValueAxis, y_ValueAxis)
 
-       chartView.createSeries(chartView.Seri)
-
        series.color = color
 
        series.width = ui.line_width
 
        series.style =  style_line
 
+       if(series.style === Qt.DotLine){
+
+           series.opacity = 0.4
+
+       }
+
        return series
    }
 
+   // Функция Для Добавления Зоны (Нарушения Выше 2 Уровня)
+   function add_area(x_start, y_start, x_finish, y_finish){
+
+       var series = chartView.createSeries(ChartView.SeriesTypeArea, "id", x_ValueAxis, y_ValueAxis)
+
+       series.color = Style.accent_Color
+
+       series.opacity = 0.5
+
+       var upperSeries = Qt.createQmlObject('import QtCharts 2.15; LineSeries {}', series, "s");
+
+       var lowerSeries = Qt.createQmlObject('import QtCharts 2.15; LineSeries {}', series, "s3");
+
+       lowerSeries.append(x_start, y_start);
+
+       lowerSeries.append(x_start, y_finish);
+
+
+       upperSeries.append(x_finish, y_start);
+
+        upperSeries.append(x_finish, y_finish);
+
+
+       series.upperSeries = upperSeries
+
+       series.lowerSeries = lowerSeries
+
+   }
 
 }
 

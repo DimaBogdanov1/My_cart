@@ -14,6 +14,8 @@ Item {
 
     property bool isClose
 
+    property real from: 0
+
     function create_page_anim(new_index){
 
         change_index = true
@@ -32,7 +34,7 @@ Item {
 
         isClose = false
 
-        opacity_Anim.from = 0
+        opacity_Anim.from = root_Item.from
 
         opacity_Anim.to = 1
 
@@ -71,15 +73,15 @@ Item {
             }
         }
 
-        onRunningChanged: {
+        /*onRunningChanged: {
 
             if (!running && isClose){
 
-                toolTip.close()
+                //toolTip.close()
 
             }
 
-        }
+        }*/
 
 
     }

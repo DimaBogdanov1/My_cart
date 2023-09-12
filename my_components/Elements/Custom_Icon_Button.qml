@@ -22,11 +22,15 @@ Item {
     property string color_rec
 
     Rectangle{
+        id: bg_Rectangle
         width: parent.width
         height: parent.height
         color: color_rec
         visible: isNeedRectangle
-        radius: ui.radius
+        layer.enabled: true
+        layer.effect: Mask_Rectangle{target: parent}
+
+       // Border_Gradient{visible: isChecked }
 
     }
 
@@ -39,17 +43,26 @@ Item {
 
         onClicked_Signal: {
 
+            button_Anim.create_scale_anim()
+
             root_Item.clicked_Signal()
 
         }
     }
 
-    Image {
-       sourceSize.width:  ui.icon_nav_size
-       sourceSize.height:  ui.icon_nav_size
+   Custom_Icon{
+       width: parent.width
+       height: parent.height
        source: isChecked ? icon_checked_path : icon_path
-       anchors.centerIn: parent
-       smooth: false // Убираем Сглаживание
-       fillMode: Image.TileVertically
+
     }
+
+
+   Button_Anim{
+      id: button_Anim
+      animation_target: root_Item
+      scale_val: 0.98
+   }
+
+
 }

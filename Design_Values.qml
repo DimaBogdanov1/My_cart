@@ -5,13 +5,17 @@ Item {
     // Размеры
     readonly property int width_Navigation: 72 // Ширина Навигации
 
-    readonly property int radius: 24 // Радиус
+   // readonly property int radius_Button: 24 // Радиус
 
-    readonly property int radius_mini: 16 // Радиус Маленький
+    readonly property int radius: 16 // Радиус Маленький
 
     readonly property int height_Button: 40 // Высота Кнопки
 
-    readonly property int border_Size: 1 // Размер Границы
+    readonly property int height_RowList: 30
+
+    readonly property int height_Big: 72
+
+    readonly property real border_Size: 1 // Размер Границы
 
     readonly property int toolBar_Size: 56 // Размер Тулбара
 
@@ -33,7 +37,7 @@ Item {
     ////////////////////////
 
     //Иконки
-    readonly property int iconBlock_Size: 28 // Размер Блока Иконки
+    readonly property int iconBlock_Size: 34 // Размер Блока Иконки
 
     readonly property int icon_nav_size: 28 // Размер Иконок Навигации
 
@@ -43,13 +47,18 @@ Item {
 
     //Отступы
 
-    readonly property int top_bar_margin: 24 // Отступы Верхней Навигации
+    readonly property int big_spacing: 24 // Отступы Верхней Навигации
 
     readonly property int basic_spacing: 12 //
 
 
     // График
     readonly property int line_width: 2 // Ширина Линии Графика
+
+    // Клавиатура
+    readonly property real size_Keyboard_Russia: 96 //(parent.width - ui.width_Navigation - ui.basic_spacing  )/ 11//96 // Русская Буква
+
+    readonly property real size_Keyboard_English: size_Keyboard_Russia * 11 / 10 // Английская Буква
 
 }
 

@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.12
+import QtGraphicalEffects 1.0
 
 import Style 1.0
 import my_components 1.0
@@ -9,56 +10,113 @@ Item {
     id: root_Item
     width: parent.width
     height: parent.height
-    clip: true
     signal clicked_Signal
 
-    property string text_Button
+    property string text
 
     property bool outlined
 
+    property bool isOnlyText
+
+    property bool isIcon
+
+    property string source: ""
+
+    property string color: Style.accent_Color
+
+    property real pixelSize: ui.text_SmallSize
+
    // text: text_Button // control.text
 
-    Rectangle {
+    function create_error_anim(){
+
+        button_Anim.create_error_anim()
+
+    }
+
+    Item{
+        id: aa
         width: parent.width
         height: parent.height
-        radius: ui.radius
-        color: outlined ? Style.background_Color  : Style.accent_Color
 
-        border{
-            width: outlined ? ui.border_Size : 0
-            color: Style.accent_Color
+        Highlight_Glow{id: glow; target: bg_Rectangle}
+
+        Rectangle {
+            id: bg_Rectangle
+            width: parent.width
+            height: parent.height
+            radius: ui.radius
+            layer.enabled: true
+            layer.effect: Mask_Rectangle{target: parent}
+
+
+            Main_Gradient{visible: !outlined}
+
+
+            Border_Gradient{visible: outlined ? isOnlyText ? false : true : false}
+
+            border{
+               // width: outlined ? isOnlyText ? 0 : ui.border_Size : 0
+                //color: "red" //Style.accent_Color
+            }
+
+
+
+            Hover_Anim{
+                id: hover_Anim
+                width: parent.width
+                height: parent.height
+                outlined: root_Item.outlined
+                color: root_Item.color
+
+                onClicked_Signal: {
+
+                    button_Anim.create_scale_anim()
+
+                    glow.change_glow(true)
+
+                    root_Item.clicked_Signal()
+
+                }
+
+                onHover_Signal: {
+
+                    glow.change_glow(value)
+
+                }
+            }
+
+            Custom_Label{
+                id: label
+                horizontalAlignment: Text.AlignHCenter
+                visible: !isIcon
+                font.pixelSize:  root_Item.pixelSize
+               // color: outlined ? root_Item.color : Style.primaryDark_Color
+                text: root_Item.text
+
+            }
+
+            Custom_Icon{
+                width: parent.width
+                height: parent.height
+                source: root_Item.source
+
+                visible: isIcon
+
+             }
+
+
         }
 
-    }
 
-    Hover_Anim{
-        id: hover_Anim
-        width: parent.width
-        height: parent.height
-        outlined: root_Item.outlined
-
-        onClicked_Signal: {
-
-            root_Item.clicked_Signal()
-
-        }
-    }
-
-
-    Label{ // Заголовок Для Физической Кнопки
-        anchors.fill: parent
-        font.weight:  ui.font_weight_Smallsize
-        font.family: custom_FontLoader.name
-        font.pixelSize:  ui.text_SmallSize // Меняем Размер Шрифта
-        wrapMode: Text.WordWrap // Если Текст Не Влезает, То Он Переноситься На Следующую Строку
-        horizontalAlignment: Text.AlignHCenter // Делаем Текст По Горизонтальному Центру
-        verticalAlignment: Text.AlignVCenter // Делаем Текст По Вертикальному Центру
-        color:  outlined ? Style.accent_Color : Style.background_Color //"white" //Style.accountText_Color // Меняем Цвет Текста
-        text: text_Button
 
     }
 
 
+    Button_Anim{
+       id: button_Anim
+       animation_target: bg_Rectangle
+    }
 
 }
 

@@ -6,6 +6,13 @@
 #include <QStringListModel>
 #include <QtTest/QtTest>
 
+
+#include <QCoreApplication>
+#include <QNetworkConfigurationManager>
+#include <QNetworkConfiguration>
+#include <QDebug>
+#include <QNetworkSession>
+
 #include "translate_headers/mylang.h"
 #include "translate_headers/mytranslator.h"
 
@@ -17,6 +24,10 @@
 #include "test_smart.h"
 
 #include "export/my_pdf.h"
+
+
+//#include <QtQuickTest>
+//QUICK_TEST_MAIN(example)
 
 void create_db(){
 
@@ -32,6 +43,7 @@ int main(int argc, char *argv[])
     #endif
 
     QApplication app(argc, argv);
+
 
     //QQuickStyle::setStyle("Material");
     app.setOrganizationName("Some Company");
@@ -74,7 +86,17 @@ int main(int argc, char *argv[])
 
     engine.load(QUrl("qrc:/main.qml")); // Загружаем QML
 
+
+
+   /* qDebug() << "currentCpuArchitecture():" << QSysInfo::currentCpuArchitecture();
+    qDebug() << "productType():" << QSysInfo::productType();
+    qDebug() << "productVersion():" << QSysInfo::productVersion();
+    qDebug() << "prettyProductName():" << QSysInfo::prettyProductName();
+    */
+
    // QTest::qExec(new Test_Smart, argc, argv); // Запускаем Тест
+
+   // QColor color = QPalette().color(QPalette::Window); // Для Определения Темы
 
     return app.exec();
 }

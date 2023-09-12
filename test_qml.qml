@@ -4,6 +4,7 @@ import QtQuick.Controls 2.15
 import QtCharts 2.15
 import Style 1.0
 import Qt.labs.platform 1.1 as Labs
+import QtTest 1.2
 
 Item {
 
@@ -19,6 +20,8 @@ Item {
                // onTriggered: Qt.quit()
             }
         }
+
+
 
         Labs.Menu {
             id: windowMenu

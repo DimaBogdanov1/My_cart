@@ -55,11 +55,14 @@ Item {
 
         picket.text = title
 
+       // picket.margin_text = 24
         picket.x -= picket.width / 2
 
         picket.y -= picket.height / 2
 
-        picket.border_color = Style.primaryDark_Color
+        picket.needBorder = true
+
+
 
        // picket.width = 100
 

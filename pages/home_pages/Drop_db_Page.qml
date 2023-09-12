@@ -10,7 +10,7 @@ import my_components 1.0
 Rectangle {
     width: parent.width
     height: parent.height
-    color: Style.primary_Color
+    color: Style.light_Color
 
 
     function open_database(path){
@@ -32,10 +32,11 @@ Rectangle {
          radius: ui.radius
          color: "transparent"
 
-         border{
-             width: ui.border_Size
-             color: Style.light_Color // Style.secondaryAccent_Color
-         }
+         layer.enabled: true
+         layer.effect: Mask_Rectangle{target: parent}
+
+         Border_Gradient{}
+
 
 
          DropArea {
@@ -45,18 +46,6 @@ Rectangle {
              onEntered: {
 
                 // drag.accept (Qt.LinkAction);
-                checkfile()
-
-             }
-             onDropped: {
-
-                 open_database(drop.urls.toString())
-
-                 toast.show("drop", 3000, 1) // Показываем Тоcт
-             }
-
-             function checkfile(){
-
                  var validFile = false;
 
                  for(var i = 0; i < drag.urls.length; i++) {
@@ -71,7 +60,15 @@ Rectangle {
                    drag.accepted = false;
                    return false;
                  }
+
              }
+             onDropped: {
+
+                 open_database(drop.urls.toString())
+
+                 toast.show("drop", 3000, 1) // Показываем Тоcт
+             }
+
 
              function validateFileExtension(filePath) {
                  return filePath.split('.').pop() === "db"
@@ -84,6 +81,7 @@ Rectangle {
              id: hover_Anim
              width: parent.width
              height: parent.height
+             outlined: true
 
              onClicked_Signal: {
 
@@ -101,7 +99,7 @@ Rectangle {
              Image {
                 sourceSize.width: ui.icon_nav_size //35// ui.icon_nav_size
                 sourceSize.height:  ui.icon_nav_size //35 //ui.icon_nav_size
-                source: "qrc:/icons/light_theme/home_page/arrow_top.svg"
+                source: "qrc:/icons/" + Style.theme + "/home_page/arrow_top.svg"
                 anchors.horizontalCenter: parent.horizontalCenter
                 smooth: false // Убираем Сглаживание
                 fillMode: Image.TileVertically
@@ -114,7 +112,6 @@ Rectangle {
                  Custom_Label{
                      horizontalAlignment: Text.AlignHCenter
                     // font.pixelSize:  ui.text_MiddleSize // Меняем Размер Шрифта
-                     color: Style.light_Color // Меняем Цвет Текста
                      text: qsTr("Перетащите вашу базу данных") + mytrans.emptyString
 
                  }
@@ -123,25 +120,6 @@ Rectangle {
 
          }
 
-         FileDialog {
-             id: fileDialog
-             title: qsTr("Выберите базу данных") + mytrans.emptyString
-             folder: shortcuts.documents
-             nameFilters: ["(*.db)"]; // Фильтр Для Расширений Файлов
 
-             onAccepted: {
-
-                //clear_list()
-
-                 open_database(fileDialog.fileUrls.toString())
-
-             }
-
-             onRejected: {
-                 console.log("Canceled")
-
-             }
-
-         }
     }
 }

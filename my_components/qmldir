@@ -8,19 +8,65 @@ Custom_Combobox 1.0 Elements/Custom_Combobox.qml
 Custom_Label 1.0 Elements/Custom_Label.qml
 Custom_ToolTip 1.0 Elements/Custom_ToolTip.qml
 Custom_Rectangle_Label 1.0 Elements/Custom_Rectangle_Label.qml
+Custom_Border 1.0 Elements/Custom_Border.qml
+Custom_Icon 1.0 Elements/Custom_Icon.qml
+Custom_TextField 1.0 Elements/Custom_TextField.qml
+Custom_Pick_Button 1.0 Elements/Custom_Pick_Button.qml
+Custom_Popup_Menu 1.0 Elements/Custom_Popup_Menu.qml
+Custom_Text_Arrow 1.0 Elements/Custom_Text_Arrow.qml
+Custom_Icon_Button 1.0 Elements/Custom_Icon_Button.qml
 
 # Animations
 Hover_Anim 1.0 Animations/Hover_Anim.qml
-Content_Up_Down_Anim 1.0  Animations/Content_Up_Down_Anim.qml
+Transition_Anim 1.0  Animations/Transition_Anim.qml
 Opacity_Anim 1.0 Animations/Opacity_Anim.qml
+Popups_Anim 1.0 Animations/Popups_Anim.qml
+Highlight_Anim 1.0 Animations/Highlight_Anim.qml
+Keyboard_Anim 1.0 Animations/Keyboard_Anim.qml
+Charts_Anim 1.0 Animations/Charts_Anim.qml
+Button_Anim 1.0 Animations/Button_Anim.qml
 
 # Measure
 Measure_Block 1.0 Measure/Measure_Block.qml
 Measure_Lines 1.0 Measure/Measure_Lines.qml
 Measure_Km 1.0 Measure/Measure_Km.qml
+Measure_Viser 1.0 Measure/Measure_Viser.qml
+Measure_ViserLine 1.0 Measure/Measure_ViserLine.qml
 
-Navigation_Element 1.0 Navigation_Element.qml
+# Lists
+My_List 1.0 Lists/My_List.qml
+List_ScrollBar 1.0 Lists/List_ScrollBar.qml
+List_Row 1.0 Lists/List_Row.qml
+List_Highlight 1.0 Lists/List_Highlight.qml
+
+# Keyboards
+Keyboard 1.0 Keyboards/Keyboard.qml
+
+# Effects
+Main_Gradient 1.0 Effects/Main_Gradient.qml
+Border_Gradient 1.0 Effects/Border_Gradient.qml
+Mask_Rectangle 1.0 Effects/Mask_Rectangle.qml
+Highlight_Glow 1.0 Effects/Highlight_Glow.qml
+
+
+# Settings
+Theme_Block 1.0 Settings/Theme_Block.qml
+Settings_Switch 1.0 Settings/Settings_Switch.qml
+Settings_Text 1.0 Settings/Settings_Text.qml
+Settings_Link 1.0 Settings/Settings_Link.qml
+
+
+# Popups
+Content_Dialog 1.0 Popups/Content_Dialog.qml
+Loading_Popup 1.0 Popups/Loading_Popup.qml
+
 
 Custom_TopBar 1.0 Custom_TopBar.qml
 
-Content_Dialog 1.0 Content_Dialog.qml
+Audio_Sounds 1.0 Audio_Sounds.qml
+
+Notification 1.0 Notification.qml
+
+Canvas_Rail 1.0 Canvas_Rail.qml
+
+Navigation_Map 1.0 Navigation_Map.qml

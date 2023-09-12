@@ -5,6 +5,7 @@ import QtQuick.Controls 2.15
 import Style 1.0
 
 Label{
+     id: label
      anchors.fill: parent
      font.weight:  ui.font_weight_Smallsize
      font.family: custom_FontLoader.name

@@ -39,33 +39,6 @@ Item {
             currentIndex: index_swipe_Home
             interactive: false
 
-            onCurrentIndexChanged: {
-
-                switch(currentIndex){
-
-                case 0:
-
-                    topBar.hide_back()
-
-                    break
-
-                case 1:
-
-                    topBar.open_back()
-
-                    topBar.hide_more()
-
-                    break
-
-                case 2:
-
-                    topBar.open_more()
-
-                    break
-
-                }
-            }
-
             Item {
 
 
@@ -101,72 +74,11 @@ Item {
 
         }
 
-        Custom_TopBar{
-            id: topBar
-            width: parent.width
-            height: ui.toolBar_Size //ui.iconBlock_topBar_Size + ui.top_bar_margin
-        }
-
-    }
-
-
-
-    Row{
-
-         width: parent.width
-         height: 48
-         anchors.bottom: parent.bottom
-
-         Button{
-             width: 100
-             height: parent.height
-             text:  qsTr("back") + mytrans.emptyString
-             onClicked: {
-
-               //  homePage_Loader.index_Page--
-
-                 index_swipe_Home--
-
-             }
-
-         }
-
-         Button{
-             width: 100
-             height: parent.height
-             text:  qsTr("next") + mytrans.emptyString
-             onClicked: {
-
-             //    homePage_Loader.index_Page++
-                 index_swipe_Home++
-             }
-
-         }
-
-         Button{
-             width: 100
-             height: parent.height
-             text:  qsTr("pdf") + mytrans.emptyString
-             onClicked: my_pdf.print_pdf()
-
-         }
-
-
-         Button{
-             width: 100
-             height: parent.height
-             text:  qsTr("size+") + mytrans.emptyString
-             onClicked: {
-
-                 applicationWindow.width = 1920
-                 applicationWindow.height = 1080
-
-             }
-
-         }
 
 
     }
+
+
 
 
 

@@ -20,13 +20,17 @@ ToolTip {
     background: Custom_Rectangle_Label {
             id: label
             text: toolTip.text
-            border_color: Style.background_Color
+            needBorder: true
 
             onWidthChanged: {
 
                 toolTip.x = -1 * label.width * 0.75
             }
         }
+
+    enter: popups_Anim.get_enter()
+
+    exit: popups_Anim.get_exit()
 
     function show_ToolTip(text){
 
@@ -35,7 +39,7 @@ ToolTip {
             toolTip.show("ss")
             toolTip.text = text
 
-            opacity_Anim.open_anim()
+           // opacity_Anim.open_anim()
         }
 
 
@@ -45,18 +49,17 @@ ToolTip {
 
         if(needTip){
 
-            opacity_Anim.close_anim()
+         //   opacity_Anim.close_anim()
 
-          //  toolTip.close()
+            toolTip.close()
 
         }
 
     }
 
 
-    Opacity_Anim{
-        id: opacity_Anim
-        animation_target: toolTip
+    Popups_Anim{
+        id: popups_Anim
 
     }
 }

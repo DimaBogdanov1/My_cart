@@ -10,26 +10,34 @@ Item {
 
     property int time_Anim: 250
 
-    function create_anim(last_index, new_index){
+    function create_right_x_anim(){
 
-        root_Item.new_index = new_index
+        x_Anim.from = animation_target.x
 
-        if(last_index < new_index){
+        x_Anim.to = 0
 
-            down_Anim.stop()
-
-            down_Anim.start()
-        }
-        else{
-
-            up_Anim.stop()
-
-            up_Anim.start()
-        }
-
+        start_anim()
     }
 
 
+    function create_left_x_anim(){
+
+        x_Anim.from = animation_target.x
+
+        x_Anim.to = animation_target.width
+
+        start_anim()
+    }
+
+    function start_anim(){
+
+        x_Anim.stop()
+
+        x_Anim.start()
+    }
+
+
+    NumberAnimation {id: x_Anim ; target: animation_target; property: "x"; from: 0; to: animation_target.x; duration: time_Anim}
 
     NumberAnimation {id: up_Anim;
 

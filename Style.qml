@@ -6,6 +6,18 @@ Item{
 
     property alias themes: themes
 
+    function change_theme(dark_mode){
+
+        if(!dark_mode){
+
+            currentTheme = themes.light_theme // Включаем Светлую Тему
+        }
+        else{
+
+            currentTheme = themes.test_dark_theme // Включаем Тёмную Тему
+
+        }
+    }
 
     readonly property string orange_Color: "#E05C60"//"#DF6C61"//"#E05C60"
     readonly property string orangeLight_Color: "#FAD5C7"
@@ -16,10 +28,16 @@ Item{
     readonly property string yellow_Color: "#F69F22"
 
 
+
+    readonly property string light_grey: "#121212" //#010219
+
+    readonly property string light_blue: "#777DE8"
+
+
     QtObject{ // Создаём Объект С Темами
         id: themes
 
-        readonly property var light: [
+        readonly property var light_2: [
             "#6f6bf9", // Акцент Цвет
             "#a29fff",  // Лёгкий Акцент
             "#1d1956", // Цвет Текста Приложения
@@ -61,32 +79,45 @@ Item{
 
         ]  // Тёмная Тема
 
-        readonly property var test_theme: [
+        readonly property var light_theme: [
             orange_Color, // Акцент Цвет
             orangeLight_Color, // Лёгкий Акцент
             dark_blue_Color,  // Цвет Текста
             blue_Color,
             body_Color, // Лёгкий Цвет
             white, // Цвет Фонов
-            yellow_Color // Акцент Цвет 2
+            yellow_Color, // Акцент Цвет 2
+
+            dark_blue_Color
 
         ]  // Тестовая Тема
 
-        readonly property var test_theme_2: [
+        readonly property var test_dark_theme: [
             "#FEC980", // Акцент Цвет
             "#0F0909", // Лёгкий Акцент
-            "#0F0909",  // Цвет Текста
+            light_grey,  // Цвет Текста
              "#FFF3E3",
-            "#0F0909", // Лёгкий Цвет
+            "#F7F6FB", // Лёгкий Цвет
             white, // Цвет Фонов
-            "#6f6bf9" // Акцент Цвет 2
+            "#6f6bf9", // Акцент Цвет 2
+
+
+              light_grey,  // Цвет
+
+
 
         ]  // Тестовая Тема
     }
 
-    property var currentTheme: themes.test_theme // Переменная Для Хранения Текущей Темы Приложения
+    property var currentTheme: themes.test_dark_theme // Переменная Для Хранения Текущей Темы Приложения
 
-    readonly property string accent_Color: currentTheme[0] // Акцент Цвет
+    property string theme: "light_theme"
+
+    // #f794a4 → #fdd6bd
+    // #ec6f66 → #f3a183 #ff5f6d → #ffc371 #2193b0 #6dd5ed    ( FE8373 FBE99D ) ("#ffafbd" , "#ffc3a0")
+    readonly property string accent_Color: "#ffafbd" //currentTheme[0] // Акцент Цвет
+
+    readonly property string secondaryAccent_Color: "#ffc3a0" // Акцент Цвет 2
 
     readonly property string accentLight_Color: currentTheme[1] // Лёгкий Акцент
 
@@ -98,7 +129,8 @@ Item{
 
     readonly property string background_Color: currentTheme[5] // Цвет Фонов
 
-    readonly property string secondaryAccent_Color: currentTheme[6] // Акцент Цвет 2
+
+    readonly property string navigation_Color: currentTheme[7]
 
 
    /* readonly property string accent: currentTheme[0] // Акцент Цвет

@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-DEFINES       = -DQT_QML_DEBUG -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_CHARTS_LIB -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_TESTLIB_LIB -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR='"/Users/dimabogdanov/QtProjects/MyCart"'
+DEFINES       = -DQUICK_TEST_SOURCE_DIR='"/Users/dimabogdanov/QtProjects/MyCart"' -DQT_QML_DEBUG -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_CHARTS_LIB -DQT_PRINTSUPPORT_LIB -DQT_OPENGL_LIB -DQT_QMLTEST_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_TESTLIB_LIB -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR='"/Users/dimabogdanov/QtProjects/MyCart"'
 CFLAGS        = -pipe -g $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=10.13 -Wall -Wextra -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -g -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=10.13 -Wall -Wextra -fPIC $(DEFINES)
-INCPATH       = -I. -I../../Qt/5.15.2/clang_64/lib/QtQuickControls2.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtQuick.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtCharts.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtGui.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtQml.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtSql.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtTest.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks/AGL.framework/Headers -I../../Qt/5.15.2/clang_64/mkspecs/macx-clang -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib
+INCPATH       = -I. -I../../Qt/5.15.2/clang_64/lib/QtQuickControls2.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtQuick.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtCharts.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtOpenGL.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtQuickTest.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtGui.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtQml.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtSql.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtTest.framework/Headers -I../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks/AGL.framework/Headers -I../../Qt/5.15.2/clang_64/mkspecs/macx-clang -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib
 QMAKE         = /Users/dimabogdanov/Qt/5.15.2/clang_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = MyCart1.0.0
 DISTDIR = /Users/dimabogdanov/QtProjects/MyCart/.tmp/MyCart1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -stdlib=libc++ -headerpad_max_install_names $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=10.13 -Wl,-rpath,@executable_path/../Frameworks -Wl,-rpath,/Users/dimabogdanov/Qt/5.15.2/clang_64/lib
-LIBS          = $(SUBLIBS) -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib -framework QtQuickControls2 -framework QtQuick -framework QtCharts -framework QtPrintSupport -framework QtWidgets -framework QtGui -framework Metal -framework QtQmlModels -framework QtQml -framework QtNetwork -framework QtSql -framework QtTest -framework Security -framework Foundation -framework ApplicationServices -framework AppKit -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL   
+LIBS          = $(SUBLIBS) -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib -framework QtQuickControls2 -framework QtQuick -framework QtCharts -framework QtPrintSupport -framework QtOpenGL -framework QtQuickTest -framework QtWidgets -framework QtGui -framework Metal -framework QtQmlModels -framework QtQml -framework QtNetwork -framework QtSql -framework QtTest -framework Security -framework Foundation -framework ApplicationServices -framework AppKit -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL   
 AR            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq
 RANLIB        = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib -s
 SED           = sed
@@ -58,12 +58,14 @@ SOURCES       = databases/big_database.cpp \
 		main.cpp \
 		models/StartTask_Model.cpp \
 		mythread.cpp \
+		requester.cpp \
 		test_smart.cpp \
 		work_with_chart.cpp qrc_qml.cpp \
 		qrc_my_components.cpp \
 		moc_big_database.cpp \
 		moc_my_pdf.cpp \
 		moc_StartTask_Model.cpp \
+		moc_requester.cpp \
 		moc_test_smart.cpp \
 		moc_mylang.cpp \
 		moc_mytranslator.cpp \
@@ -74,6 +76,7 @@ OBJECTS       = big_database.o \
 		main.o \
 		StartTask_Model.o \
 		mythread.o \
+		requester.o \
 		test_smart.o \
 		work_with_chart.o \
 		qrc_qml.o \
@@ -81,6 +84,7 @@ OBJECTS       = big_database.o \
 		moc_big_database.o \
 		moc_my_pdf.o \
 		moc_StartTask_Model.o \
+		moc_requester.o \
 		moc_test_smart.o \
 		moc_mylang.o \
 		moc_mytranslator.o \
@@ -278,6 +282,8 @@ DIST          = my_components/qmldir \
 		../../Qt/5.15.2/clang_64/mkspecs/features/default_post.prf \
 		../../Qt/5.15.2/clang_64/mkspecs/features/mac/default_post.prf \
 		../../Qt/5.15.2/clang_64/mkspecs/features/mac/objective_c.prf \
+		../../Qt/5.15.2/clang_64/mkspecs/features/testcase.prf \
+		../../Qt/5.15.2/clang_64/mkspecs/features/qmltestcase.prf \
 		../../Qt/5.15.2/clang_64/mkspecs/features/qml_debug.prf \
 		../../Qt/5.15.2/clang_64/mkspecs/features/mac/mac.prf \
 		../../Qt/5.15.2/clang_64/mkspecs/features/warn_on.prf \
@@ -303,6 +309,7 @@ DIST          = my_components/qmldir \
 		models/StartTask_Model.h \
 		models_headers/big_database.h \
 		mythread.h \
+		requester.h \
 		test_smart.h \
 		translate_headers/mylang.h \
 		translate_headers/mytranslator.h \
@@ -312,6 +319,7 @@ DIST          = my_components/qmldir \
 		main.cpp \
 		models/StartTask_Model.cpp \
 		mythread.cpp \
+		requester.cpp \
 		test_smart.cpp \
 		work_with_chart.cpp
 QMAKE_TARGET  = MyCart
@@ -527,6 +535,8 @@ Makefile: MyCart.pro ../../Qt/5.15.2/clang_64/mkspecs/macx-clang/qmake.conf ../.
 		../../Qt/5.15.2/clang_64/mkspecs/features/default_post.prf \
 		../../Qt/5.15.2/clang_64/mkspecs/features/mac/default_post.prf \
 		../../Qt/5.15.2/clang_64/mkspecs/features/mac/objective_c.prf \
+		../../Qt/5.15.2/clang_64/mkspecs/features/testcase.prf \
+		../../Qt/5.15.2/clang_64/mkspecs/features/qmltestcase.prf \
 		../../Qt/5.15.2/clang_64/mkspecs/features/qml_debug.prf \
 		../../Qt/5.15.2/clang_64/mkspecs/features/mac/mac.prf \
 		../../Qt/5.15.2/clang_64/mkspecs/features/warn_on.prf \
@@ -553,6 +563,8 @@ Makefile: MyCart.pro ../../Qt/5.15.2/clang_64/mkspecs/macx-clang/qmake.conf ../.
 		../../Qt/5.15.2/clang_64/lib/QtQuick.framework/Resources/QtQuick.prl \
 		../../Qt/5.15.2/clang_64/lib/QtCharts.framework/Resources/QtCharts.prl \
 		../../Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Resources/QtPrintSupport.prl \
+		../../Qt/5.15.2/clang_64/lib/QtOpenGL.framework/Resources/QtOpenGL.prl \
+		../../Qt/5.15.2/clang_64/lib/QtQuickTest.framework/Resources/QtQuickTest.prl \
 		../../Qt/5.15.2/clang_64/lib/QtWidgets.framework/Resources/QtWidgets.prl \
 		../../Qt/5.15.2/clang_64/lib/QtGui.framework/Resources/QtGui.prl \
 		../../Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Resources/QtQmlModels.prl \
@@ -753,6 +765,8 @@ Makefile: MyCart.pro ../../Qt/5.15.2/clang_64/mkspecs/macx-clang/qmake.conf ../.
 ../../Qt/5.15.2/clang_64/mkspecs/features/default_post.prf:
 ../../Qt/5.15.2/clang_64/mkspecs/features/mac/default_post.prf:
 ../../Qt/5.15.2/clang_64/mkspecs/features/mac/objective_c.prf:
+../../Qt/5.15.2/clang_64/mkspecs/features/testcase.prf:
+../../Qt/5.15.2/clang_64/mkspecs/features/qmltestcase.prf:
 ../../Qt/5.15.2/clang_64/mkspecs/features/qml_debug.prf:
 ../../Qt/5.15.2/clang_64/mkspecs/features/mac/mac.prf:
 ../../Qt/5.15.2/clang_64/mkspecs/features/warn_on.prf:
@@ -779,6 +793,8 @@ my_components.qrc:
 ../../Qt/5.15.2/clang_64/lib/QtQuick.framework/Resources/QtQuick.prl:
 ../../Qt/5.15.2/clang_64/lib/QtCharts.framework/Resources/QtCharts.prl:
 ../../Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Resources/QtPrintSupport.prl:
+../../Qt/5.15.2/clang_64/lib/QtOpenGL.framework/Resources/QtOpenGL.prl:
+../../Qt/5.15.2/clang_64/lib/QtQuickTest.framework/Resources/QtQuickTest.prl:
 ../../Qt/5.15.2/clang_64/lib/QtWidgets.framework/Resources/QtWidgets.prl:
 ../../Qt/5.15.2/clang_64/lib/QtGui.framework/Resources/QtGui.prl:
 ../../Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Resources/QtQmlModels.prl:
@@ -818,8 +834,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents qml.qrc my_components.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../Qt/5.15.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents databases/big_database.h databases/my_database.h export/my_pdf.h models/StartTask_Model.h models_headers/big_database.h mythread.h test_smart.h translate_headers/mylang.h translate_headers/mytranslator.h work_with_chart.h $(DISTDIR)/
-	$(COPY_FILE) --parents databases/big_database.cpp databases/my_database.cpp export/my_pdf.cpp main.cpp models/StartTask_Model.cpp mythread.cpp test_smart.cpp work_with_chart.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents databases/big_database.h databases/my_database.h export/my_pdf.h models/StartTask_Model.h models_headers/big_database.h mythread.h requester.h test_smart.h translate_headers/mylang.h translate_headers/mytranslator.h work_with_chart.h $(DISTDIR)/
+	$(COPY_FILE) --parents databases/big_database.cpp databases/my_database.cpp export/my_pdf.cpp main.cpp models/StartTask_Model.cpp mythread.cpp requester.cpp test_smart.cpp work_with_chart.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents translator/England.ts $(DISTDIR)/
 
 
@@ -830,7 +846,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r MyCart.app
-	-$(DEL_FILE) .qmake.stash
+	-$(DEL_FILE) /Users/dimabogdanov/QtProjects/MyCart/target_wrapper.sh /Users/dimabogdanov/QtProjects/MyCart/rcc_wrapper.sh /Users/dimabogdanov/QtProjects/MyCart/rcc_wrapper.sh /Users/dimabogdanov/QtProjects/MyCart/moc_wrapper.sh /Users/dimabogdanov/QtProjects/MyCart/uic_wrapper.sh /Users/dimabogdanov/QtProjects/MyCart/uic_wrapper.sh .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -839,11 +855,12 @@ distclean: clean
 xcodeproj:
 	@$(QMAKE) -spec macx-xcode "$(EXPORT__PRO_FILE_)" -spec macx-clang CONFIG+=debug CONFIG+=qml_debug
 
+check: first
+	/Users/dimabogdanov/QtProjects/MyCart/target_wrapper.sh $(TESTRUNNER) ./$(QMAKE_TARGET).app/Contents/MacOS/$(QMAKE_TARGET) $(TESTARGS)
+
 mocclean: compiler_moc_header_clean compiler_moc_objc_header_clean compiler_moc_source_clean
 
 mocables: compiler_moc_header_make_all compiler_moc_objc_header_make_all compiler_moc_source_make_all
-
-check: first
 
 benchmark: first
 
@@ -864,8 +881,11 @@ qrc_qml.cpp: qml.qrc \
 		images/logo_white_trans.png \
 		starts_elements/Splash_Screen.qml \
 		starts_elements/Onboard_Screen.qml \
+		sounds/agree.mp3 \
+		sounds/keyboard.mp3 \
 		translator/England.qm \
 		fonts/Circular_Std_Bold.ttf \
+		fonts/Montserrat_Medium.ttf \
 		fonts/CircularStd_Book.ttf \
 		icons/moon_stars_light.svg \
 		icons/test_icon.icns \
@@ -879,13 +899,28 @@ qrc_qml.cpp: qml.qrc \
 		icons/light_theme/navigation/add.svg \
 		icons/light_theme/navigation/setting_accent.svg \
 		icons/light_theme/navigation/setting.svg \
+		icons/light_theme/utils/notification.svg \
 		icons/light_theme/utils/info.svg \
+		icons/light_theme/utils/arrow_right.svg \
+		icons/light_theme/utils/shield.svg \
+		icons/light_theme/utils/send.svg \
+		icons/light_theme/utils/play.svg \
+		icons/light_theme/utils/arrow_top.svg \
+		icons/light_theme/utils/discovery.svg \
+		icons/light_theme/utils/delete.svg \
 		icons/light_theme/top_bar/arrow_left_1.svg \
+		icons/light_theme/top_bar/shield.svg \
 		icons/light_theme/top_bar/arrow_left.svg \
 		icons/light_theme/top_bar/export.svg \
 		icons/light_theme/top_bar/location.svg \
 		icons/light_theme/top_bar/more.svg \
+		icons/light_theme/home_page/pencil.svg \
 		icons/light_theme/home_page/arrow_top.svg \
+		icons/light_theme/home_page/arrow_right_long.svg \
+		sqlite/ITEMCORRECT.SQL \
+		sqlite/NAIM.SQL \
+		sqlite/ROAD.SQL \
+		sqlite/PUT.SQL \
 		pages/Settings_Page.qml \
 		pages/Calib_Page.qml \
 		pages/Home_Page.qml \
@@ -893,28 +928,67 @@ qrc_qml.cpp: qml.qrc \
 		pages/home_pages/Start_Task_Page.qml \
 		pages/home_pages/Drop_db_Page.qml \
 		pages/home_pages/Charts_Page.qml
-	/Users/dimabogdanov/Qt/5.15.2/clang_64/bin/rcc -name qml qml.qrc -o qrc_qml.cpp
+	/Users/dimabogdanov/QtProjects/MyCart/rcc_wrapper.sh -name qml qml.qrc -o qrc_qml.cpp
 
 qrc_my_components.cpp: my_components.qrc \
 		../../Qt/5.15.2/clang_64/bin/rcc \
-		my_components/Content_Dialog.qml \
-		my_components/Navigation_Element.qml \
+		my_components/Notification.qml \
+		my_components/Navigation_Map.qml \
 		my_components/Custom_TopBar.qml \
 		my_components/qmldir \
+		my_components/Audio_Sounds.qml \
+		my_components/Canvas_Rail.qml \
+		my_components/Keyboards/Model_English.qml \
+		my_components/Keyboards/Keyboard_Letter.qml \
+		my_components/Keyboards/Keyboard_Logic.qml \
+		my_components/Keyboards/Keyboard_Button.qml \
+		my_components/Keyboards/Model_Russia.qml \
+		my_components/Keyboards/Keyboard.qml \
+		my_components/Keyboards/Keyboard_Number.qml \
+		my_components/Measure/Measure_Viser.qml \
 		my_components/Measure/Measure_Km.qml \
+		my_components/Measure/Measure_ViserLine.qml \
 		my_components/Measure/Measure_Block.qml \
 		my_components/Measure/Measure_Lines.qml \
+		my_components/Settings/Theme_Block.qml \
+		my_components/Settings/Settings_Switch.qml \
+		my_components/Settings/Settings_Link.qml \
+		my_components/Settings/Settings_Text.qml \
+		my_components/Lists/My_List.qml \
+		my_components/Lists/List_ScrollBar.qml \
+		my_components/Lists/List_Row.qml \
+		my_components/Lists/List_Highlight.qml \
+		my_components/Animations/Charts_Anim.qml \
 		my_components/Animations/Hover_Anim.qml \
-		my_components/Animations/Content_Up_Down_Anim.qml \
+		my_components/Animations/Popups_Anim.qml \
+		my_components/Animations/Button_Anim.qml \
+		my_components/Animations/Highlight_Anim.qml \
 		my_components/Animations/Opacity_Anim.qml \
+		my_components/Animations/Keyboard_Anim.qml \
+		my_components/Animations/Transition_Anim.qml \
+		my_components/Popups/Background_Popup.qml \
+		my_components/Popups/Overlay_Popup.qml \
+		my_components/Popups/Content_Dialog.qml \
+		my_components/Popups/Loading_Popup.qml \
+		my_components/Effects/Highlight_Glow.qml \
+		my_components/Effects/Main_Gradient.qml \
+		my_components/Effects/Border_Gradient.qml \
+		my_components/Effects/Mask_Rectangle.qml \
 		my_components/Elements/Custom_Label.qml \
+		my_components/Elements/Custom_TextField.qml \
 		my_components/Elements/Custom_Switch.qml \
+		my_components/Elements/Custom_Popup_Menu.qml \
 		my_components/Elements/Custom_Combobox.qml \
 		my_components/Elements/Custom_ToolTip.qml \
 		my_components/Elements/Custom_Button.qml \
 		my_components/Elements/Custom_Slider.qml \
-		my_components/Elements/Custom_Rectangle_Label.qml
-	/Users/dimabogdanov/Qt/5.15.2/clang_64/bin/rcc -name my_components my_components.qrc -o qrc_my_components.cpp
+		my_components/Elements/Custom_Text_Arrow.qml \
+		my_components/Elements/Custom_Pick_Button.qml \
+		my_components/Elements/Custom_Rectangle_Label.qml \
+		my_components/Elements/Custom_Icon_Button.qml \
+		my_components/Elements/Custom_Border.qml \
+		my_components/Elements/Custom_Icon.qml
+	/Users/dimabogdanov/QtProjects/MyCart/rcc_wrapper.sh -name my_components my_components.qrc -o qrc_my_components.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
@@ -922,22 +996,22 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../Qt/5.15.2/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=10.13 -Wall -Wextra -dM -E -o moc_predefs.h ../../Qt/5.15.2/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_big_database.cpp moc_my_pdf.cpp moc_StartTask_Model.cpp moc_test_smart.cpp moc_mylang.cpp moc_mytranslator.cpp moc_work_with_chart.cpp
+compiler_moc_header_make_all: moc_big_database.cpp moc_my_pdf.cpp moc_StartTask_Model.cpp moc_requester.cpp moc_test_smart.cpp moc_mylang.cpp moc_mytranslator.cpp moc_work_with_chart.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_big_database.cpp moc_my_pdf.cpp moc_StartTask_Model.cpp moc_test_smart.cpp moc_mylang.cpp moc_mytranslator.cpp moc_work_with_chart.cpp
+	-$(DEL_FILE) moc_big_database.cpp moc_my_pdf.cpp moc_StartTask_Model.cpp moc_requester.cpp moc_test_smart.cpp moc_mylang.cpp moc_mytranslator.cpp moc_work_with_chart.cpp
 moc_big_database.cpp: databases/big_database.h \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		moc_predefs.h \
 		../../Qt/5.15.2/clang_64/bin/moc
-	/Users/dimabogdanov/Qt/5.15.2/clang_64/bin/moc $(DEFINES) --include /Users/dimabogdanov/QtProjects/MyCart/moc_predefs.h -I/Users/dimabogdanov/Qt/5.15.2/clang_64/mkspecs/macx-clang -I/Users/dimabogdanov/QtProjects/MyCart -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickControls2.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuick.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCharts.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQml.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtSql.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib databases/big_database.h -o moc_big_database.cpp
+	/Users/dimabogdanov/QtProjects/MyCart/moc_wrapper.sh $(DEFINES) --include /Users/dimabogdanov/QtProjects/MyCart/moc_predefs.h -I/Users/dimabogdanov/Qt/5.15.2/clang_64/mkspecs/macx-clang -I/Users/dimabogdanov/QtProjects/MyCart -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickControls2.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuick.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCharts.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtOpenGL.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQml.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtSql.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib databases/big_database.h -o moc_big_database.cpp
 
 moc_my_pdf.cpp: export/my_pdf.h \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		moc_predefs.h \
 		../../Qt/5.15.2/clang_64/bin/moc
-	/Users/dimabogdanov/Qt/5.15.2/clang_64/bin/moc $(DEFINES) --include /Users/dimabogdanov/QtProjects/MyCart/moc_predefs.h -I/Users/dimabogdanov/Qt/5.15.2/clang_64/mkspecs/macx-clang -I/Users/dimabogdanov/QtProjects/MyCart -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickControls2.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuick.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCharts.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQml.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtSql.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib export/my_pdf.h -o moc_my_pdf.cpp
+	/Users/dimabogdanov/QtProjects/MyCart/moc_wrapper.sh $(DEFINES) --include /Users/dimabogdanov/QtProjects/MyCart/moc_predefs.h -I/Users/dimabogdanov/Qt/5.15.2/clang_64/mkspecs/macx-clang -I/Users/dimabogdanov/QtProjects/MyCart -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickControls2.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuick.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCharts.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtOpenGL.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQml.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtSql.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib export/my_pdf.h -o moc_my_pdf.cpp
 
 moc_StartTask_Model.cpp: models/StartTask_Model.h \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QAbstractListModel \
@@ -946,14 +1020,33 @@ moc_StartTask_Model.cpp: models/StartTask_Model.h \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		moc_predefs.h \
 		../../Qt/5.15.2/clang_64/bin/moc
-	/Users/dimabogdanov/Qt/5.15.2/clang_64/bin/moc $(DEFINES) --include /Users/dimabogdanov/QtProjects/MyCart/moc_predefs.h -I/Users/dimabogdanov/Qt/5.15.2/clang_64/mkspecs/macx-clang -I/Users/dimabogdanov/QtProjects/MyCart -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickControls2.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuick.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCharts.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQml.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtSql.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib models/StartTask_Model.h -o moc_StartTask_Model.cpp
+	/Users/dimabogdanov/QtProjects/MyCart/moc_wrapper.sh $(DEFINES) --include /Users/dimabogdanov/QtProjects/MyCart/moc_predefs.h -I/Users/dimabogdanov/Qt/5.15.2/clang_64/mkspecs/macx-clang -I/Users/dimabogdanov/QtProjects/MyCart -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickControls2.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuick.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCharts.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtOpenGL.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQml.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtSql.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib models/StartTask_Model.h -o moc_StartTask_Model.cpp
+
+moc_requester.cpp: requester.h \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QBuffer \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkReply \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkRequest \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonArray \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonarray.h \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonDocument \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsondocument.h \
+		moc_predefs.h \
+		../../Qt/5.15.2/clang_64/bin/moc
+	/Users/dimabogdanov/QtProjects/MyCart/moc_wrapper.sh $(DEFINES) --include /Users/dimabogdanov/QtProjects/MyCart/moc_predefs.h -I/Users/dimabogdanov/Qt/5.15.2/clang_64/mkspecs/macx-clang -I/Users/dimabogdanov/QtProjects/MyCart -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickControls2.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuick.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCharts.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtOpenGL.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQml.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtSql.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib requester.h -o moc_requester.cpp
 
 moc_test_smart.cpp: test_smart.h \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		moc_predefs.h \
 		../../Qt/5.15.2/clang_64/bin/moc
-	/Users/dimabogdanov/Qt/5.15.2/clang_64/bin/moc $(DEFINES) --include /Users/dimabogdanov/QtProjects/MyCart/moc_predefs.h -I/Users/dimabogdanov/Qt/5.15.2/clang_64/mkspecs/macx-clang -I/Users/dimabogdanov/QtProjects/MyCart -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickControls2.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuick.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCharts.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQml.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtSql.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib test_smart.h -o moc_test_smart.cpp
+	/Users/dimabogdanov/QtProjects/MyCart/moc_wrapper.sh $(DEFINES) --include /Users/dimabogdanov/QtProjects/MyCart/moc_predefs.h -I/Users/dimabogdanov/Qt/5.15.2/clang_64/mkspecs/macx-clang -I/Users/dimabogdanov/QtProjects/MyCart -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickControls2.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuick.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCharts.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtOpenGL.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQml.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtSql.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib test_smart.h -o moc_test_smart.cpp
 
 moc_mylang.cpp: translate_headers/mylang.h \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
@@ -962,7 +1055,7 @@ moc_mylang.cpp: translate_headers/mylang.h \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qlocale.h \
 		moc_predefs.h \
 		../../Qt/5.15.2/clang_64/bin/moc
-	/Users/dimabogdanov/Qt/5.15.2/clang_64/bin/moc $(DEFINES) --include /Users/dimabogdanov/QtProjects/MyCart/moc_predefs.h -I/Users/dimabogdanov/Qt/5.15.2/clang_64/mkspecs/macx-clang -I/Users/dimabogdanov/QtProjects/MyCart -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickControls2.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuick.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCharts.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQml.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtSql.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib translate_headers/mylang.h -o moc_mylang.cpp
+	/Users/dimabogdanov/QtProjects/MyCart/moc_wrapper.sh $(DEFINES) --include /Users/dimabogdanov/QtProjects/MyCart/moc_predefs.h -I/Users/dimabogdanov/Qt/5.15.2/clang_64/mkspecs/macx-clang -I/Users/dimabogdanov/QtProjects/MyCart -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickControls2.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuick.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCharts.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtOpenGL.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQml.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtSql.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib translate_headers/mylang.h -o moc_mylang.cpp
 
 moc_mytranslator.cpp: translate_headers/mytranslator.h \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
@@ -978,14 +1071,14 @@ moc_mytranslator.cpp: translate_headers/mytranslator.h \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qlocale.h \
 		moc_predefs.h \
 		../../Qt/5.15.2/clang_64/bin/moc
-	/Users/dimabogdanov/Qt/5.15.2/clang_64/bin/moc $(DEFINES) --include /Users/dimabogdanov/QtProjects/MyCart/moc_predefs.h -I/Users/dimabogdanov/Qt/5.15.2/clang_64/mkspecs/macx-clang -I/Users/dimabogdanov/QtProjects/MyCart -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickControls2.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuick.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCharts.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQml.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtSql.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib translate_headers/mytranslator.h -o moc_mytranslator.cpp
+	/Users/dimabogdanov/QtProjects/MyCart/moc_wrapper.sh $(DEFINES) --include /Users/dimabogdanov/QtProjects/MyCart/moc_predefs.h -I/Users/dimabogdanov/Qt/5.15.2/clang_64/mkspecs/macx-clang -I/Users/dimabogdanov/QtProjects/MyCart -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickControls2.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuick.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCharts.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtOpenGL.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQml.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtSql.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib translate_headers/mytranslator.h -o moc_mytranslator.cpp
 
 moc_work_with_chart.cpp: work_with_chart.h \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		moc_predefs.h \
 		../../Qt/5.15.2/clang_64/bin/moc
-	/Users/dimabogdanov/Qt/5.15.2/clang_64/bin/moc $(DEFINES) --include /Users/dimabogdanov/QtProjects/MyCart/moc_predefs.h -I/Users/dimabogdanov/Qt/5.15.2/clang_64/mkspecs/macx-clang -I/Users/dimabogdanov/QtProjects/MyCart -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickControls2.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuick.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCharts.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQml.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtSql.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib work_with_chart.h -o moc_work_with_chart.cpp
+	/Users/dimabogdanov/QtProjects/MyCart/moc_wrapper.sh $(DEFINES) --include /Users/dimabogdanov/QtProjects/MyCart/moc_predefs.h -I/Users/dimabogdanov/Qt/5.15.2/clang_64/mkspecs/macx-clang -I/Users/dimabogdanov/QtProjects/MyCart -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickControls2.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuick.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCharts.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtOpenGL.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQuickTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQmlModels.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtQml.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtSql.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtTest.framework/Headers -I/Users/dimabogdanov/Qt/5.15.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/dimabogdanov/Qt/5.15.2/clang_64/lib work_with_chart.h -o moc_work_with_chart.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1015,6 +1108,10 @@ big_database.o: databases/big_database.cpp ../../Qt/5.15.2/clang_64/lib/QtCore.f
 		../../Qt/5.15.2/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
 		../../Qt/5.15.2/clang_64/lib/QtSql.framework/Headers/QSqlRecord \
 		../../Qt/5.15.2/clang_64/lib/QtSql.framework/Headers/qsqlrecord.h \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../Qt/5.15.2/clang_64/lib/QtSql.framework/Headers/QSqlQueryModel \
+		../../Qt/5.15.2/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
 		databases/big_database.h \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
@@ -1235,6 +1332,21 @@ my_pdf.o: export/my_pdf.cpp ../../Qt/5.15.2/clang_64/lib/QtPrintSupport.framewor
 		../../Qt/5.15.2/clang_64/lib/QtGui.framework/Headers/qpdfwriter.h \
 		../../Qt/5.15.2/clang_64/lib/QtGui.framework/Headers/QPainter \
 		../../Qt/5.15.2/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers/QPrintDialog \
+		../../Qt/5.15.2/clang_64/lib/QtPrintSupport.framework/Headers/qprintdialog.h \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkRequest \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkReply \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonArray \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonDocument \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkAccessManager \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkaccessmanager.h \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QTcpServer \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qtcpserver.h \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qtcpsocket.h \
 		export/my_pdf.h \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o my_pdf.o export/my_pdf.cpp
@@ -1251,6 +1363,16 @@ main.o: main.cpp ../../Qt/5.15.2/clang_64/lib/QtGui.framework/Headers/QGuiApplic
 		../../Qt/5.15.2/clang_64/lib/QtQml.framework/Headers/qqmlcontext.h \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QStringListModel \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qstringlistmodel.h \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QCoreApplication \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qcoreapplication.h \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkConfigurationManager \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkconfigmanager.h \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkConfiguration \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkconfiguration.h \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkSession \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworksession.h \
 		translate_headers/mylang.h \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
@@ -1299,6 +1421,23 @@ mythread.o: mythread.cpp mythread.h \
 		../../Qt/5.15.2/clang_64/lib/QtGui.framework/Headers/qstandarditemmodel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mythread.o mythread.cpp
 
+requester.o: requester.cpp requester.h \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QBuffer \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkReply \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkRequest \
+		../../Qt/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonArray \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonarray.h \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonDocument \
+		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsondocument.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o requester.o requester.cpp
+
 test_smart.o: test_smart.cpp test_smart.h \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../Qt/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
@@ -1337,6 +1476,9 @@ moc_my_pdf.o: moc_my_pdf.cpp
 
 moc_StartTask_Model.o: moc_StartTask_Model.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_StartTask_Model.o moc_StartTask_Model.cpp
+
+moc_requester.o: moc_requester.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_requester.o moc_requester.cpp
 
 moc_test_smart.o: moc_test_smart.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_test_smart.o moc_test_smart.cpp

@@ -5,36 +5,51 @@ import my_components 1.0
 import Style 1.0
 
 
-Rectangle {
-   id: root
-   width: parent.width
-   height: parent.height
-   color: Style.background_Color
-   radius: ui.radius_mini
+Item{
+    id: root_Item
 
-   property string border_color: Style.background_Color
+    property int radius: ui.radius //ui.radius_Button
 
-   border{
+    property int margin_text: 32
 
-       width: ui.border_Size
-       color: border_color
-   }
+    property bool needBorder
 
-   property string text
+    property string text
+
+    property string color: Style.background_Color
+
+    property string text_color: Style.primaryDark_Color
+
+    property int horizontal: Text.AlignHCenter
+
+    property int vertical: Text.AlignVCenter
+
+    property bool needBack: true
+
+    width: label.paintedWidth + margin_text
+    height: label.paintedHeight + margin_text / 2
+
+    Rectangle {
+       width: parent.width
+       height: parent.height
+       color: root_Item.color
+       radius: root_Item.radius
+       visible: needBack
+
+       Border_Gradient{visible: needBorder}
+
+
+    }
 
    Custom_Label{
         id: label
-        horizontalAlignment: Text.AlignHCenter
-        text: root.text
-
-        onTextChanged: {
-
-            root.width = label.paintedWidth + 32
-
-            root.height = label.paintedHeight + 16
-
-        }
-
+        horizontalAlignment: root_Item.horizontal
+        verticalAlignment: root_Item.vertical
+        text: root_Item.text
+        color: root_Item.text_color
 
    }
+
 }
+
+

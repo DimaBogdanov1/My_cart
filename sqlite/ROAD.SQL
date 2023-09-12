@@ -1,0 +1,10 @@
+SELECT DISTINCT 
+a.SITEID as ID,
+b.NAME 
+
+FROM 
+UP a
+inner join SPR_DOR b on b.ID=a.SITEID
+
+ORDER BY
+SITEID

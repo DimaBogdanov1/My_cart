@@ -1,8 +1,8 @@
 TEMPLATE = app
 
-QT += quick quickcontrols2 qml sql charts core testlib widgets printsupport
+QT += quick quickcontrols2 qml sql charts core testlib widgets printsupport network opengl #positioning location
 
-CONFIG += c++17 #sdk_no_version_check
+CONFIG += c++17 qmltestcase #sdk_no_version_check
 #QMAKE_MACOSX_DEPLOYMENT_TARGET = 13.5
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -12,6 +12,7 @@ CONFIG += c++17 #sdk_no_version_check
 #QMAKE_MAC_SDK = macosx13.5
 
 
+
 SOURCES += \
         databases/big_database.cpp \
         databases/my_database.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
         main.cpp \
         models/StartTask_Model.cpp \
         mythread.cpp \
+        requester.cpp \
         test_smart.cpp \
         work_with_chart.cpp
 
@@ -48,6 +50,7 @@ HEADERS += \
     models/StartTask_Model.h \
     models_headers/big_database.h \
     mythread.h \
+    requester.h \
     test_smart.h \
     translate_headers/mylang.h \
     translate_headers/mytranslator.h \

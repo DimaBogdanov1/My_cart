@@ -5,11 +5,34 @@ import MyLang 1.0
 import my_components 1.0
 
 Item{
-    id: topBar_Item
+    id: root_Item
     width: parent.width
     height: parent.height
 
-    readonly property int time_anim: 250
+    signal viser_Signal(value: bool)
+
+    signal grab_Signal // Test
+
+    readonly property int time_anim: 150
+
+    Keys.onPressed: {
+
+        switch(event.key){
+            case Qt.Key_1:
+
+                if(index_swipe_Home === 2){
+
+                    toast.show("Новый Пикет", 3000, 1) // Показываем Тоcт
+
+                    Work_with_chart.add_New_Picket()
+                }
+
+
+            }
+
+
+
+    }
 
     function start_anim(anim, from, to){
 
@@ -53,9 +76,10 @@ Item{
 
     }
 
+
     Item{
-         width: parent.width - ui.top_bar_margin
-         height: parent.height - ui.top_bar_margin
+         width: parent.width - ui.big_spacing
+         height: parent.height - ui.big_spacing
          anchors.centerIn: parent
 
          Item{
@@ -64,27 +88,16 @@ Item{
              anchors.left: parent.left
              anchors.verticalCenter: parent.verticalCenter
 
-             Navigation_Element{
+             Custom_Icon_Button{
                  id: back_Element
                  width: ui.iconBlock_topBar_Size
                  height: parent.height
                  isNeedRectangle: true
-                 color_rec: Style.accentLight_Color
-                 icon_path: "qrc:/icons/light_theme/top_bar/arrow_left_1.svg"
+                 color_rec: Style.light_Color
+                 icon_path: "qrc:/icons/" + Style.theme + "/top_bar/arrow_left_1.svg"
                  onClicked_Signal: {
 
-                     if(main_SwipeView.currentIndex !== 0){
-
-                         if(main_SwipeView.currentIndex === 2){
-
-                             hide_more()
-                         }
-                         else{
-                             hide_back()
-                         }
-
-                         index_swipe_Home-- // Откатываемся Назад
-                     }
+                     index_swipe_Home-- // Откатываемся Назад
 
                  }
              }
@@ -93,35 +106,50 @@ Item{
          }
 
          Row{
-             width: ui.iconBlock_topBar_Size * 3 + ui.top_bar_margin
+             width: ui.iconBlock_topBar_Size * 3 + ui.big_spacing
              height: ui.iconBlock_topBar_Size
              anchors.right: parent.right
              anchors.verticalCenter: parent.verticalCenter
-             spacing: ui.top_bar_margin / 2
+             spacing: ui.big_spacing / 2
 
-             Navigation_Element{
-                 id: export_Element
+             Custom_Icon_Button{
+                 id: viser_Element
                  width: ui.iconBlock_topBar_Size
                  height: parent.height
                  isNeedRectangle: true
-                 color_rec: Style.accentLight_Color
-                 icon_path: "qrc:/icons/light_theme/top_bar/export.svg"
+                 color_rec: Style.light_Color
+                 icon_path: "qrc:/icons/" + Style.theme + "/top_bar/shield.svg"
+                 icon_checked_path: "qrc:/icons/light_theme/utils/shield.svg"
+
                  needTip: true
-                 tip_text: qsTr("Экспорт") + mytrans.emptyString
+                 tip_text: qsTr("Срез данных") + mytrans.emptyString
                  onClicked_Signal: {
 
-                     toast.show("Экспорт", 3000, 1) // Показываем Тоcт
+                     if(!isChecked){
+
+                         isChecked = true
+
+                     }
+                     else{
+
+                         isChecked = false
+
+                     }
+
+                     root_Item.viser_Signal(isChecked)
+
+                   //  toast.show("Срез данных", 3000, 1) // Показываем Тоcт
 
                  }
              }
 
-             Navigation_Element{
+             Custom_Icon_Button{
                  id: picket_Element
                  width: ui.iconBlock_topBar_Size
                  height: parent.height
                  isNeedRectangle: true
-                 color_rec: Style.accentLight_Color
-                 icon_path: "qrc:/icons/light_theme/top_bar/location.svg"
+                 color_rec: Style.light_Color
+                 icon_path: "qrc:/icons/" + Style.theme + "/top_bar/location.svg"
                  needTip: true
                  tip_text: qsTr("Отметить пикет") + mytrans.emptyString
                  onClicked_Signal: {
@@ -131,15 +159,21 @@ Item{
                  }
              }
 
-             Navigation_Element{
+             Custom_Icon_Button{
                  id: more_Element
                  width: ui.iconBlock_topBar_Size
                  height: parent.height
                  isNeedRectangle: true
-                 color_rec: Style.accentLight_Color
-                 icon_path: "qrc:/icons/light_theme/top_bar/more.svg"
+                 color_rec: Style.light_Color
+                 needTip: true
+                 tip_text: qsTr("Ещё") + mytrans.emptyString
+                 icon_path: "qrc:/icons/" + Style.theme + "/top_bar/more.svg"
 
                  onClicked_Signal: {
+
+                     memu.open()
+
+                     grab_Signal()
 
                      toast.show("Ещё", 3000, 1) // Показываем Тоcт
 
@@ -152,6 +186,11 @@ Item{
          NumberAnimation {id: show_Anim; property: "opacity"; from: 0; to: 1; duration: time_anim }
 
          NumberAnimation {id: hide_Anim; property: "opacity"; from: 0; to: 1; duration: time_anim }
+
+    }
+
+    Custom_Popup_Menu{
+        id:memu
 
     }
 }

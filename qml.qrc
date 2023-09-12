@@ -41,5 +41,23 @@
         <file>icons/light_theme/top_bar/more.svg</file>
         <file>icons/light_theme/top_bar/location.svg</file>
         <file>icons/light_theme/utils/info.svg</file>
+        <file>icons/light_theme/utils/delete.svg</file>
+        <file>icons/light_theme/utils/arrow_right.svg</file>
+        <file>icons/light_theme/utils/discovery.svg</file>
+        <file>icons/light_theme/utils/arrow_top.svg</file>
+        <file>sounds/agree.mp3</file>
+        <file>sqlite/PUT.SQL</file>
+        <file>sqlite/ROAD.SQL</file>
+        <file>sqlite/NAIM.SQL</file>
+        <file>sqlite/ITEMCORRECT.SQL</file>
+        <file>sounds/keyboard.mp3</file>
+        <file>icons/light_theme/home_page/pencil.svg</file>
+        <file>icons/light_theme/home_page/arrow_right_long.svg</file>
+        <file>icons/light_theme/utils/notification.svg</file>
+        <file>icons/light_theme/utils/shield.svg</file>
+        <file>icons/light_theme/utils/send.svg</file>
+        <file>icons/light_theme/utils/play.svg</file>
+        <file>fonts/Montserrat_Medium.ttf</file>
+        <file>icons/light_theme/top_bar/shield.svg</file>
     </qresource>
 </RCC>

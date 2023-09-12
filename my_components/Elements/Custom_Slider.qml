@@ -1,40 +1,91 @@
 import QtQuick 2.0
-import QtQuick.Window 2.12
-import QtQml.Models 2.2
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls 1.4
-import QtQuick.Layouts 1.12
-import QtQuick.Extras 1.4
 
 import Style 1.0
+import my_components 1.0
 
 Slider {
 
+    id: slider
     property int radius_Rectangle: 30 // Радиус Скругления
 
-    property int size_Rectangle: 14 // Размер Прямоугольника
+    property int size_Rectangle:  ui.height_Button /2 // Размер Прямоугольника
 
     property int slider_stepSize // Значение Шага Слайдера
 
-    property real opacity_Handle: 0.2 // Значение Прозрачности Handle
+    property real opacity_handle: 0
 
-    property real scale_Handle: 1.2 // Значение Маштабирования Handle
+    property real scale_Handle: 1
+
+
+    readonly property real startOpacity_Handle: 0.2
+
+    readonly property real max_scale_Handle: 1.2
+
+    onHoveredChanged: {
+
+        console.log("ssss  " + slider.hovered.toString())
+
+    }
+
+    onPressedChanged: {
+
+        if(pressed) {
+
+          start_anim.start()
+        }
+        else {
+
+          close_anim.start()
+       }
+    }
+
+
+
+    ParallelAnimation{
+
+       id: close_anim
+       NumberAnimation {target: slider; property: "opacity_handle"; from: startOpacity_Handle ; to: 0; duration: 250 }
+
+       NumberAnimation {target: slider; property: "scale_Handle"; from: max_scale_Handle ; to:  1 ; duration: 250 }
+
+    }
+
+
+    SequentialAnimation {
+
+       id: start_anim
+
+       ParallelAnimation{
+
+           NumberAnimation {target: slider; property: "opacity_handle"; from: 0 ; to: startOpacity_Handle; duration: 250 }
+
+           NumberAnimation {target: slider; property: "scale_Handle"; from: 1 ; to:  max_scale_Handle ; duration: 250 }
+
+       }
+    }
 
 
     stepSize: slider_stepSize // Шаг Слайдера
+
 
     style: SliderStyle {
 
         groove: Rectangle {
                     implicitHeight: 4
-                    radius: 30
-                    color: Style.accentLight_Color
+                    layer.enabled: true
+                    layer.effect: Mask_Rectangle{target: parent; radius: 30}
+
+                    Main_Gradient{}
 
                     Rectangle {
                         implicitHeight: parent.implicitHeight
-                        color: Style.accent_Color
-                        radius: radius_Rectangle
-                        implicitWidth: control.value / control.maximumValue * parent.width
+                        color: Style.primaryDark_Color
+                        anchors.right: parent.right
+                        //radius: radius_Rectangle
+                        implicitWidth: (parent.width * (control.maximumValue - control.value)) /  control.maximumValue //* parent.width///control.value / control.maximumValue * parent.width
+
                     }
 
 
@@ -46,57 +97,32 @@ Slider {
 
                     Rectangle {
                         id: move_Rectangle
+                        scale: slider.scale_Handle
+
                         implicitWidth: size_Rectangle
                         implicitHeight: size_Rectangle
-                        border.color: Style.accent_Color
-                        border.width: 2
-                        color: Style.light_Color
+                        //border.color: Style.accent_Color
+                      //  border.width: 2
                         anchors.centerIn: parent
-                        radius: radius_Rectangle
+                     //   radius: radius_Rectangle
+                        layer.enabled: true
+                        layer.effect: Mask_Rectangle{target: move_Rectangle; radius: radius_Rectangle}
+
+                        Border_Gradient{ border_width: 2}
 
                     }
 
+
+
                     Rectangle {
                         id: background_Rectangle
-                        objectName: control.value // Меняем Имя Объекта, Чтобы К Нему Можно Было Достучаться (По Другому Я Не Знаю Как)
                         implicitWidth: size_Rectangle * 2
                         implicitHeight: size_Rectangle * 2
                         color: Style.accent_Color
                         anchors.centerIn: parent
-                        opacity: 0
+                        opacity: slider.opacity_handle
                         radius: radius_Rectangle
 
-                        onObjectNameChanged: {
-
-                            move_SequentialAnimation.stop() // Завершаем Старую Анимацию
-
-                            move_SequentialAnimation.start() // Начинаем Новую Анимацию
-                        }
-
-
-                        SequentialAnimation {
-
-                           id: move_SequentialAnimation
-
-                           ParallelAnimation{
-
-                               NumberAnimation {target: background_Rectangle; property: "opacity"; from: 0 ; to: opacity_Handle; duration: 250 }
-
-                               NumberAnimation {target: move_Rectangle; property: "scale"; from: 1 ; to:  scale_Handle ; duration: 250 }
-
-                           }
-
-                           ParallelAnimation{
-
-                               NumberAnimation {target: move_Rectangle; property: "scale"; from: scale_Handle ; to:  1 ; duration: 250 }
-
-                               NumberAnimation {target: background_Rectangle; property: "opacity"; from: opacity_Handle ; to:  0 ; duration: 250 }
-
-                           }
-
-
-
-                        }
 
                     }
 

@@ -4,9 +4,8 @@
         <file>my_components/Elements/Custom_Button.qml</file>
         <file>my_components/Elements/Custom_Slider.qml</file>
         <file>my_components/Elements/Custom_Switch.qml</file>
-        <file>my_components/Navigation_Element.qml</file>
         <file>my_components/Animations/Hover_Anim.qml</file>
-        <file>my_components/Animations/Content_Up_Down_Anim.qml</file>
+        <file>my_components/Animations/Transition_Anim.qml</file>
         <file>my_components/Animations/Opacity_Anim.qml</file>
         <file>my_components/Elements/Custom_Combobox.qml</file>
         <file>my_components/Elements/Custom_Label.qml</file>
@@ -16,6 +15,46 @@
         <file>my_components/Measure/Measure_Km.qml</file>
         <file>my_components/Elements/Custom_ToolTip.qml</file>
         <file>my_components/Elements/Custom_Rectangle_Label.qml</file>
-        <file>my_components/Content_Dialog.qml</file>
+        <file>my_components/Elements/Custom_Border.qml</file>
+        <file>my_components/Animations/Popups_Anim.qml</file>
+        <file>my_components/Lists/List_ScrollBar.qml</file>
+        <file>my_components/Lists/List_Row.qml</file>
+        <file>my_components/Lists/List_Highlight.qml</file>
+        <file>my_components/Animations/Highlight_Anim.qml</file>
+        <file>my_components/Keyboards/Keyboard_Letter.qml</file>
+        <file>my_components/Keyboards/Keyboard_Button.qml</file>
+        <file>my_components/Keyboards/Model_Russia.qml</file>
+        <file>my_components/Keyboards/Keyboard_Logic.qml</file>
+        <file>my_components/Keyboards/Model_English.qml</file>
+        <file>my_components/Elements/Custom_Icon.qml</file>
+        <file>my_components/Keyboards/Keyboard_Number.qml</file>
+        <file>my_components/Audio_Sounds.qml</file>
+        <file>my_components/Animations/Keyboard_Anim.qml</file>
+        <file>my_components/Keyboards/Keyboard.qml</file>
+        <file>my_components/Elements/Custom_TextField.qml</file>
+        <file>my_components/Elements/Custom_Pick_Button.qml</file>
+        <file>my_components/Lists/My_List.qml</file>
+        <file>my_components/Effects/Border_Gradient.qml</file>
+        <file>my_components/Effects/Main_Gradient.qml</file>
+        <file>my_components/Effects/Mask_Rectangle.qml</file>
+        <file>my_components/Effects/Highlight_Glow.qml</file>
+        <file>my_components/Notification.qml</file>
+        <file>my_components/Settings/Theme_Block.qml</file>
+        <file>my_components/Settings/Settings_Switch.qml</file>
+        <file>my_components/Settings/Settings_Text.qml</file>
+        <file>my_components/Settings/Settings_Link.qml</file>
+        <file>my_components/Elements/Custom_Popup_Menu.qml</file>
+        <file>my_components/Canvas_Rail.qml</file>
+        <file>my_components/Popups/Content_Dialog.qml</file>
+        <file>my_components/Popups/Loading_Popup.qml</file>
+        <file>my_components/Popups/Background_Popup.qml</file>
+        <file>my_components/Popups/Overlay_Popup.qml</file>
+        <file>my_components/Measure/Measure_Viser.qml</file>
+        <file>my_components/Measure/Measure_ViserLine.qml</file>
+        <file>my_components/Animations/Charts_Anim.qml</file>
+        <file>my_components/Navigation_Map.qml</file>
+        <file>my_components/Elements/Custom_Text_Arrow.qml</file>
+        <file>my_components/Animations/Button_Anim.qml</file>
+        <file>my_components/Elements/Custom_Icon_Button.qml</file>
     </qresource>
 </RCC>
