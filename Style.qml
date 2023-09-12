@@ -111,6 +111,8 @@ Item{
 
     property var currentTheme: themes.test_dark_theme // Переменная Для Хранения Текущей Темы Приложения
 
+
+
     property string theme: "light_theme"
 
     // #f794a4 → #fdd6bd
