@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_big_database_t {
-    QByteArrayData data[39];
-    char stringdata0[474];
+    QByteArrayData data[40];
+    char stringdata0[489];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -68,9 +68,10 @@ QT_MOC_LITERAL(32, 405, 11), // "update_Type"
 QT_MOC_LITERAL(33, 417, 5), // "index"
 QT_MOC_LITERAL(34, 423, 18), // "check_Coordination"
 QT_MOC_LITERAL(35, 442, 6), // "up_nom"
-QT_MOC_LITERAL(36, 449, 7), // "put_nom"
-QT_MOC_LITERAL(37, 457, 8), // "Input_KM"
-QT_MOC_LITERAL(38, 466, 7) // "Input_M"
+QT_MOC_LITERAL(36, 449, 14), // "name_Direction"
+QT_MOC_LITERAL(37, 464, 7), // "put_nom"
+QT_MOC_LITERAL(38, 472, 8), // "Input_KM"
+QT_MOC_LITERAL(39, 481, 7) // "Input_M"
 
     },
     "big_database\0newItem_Database_signal\0"
@@ -84,8 +85,8 @@ QT_MOC_LITERAL(38, 466, 7) // "Input_M"
     "mySignal\0strqqqq\0openDatabase\0path_db\0"
     "update_numRoad\0new_index\0update_upNom\0"
     "update_putNom\0code\0update_Type\0index\0"
-    "check_Coordination\0up_nom\0put_nom\0"
-    "Input_KM\0Input_M"
+    "check_Coordination\0up_nom\0name_Direction\0"
+    "put_nom\0Input_KM\0Input_M"
 };
 #undef QT_MOC_LITERAL
 
@@ -117,7 +118,7 @@ static const uint qt_meta_data_big_database[] = {
       29,    0,  130,    2, 0x0a /* Public */,
       30,    1,  131,    2, 0x0a /* Public */,
       32,    1,  134,    2, 0x0a /* Public */,
-      34,    4,  137,    2, 0x0a /* Public */,
+      34,    5,  137,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,    3,    4,    5,    6,    7,
@@ -134,7 +135,7 @@ static const uint qt_meta_data_big_database[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,   31,
     QMetaType::Void, QMetaType::Int,   33,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Int, QMetaType::Int,   35,   36,   37,   38,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::Int, QMetaType::Int,   35,   36,   37,   38,   39,
 
        0        // eod
 };
@@ -157,7 +158,7 @@ void big_database::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 9: _t->update_upNom(); break;
         case 10: _t->update_putNom((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 11: _t->update_Type((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 12: _t->check_Coordination((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4]))); break;
+        case 12: _t->check_Coordination((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

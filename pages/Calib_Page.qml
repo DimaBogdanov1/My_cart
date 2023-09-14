@@ -23,7 +23,7 @@ Item {
 
         Rectangle {
             id: menu_Rectangle
-            width: ui.width_Navigation * 3
+            width: 500
             height: parent.height
             color: Style.light_Color
 
@@ -31,6 +31,24 @@ Item {
                 width: parent.width - 40
                 height: parent.height  - 40
                 anchors.centerIn: parent
+                spacing: ui.basic_spacing * 2
+
+
+                Calib_Block{
+                    text: str.riht_Left
+                }
+
+                Calib_Block{
+                    text: str.riht_Right
+                }
+
+                Calib_Block{
+                    text: str.down_Left
+                }
+
+                Calib_Block{
+                    text: str.down_Right
+                }
 
                 Custom_Slider{
                     id: sample_Slider
@@ -49,6 +67,28 @@ Item {
                    // anchors.centerIn: parent
 
                 }
+
+                Custom_Slider{
+                    id: level_Slider
+                    width: parent.width
+
+                    onValueChanged: {
+
+                        rails_1.y = -1 * value * rails_1.height
+
+                        rails_2.y = value * rails_2.height
+
+                        var alpha =  Math.atan(Math.abs(rails_1.y - rails_2.y) /level_Measure.width) * 180.0 / Math.PI
+
+                        level_Measure.rotation =  alpha
+
+                        level_Label.text = alpha.toFixed(1) + "°"
+                    }
+
+                   // anchors.centerIn: parent
+
+                }
+
             }
 
 
@@ -79,15 +119,12 @@ Item {
 
                         Item{
                             width:  parent.width - root_Item.x_offset * 2
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            height:  parent.height
+                            anchors.centerIn: parent
+                            height:  parent.height / 4
 
-                            Rectangle{
+                            Calib_Rail{
                                 id: rails_1
                                 width: root_Item.rail_Block_Width
-                                height: parent.height
-
-                                color: "red"
                             }
 
                             Item{
@@ -147,11 +184,9 @@ Item {
 
                             }
 
-                            Rectangle{
+                            Calib_Rail{
                                 id: rails_2
                                 width: root_Item.rail_Block_Width
-                                height: parent.height
-                                color: "red"
 
                                 Component.onCompleted: {
 
@@ -166,7 +201,22 @@ Item {
 
 
 
+                    Custom_Border{
+                        id: level_Measure
+                        width: 200
+                        height:  2
+                        radius: 2
+                        color: Style.primaryDark_Color
 
+                    }
+
+
+                    Custom_Rectangle_Label {
+                        id: level_Label
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        needBorder: true
+
+                    }
 
                     Canvas_Rail{
                         width: 200
@@ -199,8 +249,10 @@ Item {
 
                     }
 
+
+
                     TextField {
-                        id: textField_1
+                        id: textField_1000
                         placeholderText: qsTr("Enter name")
 
                         onFocusChanged: {
@@ -224,7 +276,9 @@ Item {
           id: keyboard
           width: parent.width
           page_target: row
-          text_target:textField_1
+          number: true
+          full_number_keyboard: true
+          //text_target:textField_1
 
       }
 }

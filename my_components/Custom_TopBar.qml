@@ -173,10 +173,6 @@ Item{
 
                      memu.open()
 
-                     grab_Signal()
-
-                     toast.show("Ещё", 3000, 1) // Показываем Тоcт
-
                  }
              }
 
@@ -189,7 +185,7 @@ Item{
 
     }
 
-    Custom_Popup_Menu{
+    Menu_Popup{
         id:memu
 
     }

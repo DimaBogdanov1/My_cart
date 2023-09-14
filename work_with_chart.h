@@ -22,7 +22,7 @@ public slots:  // Слоты
 
 
 signals:
-    void newPoint_Chart_signal(const int& x_val, const int& y_val);
+    void newPoint_Chart_signal(const float& x_val, const float& y_val);
 
     void newPicket_signal(const int& y_val);
 

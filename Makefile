@@ -869,24 +869,30 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_qml.cpp qrc_my_components.cpp
 qrc_qml.cpp: qml.qrc \
 		../../Qt/5.15.2/clang_64/bin/rcc \
-		App_Page.qml \
-		My_Settings.qml \
 		Design_Values.qml \
-		Toast.qml \
+		test_qml.qml \
 		Style.qml \
+		App_Page.qml \
 		ToastManager.qml \
 		Utils.qml \
-		test_qml.qml \
+		Toast.qml \
+		Strings.qml \
 		main.qml \
-		images/logo_white_trans.png \
+		My_Settings.qml \
+		translator/England.qm \
+		pages/Settings_Page.qml \
+		pages/Calib_Page.qml \
+		pages/Home_Page.qml \
+		pages/History_Page.qml \
+		pages/home_pages/Start_Task_Page.qml \
+		pages/home_pages/Drop_db_Page.qml \
+		pages/home_pages/Charts_Page.qml \
 		starts_elements/Splash_Screen.qml \
 		starts_elements/Onboard_Screen.qml \
+		images/logo_white_trans.png \
+		images/test.png \
 		sounds/agree.mp3 \
 		sounds/keyboard.mp3 \
-		translator/England.qm \
-		fonts/Circular_Std_Bold.ttf \
-		fonts/Montserrat_Medium.ttf \
-		fonts/CircularStd_Book.ttf \
 		icons/moon_stars_light.svg \
 		icons/test_icon.icns \
 		icons/light_theme/home_2.svg \
@@ -917,17 +923,13 @@ qrc_qml.cpp: qml.qrc \
 		icons/light_theme/home_page/pencil.svg \
 		icons/light_theme/home_page/arrow_top.svg \
 		icons/light_theme/home_page/arrow_right_long.svg \
+		fonts/Circular_Std_Bold.ttf \
+		fonts/Montserrat_Medium.ttf \
+		fonts/CircularStd_Book.ttf \
 		sqlite/ITEMCORRECT.SQL \
 		sqlite/NAIM.SQL \
 		sqlite/ROAD.SQL \
-		sqlite/PUT.SQL \
-		pages/Settings_Page.qml \
-		pages/Calib_Page.qml \
-		pages/Home_Page.qml \
-		pages/History_Page.qml \
-		pages/home_pages/Start_Task_Page.qml \
-		pages/home_pages/Drop_db_Page.qml \
-		pages/home_pages/Charts_Page.qml
+		sqlite/PUT.SQL
 	/Users/dimabogdanov/QtProjects/MyCart/rcc_wrapper.sh -name qml qml.qrc -o qrc_qml.cpp
 
 qrc_my_components.cpp: my_components.qrc \
@@ -968,17 +970,21 @@ qrc_my_components.cpp: my_components.qrc \
 		my_components/Animations/Transition_Anim.qml \
 		my_components/Popups/Background_Popup.qml \
 		my_components/Popups/Overlay_Popup.qml \
+		my_components/Popups/Custom_Combobox.qml \
 		my_components/Popups/Content_Dialog.qml \
+		my_components/Popups/Menu_Element.qml \
 		my_components/Popups/Loading_Popup.qml \
+		my_components/Popups/Menu_Popup.qml \
+		my_components/Effects/Blur.qml \
 		my_components/Effects/Highlight_Glow.qml \
 		my_components/Effects/Main_Gradient.qml \
 		my_components/Effects/Border_Gradient.qml \
 		my_components/Effects/Mask_Rectangle.qml \
+		my_components/Calib_Elements/Calib_Rail.qml \
+		my_components/Calib_Elements/Calib_Block.qml \
 		my_components/Elements/Custom_Label.qml \
 		my_components/Elements/Custom_TextField.qml \
 		my_components/Elements/Custom_Switch.qml \
-		my_components/Elements/Custom_Popup_Menu.qml \
-		my_components/Elements/Custom_Combobox.qml \
 		my_components/Elements/Custom_ToolTip.qml \
 		my_components/Elements/Custom_Button.qml \
 		my_components/Elements/Custom_Slider.qml \

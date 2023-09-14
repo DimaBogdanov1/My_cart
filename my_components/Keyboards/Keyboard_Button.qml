@@ -78,6 +78,17 @@ Item {
 
                     break
 
+                case 6:
+
+                    keyboard_Logic.add_dot_number()
+
+                    break
+
+                case 7:
+
+                    keyboard_Logic.check_sign()
+
+                    break
                 }
             }
             else{

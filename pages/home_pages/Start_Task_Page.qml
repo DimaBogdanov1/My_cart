@@ -134,7 +134,7 @@ Item{
 
         Rectangle{
             width: parent.width < 1000 ? parent.width * 0.6 : 600
-            height: 30 +  ui.height_Button * 5 + 300 + 16 * 7 + 24
+            height: 30 +  ui.height_Button * 4 + ui.block_height + 300 + 16 * 7 + 24
             radius: ui.radius
             anchors.centerIn: parent
             color: Style.light_Color
@@ -200,7 +200,8 @@ Item{
                          height: ui.height_Button
                          model: ListModel {}
 
-                         onCurrentIndexChanged: {
+
+                         /*onCurrentIndexChanged: {
 
                              var num_Value = road_ComboBox.model.get(currentIndex).value.split(" - ");
 
@@ -211,7 +212,7 @@ Item{
                              upNom_ListModel.clear()
 
                              big_db.update_numRoad(num_Value[0])
-                         }
+                         }*/
 
                      }
 
@@ -379,11 +380,12 @@ Item{
 
                  Row{
                      width: parent.width
-                     height: ui.height_Button
+                     height: ui.block_height
                      spacing: ui.basic_spacing
 
                      Custom_Icon{
-                         height: parent.height
+                         height: ui.height_Button
+                         anchors.bottom: parent.bottom
                          source: "qrc:/icons/light_theme/top_bar/location.svg"
 
                       }
@@ -391,18 +393,19 @@ Item{
                      Custom_TextField {
                          id: textField_1
                          width: parent.width / 2 - ui.basic_spacing - ui.icon_nav_size / 2
-                         height: ui.height_Button
+                         title: qsTr("Километр")
+                         maximumLength: 4
+                         validator: IntValidator{}
+
                          //inputMethodHints: Qt.ImhSensitiveData | Qt.ImhPreferUppercase | Qt.ImhNoPredictiveText
                          //inputMask: "#### km"
-                         maximumLength: 10
-                         validator: IntValidator{}
-                         placeholderText: qsTr("Введите километр")
+                        // placeholderText: qsTr("Введите километр")
 
                          onReady_to_write_signal: {
 
-                             keyboard.text_target = textField_1
+                             keyboard.text_target = textField_1.get_target()
 
-                             keyboard.open(290)
+                             keyboard.open(300)
 
                          }
 
@@ -411,16 +414,16 @@ Item{
                      Custom_TextField {
                          id: textField_2
                          width: parent.width / 2 - ui.basic_spacing - ui.icon_nav_size / 2
-                         height: ui.height_Button
+                         title: qsTr("Метр")
                          maximumLength: 3
                          validator: IntValidator{}
-                         placeholderText: qsTr("Введите метр")
+                        // placeholderText: qsTr("Введите метр")
 
                          onReady_to_write_signal: {
 
-                             keyboard.text_target = textField_2
+                             keyboard.text_target = textField_2.get_target()
 
-                             keyboard.open(290)
+                             keyboard.open(300)
 
                          }
 
@@ -435,7 +438,7 @@ Item{
                      text:  qsTr("Начать задание") + mytrans.emptyString
                      onClicked_Signal: {
 
-                         big_db.check_Coordination(upNom_ListModel.get(list.currentIndex).code , putNom_ListModel.get(list2.currentIndex).put , textField_1.text, textField_2.text)
+                         big_db.check_Coordination(upNom_ListModel.get(list.currentIndex).code , upNom_ListModel.get(list.currentIndex).name, putNom_ListModel.get(list2.currentIndex).put , textField_1.text, textField_2.text)
 
                       //   index_swipe_Home = 2 // Переходим На График
 
@@ -477,12 +480,13 @@ Item{
 
                console.log("Код = " + upNom_ListModel.get(list.currentIndex).code    ) // + " Направление = " + putNom_ListModel.get(list.currentIndex) + " Путь = " + list2.get(list2.currentIndex))
 
-               toast.show("Проверка пройдена", 3000, 1) // Переход На Другую Страницу
+               index_swipe_Home = 2
+
            }
            else{
 
                start_Button.create_error_anim()
-               toast.show("Проверка нееееееее пройдена", 3000, 1)
+               //toast.show("Проверка нееееееее пройдена", 3000, 1)
            }
        }
 

@@ -7,7 +7,6 @@
         <file>my_components/Animations/Hover_Anim.qml</file>
         <file>my_components/Animations/Transition_Anim.qml</file>
         <file>my_components/Animations/Opacity_Anim.qml</file>
-        <file>my_components/Elements/Custom_Combobox.qml</file>
         <file>my_components/Elements/Custom_Label.qml</file>
         <file>my_components/Custom_TopBar.qml</file>
         <file>my_components/Measure/Measure_Block.qml</file>
@@ -43,7 +42,6 @@
         <file>my_components/Settings/Settings_Switch.qml</file>
         <file>my_components/Settings/Settings_Text.qml</file>
         <file>my_components/Settings/Settings_Link.qml</file>
-        <file>my_components/Elements/Custom_Popup_Menu.qml</file>
         <file>my_components/Canvas_Rail.qml</file>
         <file>my_components/Popups/Content_Dialog.qml</file>
         <file>my_components/Popups/Loading_Popup.qml</file>
@@ -56,5 +54,11 @@
         <file>my_components/Elements/Custom_Text_Arrow.qml</file>
         <file>my_components/Animations/Button_Anim.qml</file>
         <file>my_components/Elements/Custom_Icon_Button.qml</file>
+        <file>my_components/Popups/Menu_Popup.qml</file>
+        <file>my_components/Effects/Blur.qml</file>
+        <file>my_components/Popups/Custom_Combobox.qml</file>
+        <file>my_components/Popups/Menu_Element.qml</file>
+        <file>my_components/Calib_Elements/Calib_Block.qml</file>
+        <file>my_components/Calib_Elements/Calib_Rail.qml</file>
     </qresource>
 </RCC>

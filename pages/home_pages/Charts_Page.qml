@@ -89,6 +89,7 @@ Item{
 
 
                             Custom_Rectangle_Label {
+                                id: direction_Label
                                 width: parent.width * 0.3
                                 height: parent.height
                                 text: qsTr("Москва-Рига") + mytrans.emptyString
@@ -98,7 +99,6 @@ Item{
                             }
 
                             Custom_Text_Arrow{
-                               id: km_Text_Arrow
                                width: parent.width * 0.4 - ui.basic_spacing * 1.5
                                height: ui.height_Button
                                text_1:  qsTr("Станиция 1") + mytrans.emptyString
@@ -107,6 +107,7 @@ Item{
                             }
 
                             Custom_Rectangle_Label {
+                                id: upNom_Label
                                 width: parent.width * 0.15
                                 height: parent.height
                                 text: qsTr("Код: 11233") + mytrans.emptyString
@@ -117,6 +118,7 @@ Item{
 
 
                             Custom_Rectangle_Label {
+                                id: putNom_Label
                                 width: parent.width * 0.15
                                 height: parent.height
                                 text: qsTr("Путь: 1") + mytrans.emptyString
@@ -181,7 +183,7 @@ Item{
                                          x_start: 7.2
                                          x_finish: 23.8
                                          value: 1
-                                         title: qsTr("Уровень") + mytrans.emptyString
+                                         title: str.level
                                      }
 
                                      Measure_Block {
@@ -194,7 +196,7 @@ Item{
                                          x_start: 27.5
                                          x_finish: 40.3 //41.355 // x_start + 0.17 * (level_MeasureBlock.x_finish - level_MeasureBlock.x_start) / 0.2
                                          value: 1
-                                         title: qsTr("Рихтовка левая") + mytrans.emptyString
+                                         title: str.riht_Left
 
                                      }
 
@@ -208,11 +210,11 @@ Item{
                                          x_start: 44.3
                                          x_finish: x_start + riht_Left_MeasureBlock.x_finish - riht_Left_MeasureBlock.x_start
                                          value: 1
-                                         title: qsTr("Рихтовка правая") + mytrans.emptyString
+                                         title: str.riht_Right
 
                                          Component.onCompleted: {
 
-                                             console.log(x_finish + " ddddd")
+                                           //  console.log(x_finish + " ddddd")
                                          }
                                      }
 
@@ -226,7 +228,7 @@ Item{
                                          x_start: 60.8
                                          x_finish: 72
                                          value: 1
-                                         title: qsTr("Шаблон") + mytrans.emptyString
+                                         title: str.sample
 
                                      }
 
@@ -240,7 +242,7 @@ Item{
                                          x_start: 76.2
                                          x_finish: 84.3
                                          value: 8
-                                         title: qsTr("Просадка левая") + mytrans.emptyString
+                                         title: str.down_Left
 
                                      }
 
@@ -254,7 +256,7 @@ Item{
                                          x_start: 89
                                          x_finish: x_start + down_Left_MeasureBlock.x_finish - down_Left_MeasureBlock.x_start
                                          value: 10
-                                         title: qsTr("Просадка правая") + mytrans.emptyString
+                                         title: str.down_Right
 
                                      }
 
@@ -558,6 +560,7 @@ Item{
                             height:  parent.height
                             spacing: ui.basic_spacing
 
+
                             Custom_Button{
                                 id: start_Button
                                 width: parent.width
@@ -601,6 +604,8 @@ Item{
                                  }*/
 
                             }
+
+
 
                           /*  Rectangle{
                                  width: parent.width
@@ -848,6 +853,12 @@ Item{
 
                 function onNewTask_signal(up_nom, name, put_nom){
 
+                    direction_Label.text = name
+
+                    upNom_Label.text = qsTr("Код: ") + up_nom + mytrans.emptyString
+
+                    putNom_Label.text = qsTr("Путь: ") + put_nom + mytrans.emptyString
+
                     console.log("Код = " + up_nom + " Направление = " + name + " Путь = " + put_nom)
                 }
             }
@@ -877,7 +888,7 @@ Item{
 
                function onNewViserValue_signal(value) {
 
-                   sample_MeasureBlock.value = value.toFixed(1).toString()
+                   sample_MeasureBlock.value = value.toFixed(3).toString()
 
 
                }

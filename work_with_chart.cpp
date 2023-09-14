@@ -19,7 +19,7 @@ Work_with_chart::Work_with_chart(QObject *parent) : QObject(parent)
 
 }
 
-QList<QPoint> Sample_points;
+QList<QPointF> Sample_points;
 
 using namespace std;
 
@@ -28,28 +28,6 @@ int Work_with_chart::max(int a, int b)
     if(a > b)
         return a;
     return b;
-}
-
-float delete_space(string sk){
-
-    string buffer;
-
-    char chars[sk.length() + 1];
-
-    sk.copy(chars, sk.length() + 1);
-
-    for(int i=0; i < (sizeof(chars)/sizeof(*chars)); i++){
-
-        if(i != 1 && i != 2){
-
-            buffer += chars[i];
-        }
-
-    }
-
-  //  cout << buffer << endl;
-
-    return stoi( buffer );
 }
 
 
@@ -63,9 +41,9 @@ void Work_with_chart::add_New_Picket()
 
 double eee(int index_1, int index_2, float y_viser){
 
-    QPoint point_1 = Sample_points.at(index_1);
+    QPointF point_1 = Sample_points.at(index_1);
 
-    QPoint point_2 = Sample_points.at(index_2);
+    QPointF point_2 = Sample_points.at(index_2);
 
    qDebug() << "Point x1 = " + QVariant(point_1.x()).toString() +  " y1 = " + QVariant(point_1.y()).toString();
 
@@ -124,7 +102,7 @@ double eee(int index_1, int index_2, float y_viser){
 
 double aaa(int index){
 
-    qDebug() << "Совпадение" ;
+    qDebug() << "Совпадение index = " + QString::number(index) + " " + " x = " + QVariant(Sample_points.at(index).x()).toString() + " y = " + QVariant(Sample_points.at(index).y()).toString();
 
     return Sample_points.at(index).x();
 
@@ -282,12 +260,25 @@ void Work_with_chart::openCSV()
         getline(stream, sk, delimiter);
 
 
-        sk.erase(remove(sk.begin(),sk.end(), '  '),sk.end());
+        //sk.erase(remove(sk.begin(),sk.end(), '  '),sk.end());
+
+        QString aa = QString::fromStdString(sk);
+
+        aa = aa.simplified();
+
+        aa.replace(" ","");
 
 
-        emit newPoint_Chart_signal(delete_space(sk) , tmp_y); // Отправляем Сигнал
+       // qDebug() <<  QString::number(delete_space(sk));
 
-        Sample_points.append(QPoint(delete_space(sk), tmp_y));
+        double val = QString(aa).toDouble();
+
+        qDebug() << QString::number(val) ; // QString::fromStdString(sk);
+
+        emit newPoint_Chart_signal(QString(aa).toDouble() , tmp_y); // Отправляем Сигнал
+
+        Sample_points.append(QPointF(QString(aa).toDouble(), tmp_y));
+
 
 
         count++;

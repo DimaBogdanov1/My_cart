@@ -24,7 +24,7 @@ public slots:  // Слоты
 
     void update_Type(int index);
 
-    void check_Coordination(QString up_nom, QString put_nom, int Input_KM, int Input_M);
+    void check_Coordination(QString up_nom, QString name_Direction, QString put_nom, int Input_KM, int Input_M);
 
 signals:
 

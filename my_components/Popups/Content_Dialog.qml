@@ -1,12 +1,14 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.12
+import QtGraphicalEffects 1.0
+
 
 import Style 1.0
 import my_components 1.0
 
 
 Dialog {
-    id: dialog
+    id: popup
    // parent: Overlay.overlay
     width: 448
     height: 200
@@ -32,11 +34,9 @@ Dialog {
 
     background: Background_Popup{}
 
-    contentItem: Rectangle {
+    contentItem: Blur {
                     width: parent.width
                     height: parent.height
-                    radius: ui.radius
-                    color: Style.background_Color
 
                     Item {
                         width: parent.width -  ui.big_spacing
@@ -165,7 +165,7 @@ Dialog {
 
                 }
 
-    Overlay.modal: Overlay_Popup {}
+    Overlay.modal:  Overlay_Popup {}
 
     Popups_Anim{
         id: popups_Anim

@@ -119,7 +119,7 @@ QSqlQuery create_query(QString sql_file, bool prepare){
 }
 
 
-void big_database::check_Coordination(QString up_nom, QString put_nom, int Input_KM, int Input_M){
+void big_database::check_Coordination(QString up_nom, QString name_Direction, QString put_nom, int Input_KM, int Input_M){
 
     qDebug().nospace() << "\n" << "Проверка направления "  + up_nom + ", номер пути " + put_nom;
 

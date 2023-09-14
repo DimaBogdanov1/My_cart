@@ -26,11 +26,61 @@ Item {
         }
     }
 
+    function add_dot_number(){
+
+        if(text_target.text.length !== 0){
+
+            if(!check_dot){
+
+                check_dot = true
+
+                text_target.text += "."
+
+            }
+        }
+
+    }
+
+    function check_sign(){
+
+        if(text_target.text.length !== 0 ){
+
+            var value = parseFloat(text_target.text)
+
+            //value = -1 * value
+
+            if(value > 0){
+
+                console.log("ssd", "dsdsd")
+                delete_symbol()
+            }
+
+            text_target.text =  (-1 * value).toString()
+
+        }
+
+    }
+
     function delete_symbol(){
 
        audio.play_symbol()
 
        delete_symbol_signal()
+
+        //var penultChar = text_target.text[text_target.text.length -2]
+
+        var lastChar = text_target.text[text_target.text.length -1]
+
+        /*if(penultChar === "."){
+
+            check_dot = false // Указатель На То Что Можно Ставить Точку
+        }*/
+
+        if(lastChar === "."){
+
+            check_dot = false // Указатель На То Что Можно Ставить Точку
+
+        }
 
        text_target.text = text_target.text.slice(0, -1)
 

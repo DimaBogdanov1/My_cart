@@ -1,12 +1,14 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtGraphicalEffects 1.0
+import QtQuick.Layouts 1.3
 
 import Style 1.0
 import MyLang 1.0
 import my_components 1.0
 
 Item {
+    id:row
     width: parent.width
     height: parent.height
 
@@ -22,6 +24,23 @@ Item {
 
         }
 
+
+    }
+
+    Custom_TextField {
+        id: textField_1
+        width: parent.width
+        title: str.riht_Left
+        maximumLength: 3
+        validator: IntValidator{}
+
+        onReady_to_write_signal: {
+
+            keyboard.text_target = textField_1.get_target()
+
+            keyboard.open(0)
+
+        }
 
     }
 
@@ -89,4 +108,13 @@ Item {
 
     }
 
+
+
+    Keyboard{
+        id: keyboard
+        width: parent.width
+        page_target: row
+        text_target:textField_1
+
+    }
 }

@@ -12,6 +12,8 @@ Item {
 
     property bool number
 
+    property bool full_number_keyboard
+
     property string value
 
     signal new_symbol_signal(string symbol)

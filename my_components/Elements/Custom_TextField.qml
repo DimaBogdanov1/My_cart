@@ -5,161 +5,206 @@ import Style 1.0
 import my_components 1.0
 
 
-TextField {
-    id: textField
-    selectByMouse: true
-    font.weight:  ui.font_weight_Smallsize
-    font.family: custom_FontLoader.name
-    font.pixelSize:  ui.text_SmallSize
-    implicitWidth: parent.width
-    implicitHeight: parent.height
-    color: Style.primaryDark_Color
-    selectionColor: Style.light_Color // Style.primaryDark_Color
-    focus: false
+Column{
+    id: root_Column
+    width: parent.width
+    height: ui.block_height //ui.height_Button +  ui.text_miniSize + ui.basic_spacing / 2
+    spacing: ui.basic_spacing / 2
 
     property bool isReady: false
 
+    property string title
+
+    property string text
+
+    property int maximumLength: 100
+
+    property var validator
+
     signal ready_to_write_signal
 
-    //text: " км"
-    //property string color: Style.accent_Color
+    function get_target(){
 
-    Component.onCompleted: {
-
-      //  console.log("sdsd  ", isReady)
+        return textField
     }
 
-    Hover_Anim{
-        width: parent.width
-        height: parent.height
-        outlined: true
+    Custom_Rectangle_Label{
+        id: title_Block
+        height:  ui.text_miniSize
+        horizontal: Text.AlignLeft
+        needBack: false
+        pixel_size: ui.text_miniSize
+       // color: 'red'
+        text: root_Column.title
 
-        onClicked_Signal: {
+        anchors {
 
-            textField.forceActiveFocus()
-        }
-
-        onHover_Signal: {
-
-            glow.change_glow(value)
+            left: parent.left
+            leftMargin:  10 //ui.basic_spacing //2
 
         }
     }
 
 
+    TextField {
+        id: textField
+        selectByMouse: true
+        font.weight:  ui.font_weight_Smallsize
+        font.family: custom_FontLoader.name
+        font.pixelSize:  ui.text_SmallSize
+        implicitWidth: parent.width
+        implicitHeight: parent.height - title_Block.height - ui.basic_spacing / 2
+        color: Style.primaryDark_Color
+        maximumLength: root_Column.maximumLength
+        validator: root_Column.validator
+        selectionColor: Style.light_Color // Style.primaryDark_Color
+        focus: false
 
-    background: Item {
-        width: parent.width
-        height: parent.height
 
-        Highlight_Glow{id: glow; target: back_Rectangle;}
+        //text: " км"
+        //property string color: Style.accent_Color
 
-            Rectangle {
-            id: back_Rectangle
+        Component.onCompleted: {
+
+          //  console.log("sdsd  ", isReady)
+        }
+
+        Hover_Anim{
             width: parent.width
             height: parent.height
-            radius: ui.radius
-            color: Style.background_Color //"transparent"
+            outlined: true
 
-            Border_Gradient{visible: isReady}
+            onClicked_Signal: {
 
+                textField.forceActiveFocus()
             }
 
-            /*Hover_Anim{
-                id: hover_Anim
+            onHover_Signal: {
+
+                glow.change_glow(value)
+
+            }
+        }
+
+
+
+        background: Item {
+            width: parent.width
+            height: parent.height
+
+            Highlight_Glow{id: glow; target: back_Rectangle;}
+
+                Rectangle {
+                id: back_Rectangle
                 width: parent.width
                 height: parent.height
-                outlined: true
-                color: root_Item.color
+                radius: ui.radius
+                color: Style.background_Color //"transparent"
 
-                onClicked_Signal: {
-
-
-                    textField.focus = true
-                    //root_Item.clicked_Signal()
+                Border_Gradient{visible: isReady}
 
                 }
-            }*/
-            PropertyAnimation {
-                id: anim
-                target: back_Rectangle
-                property: "border.color"
-                to: "red"
-                duration: 250
+
+                /*Hover_Anim{
+                    id: hover_Anim
+                    width: parent.width
+                    height: parent.height
+                    outlined: true
+                    color: root_Item.color
+
+                    onClicked_Signal: {
+
+
+                        textField.focus = true
+                        //root_Item.clicked_Signal()
+
+                    }
+                }*/
+                PropertyAnimation {
+                    id: anim
+                    target: back_Rectangle
+                    property: "border.color"
+                    to: "red"
+                    duration: 250
+
+                }
+        }
+
+        onTextChanged: {
+
+            var patt = " км";
+
+            root_Column.text = text
+
+            if(!text.includes(patt)){
+
+                //text += " км"
 
             }
-    }
-
-    onTextChanged: {
-
-        var patt = " км";
-
-        if(!text.includes(patt)){
-
-            //text += " км"
 
         }
 
-    }
-
-    onFocusChanged: {
-
-       // opacity_Anim.open_anim()
-
-        if(focus){
-
-            isReady = true
-
-           ready_to_write_signal()
+        onFocusChanged: {
 
            // opacity_Anim.open_anim()
 
-          // anim.to = Style.accent_Color
+            if(focus){
 
-            glow.change_glow(isReady)
+                isReady = true
+
+               ready_to_write_signal()
+
+               // opacity_Anim.open_anim()
+
+              // anim.to = Style.accent_Color
+
+                glow.change_glow(isReady)
+
+            }
+            else{
+
+                isReady = false
+
+
+               // opacity_Anim.close_anim()
+                //anim.to = Style.primaryDark_Color
+
+            }
+
+
+
+           // opacity_Anim.open_anim()
 
         }
-        else{
 
-            isReady = false
+        /*Custom_Rectangle_Label {
+            width: 50
+            height: parent.height
+            margin_text: 0
+            needBack: false
+            anchors.right: parent.right
+            anchors.rightMargin: 10
+            horizontal: Text.AlignRight
+            text: " Км"
 
+        }*/
 
-           // opacity_Anim.close_anim()
-            //anim.to = Style.primaryDark_Color
-
+        ColorAnimation {
+            id: sss
+            target: back_Rectangle
+            from: "white"
+            to: "black"
+            duration: 200
         }
 
+        Opacity_Anim{
+            id: opacity_Anim
+            from: 0.4
+            animation_target: back_Rectangle
 
-
-       // opacity_Anim.open_anim()
-
+        }
     }
 
-    /*Custom_Rectangle_Label {
-        width: 50
-        height: parent.height
-        margin_text: 0
-        needBack: false
-        anchors.right: parent.right
-        anchors.rightMargin: 10
-        horizontal: Text.AlignRight
-        text: " Км"
-
-    }*/
-
-    ColorAnimation {
-        id: sss
-        target: back_Rectangle
-        from: "white"
-        to: "black"
-        duration: 200
-    }
-
-    Opacity_Anim{
-        id: opacity_Anim
-        from: 0.4
-        animation_target: back_Rectangle
-
-    }
 }
+
 

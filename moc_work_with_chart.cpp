@@ -84,7 +84,7 @@ static const uint qt_meta_data_Work_with_chart[] = {
       13,    2,   71,    2, 0x0a /* Public */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
+    QMetaType::Void, QMetaType::Float, QMetaType::Float,    3,    4,
     QMetaType::Void, QMetaType::Int,    4,
     QMetaType::Void, QMetaType::Float,    7,
 
@@ -104,7 +104,7 @@ void Work_with_chart::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         auto *_t = static_cast<Work_with_chart *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->newPoint_Chart_signal((*reinterpret_cast< const int(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2]))); break;
+        case 0: _t->newPoint_Chart_signal((*reinterpret_cast< const float(*)>(_a[1])),(*reinterpret_cast< const float(*)>(_a[2]))); break;
         case 1: _t->newPicket_signal((*reinterpret_cast< const int(*)>(_a[1]))); break;
         case 2: _t->newViserValue_signal((*reinterpret_cast< const float(*)>(_a[1]))); break;
         case 3: _t->openCSV(); break;
@@ -118,7 +118,7 @@ void Work_with_chart::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (Work_with_chart::*)(const int & , const int & );
+            using _t = void (Work_with_chart::*)(const float & , const float & );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Work_with_chart::newPoint_Chart_signal)) {
                 *result = 0;
                 return;
@@ -182,7 +182,7 @@ int Work_with_chart::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void Work_with_chart::newPoint_Chart_signal(const int & _t1, const int & _t2)
+void Work_with_chart::newPoint_Chart_signal(const float & _t1, const float & _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

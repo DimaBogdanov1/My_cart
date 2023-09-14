@@ -20,6 +20,6 @@ LinearGradient {
 
     gradient: Gradient {
         GradientStop { position: 0.0; color: !off ? Style.accent_Color : off_color}
-        GradientStop { position: 0.5; color: !off ? Style.secondaryAccent_Color : off_color}
+        GradientStop { position: 1; color: !off ? Style.secondaryAccent_Color : off_color}
     }
 }

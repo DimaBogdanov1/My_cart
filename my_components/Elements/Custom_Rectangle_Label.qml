@@ -26,6 +26,8 @@ Item{
 
     property bool needBack: true
 
+    property int pixel_size: ui.text_SmallSize
+
     width: label.paintedWidth + margin_text
     height: label.paintedHeight + margin_text / 2
 
@@ -45,6 +47,7 @@ Item{
         id: label
         horizontalAlignment: root_Item.horizontal
         verticalAlignment: root_Item.vertical
+        font.pixelSize: root_Item.pixel_size
         text: root_Item.text
         color: root_Item.text_color
 

@@ -59,6 +59,9 @@ ApplicationWindow {
         id: ui
     }
 
+    Strings{
+        id: str
+    }
 
     FontLoader {  // Создаём Загрузчик Шрифтов
         id: custom_FontLoader

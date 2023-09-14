@@ -19,10 +19,13 @@ Item {
 
     readonly property int toolBar_Size: 56 // Размер Тулбара
 
+    readonly property real block_height: ui.height_Button + ui.basic_spacing / 2 + ui.text_miniSize
+
+
     /////////////////
 
     // Текст
-    readonly property int text_miniSize: 10 // Размер Супер Маленького Текста
+    readonly property int text_miniSize: 12 // Размер Супер Маленького Текста
 
     readonly property int text_SmallSize: 14 // Размер Маленького Текста
 

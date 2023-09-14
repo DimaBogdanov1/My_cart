@@ -4,7 +4,6 @@ module my_components
 Custom_Slider 1.0 Elements/Custom_Slider.qml
 Custom_Switch 1.0 Elements/Custom_Switch.qml
 Custom_Button 1.0 Elements/Custom_Button.qml
-Custom_Combobox 1.0 Elements/Custom_Combobox.qml
 Custom_Label 1.0 Elements/Custom_Label.qml
 Custom_ToolTip 1.0 Elements/Custom_ToolTip.qml
 Custom_Rectangle_Label 1.0 Elements/Custom_Rectangle_Label.qml
@@ -12,7 +11,6 @@ Custom_Border 1.0 Elements/Custom_Border.qml
 Custom_Icon 1.0 Elements/Custom_Icon.qml
 Custom_TextField 1.0 Elements/Custom_TextField.qml
 Custom_Pick_Button 1.0 Elements/Custom_Pick_Button.qml
-Custom_Popup_Menu 1.0 Elements/Custom_Popup_Menu.qml
 Custom_Text_Arrow 1.0 Elements/Custom_Text_Arrow.qml
 Custom_Icon_Button 1.0 Elements/Custom_Icon_Button.qml
 
@@ -47,7 +45,7 @@ Main_Gradient 1.0 Effects/Main_Gradient.qml
 Border_Gradient 1.0 Effects/Border_Gradient.qml
 Mask_Rectangle 1.0 Effects/Mask_Rectangle.qml
 Highlight_Glow 1.0 Effects/Highlight_Glow.qml
-
+Blur 1.0 Effects/Blur.qml
 
 # Settings
 Theme_Block 1.0 Settings/Theme_Block.qml
@@ -59,7 +57,12 @@ Settings_Link 1.0 Settings/Settings_Link.qml
 # Popups
 Content_Dialog 1.0 Popups/Content_Dialog.qml
 Loading_Popup 1.0 Popups/Loading_Popup.qml
+Menu_Popup 1.0 Popups/Menu_Popup.qml
+Custom_Combobox 1.0 Popups/Custom_Combobox.qml
 
+# Calib_Elements
+Calib_Block 1.0 Calib_Elements/Calib_Block.qml
+Calib_Rail 1.0 Calib_Elements/Calib_Rail.qml
 
 Custom_TopBar 1.0 Custom_TopBar.qml
 
