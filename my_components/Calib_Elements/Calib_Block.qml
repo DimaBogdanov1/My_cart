@@ -52,7 +52,7 @@ Row {
             id: textField_2
             width: parent.width / 2 - ui.basic_spacing / 2
             title: qsTr("Множитель")
-            maximumLength: 3
+            maximumLength: 1
             validator: IntValidator{}
 
             onReady_to_write_signal: {

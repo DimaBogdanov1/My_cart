@@ -5,7 +5,7 @@ import QtCharts 2.15
 import QtQuick.Controls.Material 2.15
 import QtGraphicalEffects 1.15
 
-
+import qml.measure 1.0
 import Style 1.0
 import MyLang 1.0
 import my_components 1.0
@@ -31,7 +31,7 @@ Item{
 
                 if(value){
 
-                    Work_with_chart.get_points_line(measure_Viser.value * 100)
+                    Chart_Work.get_points_line(measure_Viser.value * 100)
 
                 }
 
@@ -326,8 +326,6 @@ Item{
                                                  x_finish: level_MeasureBlock.x_finish
                                                  Component.onCompleted: {
 
-                                                     addPoint(level_MeasureBlock.x_start + 3, 0)
-                                                     addPoint(level_MeasureBlock.x_start + 3, 10)
                                                      create_BorderSeries()
                                                  }
 
@@ -340,9 +338,6 @@ Item{
                                                  x_start: riht_Left_MeasureBlock.x_start
                                                  x_finish: riht_Left_MeasureBlock.x_finish
                                                  Component.onCompleted: {
-
-                                                     addPoint(riht_Left_MeasureBlock.x_start + 3, 0)
-                                                     addPoint(riht_Left_MeasureBlock.x_start + 3, 10)
 
                                                      create_BorderSeries()
                                                  }
@@ -357,9 +352,6 @@ Item{
                                                  x_finish: riht_Right_MeasureBlock.x_finish
                                                  Component.onCompleted: {
 
-                                                     addPoint(riht_Right_MeasureBlock.x_start + 3, 0)
-                                                     addPoint(riht_Right_MeasureBlock.x_start + 3, 10)
-
                                                      create_BorderSeries()
                                                  }
 
@@ -372,9 +364,6 @@ Item{
                                                  x_start: sample_MeasureBlock.x_start
                                                  x_finish: sample_MeasureBlock.x_finish
                                                  Component.onCompleted: {
-
-                                                    // addPoint(sample_MeasureBlock.x_start + 3, 0)
-                                                     //addPoint(sample_MeasureBlock.x_start + 3, 10)
 
                                                      create_BorderSeries()
                                                  }
@@ -389,9 +378,6 @@ Item{
                                                  x_finish: down_Left_MeasureBlock.x_finish
                                                  Component.onCompleted: {
 
-                                                     addPoint(down_Left_MeasureBlock.x_start + 3, 0)
-                                                     addPoint(down_Left_MeasureBlock.x_start + 3, 10)
-
                                                      create_BorderSeries()
                                                  }
 
@@ -404,9 +390,6 @@ Item{
                                                  x_start: down_Right_MeasureBlock.x_start
                                                  x_finish: down_Right_MeasureBlock.x_finish
                                                  Component.onCompleted: {
-
-                                                     addPoint(down_Right_MeasureBlock.x_start + 3, 0)
-                                                     addPoint(down_Right_MeasureBlock.x_start + 3, 10)
 
                                                      create_BorderSeries()
                                                  }
@@ -504,7 +487,7 @@ Item{
                                         //tip_text: qsTr("Отметить пикет") + mytrans.emptyString
                                         onClicked_Signal: {
 
-                                          // Work_with_chart.add_New_Picket()
+                                          // Chart_Work.add_New_Picket()
 
                                         }
                                     }
@@ -522,12 +505,13 @@ Item{
                                             value: 0.5
                                              onValueChanged: {
 
-                                                level_MeasureBlock.title = (value * 100).toString()
-                                                // console.log(value)
+                                               // level_MeasureBlock.title = (value * 100).toString()
+
+                                                 // console.log(value)
 
                                                     // это мой у
 
-                                                          Work_with_chart.get_points_line(value * 100)
+                                                          Chart_Work.get_points_line(value * 100)
 
                                                  //sample_MeasureLines.get_value_by_y(y)
 
@@ -562,7 +546,7 @@ Item{
 
 
                             Custom_Button{
-                                id: start_Button
+                                id: startStop_Button
                                 width: parent.width
                                 height: ui.height_Button
                                 isIcon: true
@@ -570,6 +554,22 @@ Item{
 
                                 onClicked_Signal: {
 
+                                    if(outlined){
+
+                                        outlined = false
+
+                                        source = "qrc:/icons/"+ Style.theme + "/utils/play.svg"
+
+                                    }
+                                    else{
+
+                                        outlined = true
+
+                                        source = "qrc:/icons/"+ Style.theme + "/utils/pause.svg"
+
+
+
+                                    }
 
                                 }
 
@@ -733,7 +733,7 @@ Item{
                                       width: 100
                                       height: parent.height
                                       text:  qsTr("csv") + mytrans.emptyString
-                                      onClicked: Work_with_chart.openCSV()
+                                      onClicked: Chart_Work.openCSV()
 
                                   }
 
@@ -864,16 +864,76 @@ Item{
             }
 
             Connections{
-               target: Work_with_chart
+               target: Chart_Work
 
-               property int tmp_y: 0
+               property int y_0: 0
 
-               function onNewPoint_Chart_signal(x, y) {
+               property int y_1: 0
+
+               property int y_2: 0
+
+               property int y_3: 0
+
+               property int y_4: 0
+
+               property int y_5: 0
+
+               function onNewPoint_Chart_signal(index, x, y) {
 
 
-                   sample_MeasureLines.addPoint(sample_MeasureBlock.convert_x(x), tmp_y, x)
+                   switch(index){
 
-                   tmp_y++
+                   case Name_Measures.Level_Measure:
+
+                       level_MeasureLines.addPoint(level_MeasureBlock.convert_x(x), y_0, x)
+
+                       y_0++
+
+                       break
+
+                   case Name_Measures.Riht_Left_Measure:
+
+                       riht_Left_MeasureLines.addPoint(riht_Left_MeasureBlock.convert_x(x), y_1, x)
+
+                       y_1++
+
+                       break
+
+                   case Name_Measures.Riht_Right_Measure:
+
+                       riht_Right_MeasureLines.addPoint(riht_Right_MeasureBlock.convert_x(x), y_2, x)
+
+                       y_2++
+
+                       break
+
+                   case Name_Measures.Sample_Measure:
+
+                       sample_MeasureLines.addPoint(sample_MeasureBlock.convert_x(x), y_3, x)
+
+                       y_3++
+
+                       break
+
+                   case Name_Measures.Down_Left_Measure:
+
+                       down_Left_MeasureLines.addPoint(down_Left_MeasureBlock.convert_x(x), y_4, x)
+
+                       y_4++
+
+                       break
+
+                   case Name_Measures.Down_Right_Measure:
+
+                       down_Right_MeasureLines.addPoint(down_Right_MeasureBlock.convert_x(x), y_5, x)
+
+                       y_5++
+
+                       break
+
+
+                   }
+
 
                    // chart_LineSeries.append(x, y)
 
@@ -886,9 +946,51 @@ Item{
 
                }
 
-               function onNewViserValue_signal(value) {
+               function onNewViserValue_signal(index, value) {
 
-                   sample_MeasureBlock.value = value.toFixed(3).toString()
+                   let fixed_value = 3
+
+                   switch(index){
+
+                   case Name_Measures.Level_Measure:
+
+                       level_MeasureBlock.value = value.toFixed(fixed_value).toString()
+
+                       break
+
+                   case Name_Measures.Riht_Left_Measure:
+
+                       riht_Left_MeasureBlock.value = value.toFixed(fixed_value).toString()
+
+                       break
+
+                   case Name_Measures.Riht_Right_Measure:
+
+                       riht_Right_MeasureBlock.value = value.toFixed(fixed_value).toString()
+
+                       break
+
+                   case Name_Measures.Sample_Measure:
+
+                       sample_MeasureBlock.value = value.toFixed(fixed_value).toString()
+
+                       break
+
+                   case Name_Measures.Down_Left_Measure:
+
+                       down_Left_MeasureBlock.value = value.toFixed(fixed_value).toString()
+
+                       break
+
+                   case Name_Measures.Down_Right_Measure:
+
+                       down_Right_MeasureBlock.value = value.toFixed(fixed_value).toString()
+
+                       break
+
+
+                   }
+
 
 
                }
@@ -905,7 +1007,7 @@ Item{
 
             Component.onDestruction: {
 
-                Work_with_chart.clearPoints()
+                Chart_Work.clearPoints()
             }
 
         }

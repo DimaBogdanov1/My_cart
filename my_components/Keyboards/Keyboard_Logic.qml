@@ -154,8 +154,6 @@ Item {
 
         close()
 
-        toast.show("Ввод", 3000, 1)
-
     }
 
     function change_language(){

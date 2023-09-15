@@ -61,5 +61,6 @@
         <file>icons/light_theme/top_bar/shield.svg</file>
         <file>images/test.png</file>
         <file>Strings.qml</file>
+        <file>icons/light_theme/utils/pause.svg</file>
     </qresource>
 </RCC>

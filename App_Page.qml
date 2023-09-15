@@ -14,7 +14,7 @@ Item {
 
     property int index_Page: -1
 
-    property int index_swipe_Home: 1 //2
+    property int index_swipe_Home: 2 //1 //2
 
     readonly property var sourcePages_Array: [
                                                "../pages/Home_Page.qml",
@@ -160,7 +160,7 @@ Item {
                 height: parent.height
                 focus: true
                 source: sourcePages_Array[index_Page]
-                Component.onCompleted: index_Page =  1 //0 //1 //source = sourcePages_Array[index_Page]
+                Component.onCompleted: index_Page =  0 //1 //source = sourcePages_Array[index_Page]
 
             }
 

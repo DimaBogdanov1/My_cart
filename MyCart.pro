@@ -18,11 +18,13 @@ SOURCES += \
         databases/my_database.cpp \
         export/my_pdf.cpp \
         main.cpp \
+        measures/chart_work.cpp \
+        measures/measure.cpp \
+        measures/name_measures.cpp \
         models/StartTask_Model.cpp \
         mythread.cpp \
         requester.cpp \
-        test_smart.cpp \
-        work_with_chart.cpp
+        test_smart.cpp
 
 TRANSLATIONS = translator/England.ts
 
@@ -47,14 +49,16 @@ HEADERS += \
     databases/big_database.h \
     databases/my_database.h \
     export/my_pdf.h \
+    measures/chart_work.h \
+    measures/measure.h \
+    measures/name_measures.h \
     models/StartTask_Model.h \
     models_headers/big_database.h \
     mythread.h \
     requester.h \
     test_smart.h \
     translate_headers/mylang.h \
-    translate_headers/mytranslator.h \
-    work_with_chart.h
+    translate_headers/mytranslator.h
 
 DISTFILES += \
     my_components/qmldir \

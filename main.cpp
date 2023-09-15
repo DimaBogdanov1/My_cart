@@ -20,7 +20,9 @@
 #include "databases/my_database.h"
 
 #include "models/StartTask_Model.h"
-#include "work_with_chart.h"
+#include "measures/chart_work.h"
+#include "measures/name_measures.h"
+
 #include "test_smart.h"
 
 #include "export/my_pdf.h"
@@ -54,7 +56,7 @@ int main(int argc, char *argv[])
 
     big_database big_db;
 
-    Work_with_chart work_with_chart;
+    Chart_Work chart_work;
 
     My_pdf my_pdf;
 
@@ -67,16 +69,20 @@ int main(int argc, char *argv[])
     qmlRegisterType<StartTask_Model>("StartTask_Model", 1, 0, "StartTask_Model");
 
 
+   qRegisterMetaType<Status>("Name_Measures");
+
+   qmlRegisterUncreatableType<Name_Measures>("qml.measure", 1, 0, "Name_Measures", "Not creatable as it is an enum type");
+
+
     MyTranslator mTrans(&app);
 
 
-    QQmlApplicationEngine engine;
-
+    QQmlApplicationEngine engine;    
     engine.rootContext()->setContextProperty("mytrans", (QObject*)&mTrans);
 
     engine.rootContext()->setContextProperty("big_db", &big_db);
 
-    engine.rootContext()->setContextProperty("Work_with_chart", &work_with_chart);
+    engine.rootContext()->setContextProperty("Chart_Work", &chart_work);
 
     engine.rootContext()->setContextProperty("my_pdf", &my_pdf);
 

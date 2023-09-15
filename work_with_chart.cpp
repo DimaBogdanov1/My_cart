@@ -9,19 +9,53 @@
 #include <QtTest/QtTest>
 
 #include <mythread.h>
-
 #include "work_with_chart.h"
+
+
+
+class Measure_3{
+
+public:
+
+    QList<QPointF> Chart_points;
+
+    float bias_value; // Смещение
+
+    float multiplier_value = 1; // Множитель
+
+
+};
+
+enum Measure_3s
+      {
+         Level_Measure_3,
+         Riht_Left_Measure_3,
+         Riht_Right_Measure_3,
+         Sample_Measure_3,
+         Down_Left_Measure_3,
+         Down_Right_Measure_3
+      };
+
+
+QList<Measure_3> Measure_3_List;
+
+using namespace std;
 
 
 // Ширина колеи 1512 - 1548
 Work_with_chart::Work_with_chart(QObject *parent) : QObject(parent)
 {
+    for(int i = 0; i < 6; i++){
 
+        Measure_3 measure_3;
+
+        Measure_3_List.append(measure_3);
+
+    }
+
+    qDebug() << "Создали Объекты для измерений";
 }
 
-QList<QPointF> Sample_points;
-
-using namespace std;
 
 int Work_with_chart::max(int a, int b)
 {
@@ -41,9 +75,9 @@ void Work_with_chart::add_New_Picket()
 
 double eee(int index_1, int index_2, float y_viser){
 
-    QPointF point_1 = Sample_points.at(index_1);
+    QPointF point_1 =  Measure_3_List[Sample_Measure_3].Chart_points.at(index_1);
 
-    QPointF point_2 = Sample_points.at(index_2);
+    QPointF point_2 =  Measure_3_List[Sample_Measure_3].Chart_points.at(index_2);
 
    qDebug() << "Point x1 = " + QVariant(point_1.x()).toString() +  " y1 = " + QVariant(point_1.y()).toString();
 
@@ -102,9 +136,9 @@ double eee(int index_1, int index_2, float y_viser){
 
 double aaa(int index){
 
-    qDebug() << "Совпадение index = " + QString::number(index) + " " + " x = " + QVariant(Sample_points.at(index).x()).toString() + " y = " + QVariant(Sample_points.at(index).y()).toString();
+    qDebug() << "Совпадение index = " + QString::number(index) + " " + " x = " + QVariant( Measure_3_List[Sample_Measure_3].Chart_points.at(index).x()).toString() + " y = " + QVariant(Measure_3_List[Sample_Measure_3].Chart_points.at(index).y()).toString();
 
-    return Sample_points.at(index).x();
+    return  Measure_3_List[Sample_Measure_3].Chart_points.at(index).x();
 
 }
 void Work_with_chart::get_points_line(float y_viser){
@@ -112,16 +146,16 @@ void Work_with_chart::get_points_line(float y_viser){
     float answer = 0;
 
     int l = 0; // левая граница
-      int r = Sample_points.size(); // правая граница
+      int r =  Measure_3_List[Sample_Measure_3].Chart_points.size(); // правая граница
       int mid;
 
-      if(Sample_points.size() != 0){
+      if( Measure_3_List[Sample_Measure_3].Chart_points.size() != 0){
 
           while ((l <= r) ) {
 
               mid = (l + r) / 2; // считываем срединный индекс отрезка [l,r]
 
-              if (Sample_points.at(mid).y() == y_viser){
+              if ( Measure_3_List[Sample_Measure_3].Chart_points.at(mid).y() == y_viser){
 
                   qDebug() << "faaaast mid = " + QString::number(mid);
 
@@ -151,7 +185,7 @@ void Work_with_chart::get_points_line(float y_viser){
               }
 
 
-              if((Sample_points.at(mid).y() < y_viser) && (Sample_points.at(mid + 1).y() > y_viser)) {
+              if(( Measure_3_List[Sample_Measure_3].Chart_points.at(mid).y() < y_viser) && (Measure_3_List[Sample_Measure_3].Chart_points.at(mid + 1).y() > y_viser)) {
 
                   answer = eee(mid, mid + 1, y_viser);
 
@@ -163,7 +197,7 @@ void Work_with_chart::get_points_line(float y_viser){
 
               //qDebug() << "Sample_points.at(mid).y() = " + QString::number(Sample_points.at(mid).y());
 
-              if (Sample_points.at(mid).y() > y_viser) r = mid - 1; // проверяем, какую часть нужно отбросить
+              if ( Measure_3_List[Sample_Measure_3].Chart_points.at(mid).y() > y_viser) r = mid - 1; // проверяем, какую часть нужно отбросить
               else l = mid + 1;
 
 
@@ -213,7 +247,7 @@ void Work_with_chart::get_points_line(float y_viser){
 
 void Work_with_chart::clearPoints(){
 
-    Sample_points.clear();
+     Measure_3_List[Sample_Measure_3].Chart_points.clear();
 
 }
 
@@ -222,7 +256,7 @@ void Work_with_chart::openCSV()
 
     tmp_y = 0;
 
-    Sample_points.clear();
+     Measure_3_List[Sample_Measure_3].Chart_points.clear();
 
     //MyThread tread("A");
 
@@ -277,7 +311,9 @@ void Work_with_chart::openCSV()
 
         emit newPoint_Chart_signal(QString(aa).toDouble() , tmp_y); // Отправляем Сигнал
 
-        Sample_points.append(QPointF(QString(aa).toDouble(), tmp_y));
+        Measure_3_List[Sample_Measure_3].Chart_points.append(QPointF(QString(aa).toDouble(), tmp_y));
+
+       // Sample_points.append(QPointF(QString(aa).toDouble(), tmp_y));
 
 
 

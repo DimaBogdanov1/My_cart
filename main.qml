@@ -9,6 +9,7 @@ import MyLang 1.0
 import StartTask_Model 1.0
 import my_components 1.0
 
+
 ApplicationWindow {
     id: applicationWindow
     width: 1344 //1920 //800

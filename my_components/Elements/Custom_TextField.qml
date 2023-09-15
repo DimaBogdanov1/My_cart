@@ -69,6 +69,15 @@ Column{
           //  console.log("sdsd  ", isReady)
         }
 
+       /* onHoveredChanged: {
+            glow.change_glow(hovered)
+
+        }
+
+        onPressed:{
+
+        }*/
+
         Hover_Anim{
             width: parent.width
             height: parent.height
@@ -76,7 +85,19 @@ Column{
 
             onClicked_Signal: {
 
+                if(textField.length > 0){
+
+                   // mouse_enabled = false
+                }
+                else{
+
+                    //mouse_enabled = true
+
+                }
+
                 textField.forceActiveFocus()
+
+
             }
 
             onHover_Signal: {
@@ -85,6 +106,7 @@ Column{
 
             }
         }
+
 
 
 
@@ -105,21 +127,6 @@ Column{
 
                 }
 
-                /*Hover_Anim{
-                    id: hover_Anim
-                    width: parent.width
-                    height: parent.height
-                    outlined: true
-                    color: root_Item.color
-
-                    onClicked_Signal: {
-
-
-                        textField.focus = true
-                        //root_Item.clicked_Signal()
-
-                    }
-                }*/
                 PropertyAnimation {
                     id: anim
                     target: back_Rectangle
@@ -177,17 +184,6 @@ Column{
 
         }
 
-        /*Custom_Rectangle_Label {
-            width: 50
-            height: parent.height
-            margin_text: 0
-            needBack: false
-            anchors.right: parent.right
-            anchors.rightMargin: 10
-            horizontal: Text.AlignRight
-            text: " Км"
-
-        }*/
 
         ColorAnimation {
             id: sss

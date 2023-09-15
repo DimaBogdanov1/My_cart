@@ -154,7 +154,7 @@ Item{
                  tip_text: qsTr("Отметить пикет") + mytrans.emptyString
                  onClicked_Signal: {
 
-                    Work_with_chart.add_New_Picket()
+                    Chart_Work.add_New_Picket()
 
                  }
              }

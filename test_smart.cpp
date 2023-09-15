@@ -1,6 +1,6 @@
 #include <QtTest/QtTest>
 #include "test_smart.h"
-#include "work_with_chart.h"
+#include "measures/chart_work.h"
 
 Test_Smart::Test_Smart(QObject *parent) : QObject(parent)
 {
@@ -9,7 +9,7 @@ Test_Smart::Test_Smart(QObject *parent) : QObject(parent)
 
 void Test_Smart::max()
 {
-    Work_with_chart a;
+    Chart_Work a;
 
     QCOMPARE(a.max(1,   0), 1);
     QCOMPARE(a.max(-1,  1), 1);

@@ -157,7 +157,7 @@ Item{
                         font.pixelSize:  ui.text_BigSize // Меняем Размер Шрифта
                         color: Style.primaryDark_Color // Меняем Цвет Текста
                         //visible: false
-                        text: qsTr("Создадим задание!") + mytrans.emptyString
+                        text: qsTr("Создадим маршрут!") + mytrans.emptyString
 
                     }
 
@@ -201,7 +201,7 @@ Item{
                          model: ListModel {}
 
 
-                         /*onCurrentIndexChanged: {
+                         onCurrentIndexChanged: {
 
                              var num_Value = road_ComboBox.model.get(currentIndex).value.split(" - ");
 
@@ -212,7 +212,7 @@ Item{
                              upNom_ListModel.clear()
 
                              big_db.update_numRoad(num_Value[0])
-                         }*/
+                         }
 
                      }
 
@@ -435,7 +435,7 @@ Item{
                      width: parent.width
                      height: ui.height_Button
                      anchors.horizontalCenter: parent.horizontalCenter
-                     text:  qsTr("Начать задание") + mytrans.emptyString
+                     text:  qsTr("Начать маршрут") + mytrans.emptyString
                      onClicked_Signal: {
 
                          big_db.check_Coordination(upNom_ListModel.get(list.currentIndex).code , upNom_ListModel.get(list.currentIndex).name, putNom_ListModel.get(list2.currentIndex).put , textField_1.text, textField_2.text)
