@@ -49,36 +49,84 @@ Item {
 
 
                         Calib_Block{
+                            id: riht_Left_Calib_Block
+                            index_block: Name_Measures.Riht_Left_Measure
                             text: str.riht_Left
                         }
 
                         Calib_Block{
+                            id: riht_Right_Calib_Block
+                            index_block: Name_Measures.Riht_Right_Measure
                             text: str.riht_Right
                         }
 
                         Calib_Block{
+                            id: down_Left_Calib_Block
+                            index_block: Name_Measures.Down_Left_Measure
                             text: str.down_Left
                         }
 
                         Calib_Block{
+                            id: down_Right_Calib_Block
+                            index_block: Name_Measures.Down_Right_Measure
                             text: str.down_Right
                         }
 
 
-
-                        Custom_Button{
-                            id: startStop_Button
+                        Row{
                             width: parent.width
                             height: ui.height_Button
-                            text: qsTr("Ок") + mytrans.emptyString
+                            spacing: ui.basic_spacing
 
-                            onClicked_Signal: {
+                            Custom_Button{
+                                width: parent.width / 2 - ui.basic_spacing / 2
+                                height: ui.height_Button
+                                text: qsTr("По умолчанию") + mytrans.emptyString
 
-                                Chart_Work.change_param_measure(Name_Measures.Sample_Measure, 10, 3);
+                                onClicked_Signal: {
+
+                                    riht_Left_Calib_Block.set_default_value(0, 1)
+
+                                    riht_Right_Calib_Block.set_default_value(0, 1)
+
+                                    down_Left_Calib_Block.set_default_value(0, 1)
+
+                                    down_Right_Calib_Block.set_default_value(0, 1)
+
+                                    // Временно
+                                    Chart_Work.change_param_measure(0, 0 , 1);
+
+                                    Chart_Work.change_param_measure(3, 0 , 1);
+
+                                }
+
+                            }
+
+                            Custom_Button{
+                                width: parent.width / 2 - ui.basic_spacing / 2
+                                height: ui.height_Button
+                                text: qsTr("Ок") + mytrans.emptyString
+
+                                onClicked_Signal: {
+
+                                    riht_Left_Calib_Block.update_param()
+
+                                    riht_Right_Calib_Block.update_param()
+
+                                    down_Left_Calib_Block.update_param()
+
+                                    down_Right_Calib_Block.update_param()
+
+                                  //  Chart_Work.change_param_measure(Name_Measures.Sample_Measure, 10, 3);
+
+                                 //   Chart_Work.change_param_measure(4, 6770, 38);
+
+                                }
 
                             }
 
                         }
+
 
 
 

@@ -150,12 +150,12 @@ Item {
 
                     Custom_Border{color: Style.primaryDark_Color}
 
+
                     Settings_Text{
                         title: qsTr("Версия приложения") + mytrans.emptyString
                         text_value: "1.0"
 
                     }
-
                     Custom_Border{color: Style.primaryDark_Color}
 
                     Settings_Link{
@@ -168,6 +168,24 @@ Item {
                     Settings_Link{
                         link: "http://www.radioavionica.ru"
                         title: qsTr("АО Радиоавионика") + mytrans.emptyString
+                    }
+
+                    Settings_Text{
+                        title: qsTr("Путь до базы данных") + mytrans.emptyString
+                        text_value: "1.0"
+
+                    }
+
+                    Settings_Text{
+                        title: qsTr("Путь до сохранения pdf ?") + mytrans.emptyString
+                        text_value: "1.0"
+
+                    }
+
+                    Settings_Text{
+                        title: qsTr("Дополнительные параметры") + mytrans.emptyString
+                        text_value: "1.0"
+
                     }
 
 

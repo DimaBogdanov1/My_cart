@@ -14,13 +14,15 @@ Item {
 
     property int index_Page: -1
 
-    property int index_swipe_Home: 2 //1 //2
+    property int sub_index_HomePage: 2 //1 //2  // Я его сюда вынес чисто из за флипа на старт мы падаем сюда
 
     readonly property var sourcePages_Array: [
                                                "../pages/Home_Page.qml",
                                                "../pages/Calib_Page.qml",
                                                "../pages/History_Page.qml",
-                                               "../pages/Settings_Page.qml"
+                                               "../pages/Login_Page.qml",
+                                               "../pages/Settings_Page.qml",
+                                               "../pages/Help_Page.qml"
                                             ]
 
    // "../pages/Defect_Charts.qml",
@@ -36,31 +38,32 @@ Item {
            height: parent.height
            color: Style.primaryDark_Color
 
-           Item {
-               width:  parent.width
-               height: 72
-             //  anchors.bottom: parent.bottom
-              // anchors.bottomMargin: 16
-                   Image {
-                      width:  parent.height
-                      height: parent.height
-                      source: "../images/logo_white_trans.png"
-                      anchors.centerIn: parent
-                      smooth: false // Убираем Сглаживание
-                      fillMode: Image.PreserveAspectCrop
-                   }
-
-           }
-
            Item{
               width: parent.width
-              height: ui.iconBlock_Size * 9
-              anchors.centerIn: parent
+              height: ui.iconBlock_Size * 9 + 72
+            //  anchors.centerIn: parent
 
               Column {
                   width: parent.width
                   height: parent.height
                   spacing: ui.icon_nav_size
+
+                  Item {
+                      width:  parent.width
+                      height: 72
+                    //  anchors.bottom: parent.bottom
+                     // anchors.bottomMargin: 16
+                          Image {
+                             width:  parent.height
+                             height: parent.height
+                             source: "../images/logo_white_trans.png"
+                             anchors.centerIn: parent
+                             smooth: false // Убираем Сглаживание
+                             fillMode: Image.PreserveAspectCrop
+                          }
+
+                  }
+
 
                   Custom_Icon_Button{
                       width:  parent.width - 16
@@ -99,6 +102,7 @@ Item {
 
                          // loading_popup.open()
 
+
                           fileDialog.open()
 
                          //dialog.open()
@@ -126,12 +130,12 @@ Item {
                       width:  parent.width - 16
                       anchors.horizontalCenter: parent.horizontalCenter
                       height: ui.iconBlock_Size
-                      isChecked: index_Page == 3
+                      isChecked: index_Page == 4
                       icon_path: "qrc:/icons/" + Style.theme + "/navigation/setting.svg"
                       icon_checked_path: "qrc:/icons/" + Style.theme + "/navigation/setting_accent.svg"
                       onClicked_Signal: {
 
-                          opacity_Anim.create_page_anim(3) // Переходим В Настройки
+                          opacity_Anim.create_page_anim(4) // Переходим В Настройки
 
                       }
                   }
@@ -141,18 +145,74 @@ Item {
 
            }
 
+           Column {
+               width: parent.width
+               height: ui.height_Button + ui.iconBlock_Size + ui.icon_nav_size
+               anchors.bottom: parent.bottom
+               anchors.bottomMargin: 16
+               spacing: ui.icon_nav_size
+
+               Custom_Icon_Button{
+                   width:  parent.width - 16
+                   anchors.horizontalCenter: parent.horizontalCenter
+                   height: ui.iconBlock_Size
+                   isChecked: index_Page == 5
+                   icon_path: "qrc:/icons/" + Style.theme + "/navigation/question.svg"
+                   icon_checked_path: "qrc:/icons/"+ Style.theme + "/navigation/question_accent.svg"
+                   onClicked_Signal: {
+
+                       opacity_Anim.create_page_anim(5)  // Переходим На Старт
+
+                   }
+               }
+
+               Account_Icon{
+                   id: authorization_Account_Icon
+
+                   onClicked_Signal: {
+
+                       account_Popup.openPopup(login, color_value)
+
+                        //opacity_Anim.create_page_anim(3)
+                   }
+
+                   Connections{
+                       target: Accounts
+
+                       function onUpdate_AuthorizationUser_signal(login, color){
+
+                           authorization_Account_Icon.login = login
+
+                           authorization_Account_Icon.color_value = color
+
+                       }
+
+                   }
+
+               }
+
+           }
+
+
+           Account_Popup{
+               id: account_Popup
+           }
+
            /*Custom_Border{
-               anchors.right: parent.right
+               anchors.right: parent.rights
                width: ui.border_Size
                height: parent.height
 
            }*/
         }
 
+
+
         Item {
             width: parent.width - ui.width_Navigation
             height: parent.height
             clip: true
+
 
             Loader{
                 id: page_Loader
@@ -164,6 +224,7 @@ Item {
 
             }
 
+
             /*Notification{
 
             }*/
@@ -174,6 +235,7 @@ Item {
             }
 
         }
+
 
         Opacity_Anim{
             id: opacity_Anim

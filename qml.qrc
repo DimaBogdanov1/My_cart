@@ -62,5 +62,19 @@
         <file>images/test.png</file>
         <file>Strings.qml</file>
         <file>icons/light_theme/utils/pause.svg</file>
+        <file>icons/light_theme/top_bar/check_off.svg</file>
+        <file>icons/light_theme/top_bar/check_on.svg</file>
+        <file>pages/Login_Page.qml</file>
+        <file>icons/light_theme/utils/lock.svg</file>
+        <file>icons/light_theme/utils/user.svg</file>
+        <file>icons/light_theme/utils/eye_slash.svg</file>
+        <file>icons/light_theme/utils/eye.svg</file>
+        <file>pages/login_pages/Register_Page.qml</file>
+        <file>pages/login_pages/Authorization_Page.qml</file>
+        <file>icons/light_theme/top_bar/plus.svg</file>
+        <file>pages/login_pages/Pick_Account_Page.qml</file>
+        <file>icons/light_theme/navigation/question_accent.svg</file>
+        <file>icons/light_theme/navigation/question.svg</file>
+        <file>pages/Help_Page.qml</file>
     </qresource>
 </RCC>

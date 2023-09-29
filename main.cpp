@@ -17,7 +17,9 @@
 #include "translate_headers/mytranslator.h"
 
 #include "databases/big_database.h"
-#include "databases/my_database.h"
+//#include "databases/my_database.h"
+
+#include "databases/accounts/accounts.h"
 
 #include "models/StartTask_Model.h"
 #include "measures/chart_work.h"
@@ -31,12 +33,6 @@
 //#include <QtQuickTest>
 //QUICK_TEST_MAIN(example)
 
-void create_db(){
-
-    my_database db;
-
-    db.create_database();
-}
 
 int main(int argc, char *argv[])
 {
@@ -60,7 +56,10 @@ int main(int argc, char *argv[])
 
     My_pdf my_pdf;
 
-    create_db();
+    //My_Database my_db;
+
+    Accounts accounts;
+
 
     qmlRegisterSingletonType(QUrl("qrc:/Style.qml"), "Style", 1, 0, "Style"); // Регестрируем Тип Style В QML Для Изменения Темы В Приложении
 
@@ -68,10 +67,6 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<StartTask_Model>("StartTask_Model", 1, 0, "StartTask_Model");
 
-
-   qRegisterMetaType<Status>("Name_Measures");
-
-   qmlRegisterUncreatableType<Name_Measures>("qml.measure", 1, 0, "Name_Measures", "Not creatable as it is an enum type");
 
 
     MyTranslator mTrans(&app);
@@ -84,6 +79,8 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("Chart_Work", &chart_work);
 
+    engine.rootContext()->setContextProperty("Accounts", &accounts);
+
     engine.rootContext()->setContextProperty("my_pdf", &my_pdf);
 
 
@@ -93,6 +90,8 @@ int main(int argc, char *argv[])
     engine.load(QUrl("qrc:/main.qml")); // Загружаем QML
 
 
+
+//    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
    /* qDebug() << "currentCpuArchitecture():" << QSysInfo::currentCpuArchitecture();
     qDebug() << "productType():" << QSysInfo::productType();

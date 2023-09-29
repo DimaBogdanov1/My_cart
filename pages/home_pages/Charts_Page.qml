@@ -49,6 +49,22 @@ Item{
                             });
             }
 
+            onVisibleBorders_Signal: {
+
+                level_MeasureLines.change_visible_borders(value)
+
+                riht_Left_MeasureLines.change_visible_borders(value)
+
+                riht_Right_MeasureLines.change_visible_borders(value)
+
+                sample_MeasureLines.change_visible_borders(value)
+
+                down_Left_MeasureLines.change_visible_borders(value)
+
+                down_Right_MeasureLines.change_visible_borders(value)
+
+            }
+
 
         }
 
@@ -87,25 +103,6 @@ Item{
                             height: parent.height
                             spacing: ui.basic_spacing / 2
 
-
-                            Custom_Rectangle_Label {
-                                id: direction_Label
-                                width: parent.width * 0.3
-                                height: parent.height
-                                text: qsTr("Москва-Рига") + mytrans.emptyString
-
-
-
-                            }
-
-                            Custom_Text_Arrow{
-                               width: parent.width * 0.4 - ui.basic_spacing * 1.5
-                               height: ui.height_Button
-                               text_1:  qsTr("Станиция 1") + mytrans.emptyString
-                               text_2:  qsTr("Станиция 2") + mytrans.emptyString
-
-                            }
-
                             Custom_Rectangle_Label {
                                 id: upNom_Label
                                 width: parent.width * 0.15
@@ -116,12 +113,29 @@ Item{
 
                             }
 
+                            Custom_Rectangle_Label {
+                                id: direction_Label
+                                width: parent.width * 0.3
+                                height: parent.height
+                                text: qsTr("Направление: Москва-Рига") + mytrans.emptyString
+
+                            }
+
 
                             Custom_Rectangle_Label {
                                 id: putNom_Label
                                 width: parent.width * 0.15
                                 height: parent.height
                                 text: qsTr("Путь: 1") + mytrans.emptyString
+
+                            }
+
+                            Custom_Text_Arrow{
+                               width: parent.width * 0.4 - ui.basic_spacing * 1.5
+                               height: ui.height_Button
+                               enabled: false
+                               text_1:  qsTr("Станиция 1") + mytrans.emptyString
+                               text_2:  qsTr("Станиция 2") + mytrans.emptyString
 
                             }
 
@@ -392,6 +406,7 @@ Item{
                                                  Component.onCompleted: {
 
                                                      create_BorderSeries()
+
                                                  }
 
                                                }
@@ -513,7 +528,6 @@ Item{
 
                                                           Chart_Work.get_points_line(value * 100)
 
-                                                 //sample_MeasureLines.get_value_by_y(y)
 
                                                  viser_Line.update_ViserLine((value * 100))
                                              }
@@ -631,10 +645,14 @@ Item{
                                  anchors.horizontalCenter: parent.horizontalCenter
                                  spacing: ui.border_Size
 
+                                // признак
+                                // установленная скорость
+                                // ограничение скорости
+
                                  List_Row{
                                      id: title_Row
-                                     model: [ "№", qsTr("Координата"), qsTr("Неисправность"), qsTr("Степень"), qsTr("Амплитуда"), qsTr("Длинна"), qsTr("Количество отступлений")]
-                                     sizes: [0.05, 0.15, 0.15, 0.15, 0.15, 0.15, 0.2]
+                                     model: [qsTr("Координата"), qsTr("Признак"), qsTr("Степень"), qsTr("Амплитуда"), qsTr("Длинна"), qsTr("Установленная скорость"), qsTr("Ограничение скорости")]
+                                     sizes: [0.14, 0.14, 0.11, 0.13, 0.11, 0.19, 0.18]
                                  }
 
                                  Custom_Border{}
@@ -743,9 +761,9 @@ Item{
                                       text:  qsTr("+") + mytrans.emptyString
                                       onClicked: {
 
-                                          sample_MeasureLines.add_area(10, 1, 20, 5)
+                                         // sample_MeasureLines.add_area(10, 1, 20, 5)
 
-                                         // chartView.zoom(2)
+                                          chartView.zoom(2)
 
                                       }
 
@@ -769,10 +787,12 @@ Item{
                                   Button{
                                       width: 100
                                       height: parent.height
-                                      text:  qsTr("<-") + mytrans.emptyString
+                                      text:  qsTr("rotate") + mytrans.emptyString
                                       onClicked: {
 
-                                          chartView.scrollLeft(100)
+                                          applicationWindow.flipped = false
+
+                                         // chartView.scrollLeft(100)
 
                                       }
 

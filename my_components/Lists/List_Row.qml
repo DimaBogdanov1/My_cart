@@ -28,6 +28,7 @@ Item{
 
     }
 
+
     Hover_Anim{
         id: hover_Anim
         width: parent.width - ui.big_spacing / 2
@@ -42,28 +43,39 @@ Item{
 
         onClicked_Signal: {
 
-            if(listview !== null){
+            if (!listview.moving){
 
-                //console.log( highlight.x)
+                if(listview !== null){
 
-                highlight.open_highlight()
+                    //console.log( highlight.x)
 
-                if(listview.currentIndex !== index){
+                    highlight.open_highlight()
 
-                    listview.last_index = listview.currentIndex
+                    if(listview.currentIndex !== index){
 
-                    listview.currentIndex = index
+                        listview.last_index = listview.currentIndex
+
+                        listview.currentIndex = index
+                    }
+
                 }
-
             }
+
+
 
         }
 
         onHover_Signal: {
 
-            glow.change_glow(value)
+            if (!listview.moving){
 
-            back_Rectangle.z = 10
+
+                glow.change_glow(value)
+
+                back_Rectangle.z = 10
+            }
+
+
         }
     }
 

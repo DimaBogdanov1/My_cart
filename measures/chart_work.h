@@ -11,6 +11,8 @@ public:
 
     explicit Chart_Work(QObject *parent = nullptr);
 
+    int count_measures;
+
     void threadFunction();
     int tmp_y = 0;
 
@@ -23,6 +25,8 @@ public slots:  // Слоты
     void clearPoints();
     void change_param_measure(int index, float bias_value, float multiplier_value);
 
+    void calibPage_Ready();
+
     int max(int a, int b);
 
 signals:
@@ -31,6 +35,9 @@ signals:
     void newPicket_signal(const int& y_val);
 
     void newViserValue_signal(const int& index, const float& value);
+
+    void updateCalibBlock_signal(const int& index, const float& bias_value, const float& multiplier_value);
+
 };
 
 #endif // CHART_WORK_H

@@ -13,6 +13,8 @@ Column{
 
     property bool isReady: false
 
+    property bool password: false
+
     property string title
 
     property string text
@@ -35,6 +37,7 @@ Column{
         needBack: false
         pixel_size: ui.text_miniSize
        // color: 'red'
+
         text: root_Column.title
 
         anchors {
@@ -59,6 +62,9 @@ Column{
         validator: root_Column.validator
         selectionColor: Style.light_Color // Style.primaryDark_Color
         focus: false
+        echoMode: password ? TextInput.Password : TextInput.Normal
+
+        text: root_Column.text
 
 
         //text: " км"
@@ -66,6 +72,7 @@ Column{
 
         Component.onCompleted: {
 
+         //   textField.text = root_Column.text
           //  console.log("sdsd  ", isReady)
         }
 
@@ -126,6 +133,47 @@ Column{
                 Border_Gradient{visible: isReady}
 
                 }
+
+                Custom_Icon{
+                    id: help_Icon
+                    height: ui.height_Button
+                    icon_size: 22
+                    visible: password
+                    anchors.right: parent.right
+                    anchors.rightMargin: ui.basic_spacing / 2
+                    source: "qrc:/icons/" + Style.theme + "/utils/eye.svg"
+
+                    property bool checked: true
+
+                    Hover_Anim{
+                        width: parent.width
+                        height: parent.height
+                        outlined: true
+                        mouse_enabled: help_Icon.visible
+
+                        onClicked_Signal: {
+
+                            if(help_Icon.checked){
+
+                                help_Icon.source = "qrc:/icons/" + Style.theme + "/utils/eye_slash.svg"
+
+                                help_Icon.checked = false
+                            }
+                            else{
+
+                                help_Icon.source = "qrc:/icons/" + Style.theme + "/utils/eye.svg"
+
+                                help_Icon.checked = true
+
+                            }
+
+
+                        }
+
+
+                    }
+
+                 }
 
                 PropertyAnimation {
                     id: anim

@@ -73,42 +73,14 @@ LineSeries {
     }
 
 
-    function get_value_by_y(index_point){
+    function change_visible_borders(value){
 
-        var point = measure_LineSeries.at(index_point);
+        for(var i = 0; i < border_arr.length; i++){
 
-        console.log("Получившаяся точка = " + point.x, point.y)
+            chartView.series(border_arr[i]).visible = value
 
+        }
 
-
-       /* for(var i = 0; i < measure_LineSeries.count; i++){
-
-            var last_point = measure_LineSeries.at(i);
-
-            var next_point = measure_LineSeries.at(i + 1);
-
-            if(last_point !== null && next_point !== null){
-
-                console.log("last = " + last_point + " next =" + next_point)
-
-                if(last_point.y < 70 && next_point.y > 70){
-
-
-                }
-            }
-
-        } */
-
-      /*  const excludeTypes = ["21"];
-        const procedure_types_number = 21;
-
-        console.log(excludeTypes.includes(procedure_types_number));
-
-        const procedure_types_string = "21"; */
-
-       // console.log(excludeTypes.includes(procedure_types_string));
-
-        return 7
     }
 
     // Добавляем Линии Границы Параметра

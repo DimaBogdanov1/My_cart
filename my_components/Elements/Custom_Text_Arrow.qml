@@ -1,48 +1,90 @@
 import QtQuick 2.0
 
 import Style 1.0
+import my_components 1.0
 
-Rectangle{
+Item{
     width: parent.width
     height: ui.height_Button
-    color: Style.background_Color
-    radius: ui.radius
 
     property string text_1
 
     property string text_2
 
-    Row{
+    Highlight_Glow{id: glow; target: bg_Rectangle}
+
+
+    Rectangle{
+        id: bg_Rectangle
         width: parent.width
         height: ui.height_Button
-        spacing: ui.basic_spacing
+        color: Style.background_Color
+        radius: ui.radius
 
-        Custom_Rectangle_Label {
-            id: startCoord_Label
-            width: parent.width / 2 - ui.basic_spacing  - ui.icon_nav_size / 2
+        Hover_Anim{
+            id: hover_Anim
+            width: parent.width
             height: parent.height
-            needBack: false
-            margin_text: 0
-            text: text_1
+            outlined: true
+
+            onClicked_Signal: {
+
+               button_Anim.create_rotation_anim()
+
+            }
+
+            onHover_Signal: {
+
+                glow.change_glow(value)
+
+            }
 
         }
 
-        Custom_Icon{
-            width: ui.icon_nav_size
-            height: parent.height
-            source: "qrc:/icons/" + Style.theme + "/home_page/arrow_right_long.svg"
 
-         }
+        Button_Anim{
+           id: button_Anim
+           animation_target: arrow_Icon
+        }
 
-        Custom_Rectangle_Label {
-            id: finishCoord_Label
-            width: parent.width / 2 - ui.basic_spacing - ui.icon_nav_size / 2
-            height: parent.height
-            margin_text: 0
-            needBack: false
-            text: text_2
+        Row{
+            width: parent.width
+            height: ui.height_Button
+            spacing: ui.basic_spacing
+
+            Custom_Rectangle_Label {
+                id: startCoord_Label
+                width: parent.width / 2 - ui.basic_spacing  - ui.icon_nav_size / 2
+                height: parent.height
+                needBack: false
+                margin_text: 0
+                text: text_1
+
+            }
+
+            Custom_Icon{
+                id: arrow_Icon
+                width: ui.icon_nav_size
+                height: parent.height
+                source: "qrc:/icons/" + Style.theme + "/home_page/arrow_right_long.svg"
+
+
+             }
+
+            Custom_Rectangle_Label {
+                id: finishCoord_Label
+                width: parent.width / 2 - ui.basic_spacing - ui.icon_nav_size / 2
+                height: parent.height
+                margin_text: 0
+                needBack: false
+                text: text_2
+
+            }
 
         }
+
 
     }
+
 }
+

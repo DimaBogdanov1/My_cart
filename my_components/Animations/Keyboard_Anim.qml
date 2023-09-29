@@ -36,6 +36,14 @@ Item {
 
        NumberAnimation {target: keyboard_target; property: "anchors.bottomMargin"; from: keyboard_target.anchors.bottomMargin ; to: -1 * keyboard_target.height ; duration: time_Anim}
 
+       onRunningChanged: {
+
+           if(!running){
+
+               on_keyboard = false
+
+           }
+       }
     }
 
 

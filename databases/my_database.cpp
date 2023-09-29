@@ -4,28 +4,19 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QStandardPaths>
-#include "databases/my_database.h"
 
-my_database::my_database()
+#include "my_database.h"
+//#include "accounts/accounts.h"
+
+
+My_Database::My_Database()
 {
 
-}
-
-my_database::~my_database()
-{
-    Database.close();
-}
-
-
-
-void my_database::create_database()
-{
+    //create_database();
 
     Database = QSqlDatabase::addDatabase("QSQLITE");
 
-    Database.setDatabaseName("my_cart.db");
-
-   // Database.setDatabaseName("/Users/dimabogdanov/Documents/MyCart_res/my_cart.db");
+    Database.setDatabaseName("/Users/dimabogdanov/Documents/MyCart_res/my_cart.db");
 
     if (!Database.open())
     {
@@ -33,32 +24,61 @@ void my_database::create_database()
     }
     else{
 
-        QSqlQuery query("CREATE TABLE IF NOT EXISTS Test "
-                        "( ID INTEGER PRIMARY KEY AUTOINCREMENT, LABEL TEXT  NOT NULL)");
-
-
     }
 
 }
 
-void my_database::add()
+/*My_Database::~My_Database()
 {
+    //Database.close();
+}
 
 
-    /*QSqlQuery query;
-    query.prepare("INSERT INTO " TABLE " ( " TABLE_NAME ", "
-                                             TABLE_PIC " ) "
-                  "VALUES (:Name, :Pic)");
-    query.bindValue(":Name",        data[0].toString());
-    query.bindValue(":Pic",         data[1].toByteArray());
+Accounts accounts;
 
-    if(!query.exec()){
-        qDebug() << "error insert into " << TABLE;
-        qDebug() << query.lastError().text();
-        return false;
-    } else {
-        return true;
+void My_Database::create_database()
+{
+    QSqlDatabase Database;
+
+    Database = QSqlDatabase::addDatabase("QSQLITE");
+
+   // Database.setDatabaseName("my_cart.db");
+
+    Database.setDatabaseName("/Users/dimabogdanov/Documents/MyCart_res/my_cart.db");
+
+    if (!Database.open())
+    {
+        qDebug() << Database.lastError().text();
     }
-    return false; */
+    else{
+
+       // Accounts accounts_2;
+
+       // accounts = accounts_2;
+
+        //accounts.create_table();
+    }
+}
+
+void My_Database::get_All_Persons(){
+
+    QList<Accounts::Profile> profiles = accounts.get_All_Persons();
+
+    for(Accounts::Profile var : profiles){
+
+        emit newUser_signal(var.login, var.password, var.color);
+
+    }
+}
+
+void My_Database::add_Person(QString login, int password){
+
+    emit result_of_Adding_signal(accounts.add_Person(login, password));
 
 }
+
+void My_Database::delete_Person(int index){
+
+    accounts.delete_Person(index);
+}
+*/

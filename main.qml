@@ -6,7 +6,6 @@ import Style 1.0
 import Qt.labs.platform 1.1 as Labs
 
 import MyLang 1.0
-import StartTask_Model 1.0
 import my_components 1.0
 
 
@@ -15,6 +14,8 @@ ApplicationWindow {
     width: 1344 //1920 //800
     height: 756 //1080 //480
     visible: true
+
+    property bool flipped: false
 
     title: qsTr("Проект") + mytrans.emptyString
 
@@ -28,13 +29,13 @@ ApplicationWindow {
 
     }
 
-
-    Loader{
-        width: parent.width
-        height: parent.height
-        focus: true
-        Component.onCompleted: source = "../App_Page.qml"
+    Flipable_Page{
+        front_source: "qrc:/pages/Login_Page.qml"
+        back_source: "../App_Page.qml"
+        flipped: applicationWindow.flipped
     }
+
+
 
     Loader{
         id: start_Loader

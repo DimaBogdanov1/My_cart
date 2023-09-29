@@ -25,6 +25,11 @@ Item {
         return exit_dialog_anim
     }
 
+    function get_account_enter(){
+
+        return enter_account_anim
+    }
+
     Transition {
         id: enter_anim
             ParallelAnimation {
@@ -106,5 +111,26 @@ Item {
             }
 
 
+        }
+
+    Transition {
+        id: enter_account_anim
+            ParallelAnimation {
+                NumberAnimation {
+                    property: "x";
+                    from: 0;
+                    to: ui.width_Navigation + ui.basic_spacing;
+                    duration: time_Anim
+                }
+
+                NumberAnimation {
+                    property: "scale";
+                    from: 0.4;
+                    to: 1.0;
+                    duration: time_Anim
+                }
+
+
+            }
         }
 }

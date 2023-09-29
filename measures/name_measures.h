@@ -1,13 +1,14 @@
 #pragma once
 
 #include <QObject>
+#include <QMetaEnum>
 
 class Name_Measures
 {
     Q_GADGET
 
 public:
-    enum Measures
+     enum Measures
           {
             Level_Measure,
             Riht_Left_Measure,
@@ -18,7 +19,6 @@ public:
           };
 
     Q_ENUM(Measures)
-
 
 private:
     explicit Name_Measures();

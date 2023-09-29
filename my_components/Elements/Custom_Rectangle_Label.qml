@@ -28,6 +28,10 @@ Item{
 
     property int pixel_size: ui.text_SmallSize
 
+    property string font_family: custom_FontLoader.name
+
+    property int font_weight: ui.font_weight_Smallsize
+
     width: label.paintedWidth + margin_text
     height: label.paintedHeight + margin_text / 2
 
@@ -47,6 +51,8 @@ Item{
         id: label
         horizontalAlignment: root_Item.horizontal
         verticalAlignment: root_Item.vertical
+        font.weight:  root_Item.font_weight
+        font.family: root_Item.font_family
         font.pixelSize: root_Item.pixel_size
         text: root_Item.text
         color: root_Item.text_color

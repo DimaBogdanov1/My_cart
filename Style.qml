@@ -131,31 +131,11 @@ Item{
 
     readonly property string background_Color: currentTheme[5] // Цвет Фонов
 
-
     readonly property string navigation_Color: currentTheme[7]
 
 
-   /* readonly property string accent: currentTheme[0] // Акцент Цвет
-    readonly property string accentLight_Color: currentTheme[1]  // Лёгкий Акцент
-    readonly property string text_Color: currentTheme[2] // Цвет Текста Приложения
-    readonly property string secondaryText_Color: currentTheme[3] // Дополнительный Цвет Текста Приложения
 
-    readonly property string background_Color: currentTheme[4] // Цвет Фона Приложения
-    readonly property string light_Color: currentTheme[5] // Цвет Фона Карточек
-    readonly property string content_Color: currentTheme[6] // Цвет Фона Контетна
 
-    readonly property string listFocus_Color: currentTheme[7] // Цвет Фона Для Иконок
-
-    */
-
-    //readonly property string theme_Color: currentTheme[8]
-/*    readonly property string secondaryBackground_Color: currentTheme[9] // Цвет Фона Приложения
-    readonly property string chartLine_Color: currentTheme[10] // Цвет Для Осей Графика
-    readonly property string backOptions_Color: currentTheme[11]
-    readonly property string backProgress_Color: currentTheme[12]
-    readonly property string modal_Color: currentTheme[13] //  Цвет Затемнения
-    readonly property string border_Color: currentTheme[14] //  Цвет Разделителя
- */
 
     readonly property string accountText_Color: "white" //"#afa56f" // Цвет Фона Для Предупредительного Действия
 

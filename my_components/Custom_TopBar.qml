@@ -11,6 +11,8 @@ Item{
 
     signal viser_Signal(value: bool)
 
+    signal visibleBorders_Signal(value: bool)
+
     signal grab_Signal // Test
 
     readonly property int time_anim: 150
@@ -20,7 +22,7 @@ Item{
         switch(event.key){
             case Qt.Key_1:
 
-                if(index_swipe_Home === 2){
+                if(root_Item.sub_index_HomePage === 2){
 
                     toast.show("Новый Пикет", 3000, 1) // Показываем Тоcт
 
@@ -55,14 +57,14 @@ Item{
 
     function open_back(){ // Открываем Назад
 
-        show_Anim.targets = [back_Element]
+       // show_Anim.targets = [back_Element]
 
-        start_anim(show_Anim, back_Element.opacity, 1)
+        //start_anim(show_Anim, back_Element.opacity, 1)
     }
 
     function hide_back(){ // Закрываем Назад
 
-        hide_Anim.targets = [back_Element]
+      //  hide_Anim.targets = [back_Element]
 
         start_anim(hide_Anim, 1, 0)
 
@@ -76,13 +78,23 @@ Item{
 
     }
 
+    Back_Arrow{
+
+         onClicked_Signal: {
+
+             sub_index_HomePage-- // Откатываемся Назад
+
+         }
+     }
 
     Item{
          width: parent.width - ui.big_spacing
          height: parent.height - ui.big_spacing
          anchors.centerIn: parent
 
-         Item{
+
+
+        /*Item{
              width: ui.iconBlock_topBar_Size
              height: ui.iconBlock_topBar_Size
              anchors.left: parent.left
@@ -97,20 +109,22 @@ Item{
                  icon_path: "qrc:/icons/" + Style.theme + "/top_bar/arrow_left_1.svg"
                  onClicked_Signal: {
 
-                     index_swipe_Home-- // Откатываемся Назад
+                     sub_index_HomePage-- // Откатываемся Назад
 
                  }
              }
 
 
-         }
+         }*/
+
 
          Row{
-             width: ui.iconBlock_topBar_Size * 3 + ui.big_spacing
+             width: ui.iconBlock_topBar_Size * 4 + ui.big_spacing * 1.5
              height: ui.iconBlock_topBar_Size
              anchors.right: parent.right
              anchors.verticalCenter: parent.verticalCenter
              spacing: ui.big_spacing / 2
+
 
              Custom_Icon_Button{
                  id: viser_Element
@@ -144,6 +158,25 @@ Item{
              }
 
              Custom_Icon_Button{
+                 width: ui.iconBlock_topBar_Size
+                 height: parent.height
+                 isNeedRectangle: true
+                 color_rec: Style.light_Color
+                 icon_path: "qrc:/icons/" + Style.theme + "/utils/notification.svg"
+                 needTip: true
+                 tip_text: qsTr("Уведомления") + mytrans.emptyString
+                 onClicked_Signal: {
+
+
+                 }
+
+                 Custom_NotificationCounter{
+
+                 }
+             }
+
+
+             Custom_Icon_Button{
                  id: picket_Element
                  width: ui.iconBlock_topBar_Size
                  height: parent.height
@@ -151,10 +184,10 @@ Item{
                  color_rec: Style.light_Color
                  icon_path: "qrc:/icons/" + Style.theme + "/top_bar/location.svg"
                  needTip: true
-                 tip_text: qsTr("Отметить пикет") + mytrans.emptyString
+                 tip_text: qsTr("Добавить объект") + mytrans.emptyString
                  onClicked_Signal: {
 
-                    Chart_Work.add_New_Picket()
+                     objects_Menu.open()
 
                  }
              }
@@ -171,7 +204,7 @@ Item{
 
                  onClicked_Signal: {
 
-                     memu.open()
+                     more_Memu.open()
 
                  }
              }
@@ -186,7 +219,16 @@ Item{
     }
 
     Menu_Popup{
-        id:memu
+        id: more_Memu
+        width_block: 300
+        x: parent.width - width_block - ui.basic_spacing
+        menu_Model: ChartsMore_Model{}
+    }
 
+    Menu_Popup{
+        id:objects_Menu
+        width_block: 300
+        x: parent.width - width_block - ui.iconBlock_topBar_Size - ui.basic_spacing * 2
+        menu_Model: ChartsObjects_Model{}
     }
 }

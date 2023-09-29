@@ -60,5 +60,17 @@
         <file>my_components/Popups/Menu_Element.qml</file>
         <file>my_components/Calib_Elements/Calib_Block.qml</file>
         <file>my_components/Calib_Elements/Calib_Rail.qml</file>
+        <file>my_components/Login_Elements/Account_Icon.qml</file>
+        <file>my_components/Popups/Menus/Menu_Popup.qml</file>
+        <file>my_components/Popups/Menus/Menu_Element.qml</file>
+        <file>my_components/Popups/Menus/ChartsMore_Model.qml</file>
+        <file>my_components/Popups/Menus/ChartsObjects_Model.qml</file>
+        <file>my_components/Flipable_Page.qml</file>
+        <file>my_components/Popups/Account_Popup.qml</file>
+        <file>my_components/Login_Elements/Account_With_Title.qml</file>
+        <file>my_components/Back_Arrow.qml</file>
+        <file>my_components/Titles.qml</file>
+        <file>my_components/Elements/Custom_Row_TextField.qml</file>
+        <file>my_components/Elements/Custom_NotificationCounter.qml</file>
     </qresource>
 </RCC>

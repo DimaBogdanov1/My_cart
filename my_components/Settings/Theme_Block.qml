@@ -7,7 +7,7 @@ import my_components 1.0
 
 Item {
     id: root_Item
-    width: ui.height_Big * 1.6
+    width: ui.height_Big * ui.block_ratio
     height: parent.height
 
     signal clicked_Signal

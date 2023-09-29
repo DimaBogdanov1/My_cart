@@ -10,6 +10,8 @@ Item {
 
     property real scale_val: 0.97
 
+    property bool isRotated: false
+
     function create_error_anim(){
 
         error_anim.stop()
@@ -22,6 +24,32 @@ Item {
         scale_Anim.stop()
 
         scale_Anim.start()
+    }
+
+
+    function create_rotation_anim(){
+
+       if(isRotated){
+
+         //  rotate_Anim.from = animation_target.rotation
+
+           rotate_Anim.to = 0
+
+           isRotated = false
+       }
+       else{
+
+          // rotate_Anim.from = animation_target.rotation
+
+           rotate_Anim.to = -180
+
+           isRotated = true
+
+       }
+
+       rotate_Anim.stop()
+
+       rotate_Anim.start()
     }
 
     SequentialAnimation{
@@ -44,5 +72,7 @@ Item {
         NumberAnimation {target: animation_target; property: "scale"; from: scale_val; to: 1; duration: 200}
 
     }
+
+    NumberAnimation {id: rotate_Anim; target: animation_target; property: "rotation"; from: animation_target.rotation; duration: 200}
 
 }

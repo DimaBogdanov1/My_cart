@@ -21,6 +21,8 @@ Item {
 
     readonly property real block_height: ui.height_Button + ui.basic_spacing / 2 + ui.text_miniSize
 
+    readonly property real block_ratio: 1.6
+
 
     /////////////////
 
@@ -52,6 +54,8 @@ Item {
 
     readonly property int big_spacing: 24 // Отступы Верхней Навигации
 
+    readonly property int middle_spacing: 16 //
+
     readonly property int basic_spacing: 12 //
 
 
@@ -62,6 +66,5 @@ Item {
     readonly property real size_Keyboard_Russia: 96 //(parent.width - ui.width_Navigation - ui.basic_spacing  )/ 11//96 // Русская Буква
 
     readonly property real size_Keyboard_English: size_Keyboard_Russia * 11 / 10 // Английская Буква
-
 }
 

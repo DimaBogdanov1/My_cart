@@ -44,97 +44,89 @@ Item {
 
         }
     }
-    Rectangle {
-        id: keyboard_Rectangle
-        width: parent.width
-        height: parent.height
-        color: Style.light_Color
-        radius: ui.radius
 
-     //   Border_Gradient{}
+    Item{
+        width:  ui.size_Keyboard_Russia * 4 * 1.25 + ui.basic_spacing
+        height: parent.height - ui.basic_spacing
+       // color: "blue"
+        anchors.centerIn: parent
 
-        Item{
-            width:  ui.size_Keyboard_Russia * 4 * 1.25 + ui.basic_spacing
-            height: parent.height - ui.basic_spacing
-           // color: "blue"
+        Row{
+            width: parent.width - ui.basic_spacing
+            height: parent.height
             anchors.centerIn: parent
 
-            Row{
-                width: parent.width - ui.basic_spacing
+            Column{
+                width: parent.width * 0.75
                 height: parent.height
-                anchors.centerIn: parent
 
-                Column{
-                    width: parent.width * 0.75
+                Repeater{
+                    width: parent.width
                     height: parent.height
+                    model: 4
 
-                    Repeater{
+                    Row{
+                        id: number_Row
                         width: parent.width
-                        height: parent.height
-                        model: 4
+                        height: ui.size_Keyboard_Russia
 
-                        Row{
-                            id: number_Row
+                        required property int index
+
+                        Repeater{
                             width: parent.width
-                            height: ui.size_Keyboard_Russia
+                            height: parent.height
+                            model: root_Item.model[index]
 
-                            required property int index
+                            Keyboard_Button{
 
-                            Repeater{
-                                width: parent.width
-                                height: parent.height
-                                model: root_Item.model[index]
+                                required property string modelData
 
-                                Keyboard_Button{
+                                required property int index
 
-                                    required property string modelData
+                                width: parent.width / 3
+                                height: ui.size_Keyboard_Russia
 
-                                    required property int index
+                                color: Style.primary_Color
+                                enabled: modelData != ""
+                                text: modelData
 
-                                    width: parent.width / 3
-                                    height: ui.size_Keyboard_Russia
-
-                                    color: Style.primary_Color
-                                    enabled: modelData != ""
-                                    text: modelData
-
-                                }
                             }
-
                         }
 
                     }
 
                 }
 
-                Column{
-                    width: parent.width * 0.25
+            }
+
+            Column{
+                width: parent.width * 0.25
+                height: parent.height
+
+                Repeater{
+                    width: parent.width
                     height: parent.height
+                    model: 4
 
-                    Repeater{
+                    Keyboard_Button{
+
+                        required property int index
+
                         width: parent.width
-                        height: parent.height
-                        model: 4
+                        height: ui.size_Keyboard_Russia
+                        isIcon: full_number_keyboard ? true: index === 0 || index === 1
+                        source:  isIcon ? icons_keyboard[index][0] : ""
 
-                        Keyboard_Button{
+                        color: Style.primary_Color
+                        bottom_button_index: isIcon ? icons_keyboard[index][1] : -1 // index === 0 ? 5 : index === 1 ? 3 : full_number_keyboard ? 6 : -1
+                        enabled: isIcon
+                        text: ""
 
-                            required property int index
-
-                            width: parent.width
-                            height: ui.size_Keyboard_Russia
-                            isIcon: full_number_keyboard ? true: index === 0 || index === 1
-                            source:  isIcon ? icons_keyboard[index][0] : ""
-
-                            color: Style.primary_Color
-                            bottom_button_index: isIcon ? icons_keyboard[index][1] : -1 // index === 0 ? 5 : index === 1 ? 3 : full_number_keyboard ? 6 : -1
-                            enabled: isIcon
-                            text: ""
-
-                        }
                     }
                 }
             }
-
         }
+
     }
+
 }

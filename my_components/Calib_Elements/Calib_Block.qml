@@ -10,6 +10,8 @@ Row {
     height: ui.block_height //+ label.height + ui.basic_spacing//label.height
     spacing: ui.basic_spacing
 
+    property int index_block: -1
+
     property string text
 
     Custom_Rectangle_Label {
@@ -65,6 +67,46 @@ Row {
 
         }
 
+    }
+
+    Component.onCompleted: {
+
+        Chart_Work.calibPage_Ready()
+
+    }
+
+    function update_param(){
+
+        Chart_Work.change_param_measure(root_Column.index_block, parseFloat(textField_1.text) , parseFloat(textField_2.text));
+
+    }
+
+    function set_default_value(bias, multi){
+
+        textField_1.get_target().text = bias.toString()
+
+        textField_2.get_target().text = multi.toString()
+
+        Chart_Work.change_param_measure(root_Column.index_block, bias , multi);
+
+    }
+
+
+    Connections{
+        target: Chart_Work
+
+        function onUpdateCalibBlock_signal(index, bias, multi) {
+
+            if(root_Column.index_block === index){
+
+                console.log("sssss bias = " + bias.toString() )
+
+                textField_1.get_target().text = bias.toString()
+
+                textField_2.get_target().text = multi.toString()
+
+            }
+        }
     }
 
 

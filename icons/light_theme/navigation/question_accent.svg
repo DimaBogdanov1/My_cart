@@ -1,0 +1,9 @@
+<svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+
+
+<linearGradient id="linear-gradient" gradientTransform="rotate(45)">
+    <stop offset="0%" stop-color="#ffafbd"/>
+    <stop offset="100%" stop-color="#ffc3a0"/>
+  </linearGradient>
+
+<path d="m8.95043 20.6471c-2.77742-.6515-4.94606-2.8201-5.59755-5.5975-.47051-2.0059-.47051-4.0933 0-6.09917.65149-2.77742 2.82013-4.94606 5.59756-5.59755 2.00586-.47051 4.09326-.47051 6.09916 0 2.7774.65149 4.946 2.82013 5.5975 5.59755.4705 2.00587.4705 4.09327 0 6.09917-.6515 2.7774-2.8201 4.946-5.5975 5.5975-2.0059.4705-4.0933.4705-6.09917 0z" stroke="url(#linear-gradient)" stroke-width="1.5"/><circle cx="12" cy="15.5" fill="url(#linear-gradient)" r="1"/><path d="m10 10v-.5c0-1.10457.8954-2 2-2 1.1046 0 2 .89543 2 2v.12132c0 .56258-.2235 1.10218-.6213 1.49998l-1.3787 1.3787" stroke="url(#linear-gradient)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg>

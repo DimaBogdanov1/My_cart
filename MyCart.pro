@@ -14,6 +14,7 @@ CONFIG += c++17 qmltestcase #sdk_no_version_check
 
 
 SOURCES += \
+        databases/accounts/accounts.cpp \
         databases/big_database.cpp \
         databases/my_database.cpp \
         export/my_pdf.cpp \
@@ -46,6 +47,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 
 HEADERS += \
+    databases/accounts/accounts.h \
+    databases/accounts/colors_profile.h \
     databases/big_database.h \
     databases/my_database.h \
     export/my_pdf.h \

@@ -54,15 +54,18 @@ Item{
 
                 }
 
+
+
+
                  Custom_Button{
                      width: 200
                      height: ui.height_Button
                      anchors.horizontalCenter: parent.horizontalCenter
                      text:  qsTr("Up") + mytrans.emptyString
                      onClicked_Signal: {
+sub_index_HomePage = 0
 
-
-                            keyboard.open(100)
+                           // keyboard.open(100)
                      }
 
                  }
@@ -90,7 +93,7 @@ Item{
                      text:  qsTr("next") + mytrans.emptyString
                      onClicked_Signal: {
 
-                         index_swipe_Home++
+                         sub_index_HomePage++
 
 
                      }
@@ -143,7 +146,7 @@ Item{
                 width: 450
                 height: parent.height - 24
                 anchors.centerIn: parent
-                spacing: 16 //ui.basic_spacing * 2
+                spacing: ui.middle_spacing //ui.basic_spacing * 2
 
                 Item{
                     width: parent.width
@@ -166,21 +169,6 @@ Item{
 
                 }
 
-                 Custom_Pick_Button{
-                     width: parent.width
-                     height: ui.height_Button
-                     model: ["Главные пути", "Станционные пути"]
-
-                     onPicked_indexChanged: {
-
-                         putNom_ListModel.clear()
-
-                         upNom_ListModel.clear()
-
-                        big_db.update_Type(picked_index)
-
-                     }
-                 }
 
                  Row{
                      width: parent.width
@@ -217,6 +205,22 @@ Item{
                      }
 
 
+                 }
+
+                 Custom_Pick_Button{
+                     width: parent.width
+                     height: ui.height_Button
+                     model: ["Главные пути", "Станционные пути"]
+
+                     onPicked_indexChanged: {
+
+                         putNom_ListModel.clear()
+
+                         upNom_ListModel.clear()
+
+                        big_db.update_Type(picked_index)
+
+                     }
                  }
 
                  Row{
@@ -378,7 +382,31 @@ Item{
                  }*/
 
 
-                 Row{
+                 Custom_Row_TextField{
+                     id: startPoint_Row
+                     source:  "qrc:/icons/" + Style.theme + "/top_bar/location.svg"
+                     start_Keyboard: 300
+                     model: ListModel{
+
+                         ListElement{
+                             title: "Километр"
+                             isLetter: false
+                             maximumLength: 4
+
+                         }
+
+                         ListElement{
+                             title: "Метр"
+                             isLetter: false
+                             maximumLength: 3
+
+                         }
+
+                     }
+                 }
+
+
+                 /*Row{
                      width: parent.width
                      height: ui.block_height
                      spacing: ui.basic_spacing
@@ -393,7 +421,7 @@ Item{
                      Custom_TextField {
                          id: textField_1
                          width: parent.width / 2 - ui.basic_spacing - ui.icon_nav_size / 2
-                         title: qsTr("Километр")
+                         title: qsTr("Километр") + mytrans.emptyString
                          maximumLength: 4
                          validator: IntValidator{}
 
@@ -414,7 +442,7 @@ Item{
                      Custom_TextField {
                          id: textField_2
                          width: parent.width / 2 - ui.basic_spacing - ui.icon_nav_size / 2
-                         title: qsTr("Метр")
+                         title: qsTr("Метр") + mytrans.emptyString
                          maximumLength: 3
                          validator: IntValidator{}
                         // placeholderText: qsTr("Введите метр")
@@ -430,17 +458,17 @@ Item{
                      }
                  }
 
+                 */
                  Custom_Button{
                      id: start_Button
                      width: parent.width
-                     height: ui.height_Button
                      anchors.horizontalCenter: parent.horizontalCenter
                      text:  qsTr("Начать маршрут") + mytrans.emptyString
                      onClicked_Signal: {
 
-                         big_db.check_Coordination(upNom_ListModel.get(list.currentIndex).code , upNom_ListModel.get(list.currentIndex).name, putNom_ListModel.get(list2.currentIndex).put , textField_1.text, textField_2.text)
+                         big_db.check_Coordination(upNom_ListModel.get(list.currentIndex).code , upNom_ListModel.get(list.currentIndex).name, putNom_ListModel.get(list2.currentIndex).put , startPoint_Row.get_text(0), startPoint_Row.get_text(1))
 
-                      //   index_swipe_Home = 2 // Переходим На График
+                      //   sub_index_HomePage = 2 // Переходим На График
 
                         //homePage_Loader.index_Page = 2
 
@@ -464,7 +492,6 @@ Item{
         width: parent.width
         page_target: page
         number: true
-        text_target:textField_1
     }
 
 
@@ -480,7 +507,7 @@ Item{
 
                console.log("Код = " + upNom_ListModel.get(list.currentIndex).code    ) // + " Направление = " + putNom_ListModel.get(list.currentIndex) + " Путь = " + list2.get(list2.currentIndex))
 
-               index_swipe_Home = 2
+               sub_index_HomePage = 2
 
            }
            else{

@@ -1,9 +1,20 @@
-#include "measure.h"
 #include <QDebug>
 
-Measure::Measure()
+#include "measure.h"
+
+
+QSettings settings("settings_demo.conf", QSettings::IniFormat );
+
+Measure::Measure(int index)
 {
 
+    index_Measure = index;
+
+    bias_path = "biase_" + QString::number(index_Measure);
+
+    multiplier_path = "multiplier_" + QString::number(index_Measure);
+
+    update_from_setting();
 }
 
 double Measure::get_x_in_line(int index_1, int index_2, float y_viser){
@@ -26,17 +37,16 @@ double Measure::get_x_in_line(int index_1, int index_2, float y_viser){
 
    // point_2.y = k * point_2.x +  (point_1.y - k * point_1.x)
 
+    // point_2.y = k * point_2.x + point_1.y - k * point_1.x
 
-     // point_2.y = k * point_2.x + point_1.y - k * point_1.x
-
-       // point_2.y = k * (point_2.x  - point_1.x)    + point_1.y
+    // point_2.y = k * (point_2.x  - point_1.x)    + point_1.y
 
     // point_1.y = k * point_1.x + b
 
     // b = point_1.y - k * point_1.x
 
 
-     //point_2.y = k * point_2.x + point_1.y - k * point_1.x
+    //point_2.y = k * point_2.x + point_1.y - k * point_1.x
 
     // point_2.y = k * (point_2.x - point_1.x) + point_1.y
 
@@ -180,3 +190,30 @@ double Measure::get_points_line(float y_viser){
       return answer;
 
 }
+
+
+
+void Measure::update_from_setting(){
+
+    this->bias_value = settings.value(bias_path).value<float>();
+
+    this->multiplier_value = settings.value(multiplier_path).value<float>();
+
+    qDebug() << "index_Measure = " + QString::number(index_Measure) + " bias_value = " + QString::number(bias_value) + " multiplier_value = " + QString::number(multiplier_value)  << "\n";
+
+}
+
+void Measure::set_params(float bias_value, float multiplier_value){
+
+    this->bias_value = bias_value;
+
+    this->multiplier_value = multiplier_value;
+
+    settings.setValue(bias_path, bias_value);
+
+    settings.setValue(multiplier_path, multiplier_value);
+
+
+}
+
+

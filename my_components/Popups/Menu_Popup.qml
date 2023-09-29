@@ -8,15 +8,20 @@ import my_components 1.0
 
 Popup {
     id: popup
-    x: parent.width - 200 - ui.basic_spacing
+    property var menu_Model
+
+   // property int count: 4
+
+    property int width_block: 300
+
+    signal clickedMenu_Signal(index: int, value: bool)
+
+    x: parent.width - width_block - ui.basic_spacing
     y: ui.toolBar_Size //+ ui.basic_spacing
 
-    property var model: [1,2,3,4]
 
-    property int count: 2
-
-    width: 200
-    height: count * ui.height_Button + ((count - 1) * ui.basic_spacing / 2 ) + ui.basic_spacing
+    width: width_block
+    height: menu_Model.count * ui.height_Button + ((menu_Model.count - 1) * ui.basic_spacing / 2 ) + ui.basic_spacing
     modal: true
 
     padding: 0
@@ -43,19 +48,65 @@ Popup {
 
     }*/
 
+
     Column{
         width: parent.width - ui.basic_spacing
         height: parent.height - ui.basic_spacing
         anchors.centerIn: parent
         spacing: ui.basic_spacing / 2
 
-        Menu_Element{
+        Repeater{
+            id: repeater
+            width: parent.width
+            height: parent.height
+            model: menu_Model
+
+            Menu_Element{
+                source: menu_Model.get(index).source
+                text: menu_Model.get(index).text
+                checkable: menu_Model.get(index).checkable
+                checked: menu_Model.get(index).checked
+
+                onClicked_Signal: {
+
+                    clickedMenu_Signal(index, checked)
+
+                }
+
+            }
+        }
+
+        /*Menu_Element{
             source: "qrc:/icons/" + Style.theme + "/top_bar/export.svg"
             text: qsTr("Экспорт") + mytrans.emptyString
 
             onClicked_Signal: {
 
                 toast.show("Экспорт", 3000, 1)
+
+            }
+
+        }
+
+        Menu_Element{
+            checked: true        
+            text: qsTr("Сетка") + mytrans.emptyString
+
+            onClicked_Signal: {
+
+                visibleBorders_Signal(checked)
+
+            }
+
+        }
+
+        Menu_Element{
+            checked: true
+            text: qsTr("Сохранять график километра") + mytrans.emptyString
+
+            onClicked_Signal: {
+
+                visibleBorders_Signal(checked)
 
             }
 
@@ -71,7 +122,7 @@ Popup {
             }
 
 
-        }
+        }*/
 
     }
 

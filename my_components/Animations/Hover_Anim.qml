@@ -1,5 +1,6 @@
-import QtQuick 2.0
+import QtQuick 2.15
 import QtGraphicalEffects 1.15
+import QtQuick.Controls 2.15
 
 import Style 1.0
 import my_components 1.0
@@ -15,6 +16,8 @@ Item {
     signal hover_Signal(value: bool)
 
     signal pressed_Signal()
+
+    signal pressed_and_Hold_Signal()
 
     property int radius: ui.radius // Радиус Скругления Эффекта
 
@@ -109,7 +112,16 @@ Item {
          anchors.fill: parent
          hoverEnabled: true
         // enabled: root_Item.mouse_enabled
-         acceptedButtons:  Qt.LeftButton | Qt.RightButton
+
+         pressAndHoldInterval: 50
+
+         acceptedButtons:  Qt.LeftButton //| Qt.RightButton
+
+         onPressAndHold: {
+
+             root_Item.pressed_and_Hold_Signal()
+
+         }
 
          onEntered: {
 

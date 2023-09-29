@@ -8,6 +8,7 @@ import MyLang 1.0
 import my_components 1.0
 
 Item {
+    id: root_Item
     width: parent.width
     height: parent.height
 
@@ -36,7 +37,7 @@ Item {
             id: main_SwipeView
             width: parent.width
             height: parent.height
-            currentIndex: index_swipe_Home
+            currentIndex: sub_index_HomePage
             interactive: false
 
             Item {

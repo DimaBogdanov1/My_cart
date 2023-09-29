@@ -190,15 +190,6 @@ void big_database::update_Type(int index)
 
 }
 
-void get_name_direction(){
-
-  //  SELECT NAME FROM Up WHERE UP_NOM = 10936
-   // QSqlQuery query = create_query(":/sqlite/PUT.SQL", true);
-
-  //  QSqlQuery query = create_query(":/sqlite/PUT.SQL", true);
-
-   // query.bindValue(":SID", numRoad_picked);
-}
 
 // Эта Функция Будет Срабатывать Когда Я Меняю Значение В Таблице С Кодом Дороги
 void big_database::update_putNom(QString up_nom){

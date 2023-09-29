@@ -7,12 +7,16 @@
 #include <fstream>
 #include <cctype>
 #include <QtTest/QtTest>
+#include <QSettings>
+#include <QMetaEnum>
+#include <QQmlApplicationEngine>
+
+#include <QQmlContext>
 
 #include <measures/measure.h>
 #include "measures/name_measures.h"
 
 #include <mythread.h>
-
 #include "chart_work.h"
 
 
@@ -32,16 +36,23 @@ using namespace std;
 
 
 Chart_Work::Chart_Work(QObject *parent) : QObject(parent)
-{
-    for(int i = 0; i < 6; i++){
+{    
+    count_measures = QMetaEnum::fromType<Name_Measures::Measures>().keyCount();
 
-        Measure measure;
+    for(int i = 0; i < count_measures; i++){
+
+        Measure measure(i);
 
         Measure_List.append(measure);
 
     }
 
+    qRegisterMetaType<Status>("Name_Measures");
+
+    qmlRegisterUncreatableType<Name_Measures>("qml.measure", 1, 0, "Name_Measures", "Not creatable as it is an enum type");
+
     qDebug() << "Создали Объекты для измерений";
+
 }
 
 
@@ -64,9 +75,23 @@ void Chart_Work::change_param_measure(int index, float bias_value, float multipl
 
     qDebug() << "index = " + QString::number(index);
 
-    Measure_List[index].bias_value = bias_value;
+     Measure_List[index].set_params(bias_value, multiplier_value);
 
-    Measure_List[index].multiplier_value = multiplier_value;
+//    Measure_List[index].bias_value = bias_value;
+
+  //  Measure_List[index].multiplier_value = multiplier_value;
+
+}
+
+void Chart_Work::calibPage_Ready()
+{
+    qDebug() << "Страница с калибровкой готова " + QString::number(count_measures);
+
+    for(int i = 0; i < count_measures; i++){
+
+        emit updateCalibBlock_signal(i, Measure_List[i].bias_value, Measure_List[i].multiplier_value);
+
+    }
 
 }
 
@@ -105,7 +130,7 @@ void Chart_Work::help_get_line( int index, string sk, int y){
 
    // qDebug() <<  QString::number(delete_space(sk));
 
-    qDebug() <<  QString::number(QString(aa).toDouble()) + " + " + QString::number(Measure_List[index].bias_value);  // QString::fromStdString(sk);
+    qDebug() <<  QString::number(QString(aa).toDouble()) + " + bias = " + QString::number(Measure_List[index].bias_value);  // QString::fromStdString(sk);
 
     double val = QString(aa).toDouble() + Measure_List[index].bias_value;
 

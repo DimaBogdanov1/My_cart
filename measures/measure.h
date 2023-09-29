@@ -3,12 +3,15 @@
 
 #include <QList>
 #include <QPointF>
+#include <QSettings>
 
 
 class Measure
 {
 public:
-    Measure();
+    Measure(int index);
+
+    int index_Measure;
 
     QList<QPointF> Chart_points;
 
@@ -16,12 +19,17 @@ public:
 
     float multiplier_value = 1; // Множитель
 
+    QString bias_path, multiplier_path;
+
     double x_coincidence(int index);
 
     double get_x_in_line(int index_1, int index_2, float y_viser);
 
     double get_points_line(float y_viser);
 
+    void update_from_setting();
+
+    void set_params(float bias_value, float multiplier_value);
 
 };
 

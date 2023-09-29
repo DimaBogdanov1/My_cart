@@ -9,7 +9,8 @@ import my_components 1.0
 Item {
     id: root_Item
     width: parent.width
-    height: parent.height
+    height: ui.height_Button
+
     signal clicked_Signal
 
     property string text
