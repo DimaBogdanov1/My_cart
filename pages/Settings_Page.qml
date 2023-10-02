@@ -38,6 +38,15 @@ Item {
                     needBack: false
                     horizontal: Text.AlignLeft
                     vertical: Text.AlignTop
+                    text: qsTr("Программируема кнопка") + mytrans.emptyString
+
+                }
+
+                Custom_Rectangle_Label{
+                    width: parent.width
+                    needBack: false
+                    horizontal: Text.AlignLeft
+                    vertical: Text.AlignTop
                     text: qsTr("Мастер") + mytrans.emptyString
 
                 }

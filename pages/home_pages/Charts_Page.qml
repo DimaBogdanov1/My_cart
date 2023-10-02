@@ -193,11 +193,14 @@ Item{
                                          height:  parent.height
                                          min: -120
                                          max: 120
+                                         values_model: [-75, -35, 0, 35, 75]
+                                         tmp_val: true
                                          step: 40
                                          x_start: 7.2
                                          x_finish: 23.8
                                          value: 1
                                          title: str.level
+
                                      }
 
                                      Measure_Block {

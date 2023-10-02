@@ -32,8 +32,10 @@ Item{
 
     property int font_weight: ui.font_weight_Smallsize
 
+
     width: label.paintedWidth + margin_text
     height: label.paintedHeight + margin_text / 2
+
 
     Rectangle {
        width: parent.width

@@ -3,12 +3,16 @@ import Style 1.0
 
 import my_components 1.0
 Item {
+    id: root_Item
     width: parent.width
     height:  parent.height
 
     property string title
 
     property real value
+
+
+
 
     property var measure_model: []
 
@@ -25,6 +29,16 @@ Item {
     readonly property int count_val: ((max - min) / step) + 1
 
 
+    /////////////////////////
+    property var values_model: [] // [-75, -35, -6, 0, 6, 35, 75]
+
+    property bool tmp_val
+
+    property real minus_width: 4.328125 // qml: minus_width = 4.328125
+
+
+
+
     function create_model(){
 
         for(var i = min; i < max + step; i+= step){
@@ -32,7 +46,17 @@ Item {
           measure_model.push(i.toString())
         }
 
-        repeater.model = measure_model
+        if(tmp_val){
+
+            repeater.model = values_model
+
+        }
+        else{
+
+            repeater.model = measure_model
+
+        }
+
     }
 
     function convert_x(x_value){
@@ -51,6 +75,71 @@ Item {
 
         return answer
     }
+
+
+
+    function create_x(value, width_block){
+
+        if(tmp_val){
+
+            //console.log("root_Item.width  = " + root_Item.width )
+
+            if(value > 0){
+
+              //  console.log("old width = " + width_block)
+
+             //   width_block =  width_block + minus_width // ((value.length + 1) * width_block) / value.length
+
+               // repeater.itemAt(index).width = width_block
+
+                //console.log("new width = " + width_block)
+            }
+
+            var a =  ((value * root_Item.width / (values_model[0] * -1)) / 2 )
+
+
+
+            if(a > 0){
+
+                a = a - width_block
+            }
+            else{
+
+                if(a < 0){
+
+                    a = a + width_block
+
+                }
+
+            }
+
+            console.log("a = " + a)
+            return  a
+
+        }
+        else{
+            return 0
+        }
+
+
+    }
+
+    /*Custom_Rectangle_Label {
+        visible: false
+        height: parent.height
+        margin_text: 0
+        pixel_size:  ui.text_miniSize
+        text: "-"
+
+        Component.onCompleted: {
+
+          //  minus_width = width
+
+            //console.log("minus_width = " + minus_width)
+        }
+
+    }*/
+
 
     Rectangle{
          width: parent.width
@@ -99,7 +188,7 @@ Item {
                   width: parent.width
                   height:  parent.height /2 //- ui.border_Size / 2
 
-                  Row{
+                  Item{
                     width: parent.width
                     height:  parent.height
 
@@ -109,26 +198,64 @@ Item {
                         height: parent.height
                         //model: measure_model
 
-                        Item{
-                            width: parent.width / repeater.count //repeater.model.count
-                            height:  parent.height
+                        Custom_Rectangle_Label {
+
+                            id: measure_label
+                            required property int index
+
                             required property string modelData
 
-                            Custom_Label{
-                                horizontalAlignment: Text.AlignHCenter
-                                font.pixelSize: ui.text_miniSize// ui.font_weight_Smallsize
+                           // width: parent.width / repeater.count //repeater.model.count
 
-                                text: modelData
+                            width: 15
 
+                            height: parent.height
+                            margin_text: 0
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            anchors.horizontalCenterOffset: create_x(modelData, width)
+                            //needBack: false
+                            horizontal: Text.AlignHCenter
+                            pixel_size:  ui.text_miniSize
+                            text: modelData
+                            color: "red"
+
+                            function update_margin(){
+
+                                measure_label.anchors.horizontalCenterOffset = create_x(index, modelData, width)
+
+                                console.log("dfdfdsfsdfdsfdsf")
                             }
+
+                            Component.onCompleted: {
+
+                                /*if(modelData > 0){
+
+                                    width = width + minus_width
+
+                                    horizontal = Text.AlignRight
+                                }
+
+                                update_margin() */
+
+                              //  anchors.horizontalCenterOffset = create_x(index, modelData, width)
+
+                               // width = 10
+                            }
+
                         }
 
                     }
 
+                    onWidthChanged: {
 
+                       /* console.log("rrrrrrrrrrrrrrrrrr")
+                        for(var i = 0; i < repeater.count; i++){
 
+                            repeater.itemAt(i).update_margin()
 
-                  }
+                        } */
+                    }
+                }
              }
          }
 
