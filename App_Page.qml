@@ -93,7 +93,7 @@ Item {
                       }
                   }
 
-                  Custom_Icon_Button{
+                 /* Custom_Icon_Button{
                       width:  parent.width - 16
                       anchors.horizontalCenter: parent.horizontalCenter
                       height: ui.iconBlock_Size
@@ -110,7 +110,7 @@ Item {
 
                       }
 
-                  }
+                  }*/
 
                   Custom_Icon_Button{
                       width:  parent.width - 16

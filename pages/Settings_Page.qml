@@ -19,6 +19,48 @@ Item {
             height: parent.height
             color: Style.light_Color
 
+            Column{
+                width: parent.width  - ui.big_spacing
+                height: parent.height - ui.big_spacing
+                spacing: ui.basic_spacing
+
+                Custom_Rectangle_Label{
+                    width: parent.width
+                    needBack: false
+                    horizontal: Text.AlignLeft
+                    vertical: Text.AlignTop
+                    text: qsTr("Общие настройки") + mytrans.emptyString
+
+                }
+
+                Custom_Rectangle_Label{
+                    width: parent.width
+                    needBack: false
+                    horizontal: Text.AlignLeft
+                    vertical: Text.AlignTop
+                    text: qsTr("Мастер") + mytrans.emptyString
+
+                }
+
+                Custom_Rectangle_Label{
+                    width: parent.width
+                    needBack: false
+                    horizontal: Text.AlignLeft
+                    vertical: Text.AlignTop
+                    text: qsTr("Админка радиоавионики") + mytrans.emptyString
+
+                }
+
+                Custom_Rectangle_Label{
+                    width: parent.width
+                    needBack: false
+                    horizontal: Text.AlignLeft
+                    vertical: Text.AlignTop
+                    text: qsTr("Об устройстве") + mytrans.emptyString
+
+                }
+
+            }
         }
 
         Rectangle {
