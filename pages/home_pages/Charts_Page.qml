@@ -169,12 +169,14 @@ Item{
                                    height:  48
 
                                    Row{
+                                     id: measure_Row
                                      width: parent.width
                                      height:  parent.height
                                      spacing: ui.basic_spacing / 2
+                                     property real spacing_value: ui.basic_spacing * 3.5 / 8
 
                                      Rectangle{ // Километр
-                                          width: parent.width * 0.05 - (ui.basic_spacing * 3 / 7)
+                                          width: parent.width * 0.05 - measure_Row.spacing_value
                                           height:  parent.height
                                           radius: ui.radius
                                           color: Style.background_Color
@@ -188,28 +190,48 @@ Item{
 
 
                                      Measure_Block {
-                                         id: level_MeasureBlock
-                                         width: parent.width * 0.2 - (ui.basic_spacing * 3 / 7)
+                                         id: speed_MeasureBlock
+                                         width:  parent.width * 0.125 -  measure_Row.spacing_value
                                          height:  parent.height
-                                         min: -120
-                                         max: 120
-                                         values_model: [-75, -35, 0, 35, 75]
-                                         tmp_val: true
-                                         step: 40
+                                         reverse: true
+                                         measure_model: [0, 60, 100, 250]
                                          x_start: 7.2
-                                         x_finish: 23.8
+                                         x_finish: 16.8
+                                         value: 10
+                                         title: str.speed
+
+                                         Component.onCompleted: {
+
+                                           //  speed_MeasureLines.create_Line(x_finish, 0,x_finish, chartView.y_finish, "red", Qt.DotLine, "name") // Создаём Границу
+
+                                          //   speed_MeasureLines.create_BorderSeries()
+                                         }
+                                     }
+
+                                     Measure_Block {
+                                         id: level_MeasureBlock
+                                         width: parent.width * 0.165 - measure_Row.spacing_value
+                                         height:  parent.height
+                                         measure_model: [-75, -35, 0, 35, 75]
+                                         tmp_val: true
+
+                                         x_start: 19.1
+                                         x_finish: 33.3//23.8
                                          value: 1
                                          title: str.level
+
+                                         Component.onCompleted: {
+
+                                             level_MeasureLines.create_BorderSeries()
+                                         }
 
                                      }
 
                                      Measure_Block {
                                          id: riht_Left_MeasureBlock
-                                         width:  parent.width * 0.17 - (ui.basic_spacing * 3 / 7)
+                                         width:  parent.width * 0.125 - measure_Row.spacing_value
                                          height:  parent.height
-                                         min: -80
-                                         max: 80
-                                         step: 40
+                                         measure_model: [-30, 0, 30]
                                          x_start: 27.5
                                          x_finish: 40.3 //41.355 // x_start + 0.17 * (level_MeasureBlock.x_finish - level_MeasureBlock.x_start) / 0.2
                                          value: 1
@@ -219,11 +241,9 @@ Item{
 
                                      Measure_Block {
                                          id: riht_Right_MeasureBlock
-                                         width:  parent.width * 0.17 - (ui.basic_spacing * 3 / 7)
+                                         width:  parent.width * 0.125 - measure_Row.spacing_value
                                          height:  parent.height
-                                         min: -80 //-90
-                                         max: 80 //90
-                                         step: 40 //30
+                                         measure_model: [-30, 0, 30]
                                          x_start: 44.3
                                          x_finish: x_start + riht_Left_MeasureBlock.x_finish - riht_Left_MeasureBlock.x_start
                                          value: 1
@@ -237,11 +257,10 @@ Item{
 
                                      Measure_Block {
                                          id: sample_MeasureBlock
-                                         width:  parent.width * 0.15 - (ui.basic_spacing * 3 / 7)
+                                         width:  parent.width * 0.16 - measure_Row.spacing_value
                                          height:  parent.height
-                                         min: 1512
-                                         max: 1544
-                                         step: 8
+                                         //tmp_val: true
+                                         measure_model: [1510, 1512, 1520, 1538, 1546]
                                          x_start: 60.8
                                          x_finish: 72
                                          value: 1
@@ -251,11 +270,9 @@ Item{
 
                                      Measure_Block {
                                          id: down_Left_MeasureBlock
-                                         width:  parent.width * 0.13 - (ui.basic_spacing * 3 / 7)
+                                         width:  parent.width * 0.125 - measure_Row.spacing_value
                                          height:  parent.height
-                                         min: -10
-                                         max: 10
-                                         step: 10
+                                         measure_model: [-10, 0, 10]
                                          x_start: 76.2
                                          x_finish: 84.3
                                          value: 8
@@ -265,18 +282,15 @@ Item{
 
                                      Measure_Block {
                                          id: down_Right_MeasureBlock
-                                         width:  parent.width * 0.13 - (ui.basic_spacing * 3 / 7)
+                                         width:  parent.width * 0.125 - measure_Row.spacing_value
                                          height:  parent.height
-                                         min: -10
-                                         max: 10
-                                         step: 10
+                                         measure_model: [-10, 0, 10]
                                          x_start: 89
                                          x_finish: x_start + down_Left_MeasureBlock.x_finish - down_Left_MeasureBlock.x_start
                                          value: 10
                                          title: str.down_Right
 
                                      }
-
 
                                    }
 
@@ -335,15 +349,29 @@ Item{
 
                                                }
 
+                                               Measure_Lines{  // Скорость
+                                                 id: speed_MeasureLines
+                                                 line_name: 6
+                                                 model: speed_MeasureBlock.x_values_model
+                                                 x_start: speed_MeasureBlock.x_start
+                                                 x_finish: speed_MeasureBlock.x_finish
+                                                 Component.onCompleted: {
+
+                                                     //create_BorderSeries()
+                                                 }
+
+                                               }
+
+
                                                Measure_Lines{  // Уровень
                                                  id: level_MeasureLines
                                                  line_name: 0
-                                                 count: level_MeasureBlock.count_val
+                                                 model: level_MeasureBlock.x_values_model
                                                  x_start: level_MeasureBlock.x_start
                                                  x_finish: level_MeasureBlock.x_finish
                                                  Component.onCompleted: {
 
-                                                     create_BorderSeries()
+                                                     //create_BorderSeries()
                                                  }
 
                                                }

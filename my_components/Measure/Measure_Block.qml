@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Style 1.0
 
 import my_components 1.0
+
 Item {
     id: root_Item
     width: parent.width
@@ -11,37 +12,39 @@ Item {
 
     property real value
 
-
-
-
     property var measure_model: []
 
-    property int max
+    property var x_values_model: []
 
-    property int min
+    //property int max
 
-    property int step
+   // property int min
+
+    //property int step
 
     property real x_start
 
     property real x_finish
 
-    readonly property int count_val: ((max - min) / step) + 1
-
+    readonly property int count_val: measure_model.length   // ((max - min) / step) + 1
 
     /////////////////////////
-    property var values_model: [] // [-75, -35, -6, 0, 6, 35, 75]
-
-    property bool tmp_val
+   // property var values_model: [] // [1510, 1512, 1520, 1538, 1546]
 
     property real minus_width: 4.328125 // qml: minus_width = 4.328125
 
+
+    property real center_value
+
+    property bool tmp_val
+
+    property bool reverse
 
 
 
     function create_model(){
 
-        for(var i = min; i < max + step; i+= step){
+        /*for(var i = min; i < max + step; i+= step){
 
           measure_model.push(i.toString())
         }
@@ -57,11 +60,78 @@ Item {
 
         }
 
+        */
+
+        if(tmp_val){
+
+            for(var i = 0; i < measure_model.length; i++){
+
+             //   console.log(title + " qqqq = " + convert_x(measure_model[i]))
+
+                       // var a =  (difference * root_Item.width / 2 )  / (center_value - amplitude )
+
+
+              //  console.log(title + " repeater = " +  convert_x(repeater.itemAt(i).width))
+
+                x_values_model.push(convert_x(measure_model[i]) )
+
+                console.log(title + " convert_x(i) = " +  convert_x(measure_model[i])  )
+
+                   console.log(title + " convert_x(15) = " +  convert_x(1) )
+
+                /*if(reverse){
+
+                    center_value = Math.abs(measure_model[measure_model.length - 1] + measure_model[0]) / 2
+
+
+                    if(i != 0 && i != measure_model.length - 1){
+
+                        var b = measure_model[i] - center_value
+
+
+
+                        console.log("center_value = " + center_value)
+
+                        console.log(title + " b = " + b)
+
+                        var c = measure_model[i] - b
+
+                        console.log(title + " c = " + c)
+
+                        console.log(title + " convert c = " + convert_x(c))
+
+
+                        x_values_model.push(convert_x(measure_model[i] - center_value))
+                    }
+                    else{
+
+                        x_values_model.push(convert_x(measure_model[i]))
+
+                    }
+
+
+
+                }
+                else{
+
+                    x_values_model.push(convert_x(measure_model[i]))
+
+                }*/
+
+            }
+
+        }
+
+
     }
 
     function convert_x(x_value){
 
-        var delta_value = max - min
+        var max = measure_model[measure_model.length - 1]
+
+        var min = measure_model[0]
+
+        var delta_value =  max - min
 
         var delta_x = x_finish - x_start
 
@@ -80,32 +150,66 @@ Item {
 
     function create_x(value, width_block){
 
-        if(tmp_val){
 
-            //console.log("root_Item.width  = " + root_Item.width )
+        var right_bord = false
 
-            if(value > 0){
+       //    console.log("Входное значение  == " + value)
 
-              //  console.log("old width = " + width_block)
+     //   center_value =  measure_model [Math.round(measure_model.length / 2) - 1]
 
-             //   width_block =  width_block + minus_width // ((value.length + 1) * width_block) / value.length
+        center_value = Math.abs(measure_model[measure_model.length - 1] + measure_model[0]) / 2
 
-               // repeater.itemAt(index).width = width_block
+        // console.log(title + " center_value " + center_value)
 
-                //console.log("new width = " + width_block)
+        var amplitude
+
+        var difference = value - center_value
+
+
+        if(Math.abs(measure_model[measure_model.length - 1])  > Math.abs(measure_model[0])){
+
+            amplitude = measure_model[measure_model.length - 1]
+
+            right_bord = true
+        }
+        else{
+
+            amplitude = measure_model[0]
+
+        }
+
+        var a =  (difference * repeater.width / 2 )  / (center_value - amplitude )
+
+      //  console.log("old a = " + a)
+
+        //console.log("difference = " + difference)
+
+
+        if(!right_bord){
+
+            if(value > center_value){
+
+                a = a - width_block / 4
+            }
+            else{
+
+                if(value < center_value){
+
+                    a = a + width_block / 4
+                }
+
             }
 
-            var a =  ((value * root_Item.width / (values_model[0] * -1)) / 2 )
+        }
+        else{
 
-
-
-            if(a > 0){
+            if(value < center_value){
 
                 a = a - width_block
             }
             else{
 
-                if(a < 0){
+                if(value > center_value){
 
                     a = a + width_block
 
@@ -113,14 +217,18 @@ Item {
 
             }
 
-            console.log("a = " + a)
-            return  a
+            if(!reverse){
+
+                a = a * -1
+
+            }
+
+
 
         }
-        else{
-            return 0
-        }
 
+        // console.log("a = " + a)
+         return  a
 
     }
 
@@ -194,26 +302,28 @@ Item {
 
                     Repeater{
                         id: repeater
-                        width: parent.width
+                        width: parent.width - ui.basic_spacing
                         height: parent.height
-                        //model: measure_model
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        model: root_Item.measure_model
+
 
                         Custom_Rectangle_Label {
 
                             id: measure_label
                             required property int index
 
-                            required property string modelData
+                            required property real modelData
 
                            // width: parent.width / repeater.count //repeater.model.count
 
-                            width: 15
+                            width: modelData.toString().length > 3 ? 20 : repeater.width * 0.14
 
                             height: parent.height
                             margin_text: 0
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.horizontalCenterOffset: create_x(modelData, width)
-                            //needBack: false
+                         //   needBack: false
                             horizontal: Text.AlignHCenter
                             pixel_size:  ui.text_miniSize
                             text: modelData
@@ -221,7 +331,7 @@ Item {
 
                             function update_margin(){
 
-                                measure_label.anchors.horizontalCenterOffset = create_x(index, modelData, width)
+                                measure_label.anchors.horizontalCenterOffset = create_x(modelData, width)
 
                                 console.log("dfdfdsfsdfdsfdsf")
                             }
@@ -240,21 +350,23 @@ Item {
                               //  anchors.horizontalCenterOffset = create_x(index, modelData, width)
 
                                // width = 10
+
+                                //console.log("repeater width = " + repeater.width)
                             }
 
                         }
 
                     }
 
-                    onWidthChanged: {
+                    /*onWidthChanged: {
 
-                       /* console.log("rrrrrrrrrrrrrrrrrr")
+                        console.log("rrrrrrrrrrrrrrrrrr")
                         for(var i = 0; i < repeater.count; i++){
 
                             repeater.itemAt(i).update_margin()
 
-                        } */
-                    }
+                        }
+                    } */
                 }
              }
          }
@@ -265,6 +377,7 @@ Item {
     Component.onCompleted: {
 
         create_model()
+
 
        // console.log(title + " " + count_val)
     }

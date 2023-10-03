@@ -14,4 +14,6 @@ Item {
 
     readonly property string down_Right: qsTr("Просадка правая") + mytrans.emptyString
 
+    readonly property string speed: qsTr("Скорость") + mytrans.emptyString
+
 }

@@ -20,6 +20,8 @@ LineSeries {
 
     property var border_arr: [] // Список Для Хранения Id Линий Границ
 
+    property var model: []
+
     property int line_name
 
     property int count
@@ -29,6 +31,7 @@ LineSeries {
     property real x_finish
 
     property var realValue_arr: []
+
 
     onClicked: {
 
@@ -88,20 +91,24 @@ LineSeries {
 
         var step_x = 0
 
-        for(var i = 0; i < count; i++){
+        for(var i = 0; i < model.length; i++){
+
+            console.log(model[i])
 
             var name = line_name + "border_" + i
 
-            create_Line(x_start + step_x, 0, x_start + step_x, chartView.y_finish, Style.primaryDark_Color, Qt.DotLine, name) // Создаём Границу
+          //  create_Line(x_start + step_x, 0, x_start + step_x, chartView.y_finish, Style.primaryDark_Color, Qt.DotLine, name) // Создаём Границу
+
+            create_Line(model[i], 0, model[i], chartView.y_finish, Style.primaryDark_Color, Qt.DotLine, name) // Создаём Границу
 
             border_arr.push(name)
 
-            step_x += (x_finish - x_start) / (count - 1)
+           // step_x += (x_finish - x_start) / (count - 1)
         }
 
-        create_middleLine(x_start + 2) // Сейчас Здесь Потом Перенесу
+       // create_middleLine(x_start + 2) // Сейчас Здесь Потом Перенесу
 
-        create_db_Line(x_start + 6) // Сейчас Здесь Потом Перенесу
+       // create_db_Line(x_start + 6) // Сейчас Здесь Потом Перенесу
     }
 
 
