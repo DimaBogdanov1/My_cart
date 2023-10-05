@@ -24,8 +24,6 @@ Item {
 
               Custom_Icon_Button{
                   id: back_Element
-                  width: ui.iconBlock_topBar_Size
-                  height: parent.height
                   isNeedRectangle: true
                   color_rec: Style.light_Color
                   icon_path: "qrc:/icons/" + Style.theme + "/top_bar/arrow_left_1.svg"

@@ -354,14 +354,5 @@ Item {
 
 
 
-      Keyboard{
-          id: keyboard
-          width: parent.width
-          page_target: row
-          number: true
-          full_number_keyboard: true
-          //text_target:textField_1
-
-      }
 }
 

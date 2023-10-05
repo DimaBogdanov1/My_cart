@@ -22,9 +22,11 @@ LineSeries {
 
     property var model: []
 
+    property var no_values_model: [-90]
+
     property int line_name
 
-    property int count
+   // property int count
 
     property real x_start
 
@@ -89,19 +91,18 @@ LineSeries {
     // Добавляем Линии Границы Параметра
     function create_BorderSeries(){
 
-        var step_x = 0
+      //  var step_x = 0
 
         for(var i = 0; i < model.length; i++){
 
-            console.log(model[i])
+          //  console.log(model[i])
 
             var name = line_name + "border_" + i
-
-          //  create_Line(x_start + step_x, 0, x_start + step_x, chartView.y_finish, Style.primaryDark_Color, Qt.DotLine, name) // Создаём Границу
 
             create_Line(model[i], 0, model[i], chartView.y_finish, Style.primaryDark_Color, Qt.DotLine, name) // Создаём Границу
 
             border_arr.push(name)
+
 
            // step_x += (x_finish - x_start) / (count - 1)
         }

@@ -15,7 +15,7 @@ Custom_Text_Arrow 1.0 Elements/Custom_Text_Arrow.qml
 Custom_Icon_Button 1.0 Elements/Custom_Icon_Button.qml
 Custom_Row_TextField 1.0 Elements/Custom_Row_TextField.qml
 Custom_NotificationCounter 1.0 Elements/Custom_NotificationCounter.qml
-
+Custom_Text_With_Icon 1.0 Elements/Custom_Text_With_Icon.qml
 
 # Animations
 Hover_Anim 1.0 Animations/Hover_Anim.qml
@@ -64,9 +64,10 @@ Menu_Popup 1.0 Popups/Menus/Menu_Popup.qml
 ChartsMore_Model 1.0 Popups/Menus/ChartsMore_Model.qml
 ChartsObjects_Model 1.0  Popups/Menus/ChartsObjects_Model.qml
 Account_Popup 1.0 Popups/Account_Popup.qml
-
+Push_Notifiaction 1.0  Popups/Push_Notifiaction.qml
 Custom_Combobox 1.0 Popups/Custom_Combobox.qml
 Overlay_Popup 1.0 Popups/Overlay_Popup.qml
+Background_Popup 1.0 Popups/Background_Popup.qml
 
 
 # Calib_Elements
@@ -80,8 +81,6 @@ Account_With_Title 1.0 Login_Elements/Account_With_Title.qml
 Custom_TopBar 1.0 Custom_TopBar.qml
 
 Audio_Sounds 1.0 Audio_Sounds.qml
-
-Notification 1.0 Notification.qml
 
 Canvas_Rail 1.0 Canvas_Rail.qml
 

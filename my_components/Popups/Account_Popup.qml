@@ -10,17 +10,16 @@ Popup {
 
    // property int count: 4
 
-    property real height_block: account_withTitle.height + 10 + ui.height_Button +  ui.middle_spacing * 2 + ui.big_spacing
+    readonly property real height_block: account_withTitle.height + 10 + ui.height_Button +  ui.middle_spacing * 2 + ui.big_spacing
 
-    property real width_block: height_block * ui.block_ratio
-
+    readonly property real width_block: height_block * ui.block_ratio
 
     x: ui.width_Navigation + ui.basic_spacing
     y: parent.height - ui.basic_spacing -  height_block//+ ui.basic_spacing
 
     width: width_block
     height: height_block
-    modal: true
+ //   modal: true
 
     padding: 0
 
@@ -28,81 +27,92 @@ Popup {
 
     enter: popups_Anim.get_account_enter()
 
-   // exit: popups_Anim.get_exit()
+    exit: popups_Anim.get_account_exit()
 
   //  Overlay.modal:  Overlay_Popup {}
 
-    background:   Blur{ x_start: popup.x + ui.width_Navigation}
+    background:   Background_Popup{} // Blur{ x_start: popup.x + ui.width_Navigation}
 
     contentItem:
-    Rectangle{
-        width: parent.width
-        height: parent.height
-        radius: ui.radius
-        color: "white"
 
-        //Border_Gradient{}
+        Item{
+         width: parent.width
+         height: parent.height
 
-        Column{
-            width: parent.width - ui.big_spacing
-            height: parent.height - ui.big_spacing
-            anchors.centerIn: parent
-            spacing: ui.middle_spacing
+         Highlight_Glow{target: bg_Rectangle; shadow: true}
 
-            Account_With_Title{
-                id: account_withTitle
-                enabled: false
+         Rectangle{
+             id: bg_Rectangle
+             width: parent.width
+             height: parent.height
+             radius: ui.radius
+             color: Style.background_Color
 
-            }
+             //Border_Gradient{}
 
-            Item {
-                width: parent.width
-                height: 10
-            }
+             Column{
+                 width: parent.width - ui.big_spacing
+                 height: parent.height - ui.big_spacing
+                 anchors.centerIn: parent
+                 spacing: ui.middle_spacing
 
-            Row{
-                width: parent.width
-                height: ui.height_Button
-                spacing: ui.basic_spacing
+                 Account_With_Title{
+                     id: account_withTitle
+                     enabled: false
 
-                Custom_Button{
-                    width: parent.width / 2 - ui.basic_spacing / 2
-                    outlined: true
-                    isOnlyText: true
-                    text:  qsTr("Выйти") + mytrans.emptyString
-                    onClicked_Signal: {
+                 }
 
-                        popup.close()
+                 Item {
+                     width: parent.width
+                     height: 10
+                 }
 
-                        applicationWindow.flipped = false
+                 Row{
+                     width: parent.width
+                     height: ui.height_Button
+                     spacing: ui.basic_spacing
 
-                        //index_Page = 0
-                    }
+                     Custom_Button{
+                         width: parent.width / 2 - ui.basic_spacing / 2
+                         outlined: true
+                         isOnlyText: true
+                         text:  qsTr("Выйти") + mytrans.emptyString
+                         onClicked_Signal: {
 
-                }
+                             popup.close()
 
-                Custom_Button{
-                    width: parent.width / 2 - ui.basic_spacing / 2
-                    height: ui.height_Button
-                   // outlined: true
-                    isIcon:  true
-                    source: "qrc:/icons/" + Style.theme + "/top_bar/plus.svg"
-                    text:  qsTr("Добавить аккаунт") + mytrans.emptyString
-                    onClicked_Signal: {
+                             applicationWindow.flipped = false
 
-                        popup.close()
+                             //index_Page = 0
+                         }
 
-                        root_Page.index_Page = 3
+                     }
 
-                        page_Loader.item.sub_index_LoginPage = 2
+                     Custom_Button{
+                         width: parent.width / 2 - ui.basic_spacing / 2
+                         height: ui.height_Button
+                        // outlined: true
+                         isIcon:  true
+                         source: "qrc:/icons/" + Style.theme + "/top_bar/plus.svg"
+                         text:  qsTr("Добавить аккаунт") + mytrans.emptyString
+                         onClicked_Signal: {
 
-                    }
+                             popup.close()
 
-                }
-            }
+                             root_Page.index_Page = 3
+
+                             page_Loader.item.sub_index_LoginPage = 2
+
+                         }
+
+                     }
+                 }
 
 
-        }
+             }
+         }
+
+
     }
 
     Popups_Anim{

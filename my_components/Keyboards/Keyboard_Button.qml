@@ -27,7 +27,8 @@ Item {
         width: parent.width - ui.basic_spacing
         height: parent.height - ui.basic_spacing
         outlined: !isIcon
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.centerIn: parent
+       // anchors.horizontalCenter: parent.horizontalCenter
         pixelSize: ui.text_MiddleSize
         isIcon:  root_Item.isIcon
         source: root_Item.source

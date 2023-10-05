@@ -137,24 +137,35 @@ ComboBox {
              //y: equipmentList.height + 4
              width: equipmentList.width
              height: contentItem.implicitHeigh
-             clip: true
-             modal: true
+            // clip: true
+            // modal: true
              padding: ui.basic_spacing / 2
 
              enter: popups_Anim.get_enter()
 
              exit: popups_Anim.get_exit()
 
-             Overlay.modal:  Overlay_Popup {}
+          //   Overlay.modal:  Overlay_Popup {}
 
-             background: Rectangle {
-                 color: Style.background_Color
-                 radius: ui.radius
+             background:         Item{
                  width: parent.width
-                 height:  parent.height
+                 height: parent.height
 
+                 Highlight_Glow{target: bg_Rectangle; shadow: true}
 
-              }
+                 Rectangle {
+                      id: bg_Rectangle
+                      width: parent.width
+                      height: parent.height
+                      radius: ui.radius
+                      color: Style.background_Color
+
+                      layer.enabled: true
+                      layer.effect: Mask_Rectangle{target: parent}
+
+                 }
+
+             }
 
              closePolicy: Popup.CloseOnEscape | Popup.CloseOnReleaseOutsideParent
 

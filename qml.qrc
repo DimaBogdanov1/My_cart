@@ -76,5 +76,11 @@
         <file>icons/light_theme/navigation/question_accent.svg</file>
         <file>icons/light_theme/navigation/question.svg</file>
         <file>pages/Help_Page.qml</file>
+        <file>icons/light_theme/utils/moon.svg</file>
+        <file>icons/light_theme/utils/sun.svg</file>
+        <file>icons/light_theme/utils/battery.svg</file>
+        <file>pages/home_pages/start_task_pages/Basic_Task_Page.qml</file>
+        <file>icons/light_theme/utils/close.svg</file>
+        <file>pages/home_pages/start_task_pages/Custom_Task_Page.qml</file>
     </qresource>
 </RCC>

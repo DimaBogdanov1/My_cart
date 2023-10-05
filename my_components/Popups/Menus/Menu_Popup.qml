@@ -18,124 +18,68 @@ Popup {
 
     width: width_block
     height: menu_Model.count * ui.height_Button + ((menu_Model.count - 1) * ui.basic_spacing / 2 ) + ui.basic_spacing
-    modal: true
+   // modal: true
 
     padding: 0
 
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnReleaseOutsideParent
 
-    enter: popups_Anim.get_enter()
+    enter: popups_Anim.get_menu_enter()
 
     exit: popups_Anim.get_exit()
 
-    Overlay.modal:  Overlay_Popup {}
+   // Overlay.modal:  Overlay_Popup {}
 
 
-    background:   Blur{ x_start: popup.x + ui.width_Navigation}
+    background:  Background_Popup{} //  Blur{ x_start: popup.x + ui.width_Navigation}
 
+    contentItem:
 
-        /*Rectangle {
-       color: Style.background_Color
-       radius: ui.radius
-       width: parent.width
-       height:  parent.height
+        Item{
+           width: parent.width
+           height: parent.height
 
-       //Border_Gradient{}
+           Highlight_Glow{target: bg_Rectangle; shadow: true;} // glowRadius: 0
 
-    }*/
+           Rectangle{
+               id: bg_Rectangle
+               width: parent.width
+               height: parent.height
+               radius: ui.radius
+               color: Style.background_Color
 
+               Column{
+                   width: parent.width - ui.basic_spacing
+                   height: parent.height - ui.basic_spacing
+                   anchors.centerIn: parent
+                   spacing: ui.basic_spacing / 2
 
-    Column{
-        width: parent.width - ui.basic_spacing
-        height: parent.height - ui.basic_spacing
-        anchors.centerIn: parent
-        spacing: ui.basic_spacing / 2
+                   Repeater{
+                       width: parent.width
+                       height: parent.height
+                       model: menu_Model
 
-        Repeater{
-            width: parent.width
-            height: parent.height
-            model: menu_Model
+                       Menu_Element{
+                           source: menu_Model.get(index).source
+                           text: menu_Model.get(index).text
+                           checkable: menu_Model.get(index).checkable
+                           checked: menu_Model.get(index).checked
 
-            Menu_Element{
-                source: menu_Model.get(index).source
-                text: menu_Model.get(index).text
-                checkable: menu_Model.get(index).checkable
-                checked: menu_Model.get(index).checked
+                           onClicked_Signal: {
 
-                onClicked_Signal: {
+                               menu_Model.get(index).pick(checked)
 
-                    menu_Model.get(index).pick(checked)
+                           }
 
-                }
+                       }
+                   }
 
-            }
-        }
+               }
 
-        /*Menu_Element{
-            source: "qrc:/icons/" + Style.theme + "/top_bar/export.svg"
-            text: qsTr("Экспорт") + mytrans.emptyString
-
-            onClicked_Signal: {
-
-                toast.show("Экспорт", 3000, 1)
-
-            }
-
-        }
-
-        Menu_Element{
-            checked: true        
-            text: qsTr("Сетка") + mytrans.emptyString
-
-            onClicked_Signal: {
-
-                visibleBorders_Signal(checked)
-
-            }
-
-        }
-
-        Menu_Element{
-            checked: true
-            text: qsTr("Сохранять график километра") + mytrans.emptyString
-
-            onClicked_Signal: {
-
-                visibleBorders_Signal(checked)
-
-            }
-
-        }
-
-        Menu_Element{
-            source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
-            text: "Фото"
-
-            onClicked_Signal: {
-
-                grab_Signal()
-            }
-
-
-        }*/
-
+           }
     }
 
 
-
-   /* MenuItem {
-              text: "New..."
-              onTriggered: document.reset()
-          }
-
-    MenuItem {
-              text: "New..."
-              onTriggered: document.reset()
-
-              Component.onCompleted: {
-                  console.log("hhh = " , height)
-              }
-          }*/
 
     Popups_Anim{
         id: popups_Anim

@@ -14,6 +14,11 @@ Item {
 
     property var measure_model: []
 
+    property var no_values_model: []
+
+
+    property int no_x_index: -1
+
     property var x_values_model: []
 
     //property int max
@@ -44,81 +49,40 @@ Item {
 
     function create_model(){
 
-        /*for(var i = min; i < max + step; i+= step){
 
-          measure_model.push(i.toString())
-        }
+        for(var i = 0; i < measure_model.length; i++){
 
-        if(tmp_val){
+         //   console.log(title + " qqqq = " + convert_x(measure_model[i]))
 
-            repeater.model = values_model
+                   // var a =  (difference * root_Item.width / 2 )  / (center_value - amplitude )
 
-        }
-        else{
-
-            repeater.model = measure_model
-
-        }
-
-        */
-
-        if(tmp_val){
-
-            for(var i = 0; i < measure_model.length; i++){
-
-             //   console.log(title + " qqqq = " + convert_x(measure_model[i]))
-
-                       // var a =  (difference * root_Item.width / 2 )  / (center_value - amplitude )
+          //  console.log(title + " repeater = " +  convert_x(repeater.itemAt(i).width))
 
 
-              //  console.log(title + " repeater = " +  convert_x(repeater.itemAt(i).width))
+            if(reverse){
+
+                var b = measure_model[measure_model.length - 1] - measure_model[i] + measure_model[0]
+
+               // console.log(title + " b = " + b)
+
+                x_values_model.push(convert_x(b))
+
+            }
+            else{
 
                 x_values_model.push(convert_x(measure_model[i]) )
 
-                console.log(title + " convert_x(i) = " +  convert_x(measure_model[i])  )
+              //  console.log(title + " convert_x(i) = " +  convert_x(measure_model[i])  )
 
-                   console.log(title + " convert_x(15) = " +  convert_x(1) )
-
-                /*if(reverse){
-
-                    center_value = Math.abs(measure_model[measure_model.length - 1] + measure_model[0]) / 2
-
-
-                    if(i != 0 && i != measure_model.length - 1){
-
-                        var b = measure_model[i] - center_value
-
-
-
-                        console.log("center_value = " + center_value)
-
-                        console.log(title + " b = " + b)
-
-                        var c = measure_model[i] - b
-
-                        console.log(title + " c = " + c)
-
-                        console.log(title + " convert c = " + convert_x(c))
-
-
-                        x_values_model.push(convert_x(measure_model[i] - center_value))
-                    }
-                    else{
-
-                        x_values_model.push(convert_x(measure_model[i]))
-
-                    }
-
-
-
-                }
-                else{
-
-                    x_values_model.push(convert_x(measure_model[i]))
-
-                }*/
+               // console.log(title + " convert_x(1) = " +  convert_x(1) )
 
             }
+
+        }
+
+        if(no_x_index != -1){
+
+            x_values_model.splice(no_x_index, 1);
 
         }
 
@@ -144,6 +108,24 @@ Item {
         //console.log("answer = " , answer )
 
         return answer
+    }
+
+    function check_visible(value){
+
+        var result = true
+
+        for(var i = 0; i < no_values_model.length; i++){
+
+            if(value === no_values_model[i]){
+
+                result = false
+
+                break
+            }
+        }
+
+        return result
+
     }
 
 
@@ -205,13 +187,13 @@ Item {
 
             if(value < center_value){
 
-                a = a - width_block
+                a = a - width_block / 4
             }
             else{
 
                 if(value > center_value){
 
-                    a = a + width_block
+                    a = a + width_block / 4
 
                 }
 
@@ -302,7 +284,7 @@ Item {
 
                     Repeater{
                         id: repeater
-                        width: parent.width - ui.basic_spacing
+                        width: parent.width - ui.big_spacing
                         height: parent.height
                         anchors.horizontalCenter: parent.horizontalCenter
                         model: root_Item.measure_model
@@ -317,56 +299,23 @@ Item {
 
                            // width: parent.width / repeater.count //repeater.model.count
 
-                            width: modelData.toString().length > 3 ? 20 : repeater.width * 0.14
+                            width: repeater.width * 0.14  //modelData.toString().length > 3 ? repeater.width * 0.14 : repeater.width * 0.14
 
                             height: parent.height
+                            visible:  check_visible(modelData)
                             margin_text: 0
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.horizontalCenterOffset: create_x(modelData, width)
-                         //   needBack: false
+                            needBack: false
                             horizontal: Text.AlignHCenter
                             pixel_size:  ui.text_miniSize
                             text: modelData
                             color: "red"
 
-                            function update_margin(){
-
-                                measure_label.anchors.horizontalCenterOffset = create_x(modelData, width)
-
-                                console.log("dfdfdsfsdfdsfdsf")
-                            }
-
-                            Component.onCompleted: {
-
-                                /*if(modelData > 0){
-
-                                    width = width + minus_width
-
-                                    horizontal = Text.AlignRight
-                                }
-
-                                update_margin() */
-
-                              //  anchors.horizontalCenterOffset = create_x(index, modelData, width)
-
-                               // width = 10
-
-                                //console.log("repeater width = " + repeater.width)
-                            }
-
                         }
 
                     }
 
-                    /*onWidthChanged: {
-
-                        console.log("rrrrrrrrrrrrrrrrrr")
-                        for(var i = 0; i < repeater.count; i++){
-
-                            repeater.itemAt(i).update_margin()
-
-                        }
-                    } */
                 }
              }
          }
@@ -377,9 +326,6 @@ Item {
     Component.onCompleted: {
 
         create_model()
-
-
-       // console.log(title + " " + count_val)
     }
 
 }

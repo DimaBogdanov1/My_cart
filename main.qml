@@ -30,7 +30,8 @@ ApplicationWindow {
     }
 
     Flipable_Page{
-        front_source: "../App_Page.qml" //"qrc:/pages/Login_Page.qml"
+        id: flipable_Page
+        front_source: "../App_Page.qml" // "qrc:/pages/Login_Page.qml"
         back_source: ""
         flipped: applicationWindow.flipped
     }
@@ -78,5 +79,10 @@ ApplicationWindow {
     }
 
 
-
+    Keyboard{
+        id: keyboard
+        width: parent.width
+        page_target: flipable_Page
+        number: true
+    }
 }

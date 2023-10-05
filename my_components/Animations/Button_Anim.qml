@@ -4,6 +4,8 @@ Item {
 
     property var animation_target
 
+    property var icon_target
+
     property int time_Anim: 250
 
     property int error_dis: 10
@@ -26,6 +28,27 @@ Item {
         scale_Anim.start()
     }
 
+    function create_icon_anim(value){
+
+        icon_Anim.target = icon_target
+
+        if(value){
+
+            icon_Anim.from =  -1 * parent.width
+
+            icon_Anim.to = 0
+        }
+        else{
+
+            icon_Anim.from =  parent.width
+
+            icon_Anim.to = 0
+        }
+
+        icon_Anim.stop()
+
+        icon_Anim.start()
+    }
 
     function create_rotation_anim(){
 
@@ -51,6 +74,26 @@ Item {
 
        rotate_Anim.start()
     }
+
+    NumberAnimation { id: icon_Anim; property: "y"; from: -1 * parent.width; to: 0; duration: time_Anim
+
+        onStarted: {
+
+            if(!isChecked){
+
+                isChecked = true
+            }
+            else{
+
+                isChecked = false
+
+            }
+        }
+
+
+
+    }
+
 
     SequentialAnimation{
 

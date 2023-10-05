@@ -46,7 +46,7 @@ Row{
                 width: parent.width / root_Row.model.count - (ui.basic_spacing * (root_Row.model.count - 1)) / root_Row.model.count
                 title: model.title
                 password: model.password === undefined ? false : model.password
-                maximumLength: password ? 4 : model.maximumLength
+                maximumLength: model.km ? 4 : ( model.meter ? 3 : password ? 4 : model.maximumLength )
                 validator: IntValidator{}
 
                 onReady_to_write_signal: {

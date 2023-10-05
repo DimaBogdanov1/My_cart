@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.3
+import QtCharts 2.15
 
 import Style 1.0
 import MyLang 1.0
@@ -18,14 +19,16 @@ Item {
         color: Style.blue_Color
 
 
-        Custom_Slider{
-            width: 200
-            anchors.centerIn: parent
 
-        }
 
 
     }
+    Column {
+        width: parent.width
+        height: parent.height
+
+
+
 
     Custom_TextField {
         id: textField_1
@@ -43,6 +46,40 @@ Item {
         }
 
     }
+
+    Row{
+        width: parent.width
+        height: 60
+
+        ChartView {
+
+           width: parent.width  /2
+           height: parent.height
+           dropShadowEnabled: false
+           antialiasing: true
+           backgroundColor: Style.background_Color //"red"//Style.background_Color
+           legend.visible:false
+           plotAreaColor: Style.background_Color
+
+
+        }
+
+        ChartView {
+
+           width: parent.width  /2
+           height: parent.height + 71//96 //95
+           dropShadowEnabled: false
+           antialiasing: true
+           backgroundColor: Style.background_Color //"red"//Style.background_Color
+           legend.visible:false
+           plotAreaColor: Style.background_Color
+
+
+        }
+    }
+
+    }
+
 
     Row{
 
@@ -110,11 +147,10 @@ Item {
 
 
 
-    Keyboard{
-        id: keyboard
-        width: parent.width
-        page_target: row
-        text_target:textField_1
+    Custom_Slider{
+        width: 200
+        anchors.centerIn: parent
 
     }
+
 }

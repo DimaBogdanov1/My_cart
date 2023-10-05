@@ -3,57 +3,75 @@ import QtQuick 2.0
 Item {
     id:root_Item
 
-    property int time_Anim: 2500
-
-    property real scroll_value: 0 // Реальное Значение Скрола Граифка
-
-    property real change_scroll: 0
-
-    property real scroll_target: 0
-
     property bool isDown
 
-    property bool check
+    property int c: 0
 
-    property real last: 0
+    property int a: 0
 
-    property real next: 0
-
-    onChange_scrollChanged: {
-
-        if(!check){
-
-            last = change_scroll
-            check = true
-        }
-        else{
-
-            next = change_scroll
-
-            check = false
-        }
-
-       // scroll_value = next - last
-
-        var a = Math.abs(next - last)
-
-        console.log("last = ",  last , "next = ",  next , "change = " ,a.toString())
+    onAChanged: {
 
         if(isDown){
 
-            chartView.scrollDown(a)
+            if(c >= 0){
+
+                c += 1
+
+                chartView.scrollUp(1)
+
+            }
+            else{
+
+                a_Anim.stop()
+
+            }
+
+
         }
         else{
 
-            chartView.scrollUp(a)
+            if(c > 0){
+
+                c -= 1
+
+                chartView.scrollDown(1)
+
+            }
+
         }
+
+       // console.log("isDown = " + isDown + " c = " + c.toString())
 
     }
 
+    NumberAnimation {id: a_Anim; target: root_Item;  property: "a"; from: 0; duration: 500}
+
+
     function create_scroll(value, down){
 
+        a_Anim.to = value
 
-        change_scroll = 0
+        isDown = down
+
+        /*if(down){
+
+            chartView.scrollDown(value)
+
+        }
+        else{
+
+            chartView.scrollUp(value)
+
+        }*/
+
+        a_Anim.stop()
+
+        if(c >= 0){
+
+            a_Anim.start()
+        }
+
+       /* change_scroll = 0
 
         scroll_target = value
 
@@ -61,10 +79,8 @@ Item {
 
         scroll_Anim.stop()
 
-        scroll_Anim.start()
+        scroll_Anim.start() */
 
     }
-
-    NumberAnimation {id: scroll_Anim; target: root_Item;  property: "change_scroll"; from: scroll_value; to: scroll_target; duration: time_Anim}
 
 }

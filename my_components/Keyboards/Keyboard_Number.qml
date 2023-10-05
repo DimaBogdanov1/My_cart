@@ -48,7 +48,7 @@ Item {
     Item{
         width:  ui.size_Keyboard_Russia * 4 * 1.25 + ui.basic_spacing
         height: parent.height - ui.basic_spacing
-       // color: "blue"
+      //  color: "blue"
         anchors.centerIn: parent
 
         Row{

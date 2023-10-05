@@ -156,12 +156,12 @@ Item {
     }
 
 
-    Keyboard{
+   /*Keyboard{
         id: keyboard
         width: parent.width
         page_target: root_Row
         number: true
-    }
+    }*/
 
 
 }

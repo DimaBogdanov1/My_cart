@@ -130,6 +130,21 @@ Item {
                       width:  parent.width - 16
                       anchors.horizontalCenter: parent.horizontalCenter
                       height: ui.iconBlock_Size
+                      isChecked: index_Page == 5
+                      icon_path: "qrc:/icons/" + Style.theme + "/navigation/question.svg"
+                      icon_checked_path: "qrc:/icons/"+ Style.theme + "/navigation/question_accent.svg"
+                      onClicked_Signal: {
+
+                          push_Notification.open()
+                       //   opacity_Anim.create_page_anim(5)  // Переходим В Справку
+
+                      }
+                  }
+
+                  Custom_Icon_Button{
+                      width:  parent.width - 16
+                      anchors.horizontalCenter: parent.horizontalCenter
+                      height: ui.iconBlock_Size
                       isChecked: index_Page == 4
                       icon_path: "qrc:/icons/" + Style.theme + "/navigation/setting.svg"
                       icon_checked_path: "qrc:/icons/" + Style.theme + "/navigation/setting_accent.svg"
@@ -147,24 +162,44 @@ Item {
 
            Column {
                width: parent.width
-               height: ui.height_Button + ui.iconBlock_Size + ui.icon_nav_size
+               height: ui.height_Button +  ui.iconBlock_topBar_Size + ui.icon_nav_size
                anchors.bottom: parent.bottom
                anchors.bottomMargin: 16
                spacing: ui.icon_nav_size
 
                Custom_Icon_Button{
-                   width:  parent.width - 16
+                   isNeedRectangle: true
+                   color_rec: Style.light_Color
                    anchors.horizontalCenter: parent.horizontalCenter
-                   height: ui.iconBlock_Size
-                   isChecked: index_Page == 5
-                   icon_path: "qrc:/icons/" + Style.theme + "/navigation/question.svg"
-                   icon_checked_path: "qrc:/icons/"+ Style.theme + "/navigation/question_accent.svg"
+                   icon_path: "qrc:/icons/" + Style.theme + "/utils/moon.svg"
+                   icon_checked_path: "qrc:/icons/" + Style.theme + "/utils/sun.svg"
+
                    onClicked_Signal: {
 
-                       opacity_Anim.create_page_anim(5)  // Переходим На Старт
+                       create_icon_anim()
 
                    }
+
+                   onIsCheckedChanged: {
+
+                       if(isChecked){
+
+                           app_Settings.dark_mode = isChecked
+
+                           Style.change_theme(app_Settings.dark_mode)
+                       }
+                       else{
+
+                           app_Settings.dark_mode = isChecked
+
+                           Style.change_theme(app_Settings.dark_mode)
+                       }
+
+
+                   }
+
                }
+
 
                Account_Icon{
                    id: authorization_Account_Icon
@@ -198,6 +233,11 @@ Item {
                id: account_Popup
            }
 
+           Push_Notifiaction{
+
+               id: push_Notification
+           }
+
            /*Custom_Border{
                anchors.right: parent.rights
                width: ui.border_Size
@@ -222,17 +262,22 @@ Item {
                 source: sourcePages_Array[index_Page]
                 Component.onCompleted: index_Page =  0 //1 //source = sourcePages_Array[index_Page]
 
+                onSourceChanged: {
+
+                    if(keyboard.on_keyboard){
+
+                        keyboard.close()
+                    }
+                }
             }
 
-
-            /*Notification{
-
-            }*/
 
             // Создаём Объект Для Показа Тостов
            ToastManager {
                 id: toast
             }
+
+
 
         }
 
@@ -245,6 +290,7 @@ Item {
 
 
     }
+
 
 
 
@@ -278,6 +324,7 @@ Item {
         Component.onCompleted: source = "../Utils.qml"
 
     }
+
 
     Loading_Popup{
         id: loading_popup

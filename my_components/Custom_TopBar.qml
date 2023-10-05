@@ -128,8 +128,6 @@ Item{
 
              Custom_Icon_Button{
                  id: viser_Element
-                 width: ui.iconBlock_topBar_Size
-                 height: parent.height
                  isNeedRectangle: true
                  color_rec: Style.light_Color
                  icon_path: "qrc:/icons/" + Style.theme + "/top_bar/shield.svg"
@@ -158,12 +156,11 @@ Item{
              }
 
              Custom_Icon_Button{
-                 width: ui.iconBlock_topBar_Size
-                 height: parent.height
                  isNeedRectangle: true
                  color_rec: Style.light_Color
                  icon_path: "qrc:/icons/" + Style.theme + "/utils/notification.svg"
                  needTip: true
+                 clip: false
                  tip_text: qsTr("Уведомления") + mytrans.emptyString
                  onClicked_Signal: {
 
@@ -178,14 +175,14 @@ Item{
 
              Custom_Icon_Button{
                  id: picket_Element
-                 width: ui.iconBlock_topBar_Size
-                 height: parent.height
                  isNeedRectangle: true
                  color_rec: Style.light_Color
                  icon_path: "qrc:/icons/" + Style.theme + "/top_bar/location.svg"
-                 needTip: true
-                 tip_text: qsTr("Добавить объект") + mytrans.emptyString
+                // needTip: true
+                 //tip_text: qsTr("Добавить объект") + mytrans.emptyString
                  onClicked_Signal: {
+
+                     more_Memu.close()
 
                      objects_Menu.open()
 
@@ -194,15 +191,15 @@ Item{
 
              Custom_Icon_Button{
                  id: more_Element
-                 width: ui.iconBlock_topBar_Size
-                 height: parent.height
                  isNeedRectangle: true
                  color_rec: Style.light_Color
-                 needTip: true
-                 tip_text: qsTr("Ещё") + mytrans.emptyString
+                // needTip: true
+                // tip_text: qsTr("Ещё") + mytrans.emptyString
                  icon_path: "qrc:/icons/" + Style.theme + "/top_bar/more.svg"
 
                  onClicked_Signal: {
+
+                     objects_Menu.close()
 
                      more_Memu.open()
 

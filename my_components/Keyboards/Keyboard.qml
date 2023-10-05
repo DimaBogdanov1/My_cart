@@ -59,10 +59,14 @@ Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: -1 * keyboard_Rectangle.height
 
-        Page{
+        Item{
             width: parent.width
             height:  parent.height
+
+            //Highlight_Glow{target: bg_Rectangle; shadow: true; glowRadius: 1}
+
             Rectangle {
+                id: bg_Rectangle
                 width: parent.width
                 height:  parent.height
                 enabled: false
@@ -77,6 +81,7 @@ Item {
         Loader{
             id: keyboard_Loader
             width: parent.width
+            height: parent.height
             source: on_keyboard ? (number ? "qrc:/my_components/Keyboards/Keyboard_Number.qml" : "qrc:/my_components/Keyboards/Keyboard_Letter.qml") : ""
 
             onSourceChanged: {

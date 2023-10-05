@@ -14,7 +14,7 @@ Item{
         }
         else{
 
-            currentTheme = themes.test_dark_theme // Включаем Тёмную Тему
+            currentTheme = themes.dark_theme // Включаем Тёмную Тему
 
         }
     }
@@ -26,7 +26,6 @@ Item{
     readonly property string body_Color: "#FEF1EA"
     readonly property string white: "#FFFFFF"
     readonly property string yellow_Color: "#F69F22"
-
 
 
     readonly property string light_grey: "#121212" //#010219
@@ -79,7 +78,7 @@ Item{
 
         ]  // Тёмная Тема
 
-        readonly property var light_theme: [
+        readonly property var dark_theme: [
             orange_Color, // Акцент Цвет
             orangeLight_Color, // Лёгкий Акцент
             dark_blue_Color,  // Цвет Текста
@@ -92,7 +91,7 @@ Item{
 
         ]  // Тестовая Тема
 
-        readonly property var test_dark_theme: [
+        readonly property var light_theme: [
             "#FEC980", // Акцент Цвет
             "#0F0909", // Лёгкий Акцент
             light_grey,  // Цвет Текста

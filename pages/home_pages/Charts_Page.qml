@@ -51,6 +51,8 @@ Item{
 
             onVisibleBorders_Signal: {
 
+                speed_MeasureLines.change_visible_borders(value)
+
                 level_MeasureLines.change_visible_borders(value)
 
                 riht_Left_MeasureLines.change_visible_borders(value)
@@ -92,10 +94,9 @@ Item{
                     anchors.centerIn: parent
                     spacing: ui.basic_spacing /// 2 /// 2
 
-                    Rectangle{ // Общая Информация
+                    Item{ // Общая Информация
                         id: task_Item
                         width: parent.width
-                        radius: ui.radius
                         height:  40 //96
 
                         Row{
@@ -103,42 +104,71 @@ Item{
                             height: parent.height
                             spacing: ui.basic_spacing / 2
 
-                            Custom_Rectangle_Label {
-                                id: upNom_Label
-                                width: parent.width * 0.15
-                                height: parent.height
-                                text: qsTr("Код: 11233") + mytrans.emptyString
+                            Rectangle{ // Общая Информация
+                                width: parent.width - 100 -  ui.basic_spacing / 2
+                                radius: ui.radius
+                                height:  parent.height
+                                color: Style.background_Color
+
+                                Row{
+                                    width: parent.width
+                                    height: parent.height
+
+                                    Custom_Rectangle_Label {
+                                        id: upNom_Label
+                                        width: parent.width * 0.15
+                                        height: parent.height
+                                        needBack: false
+                                        text: qsTr("Код: 11233") + mytrans.emptyString
+
+                                    }
+
+                                    Custom_Rectangle_Label {
+                                        id: direction_Label
+                                        width: parent.width * 0.3
+                                        height: parent.height
+                                        needBack: false
+                                        text: qsTr("Направление: Москва-Рига") + mytrans.emptyString
+
+                                    }
 
 
+                                    Custom_Rectangle_Label {
+                                        id: putNom_Label
+                                        width: parent.width * 0.15
+                                        height: parent.height
+                                        needBack: false
+                                        text: qsTr("Путь: 1") + mytrans.emptyString
 
+                                    }
+
+                                    Custom_Text_Arrow{
+                                       width: parent.width * 0.4 //- ui.basic_spacing
+                                       height: ui.height_Button
+                                       enabled: false
+                                       text_1:  qsTr("Станиция 1") + mytrans.emptyString
+                                       text_2:  qsTr("Станиция 2") + mytrans.emptyString
+
+                                    }
+                                }
                             }
 
-                            Custom_Rectangle_Label {
-                                id: direction_Label
-                                width: parent.width * 0.3
-                                height: parent.height
-                                text: qsTr("Направление: Москва-Рига") + mytrans.emptyString
 
+                            Rectangle{ // Общая Информация
+                                width: 100
+                                radius: ui.radius
+                                height:  parent.height
+                                color: Style.background_Color
+
+                                Custom_Text_With_Icon{
+                                  //  width: parent.width
+                                    height: parent.height
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    icon_size: 24
+                                    source: "qrc:/icons/"+ Style.theme + "/utils/battery.svg"
+                                    text: "100%"
+                                }
                             }
-
-
-                            Custom_Rectangle_Label {
-                                id: putNom_Label
-                                width: parent.width * 0.15
-                                height: parent.height
-                                text: qsTr("Путь: 1") + mytrans.emptyString
-
-                            }
-
-                            Custom_Text_Arrow{
-                               width: parent.width * 0.4 - ui.basic_spacing * 1.5
-                               height: ui.height_Button
-                               enabled: false
-                               text_1:  qsTr("Станиция 1") + mytrans.emptyString
-                               text_2:  qsTr("Станиция 2") + mytrans.emptyString
-
-                            }
-
 
                         }
 
@@ -195,6 +225,7 @@ Item{
                                          height:  parent.height
                                          reverse: true
                                          measure_model: [0, 60, 100, 250]
+                                         no_values_model: [0, 250]
                                          x_start: 7.2
                                          x_finish: 16.8
                                          value: 10
@@ -204,7 +235,7 @@ Item{
 
                                            //  speed_MeasureLines.create_Line(x_finish, 0,x_finish, chartView.y_finish, "red", Qt.DotLine, "name") // Создаём Границу
 
-                                          //   speed_MeasureLines.create_BorderSeries()
+                                             speed_MeasureLines.create_BorderSeries()
                                          }
                                      }
 
@@ -212,10 +243,9 @@ Item{
                                          id: level_MeasureBlock
                                          width: parent.width * 0.165 - measure_Row.spacing_value
                                          height:  parent.height
-                                         measure_model: [-75, -35, 0, 35, 75]
-                                         tmp_val: true
-
-                                         x_start: 19.1
+                                         measure_model: [-75, -35, -6, 0, 6, 35, 75]
+                                         no_values_model: [-6, 6]
+                                         x_start: 19.2
                                          x_finish: 33.3//23.8
                                          value: 1
                                          title: str.level
@@ -231,27 +261,36 @@ Item{
                                          id: riht_Left_MeasureBlock
                                          width:  parent.width * 0.125 - measure_Row.spacing_value
                                          height:  parent.height
-                                         measure_model: [-30, 0, 30]
-                                         x_start: 27.5
-                                         x_finish: 40.3 //41.355 // x_start + 0.17 * (level_MeasureBlock.x_finish - level_MeasureBlock.x_start) / 0.2
+                                         measure_model: [-30, -3, 0, 3, 30]
+                                         no_values_model: [-3, 3, 30]
+                                         no_x_index: 4
+                                         x_start: 35.8
+                                         x_finish: 45.5 //41.355 // x_start + 0.17 * (level_MeasureBlock.x_finish - level_MeasureBlock.x_start) / 0.2
                                          value: 1
                                          title: str.riht_Left
 
+                                         Component.onCompleted: {
+
+                                             riht_Left_MeasureLines.create_BorderSeries()
+                                         }
                                      }
 
                                      Measure_Block {
                                          id: riht_Right_MeasureBlock
                                          width:  parent.width * 0.125 - measure_Row.spacing_value
                                          height:  parent.height
-                                         measure_model: [-30, 0, 30]
-                                         x_start: 44.3
+                                         measure_model: [-30, -3, 0, 3, 30]
+                                         no_values_model: [-30, -3, 3]
+                                         no_x_index: 0
+                                         x_start: 47.9
                                          x_finish: x_start + riht_Left_MeasureBlock.x_finish - riht_Left_MeasureBlock.x_start
                                          value: 1
                                          title: str.riht_Right
 
                                          Component.onCompleted: {
 
-                                           //  console.log(x_finish + " ddddd")
+                                             riht_Right_MeasureLines.create_BorderSeries()
+
                                          }
                                      }
 
@@ -259,13 +298,18 @@ Item{
                                          id: sample_MeasureBlock
                                          width:  parent.width * 0.16 - measure_Row.spacing_value
                                          height:  parent.height
-                                         //tmp_val: true
                                          measure_model: [1510, 1512, 1520, 1538, 1546]
+                                         no_values_model: [1510]
                                          x_start: 60.8
-                                         x_finish: 72
+                                         x_finish: 73
                                          value: 1
                                          title: str.sample
 
+                                         Component.onCompleted: {
+
+                                             sample_MeasureLines.create_BorderSeries()
+
+                                         }
                                      }
 
                                      Measure_Block {
@@ -273,11 +317,16 @@ Item{
                                          width:  parent.width * 0.125 - measure_Row.spacing_value
                                          height:  parent.height
                                          measure_model: [-10, 0, 10]
-                                         x_start: 76.2
-                                         x_finish: 84.3
+                                         x_start: 75.8
+                                         x_finish: 85.8
                                          value: 8
                                          title: str.down_Left
 
+                                         Component.onCompleted: {
+
+                                             down_Left_MeasureLines.create_BorderSeries()
+
+                                         }
                                      }
 
                                      Measure_Block {
@@ -285,11 +334,16 @@ Item{
                                          width:  parent.width * 0.125 - measure_Row.spacing_value
                                          height:  parent.height
                                          measure_model: [-10, 0, 10]
-                                         x_start: 89
+                                         x_start: 88.2
                                          x_finish: x_start + down_Left_MeasureBlock.x_finish - down_Left_MeasureBlock.x_start
                                          value: 10
                                          title: str.down_Right
 
+                                         Component.onCompleted: {
+
+                                             down_Right_MeasureLines.create_BorderSeries()
+
+                                         }
                                      }
 
                                    }
@@ -355,10 +409,6 @@ Item{
                                                  model: speed_MeasureBlock.x_values_model
                                                  x_start: speed_MeasureBlock.x_start
                                                  x_finish: speed_MeasureBlock.x_finish
-                                                 Component.onCompleted: {
-
-                                                     //create_BorderSeries()
-                                                 }
 
                                                }
 
@@ -369,77 +419,51 @@ Item{
                                                  model: level_MeasureBlock.x_values_model
                                                  x_start: level_MeasureBlock.x_start
                                                  x_finish: level_MeasureBlock.x_finish
-                                                 Component.onCompleted: {
-
-                                                     //create_BorderSeries()
-                                                 }
 
                                                }
 
                                                Measure_Lines{ // Рихтовка левая
                                                  id: riht_Left_MeasureLines
                                                  line_name: 1
-                                                 count: riht_Left_MeasureBlock.count_val
+                                                 model: riht_Left_MeasureBlock.x_values_model
+                                                 no_values_model: [30]
                                                  x_start: riht_Left_MeasureBlock.x_start
                                                  x_finish: riht_Left_MeasureBlock.x_finish
-                                                 Component.onCompleted: {
-
-                                                     create_BorderSeries()
-                                                 }
 
                                                }
 
                                                Measure_Lines{  // Рихтовка правая
                                                  id: riht_Right_MeasureLines
                                                  line_name: 2
-                                                 count: riht_Right_MeasureBlock.count_val
+                                                 model: riht_Right_MeasureBlock.x_values_model
                                                  x_start: riht_Right_MeasureBlock.x_start
                                                  x_finish: riht_Right_MeasureBlock.x_finish
-                                                 Component.onCompleted: {
-
-                                                     create_BorderSeries()
-                                                 }
-
                                                }
 
                                                Measure_Lines{ // Шаблон
                                                  id: sample_MeasureLines
                                                  line_name: 3
-                                                 count: sample_MeasureBlock.count_val
+                                                 model: sample_MeasureBlock.x_values_model
                                                  x_start: sample_MeasureBlock.x_start
-                                                 x_finish: sample_MeasureBlock.x_finish
-                                                 Component.onCompleted: {
-
-                                                     create_BorderSeries()
-                                                 }
+                                                 x_finish: sample_MeasureBlock.x_finish      
 
                                                }
 
                                                Measure_Lines{ // Просадка левая
                                                  id: down_Left_MeasureLines
                                                  line_name: 4
-                                                 count: down_Left_MeasureBlock.count_val
+                                                 model: down_Left_MeasureBlock.x_values_model
                                                  x_start: down_Left_MeasureBlock.x_start
                                                  x_finish: down_Left_MeasureBlock.x_finish
-                                                 Component.onCompleted: {
-
-                                                     create_BorderSeries()
-                                                 }
 
                                                }
 
                                                Measure_Lines{ // Просадка правая
                                                  id: down_Right_MeasureLines
                                                  line_name: 5
-                                                 count: down_Right_MeasureBlock.count_val
+                                                 model: down_Right_MeasureBlock.x_values_model
                                                  x_start: down_Right_MeasureBlock.x_start
                                                  x_finish: down_Right_MeasureBlock.x_finish
-                                                 Component.onCompleted: {
-
-                                                     create_BorderSeries()
-
-                                                 }
-
                                                }
 
                                                Measure_ViserLine{
@@ -682,8 +706,9 @@ Item{
 
                                  List_Row{
                                      id: title_Row
-                                     model: [qsTr("Координата"), qsTr("Признак"), qsTr("Степень"), qsTr("Амплитуда"), qsTr("Длинна"), qsTr("Установленная скорость"), qsTr("Ограничение скорости")]
-                                     sizes: [0.14, 0.14, 0.11, 0.13, 0.11, 0.19, 0.18]
+                                     model: [qsTr("Координата"), qsTr("Неисправность"), qsTr("Степень"), qsTr("Амплитуда"), qsTr("Длинна"), qsTr("Признак"), qsTr("Установленная скорость"), qsTr("Ограничение скорости")]
+                                     sizes: [0.11, 0.13, 0.09, 0.11, 0.09, 0.11, 0.18, 0.17]
+                                     clip: true
                                  }
 
                                  Custom_Border{}
@@ -701,6 +726,8 @@ Item{
                                             amp: 1
                                             dl: 1
                                             cou: 1
+                                            u: 1
+
 
                                         }
 
@@ -711,6 +738,8 @@ Item{
                                             amp: 1
                                             dl: 1
                                             cou: 1
+                                            u: 1
+
                                         }
                                         ListElement{
                                             coord: 1
@@ -719,6 +748,8 @@ Item{
                                             amp: 1
                                             dl: 1
                                             cou: 1
+                                            u: 1
+
                                         }
                                         ListElement{
                                             coord: 1
@@ -727,6 +758,8 @@ Item{
                                             amp: 1
                                             dl: 1
                                             cou: 1
+                                            u: 1
+
                                         }
                                         ListElement{
                                             coord: 1
@@ -735,6 +768,8 @@ Item{
                                             amp: 1
                                             dl: 1
                                             cou: 1
+                                            u: 1
+
                                         }
                                         ListElement{
                                             coord: 1
@@ -743,6 +778,7 @@ Item{
                                             amp: 1
                                             dl: 1
                                             cou: 1
+                                            u: 1
                                         }
 
                                     }
@@ -756,7 +792,7 @@ Item{
 
                                     delegate: List_Row{
                                         listview: defect_ListView
-                                        model: [ index + 1, coord, defect, st, amp, dl, cou]
+                                        model: [ index + 1, coord, defect, st, amp, dl, cou, u]
                                         sizes: title_Row.sizes
                                         cur: defect_ListView.currentIndex
 
@@ -850,7 +886,7 @@ Item{
                                       text:  qsTr("вниз") + mytrans.emptyString
                                       onClicked: {
 
-                                          chart_anim.create_scroll(100, false)
+                                          chart_anim.create_scroll(30, true)
 
                                           //chartView.scrollDown(100)
 
@@ -866,7 +902,7 @@ Item{
                                       text:  qsTr("вверх") + mytrans.emptyString
                                       onClicked: {
 
-                                          chart_anim.create_scroll(100, true)
+                                          chart_anim.create_scroll(30, false)
 
                                          // chartView.scrollUp(100)
 
@@ -1064,6 +1100,7 @@ Item{
         }
 
     }
+
 
 }
 

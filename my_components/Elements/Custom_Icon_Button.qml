@@ -3,8 +3,10 @@ import my_components 1.0
 
 Item {
     id: root_Item
-    width:  parent.width
-    height: ui.iconBlock_Size
+    width:  ui.iconBlock_topBar_Size
+    height: ui.iconBlock_topBar_Size
+    clip: true
+
     signal clicked_Signal
 
     property string icon_path
@@ -20,6 +22,11 @@ Item {
     property string tip_text
 
     property string color_rec
+
+    function create_icon_anim(){
+
+        button_Anim.create_icon_anim(isChecked)
+    }
 
     Rectangle{
         id: bg_Rectangle
@@ -51,6 +58,7 @@ Item {
     }
 
    Custom_Icon{
+       id: icon
        width: parent.width
        height: parent.height
        source: isChecked ? icon_checked_path : icon_path
@@ -61,7 +69,8 @@ Item {
    Button_Anim{
       id: button_Anim
       animation_target: root_Item
-      scale_val: 0.98
+      icon_target: icon
+      scale_val: 0.985
    }
 
 

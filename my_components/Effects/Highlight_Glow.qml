@@ -7,11 +7,13 @@ import my_components 1.0
 RectangularGlow {
     property var target
 
+    property bool shadow
+
     anchors.fill: target
     glowRadius: 8
     spread: 0 //0.02
-    color: Style.accent_Color
-    opacity: 0
+    color: shadow ? Style.primaryDark_Color : Style.accent_Color
+    opacity: shadow ? 1 : 0
     cornerRadius: target.radius + glowRadius
 
     function change_glow(value){
