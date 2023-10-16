@@ -43,7 +43,7 @@ Item {
                 Keyboard_Button{
                     width: ui.size_Keyboard_Russia * 1.25
                     height: ui.size_Keyboard_Russia
-                    bottom_button_index: 0
+                    bottom_button_index: Keyboard.Actions.Change_Language
                     isIcon: true
                     source: "qrc:/icons/" + Style.theme + "/utils/discovery.svg"
 
@@ -52,7 +52,7 @@ Item {
                 Keyboard_Button{
                     width: ui.size_Keyboard_Russia * 1.25
                     height: ui.size_Keyboard_Russia
-                    bottom_button_index: 1
+                    bottom_button_index: Keyboard.Actions.Add_Dot
                     isIcon: true
 
                 }
@@ -60,14 +60,14 @@ Item {
                 Keyboard_Button{
                     width: parent.width - 5 * ui.size_Keyboard_Russia
                     height: ui.size_Keyboard_Russia
-                    bottom_button_index: 2
+                    bottom_button_index: Keyboard.Actions.Add_Space
 
                 }
 
                 Keyboard_Button{
                     width: ui.size_Keyboard_Russia * 2.5
                     height: ui.size_Keyboard_Russia
-                    bottom_button_index: 3
+                    bottom_button_index: Keyboard.Actions.Enter
                     isIcon: true
                     source: "qrc:/icons/" + Style.theme + "/utils/arrow_right.svg"
 

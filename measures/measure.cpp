@@ -150,6 +150,7 @@ double Measure::get_points_line(float y_viser){
 
       }
 
+
     /*for(int i = 0; i < Sample_points.size(); i++){
 
         if(i != Sample_points.size() - 1){

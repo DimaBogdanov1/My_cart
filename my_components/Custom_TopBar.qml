@@ -9,32 +9,13 @@ Item{
     width: parent.width
     height: parent.height
 
-    signal viser_Signal(value: bool)
+    //signal viser_Signal(value: bool)
 
-    signal visibleBorders_Signal(value: bool)
+    //signal visibleBorders_Signal(value: bool)
 
-    signal grab_Signal // Test
+    //signal grab_Signal // Test
 
     readonly property int time_anim: 150
-
-    Keys.onPressed: {
-
-        switch(event.key){
-            case Qt.Key_1:
-
-                if(root_Item.sub_index_HomePage === 2){
-
-                    toast.show("Новый Пикет", 3000, 1) // Показываем Тоcт
-
-                    Work_with_chart.add_New_Picket()
-                }
-
-
-            }
-
-
-
-    }
 
     function start_anim(anim, from, to){
 
@@ -75,6 +56,14 @@ Item{
         hide_Anim.targets = [export_Element, picket_Element, more_Element]
 
         start_anim(hide_Anim, export_Element.opacity, 0)
+
+    }
+
+    function calculate_offset(index){
+
+        var multi = index + 1
+
+        return parent.width - menu.width_block - ui.iconBlock_topBar_Size * (multi - 1) -  ui.basic_spacing * multi
 
     }
 
@@ -127,30 +116,17 @@ Item{
 
 
              Custom_Icon_Button{
-                 id: viser_Element
                  isNeedRectangle: true
                  color_rec: Style.light_Color
-                 icon_path: "qrc:/icons/" + Style.theme + "/top_bar/shield.svg"
-                 icon_checked_path: "qrc:/icons/light_theme/utils/shield.svg"
-
-                 needTip: true
-                 tip_text: qsTr("Срез данных") + mytrans.emptyString
+                 icon_path: "qrc:/icons/" + Style.theme + "/top_bar/zoom_in.svg"
                  onClicked_Signal: {
 
-                     if(!isChecked){
 
-                         isChecked = true
+                     menu.x = calculate_offset(3)
 
-                     }
-                     else{
+                     menu.model = scale_model
 
-                         isChecked = false
-
-                     }
-
-                     root_Item.viser_Signal(isChecked)
-
-                   //  toast.show("Срез данных", 3000, 1) // Показываем Тоcт
+                     menu.open()
 
                  }
              }
@@ -159,16 +135,26 @@ Item{
                  isNeedRectangle: true
                  color_rec: Style.light_Color
                  icon_path: "qrc:/icons/" + Style.theme + "/utils/notification.svg"
-                 needTip: true
+                // needTip: true
                  clip: false
-                 tip_text: qsTr("Уведомления") + mytrans.emptyString
+                 //tip_text: qsTr("Уведомления") + mytrans.emptyString
                  onClicked_Signal: {
 
+                     if(notidication_Popup.model.count !== 0){
+
+                     }
+
+                     notidication_Popup.open()
 
                  }
 
-                 Custom_NotificationCounter{
+                 Counter_Notification{
+                        count: notidication_Popup.model.count
 
+                        Component.onCompleted: {
+
+                            open()
+                        }
                  }
              }
 
@@ -177,14 +163,17 @@ Item{
                  id: picket_Element
                  isNeedRectangle: true
                  color_rec: Style.light_Color
+
                  icon_path: "qrc:/icons/" + Style.theme + "/top_bar/location.svg"
-                // needTip: true
-                 //tip_text: qsTr("Добавить объект") + mytrans.emptyString
                  onClicked_Signal: {
 
-                     more_Memu.close()
+                    // more_Memu.close()
 
-                     objects_Menu.open()
+                     menu.x = calculate_offset(1)
+
+                     menu.model = objects_model
+
+                     menu.open()
 
                  }
              }
@@ -199,9 +188,13 @@ Item{
 
                  onClicked_Signal: {
 
-                     objects_Menu.close()
+                   //  objects_Menu.close()
 
-                     more_Memu.open()
+                     menu.x = calculate_offset(0)
+
+                     menu.model = more_model
+
+                     menu.open()
 
                  }
              }
@@ -215,17 +208,35 @@ Item{
 
     }
 
-    Menu_Popup{
-        id: more_Memu
-        width_block: 300
-        x: parent.width - width_block - ui.basic_spacing
-        menu_Model: ChartsMore_Model{}
-    }
+    ChartsMore_Model{id: more_model}
+
+    ChartsObjects_Model{id: objects_model}
+
+    ChartsScale_Model{id: scale_model}
 
     Menu_Popup{
-        id:objects_Menu
-        width_block: 300
-        x: parent.width - width_block - ui.iconBlock_topBar_Size - ui.basic_spacing * 2
-        menu_Model: ChartsObjects_Model{}
+        id: menu
+        //x: calculate_offset(0)
+        //model: ChartsMore_Model{}
     }
+
+    Notification_Popup{
+        id: notidication_Popup
+        x: calculate_offset(2)
+        model: ListModel{
+
+            ListElement{
+                text_notification:  Notification_Popup.Message_Notification.Adjustment
+                status_notification:  Notification_Popup.Status.Warning
+
+            }
+
+            ListElement{
+                text_notification:  Notification_Popup.Message_Notification.Adjustment
+                status_notification:  Notification_Popup.Status.Warning
+
+            }
+        }
+    }
+
 }

@@ -51,6 +51,8 @@ Row{
 
                 onReady_to_write_signal: {
 
+                    console.log("start_Keyboard = " + start_Keyboard)
+
                     keyboard.number = !model.isLetter
 
                     keyboard.text_target = get_target()

@@ -10,6 +10,9 @@ ListModel{
 
         pick: function(value){
             Chart_Work.add_New_Picket()
+
+            return null
+
         }
 
 
@@ -25,6 +28,9 @@ ListModel{
 
             toast.show("Объект 1", 3000, 1)
 
+            return null
+
+
         }
     }
 
@@ -38,6 +44,9 @@ ListModel{
 
             toast.show("Объект 2", 3000, 1)
 
+            return null
+
+
         }
     }
 
@@ -50,6 +59,9 @@ ListModel{
         pick: function(value){
 
             toast.show("Объект 3", 3000, 1)
+
+            return null
+
 
         }
 

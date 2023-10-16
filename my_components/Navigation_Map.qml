@@ -62,20 +62,4 @@ Map {
         }
     }
 
-    Rectangle{
-         width: 50
-         height: width * 2 / 3
-         radius: ui.radius
-         color: Style.background_Color
-
-         anchors{
-
-             bottom: parent.bottom
-             bottomMargin: ui.basic_spacing / 4
-             right: parent.right
-             rightMargin: ui.basic_spacing / 4
-         }
-
-
-    }
  }

@@ -16,12 +16,14 @@ Item {
         [ "", "0" , ""  ]
     ]
 
+
+
     readonly property var icons_keyboard: [
 
-        ["qrc:/icons/" + Style.theme + "/utils/delete.svg", 5],
-        ["qrc:/icons/" + Style.theme + "/utils/arrow_right.svg", 3],
-        ["qrc:/icons/" + Style.theme + "/utils/arrow_right.svg", 6],
-        ["qrc:/icons/" + Style.theme + "/utils/arrow_right.svg", 7]
+        ["qrc:/icons/" + Style.theme + "/utils/delete.svg", Keyboard.Actions.Delete_Symbol ],
+        ["qrc:/icons/" + Style.theme + "/utils/arrow_right.svg", Keyboard.Actions.Enter],
+        ["qrc:/icons/" + Style.theme + "/utils/arrow_right.svg", Keyboard.Actions.Add_Dot_Number],
+        ["qrc:/icons/" + Style.theme + "/utils/arrow_right.svg", Keyboard.Actions.Check_Sign]
 
     ]
 
@@ -29,20 +31,6 @@ Item {
     Keyboard_Logic{
         id: keyboard_Logic
         isNumber_Keyboard: true
-
-        onValueChanged: {
-
-            if(number){
-
-                //root_Item.value = parseInt(value)
-
-            }
-
-            //root_Item.value = value
-
-            //toast.show(root_Item.value.toString(), 3000, 1)
-
-        }
     }
 
     Item{

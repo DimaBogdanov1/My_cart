@@ -19,6 +19,8 @@ Item {
 
                 chartView.scrollUp(1)
 
+                km_ChartView.scrollUp(1)
+
             }
             else{
 
@@ -35,6 +37,8 @@ Item {
                 c -= 1
 
                 chartView.scrollDown(1)
+
+                km_ChartView.scrollDown(1)
 
             }
 

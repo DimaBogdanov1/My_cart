@@ -31,7 +31,7 @@
         <file>my_components/Animations/Keyboard_Anim.qml</file>
         <file>my_components/Keyboards/Keyboard.qml</file>
         <file>my_components/Elements/Custom_TextField.qml</file>
-        <file>my_components/Elements/Custom_Pick_Button.qml</file>
+        <file>my_components/Elements/Custom_Tabs.qml</file>
         <file>my_components/Lists/My_List.qml</file>
         <file>my_components/Effects/Border_Gradient.qml</file>
         <file>my_components/Effects/Main_Gradient.qml</file>
@@ -66,10 +66,20 @@
         <file>my_components/Login_Elements/Account_With_Title.qml</file>
         <file>my_components/Back_Arrow.qml</file>
         <file>my_components/Titles.qml</file>
-        <file>my_components/Elements/Custom_Row_TextField.qml</file>
-        <file>my_components/Elements/Custom_NotificationCounter.qml</file>
         <file>my_components/Elements/Custom_Icon_Button.qml</file>
         <file>my_components/Elements/Custom_Text_With_Icon.qml</file>
-        <file>my_components/Popups/Push_Notifiaction.qml</file>
+        <file>my_components/Popups/Notifications/Counter_Notification.qml</file>
+        <file>my_components/Popups/Notifications/Notification_Popup.qml</file>
+        <file>my_components/Popups/Notifications/Push_Notifiaction.qml</file>
+        <file>my_components/Popups/Notifications/Notification_Element.qml</file>
+        <file>my_components/Popups/Notifications/Status_Indicator.qml</file>
+        <file>my_components/Elements/Rows/Custom_Row_ComboBox.qml</file>
+        <file>my_components/Elements/Rows/Custom_Row_TextField.qml</file>
+        <file>my_components/Mini_Title.qml</file>
+        <file>my_components/Elements/Custom_Picked_Block.qml</file>
+        <file>my_components/Measure/Measure_Objects.qml</file>
+        <file>my_components/Popups/Menus/ChartsScale_Model.qml</file>
+        <file>my_components/Elements/Custom_Calendar.qml</file>
+        <file>my_components/Popups/Calendar_Popup.qml</file>
     </qresource>
 </RCC>

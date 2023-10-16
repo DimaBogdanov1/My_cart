@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += quick quickcontrols2 qml sql charts core testlib widgets printsupport network opengl #positioning location
+QT += quick quickcontrols2 qml sql charts core testlib widgets printsupport network opengl  #positioning location
 
 CONFIG += c++17 qmltestcase #sdk_no_version_check
 #QMAKE_MACOSX_DEPLOYMENT_TARGET = 13.5
@@ -10,7 +10,6 @@ CONFIG += c++17 qmltestcase #sdk_no_version_check
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 #QMAKE_MAC_SDK = macosx13.5
-
 
 
 SOURCES += \

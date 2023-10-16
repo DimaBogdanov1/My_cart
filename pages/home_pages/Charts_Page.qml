@@ -12,10 +12,15 @@ import my_components 1.0
 
 
 Item{
+    id: root_Item
     width: parent.width
     height: parent.height
 
     property int zoom_Chart: 0
+
+    property int max: 100
+
+    property real tmp_offset: 5.7
 
     Column{
       width: parent.width
@@ -26,48 +31,6 @@ Item{
             width: parent.width
             height: ui.toolBar_Size //ui.iconBlock_topBar_Size + ui.top_bar_margin
             focus: true
-
-            onViser_Signal: {
-
-                if(value){
-
-                    Chart_Work.get_points_line(measure_Viser.value * 100)
-
-                }
-
-                measure_Viser.show_hide_viser(value)
-
-                viser_Line.show_hide_viserLine(value)
-
-               // viser_Anim.start()
-            }
-
-            onGrab_Signal: {
-
-                charts_Item.grabToImage(function(result) {
-                                result.saveToFile("/Users/Shared/example.png")
-                            });
-            }
-
-            onVisibleBorders_Signal: {
-
-                speed_MeasureLines.change_visible_borders(value)
-
-                level_MeasureLines.change_visible_borders(value)
-
-                riht_Left_MeasureLines.change_visible_borders(value)
-
-                riht_Right_MeasureLines.change_visible_borders(value)
-
-                sample_MeasureLines.change_visible_borders(value)
-
-                down_Left_MeasureLines.change_visible_borders(value)
-
-                down_Right_MeasureLines.change_visible_borders(value)
-
-            }
-
-
         }
 
         Rectangle {
@@ -105,7 +68,7 @@ Item{
                             spacing: ui.basic_spacing / 2
 
                             Rectangle{ // Общая Информация
-                                width: parent.width - 100 -  ui.basic_spacing / 2
+                                width: parent.width - 200 -  ui.basic_spacing
                                 radius: ui.radius
                                 height:  parent.height
                                 color: Style.background_Color
@@ -153,8 +116,36 @@ Item{
                                 }
                             }
 
+                            Custom_Rectangle_Label {
+                                width: 100
+                                height: parent.height
+                                color: Style.background_Color
+                                property real speed: 6
 
-                            Rectangle{ // Общая Информация
+                                text: speed + qsTr(" км/ч") + mytrans.emptyString
+
+                            }
+
+
+                            /*Rectangle{
+                                width: 100
+                                radius: ui.radius
+                                height:  parent.height
+                                color: Style.background_Color
+
+
+                                Custom_Text_With_Icon{
+                                  //  width: parent.width
+                                    height: parent.height
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    icon_size: 24
+                                    source: "qrc:/icons/"+ Style.theme + "/utils/battery.svg"
+                                    text: "12 км/ч"
+                                }
+                            }*/
+
+
+                            Rectangle{
                                 width: 100
                                 radius: ui.radius
                                 height:  parent.height
@@ -206,7 +197,8 @@ Item{
                                      property real spacing_value: ui.basic_spacing * 3.5 / 8
 
                                      Rectangle{ // Километр
-                                          width: parent.width * 0.05 - measure_Row.spacing_value
+                                          id: km_MeasureBlock
+                                          width: parent.width * 0.055 - measure_Row.spacing_value
                                           height:  parent.height
                                           radius: ui.radius
                                           color: Style.background_Color
@@ -221,13 +213,13 @@ Item{
 
                                      Measure_Block {
                                          id: speed_MeasureBlock
-                                         width:  parent.width * 0.125 -  measure_Row.spacing_value
+                                         width:  parent.width * 0.124 -  measure_Row.spacing_value
                                          height:  parent.height
                                          reverse: true
                                          measure_model: [0, 60, 100, 250]
                                          no_values_model: [0, 250]
-                                         x_start: 7.2
-                                         x_finish: 16.8
+                                         x_start: 1.2 //7.2 - tmp_offset
+                                         x_finish: 10.8 //16.8 - tmp_offset
                                          value: 10
                                          title: str.speed
 
@@ -245,8 +237,8 @@ Item{
                                          height:  parent.height
                                          measure_model: [-75, -35, -6, 0, 6, 35, 75]
                                          no_values_model: [-6, 6]
-                                         x_start: 19.2
-                                         x_finish: 33.3//23.8
+                                         x_start: 19.2 - 4.8
+                                         x_finish: 33.3 - 4.8
                                          value: 1
                                          title: str.level
 
@@ -259,13 +251,13 @@ Item{
 
                                      Measure_Block {
                                          id: riht_Left_MeasureBlock
-                                         width:  parent.width * 0.125 - measure_Row.spacing_value
+                                         width:  parent.width * 0.124 - measure_Row.spacing_value
                                          height:  parent.height
                                          measure_model: [-30, -3, 0, 3, 30]
                                          no_values_model: [-3, 3, 30]
                                          no_x_index: 4
-                                         x_start: 35.8
-                                         x_finish: 45.5 //41.355 // x_start + 0.17 * (level_MeasureBlock.x_finish - level_MeasureBlock.x_start) / 0.2
+                                         x_start: 35.8 - 3.95
+                                         x_finish: 45.5  - 3.95 //41.355 // x_start + 0.17 * (level_MeasureBlock.x_finish - level_MeasureBlock.x_start) / 0.2
                                          value: 1
                                          title: str.riht_Left
 
@@ -277,12 +269,12 @@ Item{
 
                                      Measure_Block {
                                          id: riht_Right_MeasureBlock
-                                         width:  parent.width * 0.125 - measure_Row.spacing_value
+                                         width:  parent.width * 0.124 - measure_Row.spacing_value
                                          height:  parent.height
                                          measure_model: [-30, -3, 0, 3, 30]
                                          no_values_model: [-30, -3, 3]
                                          no_x_index: 0
-                                         x_start: 47.9
+                                         x_start: 47.9 - 2.95
                                          x_finish: x_start + riht_Left_MeasureBlock.x_finish - riht_Left_MeasureBlock.x_start
                                          value: 1
                                          title: str.riht_Right
@@ -300,8 +292,8 @@ Item{
                                          height:  parent.height
                                          measure_model: [1510, 1512, 1520, 1538, 1546]
                                          no_values_model: [1510]
-                                         x_start: 60.8
-                                         x_finish: 73
+                                         x_start: 60.8 - 2.3
+                                         x_finish: 73 - 2.3
                                          value: 1
                                          title: str.sample
 
@@ -314,11 +306,11 @@ Item{
 
                                      Measure_Block {
                                          id: down_Left_MeasureBlock
-                                         width:  parent.width * 0.125 - measure_Row.spacing_value
+                                         width:  parent.width * 0.124 - measure_Row.spacing_value
                                          height:  parent.height
                                          measure_model: [-10, 0, 10]
-                                         x_start: 75.8
-                                         x_finish: 85.8
+                                         x_start: 75.8 - 1
+                                         x_finish: 85.8 - 1
                                          value: 8
                                          title: str.down_Left
 
@@ -331,10 +323,10 @@ Item{
 
                                      Measure_Block {
                                          id: down_Right_MeasureBlock
-                                         width:  parent.width * 0.125 - measure_Row.spacing_value
+                                         width:  parent.width * 0.124 - measure_Row.spacing_value
                                          height:  parent.height
                                          measure_model: [-10, 0, 10]
-                                         x_start: 88.2
+                                         x_start: 88.2 - 0.5
                                          x_finish: x_start + down_Left_MeasureBlock.x_finish - down_Left_MeasureBlock.x_start
                                          value: 10
                                          title: str.down_Right
@@ -364,154 +356,192 @@ Item{
                                        layer.enabled: true
                                        layer.effect: Mask_Rectangle{target: parent}
 
+                                       Row{
+                                           width: parent.width
+                                           height: parent.height
 
-                                       Item{
-                                            width: parent.width  //+ 125 //128
-                                            height: parent.height //* 0.25
-                                            clip: true
+                                           Item{
+                                                id: km_Item
+                                                width: km_MeasureBlock.width + measure_Row.spacing + 14.5
+                                                height: parent.height
+                                                clip: true
 
-                                           // rotation: 180
+                                                ChartView {
+                                                   id: km_ChartView
+                                                   x: -40
+                                                   y: -40 // -41
+                                                   width: parent.width + 70
+                                                   height: parent.height + 96 //95
+                                                   dropShadowEnabled: false
+                                                   antialiasing: true
+                                                   backgroundColor: Style.background_Color
+                                                   legend.visible:false
+                                                   plotAreaColor: Style.background_Color
 
 
-                                            ChartView {
-                                               id: chartView
-                                               x: -56
-                                               y: -32 // -41
-                                               width: parent.width + 100
-                                               height: parent.height + 71//96 //95
-                                               dropShadowEnabled: false
-                                               antialiasing: true
-                                               backgroundColor: Style.background_Color //"red"//Style.background_Color
-                                               legend.visible:false
-                                               plotAreaColor: Style.background_Color
+                                                   Measure_Km{
+                                                       id: measure_Km
 
-                                               property int y_finish: 40
+                                                       Component.onCompleted: {
 
-                                               Charts_Anim{
-                                                   id: chart_anim
-                                               }
+                                                          // km_ChartView.setAxisY(yKm_ValueAxis)
 
-                                               Measure_Km{
-                                                   id: measure_Km
-                                                   x_start: 2.5
-                                                   Component.onCompleted: {
+                                                           create_RailsLine()
 
-                                                       create_RailsLine()
+                                                         //  create_KmLine(20)
+                                                       }
 
-                                                      // create_KmLine(20)
                                                    }
 
-                                               }
-
-                                               Measure_Lines{  // Скорость
-                                                 id: speed_MeasureLines
-                                                 line_name: 6
-                                                 model: speed_MeasureBlock.x_values_model
-                                                 x_start: speed_MeasureBlock.x_start
-                                                 x_finish: speed_MeasureBlock.x_finish
-
-                                               }
 
 
-                                               Measure_Lines{  // Уровень
-                                                 id: level_MeasureLines
-                                                 line_name: 0
-                                                 model: level_MeasureBlock.x_values_model
-                                                 x_start: level_MeasureBlock.x_start
-                                                 x_finish: level_MeasureBlock.x_finish
+                                                   Component.onCompleted: {
 
-                                               }
+                                                       km_ChartView.scrollDown(20)
 
-                                               Measure_Lines{ // Рихтовка левая
-                                                 id: riht_Left_MeasureLines
-                                                 line_name: 1
-                                                 model: riht_Left_MeasureBlock.x_values_model
-                                                 no_values_model: [30]
-                                                 x_start: riht_Left_MeasureBlock.x_start
-                                                 x_finish: riht_Left_MeasureBlock.x_finish
+                                                   }
 
-                                               }
-
-                                               Measure_Lines{  // Рихтовка правая
-                                                 id: riht_Right_MeasureLines
-                                                 line_name: 2
-                                                 model: riht_Right_MeasureBlock.x_values_model
-                                                 x_start: riht_Right_MeasureBlock.x_start
-                                                 x_finish: riht_Right_MeasureBlock.x_finish
-                                               }
-
-                                               Measure_Lines{ // Шаблон
-                                                 id: sample_MeasureLines
-                                                 line_name: 3
-                                                 model: sample_MeasureBlock.x_values_model
-                                                 x_start: sample_MeasureBlock.x_start
-                                                 x_finish: sample_MeasureBlock.x_finish      
-
-                                               }
-
-                                               Measure_Lines{ // Просадка левая
-                                                 id: down_Left_MeasureLines
-                                                 line_name: 4
-                                                 model: down_Left_MeasureBlock.x_values_model
-                                                 x_start: down_Left_MeasureBlock.x_start
-                                                 x_finish: down_Left_MeasureBlock.x_finish
-
-                                               }
-
-                                               Measure_Lines{ // Просадка правая
-                                                 id: down_Right_MeasureLines
-                                                 line_name: 5
-                                                 model: down_Right_MeasureBlock.x_values_model
-                                                 x_start: down_Right_MeasureBlock.x_start
-                                                 x_finish: down_Right_MeasureBlock.x_finish
-                                               }
-
-                                               Measure_ViserLine{
-                                                   id: viser_Line
-
-                                               }
+                                                }
+                                           }
 
 
-                                               // Создаём Границы По X Для Нашего Графика
-                                               ValueAxis {
-                                                  id: x_ValueAxis
-                                                  min: 0
-                                                  max: 100
-                                                  tickType: ValueAxis.TicksDynamic
-                                                  tickInterval: 10
-                                                  labelFormat: "%i" // Делаем int Значения
-                                                  color: Style.light_Color
-                                                  gridLineColor: Style.light_Color  // Цвет Сетки
-                                                 // labelsColor: Style.primaryDark_Color // Цвет Чисел
-                                                 // labelsAngle: 90
-                                                 //labelsVisible: false
 
-                                                 // labelsFont: test_label.font// Копируем Шрифт С Вспомогательного Label
-                                                  labelsFont:Qt.font({pointSize: 1})
+                                           Item{
+                                                width: parent.width - km_Item.width
+                                                height: parent.height
+                                                clip: true
 
-                                               }
+                                                ChartView {
+                                                   id: chartView
+                                                   x: -56
+                                                   y: -34 // -41
+                                                   width: parent.width + 100
+                                                   height: parent.height + 75//96 //95
+                                                   dropShadowEnabled: false
+                                                   antialiasing: true
+                                                   backgroundColor: Style.background_Color //"red"//Style.background_Color
+                                                   legend.visible:false
+                                                   plotAreaColor: Style.background_Color
 
-                                               // Создаём Границы По Y Для Нашего Графика
-                                               ValueAxis {
-                                                  id: y_ValueAxis
-                                                  min: 0
-                                                  max: 100
-                                                  tickType: ValueAxis.TicksFixed
-                                                  tickInterval: 10
-                                                  reverse: true
+                                                   property int y_finish: 40
 
-                                                  labelsVisible: false
-                                                  labelFormat: "%i" // Делаем int Значения
-                                                  color: Style.light_Color //"#d0d0d0"//Style.light_Color //Style.secondaryText_Color
-                                                  gridLineColor: Style.light_Color //  "#d0d0d0"//Style.light_Color// Style.secondaryText_Color // Цвет Сетки
-                                                  //labelsColor: Style.primaryDark_Color
-                                                  labelsFont:Qt.font({pointSize: 1})
-                                               }
+                                                   Charts_Anim{
+                                                       id: chart_anim
+                                                   }
 
+                                                   Measure_Lines{  // Скорость
+                                                     id: speed_MeasureLines
+                                                     line_name: 6
+                                                     model: speed_MeasureBlock.x_values_model
+                                                     x_start: speed_MeasureBlock.x_start
+                                                     x_finish: speed_MeasureBlock.x_finish
+
+                                                   }
+
+
+                                                   Measure_Lines{  // Уровень
+                                                     id: level_MeasureLines
+                                                     line_name: 0
+                                                     model: level_MeasureBlock.x_values_model
+                                                     x_start: level_MeasureBlock.x_start
+                                                     x_finish: level_MeasureBlock.x_finish
+
+                                                   }
+
+                                                   Measure_Lines{ // Рихтовка левая
+                                                     id: riht_Left_MeasureLines
+                                                     line_name: 1
+                                                     model: riht_Left_MeasureBlock.x_values_model
+                                                     no_values_model: [30]
+                                                     x_start: riht_Left_MeasureBlock.x_start
+                                                     x_finish: riht_Left_MeasureBlock.x_finish
+
+                                                   }
+
+                                                   Measure_Lines{  // Рихтовка правая
+                                                     id: riht_Right_MeasureLines
+                                                     line_name: 2
+                                                     model: riht_Right_MeasureBlock.x_values_model
+                                                     x_start: riht_Right_MeasureBlock.x_start
+                                                     x_finish: riht_Right_MeasureBlock.x_finish
+                                                   }
+
+                                                   Measure_Lines{ // Шаблон
+                                                     id: sample_MeasureLines
+                                                     line_name: 3
+                                                     model: sample_MeasureBlock.x_values_model
+                                                     x_start: sample_MeasureBlock.x_start
+                                                     x_finish: sample_MeasureBlock.x_finish
+
+                                                   }
+
+                                                   Measure_Lines{ // Просадка левая
+                                                     id: down_Left_MeasureLines
+                                                     line_name: 4
+                                                     model: down_Left_MeasureBlock.x_values_model
+                                                     x_start: down_Left_MeasureBlock.x_start
+                                                     x_finish: down_Left_MeasureBlock.x_finish
+
+                                                   }
+
+                                                   Measure_Lines{ // Просадка правая
+                                                     id: down_Right_MeasureLines
+                                                     line_name: 5
+                                                     model: down_Right_MeasureBlock.x_values_model
+                                                     x_start: down_Right_MeasureBlock.x_start
+                                                     x_finish: down_Right_MeasureBlock.x_finish
+                                                   }
+
+                                                   Measure_ViserLine{
+                                                       id: viser_Line
+
+                                                   }
+
+
+                                                   // Создаём Границы По X Для Нашего Графика
+                                                   ValueAxis {
+                                                      id: x_ValueAxis
+                                                      min: 0
+                                                      max: 100
+                                                      tickType: ValueAxis.TicksDynamic
+                                                      tickInterval: 10
+                                                      labelFormat: "%i" // Делаем int Значения
+                                                      color: Style.light_Color
+                                                      gridLineColor: Style.light_Color  // Цвет Сетки
+                                                     // labelsColor: Style.primaryDark_Color // Цвет Чисел
+                                                     // labelsAngle: 90
+                                                     //labelsVisible: false
+
+                                                     // labelsFont: test_label.font// Копируем Шрифт С Вспомогательного Label
+                                                      labelsFont:Qt.font({pointSize: 1})
+
+                                                   }
+
+                                                   // Создаём Границы По Y Для Нашего Графика
+                                                   ValueAxis {
+                                                      id: y_ValueAxis
+                                                      min: 0
+                                                      max: root_Item.max
+                                                      tickType: ValueAxis.TicksFixed
+                                                      tickInterval: 10
+                                                      reverse: true
+
+                                                      labelsVisible: false
+                                                      //labelFormat: "%i" // Делаем int Значения
+                                                      //color: "red" //Style.light_Color //"#d0d0d0"//Style.light_Color //Style.secondaryText_Color
+                                                      gridLineColor: Style.light_Color //  "#d0d0d0"//Style.light_Color// Style.secondaryText_Color // Цвет Сетки
+                                                      //labelsColor: Style.primaryDark_Color
+                                                      labelsFont:Qt.font({pointSize: 1})
+                                                   }
+
+
+                                                }
 
                                             }
 
-                                        }
+
+                                       }
+
 
 
                                        Rectangle {
@@ -830,7 +860,14 @@ Item{
 
                                          // sample_MeasureLines.add_area(10, 1, 20, 5)
 
-                                          chartView.zoom(2)
+                                          y_ValueAxis.max = 200
+
+
+                                       //   chartView.zoomIn(Qt.rect(0, 0, charts_Item.width, charts_Item.height))
+
+                                     //     chartView.zoomIn(Qt.rect(0, 0, charts_Item.width, 300))
+
+                                          //chartView.zoom(2)
 
                                       }
 
@@ -844,7 +881,9 @@ Item{
                                       onClicked: {
 
 
-                                          chartView.zoomReset()
+                                          y_ValueAxis.max = 100
+
+                                         // chartView.zoomReset()
                                           //main_ChartView.zoom(1)
 
                                       }
@@ -868,12 +907,16 @@ Item{
                                   Button{
                                       width: 100
                                       height: parent.height
-                                      text:  qsTr("->") + mytrans.emptyString
+                                      text:  qsTr("down km chart") + mytrans.emptyString
                                       onClicked: {
+
+                                          km_ChartView.scrollDown(20)
+
+                                          //my_pdf.print_pdf()
 
                                         //  chartView.scrollRight(100)
 
-                                          viser_Line.update_ViserLine(50)
+                                        //  viser_Line.update_ViserLine(50)
 
 
                                       }

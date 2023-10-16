@@ -21,6 +21,7 @@ ToolTip {
             id: label
             text: toolTip.text
             needBorder: true
+            margin_text: 32
 
             onWidthChanged: {
 

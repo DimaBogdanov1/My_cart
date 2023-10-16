@@ -136,7 +136,7 @@ Item {
                       onClicked_Signal: {
 
                           push_Notification.open()
-                       //   opacity_Anim.create_page_anim(5)  // Переходим В Справку
+                         // opacity_Anim.create_page_anim(5)  // Переходим В Справку
 
                       }
                   }
@@ -238,6 +238,11 @@ Item {
                id: push_Notification
            }
 
+           Calendar_Popup{
+
+              // Component.onCompleted: open()
+           }
+
            /*Custom_Border{
                anchors.right: parent.rights
                width: ui.border_Size
@@ -264,10 +269,8 @@ Item {
 
                 onSourceChanged: {
 
-                    if(keyboard.on_keyboard){
+                    keyboard.check_close()
 
-                        keyboard.close()
-                    }
                 }
             }
 

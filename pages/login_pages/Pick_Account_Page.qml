@@ -63,9 +63,9 @@ Item {
 
         ListView{
            id: list
-           width: list.count * 130 > applicationWindow.width ? parent.width : list.count * 130
+           width:  list.count * 130 + (ui.big_spacing * (list.count - 1)) //list.count * 130 > applicationWindow.width ? parent.width : list.count * 130
            height: ui.height_Button * 2 + ui.middle_spacing + ui.text_SmallSize
-           interactive: list.count * 130 > applicationWindow.width
+           interactive:  false//list.count * 130 > applicationWindow.width
            model: ListModel{id: account_model}
 
            snapMode: ListView.SnapToItem
@@ -73,7 +73,7 @@ Item {
 
            currentIndex: 0
            anchors.horizontalCenter: parent.horizontalCenter
-           spacing: ui.basic_spacing
+           spacing: ui.big_spacing
            orientation: ListView.Horizontal
 
            property bool isScrolling

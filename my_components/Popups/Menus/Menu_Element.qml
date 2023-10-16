@@ -14,6 +14,8 @@ Item{
 
     property bool checked
 
+    property bool onlyTrueCheck: false
+
     property string source
 
     property string unchecked_source: "qrc:/icons/" + Style.theme + "/top_bar/check_off.svg"
@@ -36,7 +38,11 @@ Item{
 
             if(checked){
 
-                checked = false
+                if(!onlyTrueCheck){
+
+                    checked = false
+
+                }
             }
             else{
 

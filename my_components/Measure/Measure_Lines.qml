@@ -157,6 +157,10 @@ LineSeries {
 
        series.style =  style_line
 
+       series.capStyle = Qt.RoundCap
+
+       series.joinStyle =  Qt.RoundJoin
+
        if(series.style === Qt.DotLine){
 
            series.opacity = 0.4

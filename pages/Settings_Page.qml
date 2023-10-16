@@ -20,35 +20,24 @@ Item {
             color: Style.light_Color
 
             Column{
-                width: parent.width  - ui.big_spacing
-                height: parent.height - ui.big_spacing
+                width: parent.width // - ui.big_spacing
+                height: parent.height //- ui.big_spacing
+                anchors.centerIn: parent
                 spacing: ui.basic_spacing
 
-                Custom_Rectangle_Label{
-                    width: parent.width
-                    needBack: false
-                    horizontal: Text.AlignLeft
-                    vertical: Text.AlignTop
-                    text: qsTr("Общие настройки") + mytrans.emptyString
-
+                Custom_Picked_Block{
+                    source:  "qrc:/icons/" + Style.theme + "/utils/lock.svg"
+                    text:  qsTr("Общие настройки") + mytrans.emptyString
                 }
 
-                Custom_Rectangle_Label{
-                    width: parent.width
-                    needBack: false
-                    horizontal: Text.AlignLeft
-                    vertical: Text.AlignTop
+                Custom_Picked_Block{
+                    source:  "qrc:/icons/" + Style.theme + "/utils/lock.svg"
                     text: qsTr("Программируема кнопка") + mytrans.emptyString
-
                 }
 
-                Custom_Rectangle_Label{
-                    width: parent.width
-                    needBack: false
-                    horizontal: Text.AlignLeft
-                    vertical: Text.AlignTop
+                Custom_Picked_Block{
+                    source:  "qrc:/icons/" + Style.theme + "/utils/lock.svg"
                     text: qsTr("Мастер") + mytrans.emptyString
-
                 }
 
                 Custom_Rectangle_Label{

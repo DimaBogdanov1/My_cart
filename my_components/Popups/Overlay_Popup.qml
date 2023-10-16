@@ -8,7 +8,7 @@ Item {
    Rectangle{
        anchors.fill: parent
        color: Style.primaryDark_Color
-       opacity: 0.5
+       opacity: 0.02
    }
 
 

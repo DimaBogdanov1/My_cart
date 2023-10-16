@@ -8,6 +8,7 @@
 #include <QPdfWriter>
 #include <QPainter>
 #include <QPrintDialog>
+#include <measures/chart_work.h>
 
 
 #include <QNetworkRequest>
@@ -103,6 +104,17 @@ void My_pdf::slotReadClient()
 
 void My_pdf::print_pdf()
 {
+
+    Chart_Work* a = new Chart_Work();
+
+    QThread *thread = new QThread;
+
+    a->moveToThread(thread);
+
+    connect(thread, SIGNAL(started()), a, SLOT(openCSV()));
+
+    thread->start();
+
 
    // QPrinter printer;
     //printer.setOutputFileName("/Users/Shared/example.pdf");

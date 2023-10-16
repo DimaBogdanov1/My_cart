@@ -10,7 +10,7 @@ Item{
 
     property int radius: ui.radius //ui.radius_Button
 
-    property int margin_text: 32
+    property int margin_text: 0
 
     property bool needBorder
 
@@ -32,6 +32,7 @@ Item{
 
     property int font_weight: ui.font_weight_Smallsize
 
+   property int wrap: Text.NoWrap
 
     width: label.paintedWidth + margin_text
     height: label.paintedHeight + margin_text / 2
@@ -56,6 +57,7 @@ Item{
         font.weight:  root_Item.font_weight
         font.family: root_Item.font_family
         font.pixelSize: root_Item.pixel_size
+        wrapMode: root_Item.wrap
         text: root_Item.text
         color: root_Item.text_color
 

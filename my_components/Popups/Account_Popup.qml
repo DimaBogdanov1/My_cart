@@ -8,8 +8,6 @@ import my_components 1.0
 Popup {
     id: popup
 
-   // property int count: 4
-
     readonly property real height_block: account_withTitle.height + 10 + ui.height_Button +  ui.middle_spacing * 2 + ui.big_spacing
 
     readonly property real width_block: height_block * ui.block_ratio

@@ -31,7 +31,7 @@ ApplicationWindow {
 
     Flipable_Page{
         id: flipable_Page
-        front_source: "../App_Page.qml" // "qrc:/pages/Login_Page.qml"
+        front_source: "../App_Page.qml" //"qrc:/pages/Login_Page.qml"
         back_source: ""
         flipped: applicationWindow.flipped
     }

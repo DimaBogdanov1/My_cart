@@ -30,24 +30,11 @@ Column{
         return textField
     }
 
-    Custom_Rectangle_Label{
+    Mini_Title{
         id: title_Block
-        height:  ui.text_miniSize
-        horizontal: Text.AlignLeft
-        needBack: false
-        pixel_size: ui.text_miniSize
-       // color: 'red'
-
         text: root_Column.title
 
-        anchors {
-
-            left: parent.left
-            leftMargin:  10 //ui.basic_spacing //2
-
-        }
     }
-
 
     TextField {
         id: textField

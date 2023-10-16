@@ -6,15 +6,21 @@ Item{
 
     property alias themes: themes
 
+    property string theme: "light_theme"
+
     function change_theme(dark_mode){
 
         if(!dark_mode){
 
             currentTheme = themes.light_theme // Включаем Светлую Тему
+
+          //  theme = "light_theme"
         }
         else{
 
             currentTheme = themes.dark_theme // Включаем Тёмную Тему
+
+          //  theme = "dark_theme"
 
         }
     }
@@ -28,7 +34,7 @@ Item{
     readonly property string yellow_Color: "#F69F22"
 
 
-    readonly property string light_grey: "#121212" //#010219
+    readonly property string light_grey:  "#010219" //"#121212" //#010219
 
     readonly property string light_blue: "#777DE8"
 
@@ -110,9 +116,10 @@ Item{
 
     property var currentTheme: themes.test_dark_theme // Переменная Для Хранения Текущей Темы Приложения
 
+    readonly property string warning_Color: "#FFA300"
 
 
-    property string theme: "light_theme"
+
 
     // #f794a4 → #fdd6bd
     // #ec6f66 → #f3a183 #ff5f6d → #ffc371 #2193b0 #6dd5ed    ( FE8373 FBE99D ) ("#ffafbd" , "#ffc3a0")
@@ -143,7 +150,6 @@ Item{
 
 
     readonly property string warningBackground_Color: "#ffeecb" //"#fff6ca" // Цвет Фона Для Предупредительного Действия
-    readonly property string warning_Color: "#9f7c44" //"#afa56f" // Цвет Фона Для Предупредительного Действия
 
     readonly property string errorBackground_Color:  "#ffd5df" // Цвет Фона Для Ошибочного Действия
     readonly property string error_Color: "#c7516b" // Цвет Для Ошибочного Действия

@@ -6,199 +6,218 @@ import QtGraphicalEffects 1.15
 import Style 1.0
 import my_components 1.0
 
-ComboBox {
-    id:equipmentList
+
+Column{
+    id: root_Column
     width: parent.width
-    height: parent.height
-    currentIndex: 0
+    height: ui.block_height
+    spacing: ui.basic_spacing / 2
 
-    signal clicked_Signal
+    //signal currentIndexChanged
 
-    property string openIcon
-    property string closeIcon
+    property string title
 
     property string color: Style.accent_Color
 
-    model: root_Item.model
+    property var model
 
-    contentItem: Custom_Label {
-           anchors.left: parent.left
-           anchors.leftMargin: ui.basic_spacing
-           text: equipmentList.displayText
-       }
+    property int currentIndex: equipmentList.currentIndex
 
-     background: Item {
-         width: parent.width
-         height: parent.height
 
-         Highlight_Glow{id: glow; target: back_Rectangle;}
+    Mini_Title{
+        id: title_Block
+        text: root_Column.title
 
-         Rectangle {
-            id:back_Rectangle
-            width: parent.width
-            height: parent.height
-            color: Style.background_Color
-            radius: ui.radius
+    }
 
-            Hover_Anim{
+    ComboBox {
+        id:equipmentList
+        width: parent.width
+        height: ui.height_Button
+        model: root_Column.model
+        currentIndex: 0
+
+
+        contentItem: Custom_Label {
+               anchors.left: parent.left
+               anchors.leftMargin: ui.basic_spacing
+               text: equipmentList.displayText
+           }
+
+         background: Item {
+             width: parent.width
+             height: parent.height
+
+             Highlight_Glow{id: glow; target: back_Rectangle;}
+
+             Rectangle {
+                id:back_Rectangle
                 width: parent.width
                 height: parent.height
-                outlined: true
-                color: equipmentList.color
+                color: Style.background_Color
+                radius: ui.radius
 
-                onClicked_Signal: {
+                Hover_Anim{
+                    width: parent.width
+                    height: parent.height
+                    outlined: true
+                    color: root_Column.color
 
-                    //equipmentList.currentIndex = index
+                    onClicked_Signal: {
 
-                    popup.open()
-                   // root_Item.clicked_Signal()
+                        //equipmentList.currentIndex = index
 
+                        popup.open()
+                       // root_Item.clicked_Signal()
+
+                    }
+
+                    onHover_Signal: {
+
+                        glow.change_glow(value)
+
+                    }
                 }
 
-                onHover_Signal: {
 
-                    glow.change_glow(value)
-
-                }
-            }
-
+             }
 
          }
 
-     }
 
+         delegate: ItemDelegate {
+              width: equipmentList.width
+              height: ui.height_RowList
 
-     delegate: ItemDelegate {
-          width: equipmentList.width
-          height: ui.height_RowList
+              Hover_Anim{
+                  id: hover_Anim
+                  width: parent.width - ui.basic_spacing
+                  height: parent.height
+                  outlined: true
+                  color: root_Column.color
 
-          Hover_Anim{
-              id: hover_Anim
-              width: parent.width - ui.basic_spacing
-              height: parent.height
-              outlined: true
-              color: equipmentList.color
+                  onClicked_Signal: {
 
-              onClicked_Signal: {
+                      equipmentList.currentIndex = index
 
-                  equipmentList.currentIndex = index
-
-                  popup.close()
-                 // root_Item.clicked_Signal()
-
-              }
-          }
-
-          Custom_Label{
-              id:textItem
-              text: modelData
-              anchors.left: parent.left
-              anchors.leftMargin: ui.basic_spacing
-
-          }
-
-          List_Highlight{
-              id: highlight
-              width: 12 //parent.width - ui.big_spacing / 2
-              height: parent.height //parent.height // - ui.basic_spacing / 2
-              anchors.right: parent.right
-              anchors.rightMargin: ui.basic_spacing * 1.5
-              opacity: 0
-
-              Component.onCompleted: {
-
-                  if(equipmentList.currentIndex === index){
-
-                      highlight.open_highlight()
+                      popup.close()
 
                   }
               }
-          }
+
+              Custom_Label{
+                  id:textItem
+                  text: modelData
+                  anchors.left: parent.left
+                  anchors.leftMargin: ui.basic_spacing
+
+              }
+
+              List_Highlight{
+                  id: highlight
+                  width: 12 //parent.width - ui.big_spacing / 2
+                  height: parent.height //parent.height // - ui.basic_spacing / 2
+                  anchors.right: parent.right
+                  anchors.rightMargin: ui.basic_spacing * 1.5
+                  opacity: 0
+
+                  Component.onCompleted: {
+
+                      if(equipmentList.currentIndex === index){
+
+                          highlight.open_highlight()
+
+                      }
+                  }
+              }
 
 
 
 
-       }
+           }
 
-     indicator: Custom_Icon{
+         indicator: Custom_Icon{
 
-             anchors{
-                right: parent.right
-                rightMargin: ui.basic_spacing / 2
-                verticalCenter: parent.verticalCenter
-                centerIn: null
-             }
-               rotation: -90
-             source: "qrc:/icons/light_theme/top_bar/arrow_left.svg"
-       }
+                 anchors{
+                    right: parent.right
+                    rightMargin: ui.basic_spacing / 2
+                    verticalCenter: parent.verticalCenter
+                    centerIn: null
+                 }
+                   rotation: -90
+                 source: "qrc:/icons/light_theme/top_bar/arrow_left.svg"
+           }
 
-       popup: Popup {
-             id:popup
-             //y: equipmentList.height + 4
-             width: equipmentList.width
-             height: contentItem.implicitHeigh
-            // clip: true
-            // modal: true
-             padding: ui.basic_spacing / 2
+           popup: Popup {
+                 id:popup
+                 //y: equipmentList.height + 4
+                 width: equipmentList.width
+                 height: contentItem.implicitHeigh
+                // clip: true
+                 modal: true
+                 padding: ui.basic_spacing / 2
 
-             enter: popups_Anim.get_enter()
+                 enter: popups_Anim.get_enter()
 
-             exit: popups_Anim.get_exit()
+                 exit: popups_Anim.get_exit()
 
-          //   Overlay.modal:  Overlay_Popup {}
+                 Overlay.modal:  Overlay_Popup {}
 
-             background:         Item{
-                 width: parent.width
-                 height: parent.height
+                 background:         Item{
+                     width: parent.width
+                     height: parent.height
 
-                 Highlight_Glow{target: bg_Rectangle; shadow: true}
+                   //  Highlight_Glow{target: bg_Rectangle; shadow: true}
 
-                 Rectangle {
-                      id: bg_Rectangle
-                      width: parent.width
-                      height: parent.height
-                      radius: ui.radius
-                      color: Style.background_Color
+                     Rectangle {
+                          id: bg_Rectangle
+                          width: parent.width
+                          height: parent.height
+                          radius: ui.radius
+                          color: Style.background_Color
 
-                      layer.enabled: true
-                      layer.effect: Mask_Rectangle{target: parent}
+                          layer.enabled: true
+                          layer.effect: Mask_Rectangle{target: parent}
+
+                     }
 
                  }
 
-             }
+                 closePolicy: Popup.CloseOnEscape | Popup.CloseOnReleaseOutsideParent
 
-             closePolicy: Popup.CloseOnEscape | Popup.CloseOnReleaseOutsideParent
-
-             contentItem:  Item {
-                width: parent.width //- ui.big_spacing / 2
-                height: parent.height //- 50 //ui.basic_spacing / 2
+                 contentItem:  Item {
+                    width: parent.width //- ui.big_spacing / 2
+                    height: parent.height //- 50 //ui.basic_spacing / 2
 
 
-                ListView {
-                     id:listView
-                     width: parent.width //- ui.big_spacing /// 2
-                      height: parent.height
-                     anchors.centerIn: parent
-                     property int max_elements: 8
-                     implicitHeight: equipmentList.delegateModel.count * ui.height_RowList //equipmentList.delegateModel.count > max_elements ? ui.height_Button * max_elements : equipmentList.delegateModel.count * ui.height_Button
-                     model: equipmentList.popup.visible ? equipmentList.delegateModel : null
+                    ListView {
+                         id:listView
+                         width: parent.width //- ui.big_spacing /// 2
+                          height: parent.height
+                         anchors.centerIn: parent
+                         property int max_elements: 8
+                         implicitHeight: equipmentList.delegateModel.count * ui.height_RowList //equipmentList.delegateModel.count > max_elements ? ui.height_Button * max_elements : equipmentList.delegateModel.count * ui.height_Button
+                         model: equipmentList.popup.visible ? equipmentList.delegateModel : null
+
+
+                     }
 
 
                  }
 
 
+
+
              }
 
+           Popups_Anim{
+               id: popups_Anim
+
+           }
 
 
 
-         }
-
-       Popups_Anim{
-           id: popups_Anim
-
-       }
-
-
+    }
 
 }
+

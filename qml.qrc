@@ -22,7 +22,7 @@
         <file>pages/Calib_Page.qml</file>
         <file>pages/History_Page.qml</file>
         <file>pages/Settings_Page.qml</file>
-        <file>pages/home_pages/Start_Task_Page.qml</file>
+        <file>pages/home_pages/Task_Page.qml</file>
         <file>pages/home_pages/Charts_Page.qml</file>
         <file>icons/light_theme/navigation/add.svg</file>
         <file>icons/light_theme/navigation/home.svg</file>
@@ -79,8 +79,12 @@
         <file>icons/light_theme/utils/moon.svg</file>
         <file>icons/light_theme/utils/sun.svg</file>
         <file>icons/light_theme/utils/battery.svg</file>
-        <file>pages/home_pages/start_task_pages/Basic_Task_Page.qml</file>
         <file>icons/light_theme/utils/close.svg</file>
-        <file>pages/home_pages/start_task_pages/Custom_Task_Page.qml</file>
+        <file>pages/home_pages/task_pages/start_task_pages/Basic_Task_Page.qml</file>
+        <file>pages/home_pages/task_pages/start_task_pages/Custom_Task_Page.qml</file>
+        <file>pages/home_pages/task_pages/Finish_Task_Page.qml</file>
+        <file>pages/home_pages/task_pages/Start_Task_Page.qml</file>
+        <file>icons/light_theme/top_bar/zoom_in.svg</file>
+        <file>icons/light_theme/top_bar/marking.svg</file>
     </qresource>
 </RCC>

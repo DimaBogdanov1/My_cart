@@ -16,24 +16,23 @@ Item {
         width: parent.width
         height: parent.height
 
-       /* Loader{
+       Loader{
             id: homePage_Loader
-            property int index_Page: -1
 
             readonly property var sourcePages_Array: [
                                                        "../pages/home_pages/Drop_db_Page.qml",
-                                                       "../pages/home_pages/Start_Task_Page.qml",
+                                                       "../pages/home_pages/Task_Page.qml",
                                                        "../pages/home_pages/Charts_Page.qml"
                                                     ]
             width: parent.width
             height: parent.height
-            source: sourcePages_Array[index_Page]
-            Component.onCompleted: index_Page =  0 //1 //source = sourcePages_Array[index_Page]
+            source: sourcePages_Array[sub_index_HomePage]
+            Component.onCompleted: sub_index_HomePage =  2//1 //source = sourcePages_Array[index_Page]
 
-        }*/
+        }
 
 
-        SwipeView {
+        /*SwipeView {
             id: main_SwipeView
             width: parent.width
             height: parent.height
@@ -56,7 +55,7 @@ Item {
                  Loader{
                      width: parent.width
                      height: parent.height
-                     Component.onCompleted: source = "../pages/home_pages/Start_Task_Page.qml"
+                     Component.onCompleted: source = "../pages/home_pages/Task_Page.qml"
 
                  }
              }
@@ -73,7 +72,7 @@ Item {
 
 
 
-        }
+        }*/
 
 
 

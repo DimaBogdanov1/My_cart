@@ -11,7 +11,7 @@ Popup {
 
     readonly property real height_block: ui.height_Button * 2.5
 
-    property string text: "Уведомление бла бла блаsadsadsadsaddddddddddddddddddddddddd ddddddddddd....."
+    property string text: "До окончания срока юстировки осталось 29 дней!"
 
     y: parent.height - ui.basic_spacing -  height_block//+ ui.basic_spacing
 
@@ -58,25 +58,70 @@ Popup {
                  anchors.centerIn: parent
                  spacing: ui.basic_spacing
 
-                 Item{
+                 Column{
                      width: parent.width - ui.icon_nav_size - ui.basic_spacing
                      height: parent.height
-                     clip: true
+                     spacing: ui.basic_spacing / 2
 
-                     Custom_Label{
-                            id: label
-                            width: parent.width - ui.icon_nav_size - ui.basic_spacing
-                            height: parent.height
-                           // horizontalAlignment: root_Item.horizontal
-                           // verticalAlignment: root_Item.vertical
-                           // font.weight:  root_Item.font_weight
-                           // font.family: root_Item.font_family
-                           // font.pixelSize: root_Item.pixel_size
-                            wrapMode: Text.WordWrap
-                            text: popup.text
-                         //   color: root_Item.text_color
+                     Row{
+                         width: parent.width - ui.icon_nav_size - ui.basic_spacing
+                         height: parent.height * 0.3
+                         spacing: ui.basic_spacing
+
+                         Custom_Rectangle_Label {
+                             height: parent.height
+                             needBack: false
+                             //pixel_size: ui.text_BigSize
+                             font_weight:  ui.font_weight_Bigsize
+                             font_family: customTitle_FontLoader.name
+
+                             horizontal: Text.AlignLeft
+                             text: qsTr("Уведомление") + mytrans.emptyString
+
+                         }
+
+                         Status_Indicator{
+
+                         }
+
                      }
+
+                     Custom_Rectangle_Label {
+                         width: parent.width - ui.icon_nav_size - ui.basic_spacing
+                         height: parent.height * 0.7 - ui.basic_spacing / 2
+                         wrap: Text.WordWrap
+                         horizontal: Text.AlignLeft
+                         vertical: Text.AlignTop
+
+                         clip: true
+                         needBack: false
+                         text: popup.text
+                     }
+
+
+
+                    /* Item{
+                         width: parent.width - ui.icon_nav_size - ui.basic_spacing
+                         height: parent.height * 0.7
+                         clip: true
+
+                         Custom_Label{
+                                id: label
+                                width: parent.width - ui.icon_nav_size - ui.basic_spacing
+                                height: parent.height
+                               // horizontalAlignment: root_Item.horizontal
+                               // verticalAlignment: root_Item.vertical
+                               // font.weight:  root_Item.font_weight
+                               // font.family: root_Item.font_family
+                               // font.pixelSize: root_Item.pixel_size
+                                wrapMode: Text.WordWrap
+                                text: popup.text
+                             //   color: root_Item.text_color
+                         }
+                     }*/
+
                  }
+
 
                  Custom_Icon_Button{
                      height: parent.height

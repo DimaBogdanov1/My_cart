@@ -35,16 +35,36 @@ Item {
 
             keyboard_Anim.up_content()
 
-
         }
 
     }
 
     function close(){
 
+        text_target.focus = false
+
         keyboard_Anim.down_content()
 
     }
+
+    function check_close(){
+
+        if(on_keyboard){
+
+            close()
+        }
+    }
+
+    enum Actions {
+           Change_Language,
+           Add_Dot,
+           Add_Space,
+           Enter,
+           Change_Caps,
+           Delete_Symbol,
+           Add_Dot_Number,
+           Check_Sign
+       }
 
     Keyboard_Anim{
         id: keyboard_Anim
@@ -63,6 +83,11 @@ Item {
             width: parent.width
             height:  parent.height
 
+            Flickable{
+                width: parent.width
+                height:  parent.height
+            }
+
             //Highlight_Glow{target: bg_Rectangle; shadow: true; glowRadius: 1}
 
             Rectangle {
@@ -73,6 +98,13 @@ Item {
                 color: Style.light_Color
                 radius: ui.radius
 
+                Rectangle { // Создаём Блок Для Того ЧТобы Скругления Были Только С Одной Стороны
+                    width: parent.width
+                    height: parent.height / 2
+                    anchors.bottom: parent.bottom
+                    color: bg_Rectangle.color
+
+                }
             }
         }
 
@@ -83,6 +115,14 @@ Item {
             width: parent.width
             height: parent.height
             source: on_keyboard ? (number ? "qrc:/my_components/Keyboards/Keyboard_Number.qml" : "qrc:/my_components/Keyboards/Keyboard_Letter.qml") : ""
+
+            onLoaded: {
+
+                if(on_keyboard){
+
+
+                }
+            }
 
             onSourceChanged: {
 

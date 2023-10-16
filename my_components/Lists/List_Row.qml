@@ -117,7 +117,6 @@ Item{
 
                         width: parent.width * root_Item.sizes[index]
                         height: parent.height
-                        margin_text: 0
                         needBack: false
                         horizontal: Text.AlignLeft
                         text: modelData

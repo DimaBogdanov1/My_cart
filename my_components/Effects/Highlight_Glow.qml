@@ -10,7 +10,7 @@ RectangularGlow {
     property bool shadow
 
     anchors.fill: target
-    glowRadius: 8
+    glowRadius: shadow ? 1 : 8
     spread: 0 //0.02
     color: shadow ? Style.primaryDark_Color : Style.accent_Color
     opacity: shadow ? 1 : 0

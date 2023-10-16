@@ -10,26 +10,11 @@ Item {
 
     property int time_Anim: 250
 
-    function create_right_x_anim(){
+    function create_x_anim(value){
 
         x_Anim.from = animation_target.x
 
-        x_Anim.to = 0
-
-        start_anim()
-    }
-
-
-    function create_left_x_anim(){
-
-        x_Anim.from = animation_target.x
-
-        x_Anim.to = animation_target.width
-
-        start_anim()
-    }
-
-    function start_anim(){
+        x_Anim.to = value
 
         x_Anim.stop()
 

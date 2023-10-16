@@ -1,0 +1,227 @@
+import QtQuick 2.15
+import QtQuick.Window 2.15
+import QtQuick.Controls 2.15
+import QtCharts 2.15
+import QtQuick.Dialogs 1.0
+import QtQuick.Layouts 1.15
+
+import Style 1.0
+import MyLang 1.0
+import my_components 1.0
+
+
+Item{
+    id: root_Item
+    width: parent.width
+    height: parent.height
+
+    property int index_Page: 0 //-1
+
+    readonly property var sourcePages_Array: [
+                                               "../task_pages/start_task_pages/Basic_Task_Page.qml",
+                                               "../task_pages/start_task_pages/Custom_Task_Page.qml",
+                                            ]
+    Rectangle {
+        id: page
+        width: parent.width
+        height: parent.height
+        color: Style.background_Color
+
+        Column{
+            width: parent.width //- ui.big_spacing
+            height: parent.height
+
+            Item{
+                width: parent.width
+                height: ui.toolBar_Size
+
+                Custom_Tabs{
+                    id: tabs
+                    width:  800
+                    anchors.centerIn: parent
+                    model: [qsTr("Маршрут из базы данных") + mytrans.emptyString, qsTr("Пользовательский маршрут") + mytrans.emptyString]
+
+                    onIndexChanged: {
+
+                        index_Page = index
+
+                    }
+                }
+            }
+
+            SwipeView{
+                id: stackLayout
+                width: parent.width
+                height: parent.height - ui.toolBar_Size
+                currentIndex: index_Page
+
+                onCurrentIndexChanged: {
+
+                   tabs.index = currentIndex
+
+                    keyboard.check_close()
+
+                }
+
+                   Item {
+
+                       Loader{
+                           width: parent.width
+                           height: parent.height
+                           Component.onCompleted: source =  sourcePages_Array[0]
+                       }
+                   }
+
+                   Item {
+
+                       Loader{
+                           width: parent.width
+                           height: parent.height
+                           Component.onCompleted: source =  sourcePages_Array[1]
+                       }
+                   }
+
+
+            }
+
+
+        }
+
+
+
+    }
+
+    Rectangle{
+        width: 200
+        height: 600
+        //color: "orange"
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+
+        Column{ // Создаём Основную Колонку
+            width: parent.width
+            height: parent.height - 24
+            //anchors.centerIn: parent
+            spacing: 16 //ui.basic_spacing * 2
+
+            Custom_Button{
+                width: 200
+                 outlined: true
+                anchors.horizontalCenter: parent.horizontalCenter
+                text:  qsTr("finish task") + mytrans.emptyString
+                onClicked_Signal: {
+
+                    index_Task = 1
+
+                }
+
+            }
+
+            Custom_Button{
+                width: 200
+                 outlined: true
+                anchors.horizontalCenter: parent.horizontalCenter
+                text:  qsTr("custom task") + mytrans.emptyString
+                onClicked_Signal: {
+
+
+                    root_Item.index_Page = 1
+                }
+
+            }
+
+            Custom_Button{
+                width: 200
+                 outlined: true
+                anchors.horizontalCenter: parent.horizontalCenter
+                text:  qsTr("basic task") + mytrans.emptyString
+                onClicked_Signal: {
+
+
+                    root_Item.index_Page = 0
+                }
+
+            }
+
+
+             Custom_Button{
+                 width: 200
+                 height: ui.height_Button
+                 anchors.horizontalCenter: parent.horizontalCenter
+                 text:  qsTr("Up") + mytrans.emptyString
+                 onClicked_Signal: {
+                sub_index_HomePage = 0
+
+                       // keyboard.open(100)
+                 }
+
+             }
+
+
+             Custom_Button{
+                 width: 200
+                 height: ui.height_Button
+                  outlined: true
+                 anchors.horizontalCenter: parent.horizontalCenter
+                 text:  qsTr("Down") + mytrans.emptyString
+                 onClicked_Signal: {
+
+
+                        keyboard.close()
+
+                 }
+
+             }
+
+             Custom_Button{
+                 width: 200
+                 height: ui.height_Button
+                  outlined: true
+                 anchors.horizontalCenter: parent.horizontalCenter
+                 text:  qsTr("next") + mytrans.emptyString
+                 onClicked_Signal: {
+
+                     sub_index_HomePage++
+
+
+                 }
+
+             }
+
+             Custom_Button{
+                 width: 200
+                 height: ui.height_Button
+                  outlined: true
+                 anchors.horizontalCenter: parent.horizontalCenter
+                 text:  qsTr("open db") + mytrans.emptyString
+                 onClicked_Signal: {
+
+                     big_db.openDatabase("/Users/dimabogdanov/Documents/MyCart_res/ApBAZE.db")
+
+
+                 }
+
+             }
+
+             Custom_Button{
+                 width: 200
+                 height: ui.height_Button
+                  outlined: true
+                 anchors.horizontalCenter: parent.horizontalCenter
+                 text:  qsTr("dialog") + mytrans.emptyString
+                 onClicked_Signal: {
+
+                     dialog.open()
+
+
+                 }
+
+             }
+
+
+
+        }
+    }
+
+
+}

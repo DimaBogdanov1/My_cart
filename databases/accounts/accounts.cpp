@@ -14,6 +14,7 @@
 
 Accounts::Accounts(QObject *parent) : QObject(parent)
 {
+    qDebug() << "Конструктор";
     create_table();
 }
 
@@ -144,11 +145,28 @@ void Accounts::create_table() {
 void Accounts::get_All_Users(){
 
     qDebug() << "get alllllll";
+
+    My_Database my_database;
+
+    this->Database = my_database.Database;
+
+
     QSqlQuery query(Database);
+
 
     query.prepare("SELECT * FROM " + account_Table);
 
-    query.exec();
+    if (!query.exec())
+    {
+        qDebug()<<"Ошибка открытия аккаунтов"<< query.lastError();
+
+        if(!Database.open()){
+
+            qDebug()<<"Пустая бд";
+
+        }
+    }
+   // query.exec();
 
     while (query.next())
     {
@@ -160,6 +178,7 @@ void Accounts::get_All_Users(){
 
         //qDebug() << "Пользователь " << QVariant( query.value(1)).toString();
     }
+
 
 }
 

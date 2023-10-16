@@ -150,8 +150,6 @@ Item {
 
         audio.play_symbol()
 
-        text_target.focus = false
-
         close()
 
     }
