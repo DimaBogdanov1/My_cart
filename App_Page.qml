@@ -238,10 +238,6 @@ Item {
                id: push_Notification
            }
 
-           Calendar_Popup{
-
-              // Component.onCompleted: open()
-           }
 
            /*Custom_Border{
                anchors.right: parent.rights

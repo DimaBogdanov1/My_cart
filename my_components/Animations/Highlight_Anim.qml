@@ -8,12 +8,16 @@ Item {
 
     property var animation_target
 
-    property int time_Anim: 250
+    property int time_Anim: 150
 
 
     function open_anim(){
 
         opacity_Anim.open_anim()
+
+       // width_Anim.from = 0
+
+        //width_Anim.to = 1
 
         width_Anim.start()
     }
@@ -21,6 +25,13 @@ Item {
     function close_anim(){
 
         opacity_Anim.close_anim()
+
+      //  width_Anim.from = 1
+
+        //width_Anim.to = 0
+
+        //width_Anim.start()
+
     }
 
     NumberAnimation {id: width_Anim; target: animation_target; property: "scale"; from: 0; to: 1; duration: time_Anim}

@@ -3,6 +3,7 @@ import QtQuick.Controls 2.15
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.3
 import QtCharts 2.15
+import MqttClient 1.0
 
 import Style 1.0
 import MyLang 1.0
@@ -12,6 +13,22 @@ Item {
     id:row
     width: parent.width
     height: parent.height
+
+    property var subscription: 0
+
+    function addMessage(payload)
+    {
+        messageModel.insert(0, {"payload" : payload})
+
+        if (messageModel.count >= 100)
+            messageModel.remove(99)
+    }
+    MqttClient {
+        id: client
+        hostname: '127.0.0.1'
+        port:  applicationWindow.port
+
+    }
 
     Rectangle {
         width: parent.width
@@ -26,6 +43,7 @@ Item {
     Column {
         width: parent.width
         height: parent.height
+        spacing: 30
 
 
 
@@ -47,38 +65,84 @@ Item {
 
     }
 
-    Row{
-        width: parent.width
-        height: 60
 
-        ChartView {
+    Button {
+        id: connectButton
+        Layout.columnSpan: 2
+        Layout.fillWidth: true
+        text: client.state === MqttClient.Connected ? "Disconnect" : "Connect"
+        onClicked: {
 
-           width: parent.width  /2
-           height: parent.height
-           dropShadowEnabled: false
-           antialiasing: true
-           backgroundColor: Style.background_Color //"red"//Style.background_Color
-           legend.visible:false
-           plotAreaColor: Style.background_Color
+           //  client.connectToHost()
 
-
-        }
-
-        ChartView {
-
-           width: parent.width  /2
-           height: parent.height + 71//96 //95
-           dropShadowEnabled: false
-           antialiasing: true
-           backgroundColor: Style.background_Color //"red"//Style.background_Color
-           legend.visible:false
-           plotAreaColor: Style.background_Color
+           if (client.state === MqttClient.Connected) {
+                client.disconnectFromHost()
+                messageModel.clear()
+                subscription.destroy()
+                subscription = 0
+            } else
+                client.connectToHost()
 
 
         }
     }
 
+    Button {
+        id: subButton
+        text: "Subscribe"
+        onClicked: {
+
+            subscription = client.subscribe("test_topic")
+
+            subscription.messageReceived.connect(addMessage)
+        }
     }
+
+
+
+    ListView {
+        id: messageView
+        model:     ListModel {
+            id: messageModel
+        }
+        height: 300
+        width: 200
+        Layout.columnSpan: 2
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+        clip: true
+        delegate: Rectangle {
+            width: messageView.width
+            height: 30
+            color: index % 2 ? "white" : "orange"
+            radius: 5
+            Text {
+                text: payload
+                anchors.centerIn: parent
+            }
+        }
+    }
+
+        Label {
+            function stateToString(value) {
+                if (value === 0)
+                    return "Disconnected"
+                else if (value === 1)
+                    return "Connecting"
+                else if (value === 2)
+                    return "Connected"
+                else
+                    return "Unknown"
+            }
+            color: "white"
+            text: "Status:" + stateToString(client.state) + "(" + client.state + ")"
+            enabled: client.state === MqttClient.Connected
+        }
+
+
+    }
+
+
 
 
     Row{

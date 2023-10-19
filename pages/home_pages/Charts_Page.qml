@@ -378,6 +378,17 @@ Item{
                                                    legend.visible:false
                                                    plotAreaColor: Style.background_Color
 
+                                                   Text {
+                                                          id: txt
+                                                          text: "Hello"
+                                                          color: "red"
+                                                      }
+
+
+                                                      onWidthChanged: measure_Km.updatePointPosition();
+                                                      onHeightChanged: measure_Km.updatePointPosition();
+
+
 
                                                    Measure_Km{
                                                        id: measure_Km
@@ -388,7 +399,7 @@ Item{
 
                                                            create_RailsLine()
 
-                                                         //  create_KmLine(20)
+                                                        //   create_KmLine(20)
                                                        }
 
                                                    }

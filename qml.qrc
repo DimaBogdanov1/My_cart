@@ -86,5 +86,7 @@
         <file>pages/home_pages/task_pages/Start_Task_Page.qml</file>
         <file>icons/light_theme/top_bar/zoom_in.svg</file>
         <file>icons/light_theme/top_bar/marking.svg</file>
+        <file>icons/light_theme/utils/calendar.svg</file>
+        <file>icons/light_theme/top_bar/minus.svg</file>
     </qresource>
 </RCC>

@@ -15,6 +15,50 @@ Item{
 
     property real week_Height: 50
 
+    property var date_second: new Date(2017, 0, 13)
+
+    property var minimumDate: new Date(2017, 0, 13)
+
+    property var maximumDate: new Date(2018, 0, 1)
+
+    property var selectedDate: minimumDate
+
+    onSelectedDateChanged: {
+
+        calendar.selectedDate = selectedDate
+    }
+
+    signal newDate_signal(year: int, month: int, day: int)
+
+    function check_color(year, month, day , selected){
+
+        if(!selected){
+
+            var date = new Date(year, month, day)
+
+            if(date_second.getFullYear() === year && date_second.getMonth() === month && date_second.getDate() ===  day){
+
+
+                return true
+
+            }
+            else{
+
+                return false
+            }
+
+        }
+
+        else{
+            return true
+
+        }
+
+
+
+
+    }
+
     Rectangle {
         id: bg_Rectangle
         width: parent.width
@@ -32,10 +76,10 @@ Item{
            // locale: Qt.locale("en_AU")
 
 
-            minimumDate: new Date(2017, 0, 1)
-            maximumDate: new Date(2018, 0, 1)
+            minimumDate: root_Item.minimumDate
+            maximumDate: root_Item.maximumDate
 
-            selectedDate: minimumDate
+            selectedDate: root_Item.selectedDate
 
 
             style: CalendarStyle {
@@ -146,7 +190,8 @@ Item{
                           layer.enabled: true
                           layer.effect: Mask_Rectangle{target: rec;}
 
-                          Main_Gradient{off: !styleData.selected; off_color: Style.background_Color}
+
+                          Main_Gradient{off: !styleData.selected ; off_color: Style.background_Color} // !styleData.selected !check_color( styleData.date.getFullYear(), styleData.date.getMonth(), styleData.date.getDate(), styleData.selected)
 
                           Custom_Label{
                               opacity: styleData.valid ? 1 : 0.3
@@ -170,6 +215,10 @@ Item{
                                   var year = styleData.date.getFullYear();
 
                                   calendar.selectedDate =  new Date(year, month, day)
+
+                                  newDate_signal(year, month, day)
+
+                                 // popup.close()
 
                                  // toast.show(styleData.title , 3000, 1) // Показываем Тоcт
 

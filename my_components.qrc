@@ -81,5 +81,8 @@
         <file>my_components/Popups/Menus/ChartsScale_Model.qml</file>
         <file>my_components/Elements/Custom_Calendar.qml</file>
         <file>my_components/Popups/Calendar_Popup.qml</file>
+        <file>my_components/Elements/Custom_Checkbox.qml</file>
+        <file>my_components/Elements/Rows/Custom_Row_Checkbox.qml</file>
+        <file>my_components/Elements/Custom_Date_Block.qml</file>
     </qresource>
 </RCC>

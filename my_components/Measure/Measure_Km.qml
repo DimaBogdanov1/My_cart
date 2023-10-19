@@ -7,6 +7,7 @@ import MyLang 1.0
 import my_components 1.0
 
 LineSeries {
+    id: series
 
     axisX: xKm_ValueAxis
    axisYRight: yKm_ValueAxis
@@ -22,9 +23,22 @@ LineSeries {
 
     property var pickets_arr: []
 
+   property bool tmp_check
 
     Measure_Objects{
         id: measure_Objects
+    }
+
+    function updatePointPosition()
+    {
+        if(tmp_check){
+
+            var p = km_ChartView.mapToPosition(  km_ChartView.series("middle_struct").at(0),  km_ChartView.series("left_rail") );
+            txt.x = p.x;
+            txt.y = p.y;
+        }
+
+
     }
 
     function create_RailsLine(){
@@ -44,7 +58,7 @@ LineSeries {
 
             var arr = [ [x_start, i] , [x_start + width_Line, i]]
 
-            measure_Objects.createLine_Structure(arr, "right_rails",  Style.secondaryAccent_Color, ChartView.SeriesTypeLine)
+            measure_Objects.createLine_Structure(arr, "sleeper" + i ,  Style.secondaryAccent_Color, ChartView.SeriesTypeLine)
 
         }
 
@@ -67,6 +81,8 @@ LineSeries {
 
         measure_Objects.createRailroad_Crossing(90)
 
+        tmp_check = true
+
     }
 
 
@@ -75,7 +91,7 @@ LineSeries {
 
         //measureLines.create_Line(0, y_coord, x_ValueAxis.max, y_coord, Style.accentLight_Color, Qt.DotLine, "km_1") // Создаём Линию Километра (Дефекта)
 
-        createPicket(y_coord, "256")
+        createPicket(80, "256dd")
     }
 
 
@@ -85,7 +101,7 @@ LineSeries {
     {
         var name = "picket" + pickets_arr.length
 
-        var p = chartView.mapToPosition(Qt.point(x_start + width_Line / 2 , y_coord), name);
+        var p = km_ChartView.mapToPosition(Qt.point(x_start + width_Line / 2 , y_coord), name);
 
         var component = Qt.createComponent("qrc:/my_components/Elements/Custom_Rectangle_Label.qml")
 
@@ -94,6 +110,12 @@ LineSeries {
         pickets_arr.push(picket)
 
         //picket.id = name
+
+        picket.width = 100
+
+        picket.anchors.left = parent.left
+
+        picket.anchors.right = parent.right
 
         picket.text = title
 

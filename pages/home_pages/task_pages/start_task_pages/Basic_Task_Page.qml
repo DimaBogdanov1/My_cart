@@ -58,10 +58,12 @@ Item{
                     title: qsTr("Код дороги") + mytrans.emptyString
                     model: ListModel {}
 
+                    property int num_Value: 1
+
 
                     onCurrentIndexChanged: {
 
-                        var num_Value = road_ComboBox.model.get(currentIndex).value.split(" - ");
+                         num_Value = road_ComboBox.model.get(currentIndex).value.split(" - ")[0];
 
                       //  toast.show(num_Value[0].toString(), 3000, 1)
 
@@ -69,7 +71,7 @@ Item{
 
                         upNom_ListModel.clear()
 
-                        big_db.update_numRoad(num_Value[0])
+                        big_db.update_numRoad(num_Value)
                     }
                 }
 
@@ -280,6 +282,7 @@ Item{
                      text:  qsTr("Продолжить") + mytrans.emptyString
                      onClicked_Signal: {
 
+
                          big_db.check_Coordination(upNom_ListModel.get(list.currentIndex).code , upNom_ListModel.get(list.currentIndex).name, putNom_ListModel.get(list2.currentIndex).put , startPoint_Row.get_text(0), startPoint_Row.get_text(1))
 
                       //   sub_index_HomePage = 2 // Переходим На График
@@ -321,7 +324,14 @@ Item{
 
                console.log("Код = " + upNom_ListModel.get(list.currentIndex).code    ) // + " Направление = " + putNom_ListModel.get(list.currentIndex) + " Путь = " + list2.get(list2.currentIndex))
 
-               index_Page = 2 // Переход На Финишное Завершение Задания
+
+               finish_Task_Loader.item.picked_siteID = road_ComboBox.num_Value
+
+               finish_Task_Loader.item.picked_upNom = upNom_ListModel.get(list.currentIndex).code
+
+               finish_Task_Loader.item.picked_putNom = putNom_ListModel.get(list2.currentIndex).put
+
+               index_Task = 1 // Переход На Финишное Завершение Задания
 
               // sub_index_HomePage = 2
 

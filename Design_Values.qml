@@ -11,7 +11,7 @@ Item {
 
     readonly property int height_Button: 40 // Высота Кнопки
 
-    readonly property int height_RowList: 30
+    readonly property int height_RowList: 35
 
     readonly property int height_Big: 72
 

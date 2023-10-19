@@ -16,7 +16,10 @@ Custom_Icon_Button 1.0 Elements/Custom_Icon_Button.qml
 Custom_Text_With_Icon 1.0 Elements/Custom_Text_With_Icon.qml
 Custom_Picked_Block 1.0 Elements/Custom_Picked_Block.qml
 Custom_Calendar 1.0 Elements/Custom_Calendar.qml
+Custom_Checkbox 1.0 Elements/Custom_Checkbox.qml
+Custom_Date_Block 1.0 Elements/Custom_Date_Block.qml
 
+Custom_Row_Checkbox 1.0 Elements/Rows/Custom_Row_Checkbox.qml
 Custom_Row_TextField 1.0 Elements/Rows/Custom_Row_TextField.qml
 Custom_Row_ComboBox 1.0 Elements/Rows/Custom_Row_ComboBox.qml
 

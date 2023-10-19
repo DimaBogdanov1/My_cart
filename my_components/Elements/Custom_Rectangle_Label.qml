@@ -61,6 +61,7 @@ Item{
         text: root_Item.text
         color: root_Item.text_color
 
+
    }
 
 }

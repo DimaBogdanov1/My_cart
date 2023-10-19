@@ -27,6 +27,12 @@ public slots:  // Слоты
 
     void slotReadClient();
 
+    void broker_test();
+
+    void state_changed();
+
+   // void isConnected();
+
 };
 
 #endif // MY_PDF_H

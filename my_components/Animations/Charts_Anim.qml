@@ -44,6 +44,9 @@ Item {
 
         }
 
+
+        measure_Km.updatePointPosition();
+
        // console.log("isDown = " + isDown + " c = " + c.toString())
 
     }

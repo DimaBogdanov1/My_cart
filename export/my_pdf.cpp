@@ -1,3 +1,4 @@
+
 #include <QPrinter>
 #include <QTextDocument>
 #include <QTextCharFormat>
@@ -23,9 +24,25 @@
 
 #include "my_pdf.h"
 
+//#include "qmqtt.h"
+
+#include <QMqttClient>
+
+#include <QTcpSocket>
+
+#include <QtMqtt/QMqttClient>
+#include <QtCore/QDateTime>
+
+//using namespace QMQTT ;
+
 My_pdf::My_pdf(QObject *parent) : QObject(parent)
 {
 
+ broker_test();
+
+   // m_client = newQMqttClient(this);
+     //  m_client->setHostname(ui->lineEditHost->text());
+       //m_client->setPort(static_cast<quint16>(ui->spinBoxPort->value()));
 }
 
 int server_status;
@@ -33,6 +50,83 @@ QMap<int,QTcpSocket *> SClients;
 
 
 QTcpServer *tcpServer;
+
+
+
+//using namespace std::string_literals;
+
+void My_pdf::state_changed(){
+
+
+}
+
+
+
+void My_pdf::broker_test(){
+
+ QMqttClient *m_client;
+
+    m_client = new QMqttClient(this);
+
+      m_client->setHostname("127.0.0.1");
+      m_client->setUsername("admin");
+      m_client->setPassword("public");
+
+      m_client->setPort(1883);
+
+      connect(m_client, &QMqttClient::stateChanged, this, &My_pdf::state_changed);
+
+ QMqttSubscription *m_sub;
+
+ //topic.setFilter("test");
+   //auto subscription = m_client->subscribe(topic, qos0);
+
+   QMqttTopicFilter test_Topic{"sensor/width"};
+
+      m_client->subscribe(test_Topic, 1883);
+
+      connect(m_client, &QMqttClient::messageReceived, this, [this](const QByteArray &message, const QMqttTopicName &topic) {
+             const QString content = QDateTime::currentDateTime().toString()
+                         + " Received Topic: "
+                         + topic.name()
+                         + " Message: "
+                         + message
+                         + u'\n';
+
+             qDebug() << "messageReceived";
+
+             //ui->editLog->insertPlainText(content);
+         });
+
+      qDebug() << "sssssssssssss";
+
+    //  m_client->me
+
+    //  client.on_message = on_message1
+
+
+     // auto subWindow = new SubscriptionWindow(subscription);
+
+
+      //    connect(m_client, &QMqttClient::disconnected, this, &MainWindow::brokerDisconnected);
+
+    //  m_client->subscribe(QMqttTopicFilter
+
+   /* QMQTT::Client *client = new QMQTT::Client(QHostAddress::LocalHost, 1883);
+    client->setClientId("clientId");
+    client->setUsername("admin");
+    client->setPassword("public");
+    client->connectToHost(); */
+
+   /* broker = "127.0.0.1"
+    port = 1883
+
+    # generate client ID with pub prefix randomly
+    client_id = f"python-mqtt-{random.randint(0, 1000)}"
+    username = "admin"
+    password = "public" */
+
+}
 
 void My_pdf::on_stoping_clicked()
 {

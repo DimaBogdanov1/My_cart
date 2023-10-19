@@ -27,7 +27,7 @@ Item {
             width: parent.width
             height: parent.height
             source: sourcePages_Array[sub_index_HomePage]
-            Component.onCompleted: sub_index_HomePage =  2//1 //source = sourcePages_Array[index_Page]
+           //Component.onCompleted: sub_index_HomePage =  1 //2//1 //source = sourcePages_Array[index_Page]
 
         }
 

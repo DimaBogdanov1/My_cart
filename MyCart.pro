@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += quick quickcontrols2 qml sql charts core testlib widgets printsupport network opengl  #positioning location
+QT += quick quickcontrols2 qml sql charts core testlib widgets printsupport network opengl mqtt  # qmqtt positioning location
 
 CONFIG += c++17 qmltestcase #sdk_no_version_check
 #QMAKE_MACOSX_DEPLOYMENT_TARGET = 13.5
@@ -16,12 +16,14 @@ SOURCES += \
         databases/accounts/accounts.cpp \
         databases/big_database.cpp \
         databases/my_database.cpp \
+        databases/warnings/warnings.cpp \
         export/my_pdf.cpp \
         main.cpp \
         measures/chart_work.cpp \
         measures/measure.cpp \
         measures/name_measures.cpp \
         models/StartTask_Model.cpp \
+        mqtt/qmlmqttclient.cpp \
         mythread.cpp \
         requester.cpp \
         test_smart.cpp
@@ -50,12 +52,14 @@ HEADERS += \
     databases/accounts/colors_profile.h \
     databases/big_database.h \
     databases/my_database.h \
+    databases/warnings/warnings.h \
     export/my_pdf.h \
     measures/chart_work.h \
     measures/measure.h \
     measures/name_measures.h \
     models/StartTask_Model.h \
     models_headers/big_database.h \
+    mqtt/qmlmqttclient.h \
     mythread.h \
     requester.h \
     test_smart.h \

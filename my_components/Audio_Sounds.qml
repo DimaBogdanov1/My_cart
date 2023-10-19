@@ -8,9 +8,9 @@ Audio {
 
     function play_symbol(){
 
-        player_Audio.stop()
+       // player_Audio.stop()
 
-        player_Audio.play()
+       // player_Audio.play()
     }
 
 

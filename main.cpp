@@ -20,6 +20,8 @@
 //#include "databases/my_database.h"
 
 #include "databases/accounts/accounts.h"
+#include "databases/warnings/warnings.h"
+
 
 #include "models/StartTask_Model.h"
 #include "measures/chart_work.h"
@@ -28,6 +30,7 @@
 #include "test_smart.h"
 
 #include "export/my_pdf.h"
+#include "mqtt/qmlmqttclient.h"
 
 
 //#include <QtQuickTest>
@@ -60,6 +63,8 @@ int main(int argc, char *argv[])
 
     Accounts accounts;
 
+    Warnings warnings;
+
 
     qmlRegisterSingletonType(QUrl("qrc:/Style.qml"), "Style", 1, 0, "Style"); // Регестрируем Тип Style В QML Для Изменения Темы В Приложении
 
@@ -67,6 +72,9 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<StartTask_Model>("StartTask_Model", 1, 0, "StartTask_Model");
 
+    qmlRegisterType<QmlMqttClient>("MqttClient", 1, 0, "MqttClient");
+
+    qmlRegisterUncreatableType<QmlMqttSubscription>("MqttClient", 1, 0, "MqttSubscription", QLatin1String("Subscriptions are read-only"));
 
 
     MyTranslator mTrans(&app);
@@ -80,6 +88,8 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("Chart_Work", &chart_work);
 
     engine.rootContext()->setContextProperty("Accounts", &accounts);
+
+    engine.rootContext()->setContextProperty("Warnings", &warnings);
 
     engine.rootContext()->setContextProperty("my_pdf", &my_pdf);
 

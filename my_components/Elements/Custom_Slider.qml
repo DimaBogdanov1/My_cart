@@ -84,7 +84,7 @@ Slider {
                         color: Style.primaryDark_Color
                         anchors.right: parent.right
                         //radius: radius_Rectangle
-                        implicitWidth: (parent.width * (control.maximumValue - control.value)) /  control.maximumValue //* parent.width///control.value / control.maximumValue * parent.width
+                        implicitWidth: (parent.width * (control.maximumValue - control.value)) /  (control.maximumValue - control.minimumValue) //* parent.width///control.value / control.maximumValue * parent.width
 
                     }
 

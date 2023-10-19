@@ -14,7 +14,7 @@
 
 Accounts::Accounts(QObject *parent) : QObject(parent)
 {
-    qDebug() << "Конструктор";
+    qDebug() << "Конструктор аккаунтов";
     create_table();
 }
 
