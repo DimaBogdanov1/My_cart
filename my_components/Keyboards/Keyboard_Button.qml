@@ -29,10 +29,11 @@ Item {
         outlined: !isIcon
         anchors.centerIn: parent
        // anchors.horizontalCenter: parent.horizontalCenter
-        pixelSize: ui.text_MiddleSize
+        pixelSize: ui.text_SmallSize
         isIcon:  root_Item.isIcon
         source: root_Item.source
           isOnlyText: true
+          tmp_gardient_check:  isIcon
         text:  root_Item.caps ? root_Item.text : root_Item.text.toLowerCase()
 
         onClicked_Signal: {

@@ -68,9 +68,47 @@ Item{
                 title: qsTr("Дополнительные параметры") + mytrans.emptyString
             }
 
-            Custom_Row_Checkbox{
+            /*Custom_Row_Checkbox{
                 title: qsTr("Предупреждение") + mytrans.emptyString
+            }*/
+
+            List_With_Title{
+                title:  qsTr("Предупреждения код направления 1 номер пути 3") + mytrans.emptyString
+                height: 300
+                title_name_model: [ "№", qsTr("Начало") + mytrans.emptyString, qsTr("Конец") + mytrans.emptyString, qsTr("Скорость") + mytrans.emptyString]
+                title_size_model: [0.1 , 0.3, 0.3 , 0.3]
+                model: [1]
             }
+
+            /*
+                             List_Row{
+                                 id: title_Row2
+                                 model: [ qsTr("Путь"), qsTr("Тип")]
+                                 sizes: [0.3, 0.7]
+                             }
+
+                             Custom_Border{}
+
+                             My_List{
+                                id: list2
+                                width: parent.width
+                                height: parent.height - title_Row.height - ui.border_Size * 2
+                                model: ListModel{id: putNom_ListModel}
+
+
+
+                                delegate: List_Row{
+                                    listview: list2
+                                    width: list2.width
+                                    model: [put, type]
+                                    sizes: title_Row2.sizes
+                                    cur: list2.currentIndex
+
+                                }
+
+                             }
+
+              */
 
             /*Rectangle{
                 width: parent.width //- ui.basic_spacing / 2
@@ -104,127 +142,6 @@ Item{
                 }
             }*/
 
-            Custom_Row_ComboBox{
-                id: speed_ComboBox
-                width: parent.width
-                height: ui.block_height
-                source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
-                title: qsTr("Скорость") + mytrans.emptyString
-                property int speed: 15
-              //  model:  [qsTr("Рабочая") + mytrans.emptyString , qsTr("Контрольная") + mytrans.emptyString , qsTr("Дополнительная") + mytrans.emptyString]
-
-                onCurrentIndexChanged: {
-
-                    speed = speed_ComboBox.model[currentIndex].split(" ")[0]
-
-                }
-
-                Component.onCompleted: {
-
-                    var a = new Array
-
-                    //a.push()
-                    for(var i = speed; i < 150; i+= 15){
-
-                        a.push(i + qsTr(" Км/ч") + mytrans.emptyString)
-                    }
-
-                    model = a
-                }
-            }
-
-
-            Custom_Row_TextField{
-                id: startPoint_Row
-                source:  "qrc:/icons/" + Style.theme + "/top_bar/location.svg"
-                start_Keyboard: 300
-                model: ListModel{
-
-                    ListElement{
-                        title: "Начальный километр"
-                        isLetter: false
-                        km: true
-                    }
-
-                    ListElement{
-                        title: "Начальный метр"
-                        isLetter: false
-                        meter: true
-
-
-                    }
-
-                }
-            }
-
-            Custom_Row_TextField{
-                id: endPoint_Row
-                source:  "qrc:/icons/" + Style.theme + "/top_bar/location.svg"
-                start_Keyboard: 300
-                model: ListModel{
-
-                    ListElement{
-                        title: "Конечный километр"
-                        isLetter: false
-                        km: true
-                    }
-
-                    ListElement{
-                        title: "Конечный метр"
-                        isLetter: false
-                        meter: true
-
-
-                    }
-
-                }
-            }
-
-
-            Custom_Date_Block {
-                id: date_Block
-                title: qsTr("Время действия") + mytrans.emptyString
-                source:  "qrc:/icons/" + Style.theme + "/utils/calendar.svg"
-
-            }
-
-            /*Custom_Row_TextField{
-                source:  "qrc:/icons/" + Style.theme + "/utils/calendar.svg"
-                start_Keyboard: 300
-                model: ListModel{
-
-                    ListElement{
-                        title: "Время действия"
-                        isLetter: false
-                        km: true
-                    }
-
-                    ListElement{
-                        title: "Дата конца"
-                        isLetter: false
-                        meter: true
-
-
-                    }
-
-                }
-            }
-
-            */
-
-            Custom_Button{
-                width: parent.width
-                text:  qsTr("Добавить предупреждение") + mytrans.emptyString
-                onClicked_Signal: {
-
-                   // console.log("picked_siteID = "  + picked_siteID , "picked_upNom = "  + picked_upNom , "picked_putNom = "  + picked_putNom )
-
-                   Warnings.add_Warning(picked_siteID, picked_upNom, picked_putNom, startPoint_Row.get_text(0), startPoint_Row.get_text(1), endPoint_Row.get_text(0), endPoint_Row.get_text(1), date_Block.get_dates(0), date_Block.get_dates(1), speed_ComboBox.speed)
-
-                }
-
-            }
-
 
             Custom_Button{
                 id: start_Button
@@ -232,7 +149,9 @@ Item{
                 text:  qsTr("Начать маршрут") + mytrans.emptyString
                 onClicked_Signal: {
 
-                    sub_index_HomePage = 2
+                    sub_index_HomePage = page_Loader.open_next(2)
+
+                //    sub_index_HomePage = 2
 
 
                 }

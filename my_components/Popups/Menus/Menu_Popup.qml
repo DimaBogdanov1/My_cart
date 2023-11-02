@@ -8,9 +8,47 @@ import my_components 1.0
 
 Popup {
     id: popup
+
     property var model: []
 
     property int width_block: 300
+
+   /* property bool start_Enter
+
+    onStart_EnterChanged: {
+
+        if(start_Enter){
+
+            anim.stop()
+
+            anim.start()
+
+            start_Enter = false
+        }
+    }
+    ParallelAnimation {
+
+        id: anim
+
+        NumberAnimation {
+            property: "width";
+            target: bg_Rectangle
+            from: 0;
+            to: bg_Rectangle.width;
+            duration: 2500
+        }
+
+        NumberAnimation {
+            property: "height";
+            target: bg_Rectangle
+            from: 0;
+            to: bg_Rectangle.height;
+            duration: 2500
+        }
+
+
+    }*/
+
 
     function update_elements(index_arr){
 
@@ -43,11 +81,13 @@ Popup {
 
     background:  Background_Popup{} //  Blur{ x_start: popup.x + ui.width_Navigation}
 
+
     contentItem:
 
         Item{
            width: parent.width
            height: parent.height
+          // color: "green"
 
           // Highlight_Glow{target: bg_Rectangle; shadow: true;} // glowRadius: 0
 
@@ -56,6 +96,7 @@ Popup {
                width: parent.width
                height: parent.height
                radius: ui.radius
+               anchors.right: parent.right
                color: Style.background_Color
 
                Column{

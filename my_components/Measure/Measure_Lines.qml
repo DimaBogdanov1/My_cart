@@ -8,7 +8,7 @@ import MyLang 1.0
 // Основная Линия
 LineSeries {
     id: measure_LineSeries
-    color: Style.accent_Color
+    color: "#6BCE87" //Style.accent_Color E9FAA7 B9B2F9
     axisX: x_ValueAxis
     axisY: y_ValueAxis
   //  axisXTop: x_ValueAxis
@@ -107,9 +107,9 @@ LineSeries {
            // step_x += (x_finish - x_start) / (count - 1)
         }
 
-       // create_middleLine(x_start + 2) // Сейчас Здесь Потом Перенесу
+//       create_middleLine(x_start + 2) // Сейчас Здесь Потом Перенесу
 
-       // create_db_Line(x_start + 6) // Сейчас Здесь Потом Перенесу
+      create_db_Line(x_start + 6) // Сейчас Здесь Потом Перенесу
     }
 
 
@@ -131,18 +131,18 @@ LineSeries {
 
        series.append(x_start, 0);
 
-       series.append(x_start, chartView.y_finish);
+       series.append(x_start, 60);
 
    }
 
    // Создание Линии Из Базы Данных
   function create_db_Line(x_start){
 
-      var series = change_series(Style.primary_Color, Qt.SolidLine, "db_line")
+      var series = change_series("#E17259", Qt.SolidLine, "db_line")
 
       series.append(x_start, 0);
 
-      series.append(x_start, chartView.y_finish);
+      series.append(x_start, 80);
 
   }
 
@@ -157,13 +157,13 @@ LineSeries {
 
        series.style =  style_line
 
-       series.capStyle = Qt.RoundCap
+       series.capStyle = Qt.DotLine
 
        series.joinStyle =  Qt.RoundJoin
 
        if(series.style === Qt.DotLine){
 
-           series.opacity = 0.4
+           series.opacity = 0.2
 
        }
 

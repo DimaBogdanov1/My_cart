@@ -10,7 +10,7 @@ Popup {
 
     readonly property real height_block: account_withTitle.height + 10 + ui.height_Button +  ui.middle_spacing * 2 + ui.big_spacing
 
-    readonly property real width_block: height_block * ui.block_ratio
+    readonly property real width_block: height_block *  ui.block_ratio
 
     x: ui.width_Navigation + ui.basic_spacing
     y: parent.height - ui.basic_spacing -  height_block//+ ui.basic_spacing
@@ -90,8 +90,9 @@ Popup {
                          width: parent.width / 2 - ui.basic_spacing / 2
                          height: ui.height_Button
                         // outlined: true
-                         isIcon:  true
-                         source: "qrc:/icons/" + Style.theme + "/top_bar/plus.svg"
+                         icon_with_Text: true
+                         source: "qrc:/icons/" + Style.theme + "/top_bar/plus_white.svg" // "qrc:/icons/" + Style.theme + "/navigation/home.svg"
+
                          text:  qsTr("Добавить аккаунт") + mytrans.emptyString
                          onClicked_Signal: {
 

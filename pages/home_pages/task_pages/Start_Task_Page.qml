@@ -20,6 +20,7 @@ Item{
     readonly property var sourcePages_Array: [
                                                "../task_pages/start_task_pages/Basic_Task_Page.qml",
                                                "../task_pages/start_task_pages/Custom_Task_Page.qml",
+                                               "../task_pages/start_task_pages/Warning_Page.qml"
                                             ]
     Rectangle {
         id: page
@@ -39,7 +40,7 @@ Item{
                     id: tabs
                     width:  800
                     anchors.centerIn: parent
-                    model: [qsTr("Маршрут из базы данных") + mytrans.emptyString, qsTr("Пользовательский маршрут") + mytrans.emptyString]
+                    model: [qsTr("Маршрут из базы данных") + mytrans.emptyString, qsTr("Пользовательский маршрут") + mytrans.emptyString, qsTr("Предупреждения") + mytrans.emptyString]
 
                     onIndexChanged: {
 
@@ -78,6 +79,16 @@ Item{
                            width: parent.width
                            height: parent.height
                            Component.onCompleted: source =  sourcePages_Array[1]
+                       }
+                   }
+
+
+                   Item {
+
+                       Loader{
+                           width: parent.width
+                           height: parent.height
+                           Component.onCompleted: source =  sourcePages_Array[2]
                        }
                    }
 

@@ -12,8 +12,8 @@ import my_components 1.0
 
 ApplicationWindow {
     id: applicationWindow
-    width: 1344 //1920 //800
-    height: 756 //1080 //480
+    width: 1920 * 0.75 //1920 //800
+    height: 1080 * 0.75 //1080 //480
     visible: true
 
     readonly property int port: 1883
@@ -34,7 +34,7 @@ ApplicationWindow {
 
     Flipable_Page{
         id: flipable_Page
-        front_source: "../App_Page.qml" //"qrc:/pages/Login_Page.qml"
+        front_source: "qrc:/App_Page.qml" //"qrc:/pages/Login_Page.qml"
         back_source: ""
         flipped: applicationWindow.flipped
     }

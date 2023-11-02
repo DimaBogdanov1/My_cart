@@ -88,5 +88,15 @@
         <file>icons/light_theme/top_bar/marking.svg</file>
         <file>icons/light_theme/utils/calendar.svg</file>
         <file>icons/light_theme/top_bar/minus.svg</file>
+        <file>icons/light_theme/top_bar/arrow_right_1.svg</file>
+        <file>icons/light_theme/top_bar/arrow_right_1_white.svg</file>
+        <file>icons/light_theme/top_bar/plus_white.svg</file>
+        <file>pages/settings_pages/Admin_Page.qml</file>
+        <file>pages/settings_pages/General_Settings_Page.qml</file>
+        <file>pages/settings_pages/ProgButon_Settings_Page.qml</file>
+        <file>pages/settings_pages/AboutApp_Settings_Page.qml</file>
+        <file>icons/light_theme/utils/add.svg</file>
+        <file>icons/light_theme/utils/programming.svg</file>
+        <file>pages/home_pages/task_pages/start_task_pages/Warning_Page.qml</file>
     </qresource>
 </RCC>

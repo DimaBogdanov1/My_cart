@@ -71,7 +71,9 @@ Item{
 
          onClicked_Signal: {
 
-             sub_index_HomePage-- // Откатываемся Назад
+             sub_index_HomePage = page_Loader.open_back(sub_index_HomePage, 1)
+
+         //    sub_index_HomePage-- // Откатываемся Назад
 
          }
      }

@@ -8,7 +8,6 @@
         <file>my_components/Animations/Transition_Anim.qml</file>
         <file>my_components/Animations/Opacity_Anim.qml</file>
         <file>my_components/Elements/Custom_Label.qml</file>
-        <file>my_components/Custom_TopBar.qml</file>
         <file>my_components/Measure/Measure_Block.qml</file>
         <file>my_components/Measure/Measure_Lines.qml</file>
         <file>my_components/Measure/Measure_Km.qml</file>
@@ -27,7 +26,6 @@
         <file>my_components/Keyboards/Model_English.qml</file>
         <file>my_components/Elements/Custom_Icon.qml</file>
         <file>my_components/Keyboards/Keyboard_Number.qml</file>
-        <file>my_components/Audio_Sounds.qml</file>
         <file>my_components/Animations/Keyboard_Anim.qml</file>
         <file>my_components/Keyboards/Keyboard.qml</file>
         <file>my_components/Elements/Custom_TextField.qml</file>
@@ -61,10 +59,8 @@
         <file>my_components/Popups/Menus/Menu_Element.qml</file>
         <file>my_components/Popups/Menus/ChartsMore_Model.qml</file>
         <file>my_components/Popups/Menus/ChartsObjects_Model.qml</file>
-        <file>my_components/Flipable_Page.qml</file>
         <file>my_components/Popups/Account_Popup.qml</file>
         <file>my_components/Login_Elements/Account_With_Title.qml</file>
-        <file>my_components/Back_Arrow.qml</file>
         <file>my_components/Titles.qml</file>
         <file>my_components/Elements/Custom_Icon_Button.qml</file>
         <file>my_components/Elements/Custom_Text_With_Icon.qml</file>
@@ -84,5 +80,19 @@
         <file>my_components/Elements/Custom_Checkbox.qml</file>
         <file>my_components/Elements/Rows/Custom_Row_Checkbox.qml</file>
         <file>my_components/Elements/Custom_Date_Block.qml</file>
+        <file>my_components/Page_Components/Audio_Sounds.qml</file>
+        <file>my_components/Page_Components/Back_Arrow.qml</file>
+        <file>my_components/Page_Components/Custom_TopBar.qml</file>
+        <file>my_components/Page_Components/Flipable_Page.qml</file>
+        <file>my_components/Page_Components/Page_Loader.qml</file>
+        <file>my_components/Page_Components/test_Page/Page_1.qml</file>
+        <file>my_components/Page_Components/test_Page/Page_2.qml</file>
+        <file>my_components/Page_Components/test_Page/Page_3.qml</file>
+        <file>my_components/Settings/Admin_Block.qml</file>
+        <file>my_components/Lists/List_With_Title.qml</file>
+        <file>my_components/Measure/Measure_Rails.qml</file>
+        <file>my_components/Measure/Measure_Numbers.qml</file>
+        <file>my_components/Animations/TextField_Anim.qml</file>
+        <file>my_components/Elements/Rows/Icon_In_Row.qml</file>
     </qresource>
 </RCC>

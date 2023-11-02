@@ -51,7 +51,7 @@ Chart_Work::Chart_Work(QObject *parent) : QObject(parent)
 
     qmlRegisterUncreatableType<Name_Measures>("qml.measure", 1, 0, "Name_Measures", "Not creatable as it is an enum type");
 
-    qDebug() << "Создали Объекты для измерений";
+  //  qDebug() << "Создали Объекты для измерений";
 
 }
 
@@ -63,11 +63,11 @@ int Chart_Work::max(int a, int b)
     return b;
 }
 
-void Chart_Work::add_New_Picket()
+void Chart_Work::create_KmLine()
 {
     //  Здесь я беру текущий y графика и строю линию
 
-    emit newPicket_signal(60); // Отправляем Сигнал
+    emit newPicket_signal(70); // Отправляем Сигнал
 
 }
 

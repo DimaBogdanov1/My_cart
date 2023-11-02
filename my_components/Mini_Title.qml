@@ -6,10 +6,15 @@ import my_components 1.0
 
 
 Custom_Rectangle_Label{
+    property bool error: false
+
     height:  ui.text_miniSize
     horizontal: Text.AlignLeft
     needBack: false
     pixel_size: ui.text_miniSize
+    text_color: error ? Style.error_Color : Style.primaryDark_Color
+    opacity: error ? 0 : 1
+
 
     anchors {
 

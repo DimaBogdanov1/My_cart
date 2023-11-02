@@ -200,7 +200,7 @@ void Measure::update_from_setting(){
 
     this->multiplier_value = settings.value(multiplier_path).value<float>();
 
-    qDebug() << "index_Measure = " + QString::number(index_Measure) + " bias_value = " + QString::number(bias_value) + " multiplier_value = " + QString::number(multiplier_value)  << "\n";
+ //   qDebug() << "index_Measure = " + QString::number(index_Measure) + " bias_value = " + QString::number(bias_value) + " multiplier_value = " + QString::number(multiplier_value)  << "\n";
 
 }
 

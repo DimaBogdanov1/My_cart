@@ -23,12 +23,78 @@ Row{
 
     }
 
-    Custom_Icon{
-        height: ui.height_Button
-        anchors.bottom: parent.bottom
-        source: root_Row.source
+    function check_password(){
 
-     }
+        var result = false
+
+        if(check_text()){
+
+            for(var i = 0; i < model.count; i++){
+
+                if(repeater.itemAt(i).get_target().text.length > 3){
+
+                    result = true
+                }
+                else{
+
+                    result = false
+
+                    open_error(i, "Пароль должен быть больше трёх символов!")
+
+                    break
+                }
+            }
+        }
+
+
+
+       return result
+
+
+    }
+
+
+
+
+    function check_text(){
+
+        var result = false
+
+        for(var i = 0; i < model.count; i++){
+
+            if(repeater.itemAt(i).get_target().text.length !== 0){
+
+                result = true
+            }
+            else{
+
+                result = false
+
+                open_error(i, "Поле не может быть пустым!")
+
+                break
+            }
+        }
+
+       return result
+
+    }
+
+    function open_error(index, text){
+
+
+        repeater.itemAt(index).create_error(text)
+
+        //repeater.itemAt(index).error_message = "Заполните поле!"
+
+       // repeater.itemAt(index).error = true
+
+       // toast.show("поле не может быть пустым " + index, 3000, 1) // Показываем Тоcт
+
+
+    }
+
+    Icon_In_Row{}
 
     Row{
         width: parent.width - ui.basic_spacing - ui.icon_nav_size

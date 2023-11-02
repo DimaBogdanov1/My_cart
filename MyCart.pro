@@ -12,6 +12,22 @@ CONFIG += c++17 qmltestcase #sdk_no_version_check
 #QMAKE_MAC_SDK = macosx13.5
 
 
+#static {
+#    QT += svg
+ #   QTPLUGIN += qtvirtualkeyboardplugin
+#}
+
+#disable-xcb {
+ #   message("The disable-xcb option has been deprecated. Please use disable-desktop instead.")
+  #  CONFIG += disable-desktop
+#}
+
+#disable-desktop|android-embedded|!isEmpty(CROSS_COMPILE)|qnx {
+ #   DEFINES += MAIN_QML=\\\"basic-b2qt.qml\\\"
+#} else {
+ #   DEFINES += MAIN_QML=\\\"Basic.qml\\\"
+#}
+
 SOURCES += \
         databases/accounts/accounts.cpp \
         databases/big_database.cpp \

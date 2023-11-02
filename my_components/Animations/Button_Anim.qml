@@ -14,6 +14,8 @@ Item {
 
     property bool isRotated: false
 
+    signal finish_anim_Signal
+
     function create_error_anim(){
 
         error_anim.stop()
@@ -50,11 +52,12 @@ Item {
         icon_Anim.start()
     }
 
+
     function create_rotation_anim(){
 
        if(isRotated){
 
-         //  rotate_Anim.from = animation_target.rotation
+           rotate_Anim.from =  90 //animation_target.rotation
 
            rotate_Anim.to = 0
 
@@ -62,9 +65,9 @@ Item {
        }
        else{
 
-          // rotate_Anim.from = animation_target.rotation
+           rotate_Anim.from =  -90//animation_target.rotation
 
-           rotate_Anim.to = -180
+           rotate_Anim.to = 0
 
            isRotated = true
 
@@ -74,6 +77,7 @@ Item {
 
        rotate_Anim.start()
     }
+
 
     NumberAnimation { id: icon_Anim; property: "y"; from: -1 * parent.width; to: 0; duration: time_Anim
 
@@ -95,6 +99,7 @@ Item {
     }
 
 
+
     SequentialAnimation{
 
         id: error_anim
@@ -105,6 +110,13 @@ Item {
 
         NumberAnimation {target: animation_target; property: "x"; from: -1 * error_dis; to: 0; duration: time_Anim / 4}
 
+        onRunningChanged: {
+
+            if(!running){
+
+                finish_anim_Signal()
+            }
+        }
     }
 
     SequentialAnimation{

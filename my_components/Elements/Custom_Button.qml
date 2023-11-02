@@ -21,17 +21,39 @@ Item {
 
     property bool isIcon
 
+    property bool icon_with_Text
+
     property string source: ""
 
     property string color: Style.accent_Color
 
-    property real pixelSize: ui.text_SmallSize
+    property real pixelSize: ui.text_miniSize
+
+    property bool isCheck
+
+
+    property bool basic_text
+
+    property bool tmp_gardient_check
+
 
    // text: text_Button // control.text
 
     function create_error_anim(){
 
+        button_Anim.animation_target = bg_Rectangle
+
         button_Anim.create_error_anim()
+
+    }
+
+    function create_rotation_anim(){
+
+        button_Anim.animation_target = icon
+
+        button_Anim.create_rotation_anim()
+
+        isCheck = button_Anim.isRotated
 
     }
 
@@ -47,18 +69,21 @@ Item {
             width: parent.width
             height: parent.height
             radius: ui.radius
+            color: !outlined ? Style.primaryDark_Color : Style.background_Color
             layer.enabled: true
             layer.effect: Mask_Rectangle{target: parent}
 
 
-            Main_Gradient{visible: !outlined}
+            Main_Gradient{visible: tmp_gardient_check}
+
+           // Main_Gradient{visible: !outlined}
 
 
-            Border_Gradient{visible: outlined ? isOnlyText ? false : true : false}
+         //   Border_Gradient{visible: outlined ? isOnlyText ? false : true : false}
 
             border{
-               // width: outlined ? isOnlyText ? 0 : ui.border_Size : 0
-                //color: "red" //Style.accent_Color
+                width: outlined ? isOnlyText ? 0 : ui.border_Size : 0
+                color: Style.primary_Color
             }
 
 
@@ -87,24 +112,82 @@ Item {
                 }
             }
 
-            Custom_Label{
+
+            Custom_Rectangle_Label {
                 id: label
-                horizontalAlignment: Text.AlignHCenter
+                height: parent.height
+                needBack: false
+                //color: "green"
+                //horizontal: Text.AlignLeft
                 visible: !isIcon
-                font.pixelSize:  root_Item.pixelSize
-               // color: outlined ? root_Item.color : Style.primaryDark_Color
+                pixel_size:  !root_Item.basic_text ? root_Item.pixelSize : ui.text_SmallSize
+                font_weight: !root_Item.basic_text ? ui.font_weight_Bigsize : ui.font_weight_Smallsize
+                font_family: !root_Item.basic_text ?  customTitle_FontLoader.name : custom_FontLoader.name
+                text_color: outlined || isOnlyText ? Style.primaryDark_Color : Style.background_Color
+                anchors.horizontalCenter: parent.horizontalCenter
                 text: root_Item.text
 
             }
 
             Custom_Icon{
-                width: parent.width
-                height: parent.height
+                id: icon
+                //width: parent.width
+                //height: parent.height
+                //icon_size: 24
                 source: root_Item.source
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
 
-                visible: isIcon
+                visible: isIcon || icon_with_Text
 
+                Component.onCompleted: {
+
+                    if(icon_with_Text){
+
+                      //  icon.icon_size = 24
+
+                        const spacing = 0 //ui.basic_spacing  /// 2
+
+                        const icon_deviation = 9
+
+                        const all_width = (label.width + icon.width  + spacing ) / 2
+
+
+                        var a = (label.width  + spacing / 2) / 2
+
+                        var b = a - all_width
+
+
+                        var c = (icon.width +  spacing / 2) / 2
+
+
+                        var d = -1 *( c - all_width) + icon_deviation
+
+                        label.anchors.horizontalCenterOffset = b //-1 * (label.width  - all_width)
+
+                        icon.anchors.horizontalCenterOffset = d //-1 * (icon.width - all_width) //label.width / 2 + ui.icon_nav_size / 2 + ui.basic_spacing
+
+                    }
+
+                }
              }
+
+
+            /*Custom_Label{
+                id: label
+                horizontalAlignment: Text.AlignHCenter
+                visible: !isIcon
+                color: outlined || isOnlyText ? Style.primaryDark_Color : Style.background_Color
+                font.pixelSize:  12 //root_Item.pixelSize
+                font.weight:  ui.font_weight_Bigsize
+                font.family: customTitle_FontLoader.name
+
+               // color: outlined ? root_Item.color : Style.primaryDark_Color
+                text: root_Item.text
+
+
+            }*/
+
 
 
         }

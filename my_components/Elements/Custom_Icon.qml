@@ -4,6 +4,7 @@ Item{
     id: root_Item
     width: ui.icon_nav_size
     height: ui.icon_nav_size
+   // color: "red"
 
     property string source
 

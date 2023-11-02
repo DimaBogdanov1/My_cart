@@ -22,6 +22,7 @@ Custom_Date_Block 1.0 Elements/Custom_Date_Block.qml
 Custom_Row_Checkbox 1.0 Elements/Rows/Custom_Row_Checkbox.qml
 Custom_Row_TextField 1.0 Elements/Rows/Custom_Row_TextField.qml
 Custom_Row_ComboBox 1.0 Elements/Rows/Custom_Row_ComboBox.qml
+Icon_In_Row 1.0 Elements/Rows/Icon_In_Row.qml
 
 # Animations
 Hover_Anim 1.0 Animations/Hover_Anim.qml
@@ -32,6 +33,7 @@ Highlight_Anim 1.0 Animations/Highlight_Anim.qml
 Keyboard_Anim 1.0 Animations/Keyboard_Anim.qml
 Charts_Anim 1.0 Animations/Charts_Anim.qml
 Button_Anim 1.0 Animations/Button_Anim.qml
+TextField_Anim 1.0 Animations/TextField_Anim.qml
 
 # Measure
 Measure_Block 1.0 Measure/Measure_Block.qml
@@ -39,12 +41,14 @@ Measure_Lines 1.0 Measure/Measure_Lines.qml
 Measure_Km 1.0 Measure/Measure_Km.qml
 Measure_Viser 1.0 Measure/Measure_Viser.qml
 Measure_ViserLine 1.0 Measure/Measure_ViserLine.qml
+Measure_Rails 1.0 Measure/Measure_Rails.qml
 
 # Lists
 My_List 1.0 Lists/My_List.qml
 List_ScrollBar 1.0 Lists/List_ScrollBar.qml
 List_Row 1.0 Lists/List_Row.qml
 List_Highlight 1.0 Lists/List_Highlight.qml
+List_With_Title 1.0 Lists/List_With_Title.qml
 
 # Keyboards
 Keyboard 1.0 Keyboards/Keyboard.qml
@@ -61,6 +65,7 @@ Theme_Block 1.0 Settings/Theme_Block.qml
 Settings_Switch 1.0 Settings/Settings_Switch.qml
 Settings_Text 1.0 Settings/Settings_Text.qml
 Settings_Link 1.0 Settings/Settings_Link.qml
+Admin_Block 1.0 Settings/Admin_Block.qml
 
 
 # Popups
@@ -88,18 +93,22 @@ Calib_Rail 1.0 Calib_Elements/Calib_Rail.qml
 Account_Icon 1.0 Login_Elements/Account_Icon.qml
 Account_With_Title 1.0 Login_Elements/Account_With_Title.qml
 
-Custom_TopBar 1.0 Custom_TopBar.qml
 
-Audio_Sounds 1.0 Audio_Sounds.qml
+# Page_Components
+Custom_TopBar 1.0 Page_Components/Custom_TopBar.qml
+Audio_Sounds 1.0 Page_Components/Audio_Sounds.qml
+Flipable_Page 1.0 Page_Components/Flipable_Page.qml
+Back_Arrow 1.0 Page_Components/Back_Arrow.qml
+Page_Loader 1.0 Page_Components/Page_Loader.qml
+
 
 Canvas_Rail 1.0 Canvas_Rail.qml
 
 Navigation_Map 1.0 Navigation_Map.qml
 
-Flipable_Page 1.0 Flipable_Page.qml
 
-Back_Arrow 1.0 Back_Arrow.qml
 
 Titles 1.0 Titles.qml
 
 Mini_Title 1.0 Mini_Title.qml
+

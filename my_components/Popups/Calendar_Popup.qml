@@ -42,8 +42,8 @@ Popup {
          week_Height: 50
          selectedDate: popup.selectedDate
 
-         minimumDate:  new Date() // popup.minimumDate
-         maximumDate: new Date(minimumDate.getFullYear(), minimumDate.getMonth(), minimumDate.getDate() + max_days) // popup.maximumDate //
+         minimumDate: popup.minimumDate // new Date() // popup.minimumDate
+         maximumDate: popup.maximumDate //new Date(minimumDate.getFullYear(), minimumDate.getMonth(), minimumDate.getDate() + max_days) // popup.maximumDate //
 
 
          onNewDate_signal: {

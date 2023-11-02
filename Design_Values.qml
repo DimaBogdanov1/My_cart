@@ -19,9 +19,12 @@ Item {
 
     readonly property int toolBar_Size: 56 // Размер Тулбара
 
-    readonly property real block_height: ui.height_Button + ui.basic_spacing / 2 + ui.text_miniSize
+    readonly property real block_height:  ui.height_Button + ui.basic_spacing + 2 * ui.text_miniSize //ui.height_Button + ui.basic_spacing / 2 + ui.text_miniSize
 
-    readonly property real block_ratio: 1.6
+    readonly property real mini_block_height:  block_height - ui.basic_spacing / 2 - ui.text_miniSize //     readonly property real block_height:  ui.height_Button + ui.basic_spacing / 2 + ui.text_miniSize
+
+
+    readonly property real block_ratio: 1.8
 
 
     /////////////////

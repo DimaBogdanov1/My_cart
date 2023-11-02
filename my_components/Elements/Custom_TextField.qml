@@ -23,6 +23,10 @@ Column{
 
     property var validator
 
+    property string error_message
+
+    property bool error
+
     signal ready_to_write_signal
 
     function get_target(){
@@ -30,8 +34,16 @@ Column{
         return textField
     }
 
+    function create_error(text){
+
+        error_Message.text =  text
+
+        textField_Anim.open_close_anim()
+    }
+
     Mini_Title{
         id: title_Block
+        error: root_Column.error
         text: root_Column.title
 
     }
@@ -43,7 +55,7 @@ Column{
         font.family: custom_FontLoader.name
         font.pixelSize:  ui.text_SmallSize
         implicitWidth: parent.width
-        implicitHeight: parent.height - title_Block.height - ui.basic_spacing / 2
+        implicitHeight: ui.height_Button //parent.height - title_Block.height - ui.basic_spacing / 2
         color: Style.primaryDark_Color
         maximumLength: root_Column.maximumLength
         validator: root_Column.validator
@@ -228,13 +240,32 @@ Column{
             duration: 200
         }
 
-        Opacity_Anim{
+       /* Opacity_Anim{
             id: opacity_Anim
             from: 0.4
-            animation_target: back_Rectangle
+            animation_target: error_Message //back_Rectangle
+
+        }*/
+
+        TextField_Anim{
+            id: textField_Anim
+            animation_target: error_Message
+        }
+    }
+
+    Item{
+       width: parent.width
+       height: title_Block.height
+       clip: true
+
+        Mini_Title{
+            id: error_Message
+            error: true
+            text: root_Column.error_message
 
         }
     }
+
 
 }
 

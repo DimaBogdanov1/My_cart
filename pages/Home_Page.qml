@@ -16,7 +16,20 @@ Item {
         width: parent.width
         height: parent.height
 
-       Loader{
+        Page_Loader{
+
+            id: page_Loader
+
+            tmp_Index: sub_index_HomePage //1
+            model: [
+                "qrc:/pages/home_pages/Drop_db_Page.qml",
+                "qrc:/pages/home_pages/Task_Page.qml",
+                "qrc:/pages/home_pages/Charts_Page.qml"
+             ]
+
+        }
+
+      /* Loader{
             id: homePage_Loader
 
             readonly property var sourcePages_Array: [
@@ -29,7 +42,8 @@ Item {
             source: sourcePages_Array[sub_index_HomePage]
            //Component.onCompleted: sub_index_HomePage =  1 //2//1 //source = sourcePages_Array[index_Page]
 
-        }
+
+        } */
 
 
         /*SwipeView {

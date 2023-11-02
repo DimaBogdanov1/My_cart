@@ -14,7 +14,7 @@ Item {
 
     property int index_Page: -1
 
-    property int sub_index_HomePage: 2 //1 //2  // Я его сюда вынес чисто из за флипа на старт мы падаем сюда
+    property int sub_index_HomePage: 1 //2  // Я его сюда вынес чисто из за флипа на старт мы падаем сюда
 
     readonly property var sourcePages_Array: [
                                                "../pages/Home_Page.qml",
@@ -164,7 +164,7 @@ Item {
                width: parent.width
                height: ui.height_Button +  ui.iconBlock_topBar_Size + ui.icon_nav_size
                anchors.bottom: parent.bottom
-               anchors.bottomMargin: 16
+               anchors.bottomMargin: ui.middle_spacing
                spacing: ui.icon_nav_size
 
                Custom_Icon_Button{
@@ -261,13 +261,15 @@ Item {
                 height: parent.height
                 focus: true
                 source: sourcePages_Array[index_Page]
-                Component.onCompleted: index_Page =  0 //1 //source = sourcePages_Array[index_Page]
+                Component.onCompleted: index_Page =  0 //4 //2 //0 //1 //source = sourcePages_Array[index_Page]
 
                 onSourceChanged: {
 
                     keyboard.check_close()
 
                 }
+
+
             }
 
 

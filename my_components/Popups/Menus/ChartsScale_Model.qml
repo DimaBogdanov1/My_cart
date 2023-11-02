@@ -30,7 +30,7 @@ ListModel{
 
         pick: function(value){
 
-            y_ValueAxis.max = 150
+            y_ValueAxis.max = 125
 
             var arr = [0, 2]
 
@@ -47,7 +47,7 @@ ListModel{
 
         pick: function(value){
 
-            y_ValueAxis.max = 200
+            y_ValueAxis.max = 150
 
             var arr = [0, 1]
 
@@ -69,6 +69,8 @@ ListModel{
             }
 
         }
+
+        measure_Km.updatePointPosition()
 
         return arr
 

@@ -98,10 +98,10 @@ Item{
         ]  // Тестовая Тема
 
         readonly property var light_theme: [
-            "#FEC980", // Акцент Цвет
-            "#0F0909", // Лёгкий Акцент
+            "blue", // Акцент Цвет
+            "red", // Лёгкий Акцент
             light_grey,  // Цвет Текста
-             "#FFF3E3",
+             "#E3E3E6",
             "#F7F6FB", // Лёгкий Цвет
             white, // Цвет Фонов
             "#6f6bf9", // Акцент Цвет 2
@@ -125,7 +125,7 @@ Item{
     // #ec6f66 → #f3a183 #ff5f6d → #ffc371 #2193b0 #6dd5ed    ( FE8373 FBE99D ) ("#ffafbd" , "#ffc3a0")
     readonly property string accent_Color: "#ffafbd" //currentTheme[0] // Акцент Цвет
 
-    readonly property string secondaryAccent_Color: "#ffc3a0" // Акцент Цвет 2
+    readonly property string secondaryAccent_Color: "#ffc3a0" // Акцент Цвет 2 // FFA558
 
     readonly property string accentLight_Color: currentTheme[1] // Лёгкий Акцент
 
@@ -138,6 +138,7 @@ Item{
     readonly property string background_Color: currentTheme[5] // Цвет Фонов
 
     readonly property string navigation_Color: currentTheme[7]
+
 
 
 

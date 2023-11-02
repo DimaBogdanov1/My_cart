@@ -13,7 +13,9 @@ Popup {
 
     property string text: "До окончания срока юстировки осталось 29 дней!"
 
-    y: parent.height - ui.basic_spacing -  height_block//+ ui.basic_spacing
+    readonly property real start_y:  parent.height - ui.basic_spacing -  height_block
+
+    y: start_y//+ ui.basic_spacing
 
     width: 345.6 // Ширина Как В Аккаунте Потом Поправлю!
     height: height_block

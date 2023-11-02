@@ -98,7 +98,7 @@ void My_pdf::broker_test(){
              //ui->editLog->insertPlainText(content);
          });
 
-      qDebug() << "sssssssssssss";
+      //qDebug() << "sssssssssssss";
 
     //  m_client->me
 

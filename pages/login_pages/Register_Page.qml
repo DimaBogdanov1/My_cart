@@ -235,9 +235,10 @@ Item{
 
                 var check = false
 
-                if(name.length > 0 && surname.length > 0){
 
-                    if(password.length > 3){
+                if(name_and_surname_Row.check_text()){
+
+                    if(password_Row.check_password() ){
 
                         if(password === repeat_password){
 
@@ -247,24 +248,12 @@ Item{
                         }
                         else{
 
-                            toast.show("Пароли не совпадают", 3000, 1) // Показываем Тоcт
+                            passwordRepeat_Row.open_error(0, "Пароли не совпадают!")
 
                         }
 
-                    }
-                    else{
-
-                        toast.show("Пароль должен быть 4 символа", 3000, 1) // Показываем Тоcт
-
-                    }
-
-
                 }
-                else{
 
-                    toast.show("Имя пустое", 3000, 1) // Показываем Тоcт
-
-                }
 
                 if(!check){
 
@@ -319,6 +308,8 @@ Item{
 
             toast.show("результат добавления " + value.toString(), 3000, 1) // Показываем Тоcт
         }
+    }
+
     }
 
 

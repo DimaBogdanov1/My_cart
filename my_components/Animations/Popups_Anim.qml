@@ -167,6 +167,19 @@ Item {
             ParallelAnimation {
 
                 NumberAnimation {
+                    property: "y";
+                    from: parent.y;
+                    to:  start_y;
+                    duration: 10 //time_Anim
+                }
+
+                NumberAnimation {
+                    property: "opacity";
+                    from: 0;
+                    to: 1;
+                    duration: 10
+                }
+                NumberAnimation {
                     property: "x";
                     from: -1 * parent.width;
                     to: ui.width_Navigation + ui.basic_spacing
@@ -183,12 +196,25 @@ Item {
 
     Transition {
         id: exit_notification_anim
+
+        ParallelAnimation {
+
             NumberAnimation {
-                            property: "x";
-                            from: parent.x
-                            to:  -1 * parent.width;
-                            duration: time_Anim
-                        }
+                property: "opacity";
+                from: 1;
+                to: 0;
+                duration: time_Anim
+            }
+
+            NumberAnimation {
+                property: "y";
+                from: applicationWindow.height - parent.height - ui.basic_spacing
+                to: applicationWindow.height + parent.height; //parent.width - ui.basic_spacing; // ui.width_Navigation + ui.basic_spacing;
+                duration: time_Anim
+
+            }
+
+        }
 
         }
 
@@ -200,7 +226,15 @@ Item {
 
     Transition {
         id: enter_menu_anim
+
+
             ParallelAnimation {
+
+                onStarted: {
+
+                    popup.start_Enter = true
+                }
+
                 NumberAnimation {
                     property: "opacity";
                     from: 0;
@@ -208,19 +242,19 @@ Item {
                     duration: time_Anim
                 }
 
-               /* NumberAnimation {
+              /*  NumberAnimation {
                     property: "width";
                     from: 0;
                     to: parent.width;
                     duration: time_Anim
-                }*/
+                }
 
                 NumberAnimation {
                     property: "height";
                     from: 0;
                     to: parent.height;
                     duration: time_Anim
-                }
+                }*/
 
                /* NumberAnimation {
                     property: "scale";

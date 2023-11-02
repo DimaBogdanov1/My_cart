@@ -45,7 +45,14 @@ Item{
        radius: root_Item.radius
        visible: needBack
 
-       Border_Gradient{visible: needBorder}
+
+       border{
+           width: !needBorder ? 0 : ui.border_Size
+           color: Style.primary_Color
+       }
+
+
+      // Border_Gradient{visible: needBorder}
 
 
     }

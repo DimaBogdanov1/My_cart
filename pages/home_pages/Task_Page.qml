@@ -14,7 +14,7 @@ Item{
     width: parent.width
     height: parent.height
 
-    property int index_Task: 1 //0
+    property int index_Task: 0 //1 //0
 
     readonly property var sourcePages_Array: [
                                                "../home_pages/task_pages/Start_Task_Page.qml",

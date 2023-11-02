@@ -114,7 +114,8 @@ Item{
                  }
 
                  */
-                 Custom_Tabs{
+
+                Custom_Tabs{
                      width: parent.width
                      height: ui.height_Button
                      model: [qsTr("Главные пути") + mytrans.emptyString, qsTr("Станционные пути") + mytrans.emptyString]
@@ -279,6 +280,8 @@ Item{
                  Custom_Button{
                      id: start_Button
                      width: parent.width
+                     icon_with_Text: true
+                     source: "qrc:/icons/" + Style.theme + "/top_bar/arrow_right_1_white.svg" // "qrc:/icons/" + Style.theme + "/navigation/home.svg"
                      text:  qsTr("Продолжить") + mytrans.emptyString
                      onClicked_Signal: {
 

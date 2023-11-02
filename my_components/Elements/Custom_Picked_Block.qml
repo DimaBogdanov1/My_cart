@@ -24,7 +24,7 @@ Item{
         width: parent.width
         height: parent.height
         radius: ui.radius
-        color: "transparent"
+        color: Style.background_Color
         layer.enabled: true
         layer.effect: Mask_Rectangle{target: parent}
 
@@ -51,30 +51,48 @@ Item{
         }
 
         Item{
-            width: parent.width - ui.big_spacing
-            height: parent.height - ui.big_spacing
+            width: parent.width - ui.basic_spacing
+            height: parent.height - ui.basic_spacing
             anchors.centerIn: parent
 
             Row{
-               width: label.width + icon_size + spacing
+               width: parent.width //label.width + icon_size + spacing
                height: parent.height
                spacing: ui.basic_spacing
 
-               Custom_Icon{
+              /* Custom_Icon{
                   // width: parent.width - label.width
                    height: parent.height
                    icon_size: root_Item.icon_size
                    source: root_Item.source
 
-                }
+                }*/
 
                Custom_Rectangle_Label {
                    id: label
+                   width: parent.width - ui.icon_nav_size * 2 - ui.basic_spacing * 2
                    color: "transparent"
                    height: parent.height
+                   horizontal: Text.AlignLeft
                    text: root_Item.text
 
                }
+
+               /*Rectangle{
+                  width:  ui.icon_nav_size
+                  height: parent.height
+                  color: "red"
+
+               }*/
+
+              /* Custom_Icon{
+                  // width: parent.width - label.width
+                   height: parent.height
+                   icon_size: root_Item.icon_size
+                   rotation: 180
+                   source: "qrc:/icons/" + Style.theme + "/top_bar/arrow_left_1.svg" // "qrc:/icons/" + Style.theme + "/navigation/home.svg"
+
+                }*/
             }
 
         }

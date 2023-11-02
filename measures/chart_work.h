@@ -20,7 +20,7 @@ public:
 
 public slots:  // Слоты
     void openCSV();
-    void add_New_Picket();
+    void create_KmLine();
     void get_points_line(float y_viser);
     void clearPoints();
     void change_param_measure(int index, float bias_value, float multiplier_value);

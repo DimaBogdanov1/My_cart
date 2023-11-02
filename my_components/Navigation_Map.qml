@@ -4,16 +4,41 @@ import QtPositioning 5.15
 
 import Style 1.0
 import MyLang 1.0
+
+
+/*
+
+style : enumeration
+This read-only property gives access to the style of the map type.
+
+MapType.NoMap - No map.
+MapType.StreetMap - A street map.
+MapType.StreetMap - A map with day-time satellite imagery.
+MapType.SatelliteMapNight - A map with night-time satellite imagery.
+MapType.TerrainMap - A terrain map.
+MapType.HybridMap - A map with satellite imagery and street information.
+MapType.GrayStreetMap - A gray-shaded street map.
+MapType.PedestrianMap - A street map suitable for pedestriants.
+MapType.CarNavigationMap - A street map suitable for car navigation.
+MapType.CycleMap - A street map suitable for cyclists.
+MapType.CustomMap - A custom map type.
+*/
 Map {
     id: map
     anchors.fill: parent
     copyrightsVisible: false
     zoomLevel: 16
+   //  activeMapType:MapType.GrayStreetMap
+
+
+
+
     center: QtPositioning.coordinate(59.9386300, 30.3141300) //positionSource.position.coordinate
 
     plugin: Plugin {
        id: osmPlugin
        name: "osm"
+
     }
 
     MouseArea {

@@ -16,4 +16,10 @@ Item {
 
     readonly property string speed: qsTr("Скорость") + mytrans.emptyString
 
+    readonly property string siteID: qsTr("Код дороги") + mytrans.emptyString
+
+    readonly property string upNom: qsTr("Код направления") + mytrans.emptyString
+
+    readonly property string putNom: qsTr("Номер пути") + mytrans.emptyString
+
 }

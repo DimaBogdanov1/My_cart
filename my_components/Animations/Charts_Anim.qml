@@ -9,17 +9,19 @@ Item {
 
     property int a: 0
 
+    property int maxUp: 1000
+
     onAChanged: {
 
         if(isDown){
 
-            if(c >= 0){
+            if(c < 1000){  //   if(c >= 0)
 
                 c += 1
 
                 chartView.scrollUp(1)
 
-                km_ChartView.scrollUp(1)
+             //   km_ChartView.scrollUp(1)
 
             }
             else{
@@ -30,15 +32,15 @@ Item {
 
 
         }
-        else{
+        else{ // Up
 
-            if(c > 0){
+            if(c > -1 * maxUp){ // if(c > 0)
 
                 c -= 1
 
                 chartView.scrollDown(1)
 
-                km_ChartView.scrollDown(1)
+              //  km_ChartView.scrollDown(1)
 
             }
 
@@ -73,7 +75,7 @@ Item {
 
         a_Anim.stop()
 
-        if(c >= 0){
+        if(c >= -1000){ // if(c >= 0){
 
             a_Anim.start()
         }

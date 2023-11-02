@@ -60,6 +60,10 @@ Item {
 
 
 
+
+
+
+
     NumberAnimation {id: opacity_Anim;
 
         target: animation_target; property: "opacity"; from: 0; to: 1; duration:  time_Anim

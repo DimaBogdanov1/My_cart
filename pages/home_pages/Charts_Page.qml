@@ -205,7 +205,7 @@ Item{
 
                                           Custom_Label{
                                               horizontalAlignment: Text.AlignHCenter
-                                              text: qsTr("255") + mytrans.emptyString
+                                              text: qsTr("255.50") + mytrans.emptyString
 
                                           }
                                      }
@@ -218,8 +218,8 @@ Item{
                                          reverse: true
                                          measure_model: [0, 60, 100, 250]
                                          no_values_model: [0, 250]
-                                         x_start: 1.2 //7.2 - tmp_offset
-                                         x_finish: 10.8 //16.8 - tmp_offset
+                                         x_start: 7.2 //- tmp_offset // 1.2
+                                         x_finish: 16.8 // - tmp_offset // 10.8
                                          value: 10
                                          title: str.speed
 
@@ -237,8 +237,8 @@ Item{
                                          height:  parent.height
                                          measure_model: [-75, -35, -6, 0, 6, 35, 75]
                                          no_values_model: [-6, 6]
-                                         x_start: 19.2 - 4.8
-                                         x_finish: 33.3 - 4.8
+                                         x_start: 19.2 //- 4.8
+                                         x_finish: 33.3 //- 4.8
                                          value: 1
                                          title: str.level
 
@@ -253,11 +253,11 @@ Item{
                                          id: riht_Left_MeasureBlock
                                          width:  parent.width * 0.124 - measure_Row.spacing_value
                                          height:  parent.height
-                                         measure_model: [-30, -3, 0, 3, 30]
-                                         no_values_model: [-3, 3, 30]
-                                         no_x_index: 4
-                                         x_start: 35.8 - 3.95
-                                         x_finish: 45.5  - 3.95 //41.355 // x_start + 0.17 * (level_MeasureBlock.x_finish - level_MeasureBlock.x_start) / 0.2
+                                         measure_model: [-30, 0, 3, 30]
+                                         no_values_model: [ 3, 30]
+                                         no_x_index: 3
+                                         x_start: 35.8 //- 3.95
+                                         x_finish: 45.5  //- 3.95 //41.355 // x_start + 0.17 * (level_MeasureBlock.x_finish - level_MeasureBlock.x_start) / 0.2
                                          value: 1
                                          title: str.riht_Left
 
@@ -271,10 +271,10 @@ Item{
                                          id: riht_Right_MeasureBlock
                                          width:  parent.width * 0.124 - measure_Row.spacing_value
                                          height:  parent.height
-                                         measure_model: [-30, -3, 0, 3, 30]
-                                         no_values_model: [-30, -3, 3]
+                                         measure_model: [-30, -3, 0, 30]
+                                         no_values_model: [-30, -3]
                                          no_x_index: 0
-                                         x_start: 47.9 - 2.95
+                                         x_start: 47.9 //- 2.95
                                          x_finish: x_start + riht_Left_MeasureBlock.x_finish - riht_Left_MeasureBlock.x_start
                                          value: 1
                                          title: str.riht_Right
@@ -292,8 +292,8 @@ Item{
                                          height:  parent.height
                                          measure_model: [1510, 1512, 1520, 1538, 1546]
                                          no_values_model: [1510]
-                                         x_start: 60.8 - 2.3
-                                         x_finish: 73 - 2.3
+                                         x_start: 60.8 //- 2.3
+                                         x_finish: 73 //- 2.3
                                          value: 1
                                          title: str.sample
 
@@ -309,8 +309,8 @@ Item{
                                          width:  parent.width * 0.124 - measure_Row.spacing_value
                                          height:  parent.height
                                          measure_model: [-10, 0, 10]
-                                         x_start: 75.8 - 1
-                                         x_finish: 85.8 - 1
+                                         x_start: 75.8 //- 1
+                                         x_finish: 85.8 //- 1
                                          value: 8
                                          title: str.down_Left
 
@@ -326,7 +326,7 @@ Item{
                                          width:  parent.width * 0.124 - measure_Row.spacing_value
                                          height:  parent.height
                                          measure_model: [-10, 0, 10]
-                                         x_start: 88.2 - 0.5
+                                         x_start: 88.2 //- 0.5
                                          x_finish: x_start + down_Left_MeasureBlock.x_finish - down_Left_MeasureBlock.x_start
                                          value: 10
                                          title: str.down_Right
@@ -360,7 +360,7 @@ Item{
                                            width: parent.width
                                            height: parent.height
 
-                                           Item{
+                                           /*Item{
                                                 id: km_Item
                                                 width: km_MeasureBlock.width + measure_Row.spacing + 14.5
                                                 height: parent.height
@@ -415,10 +415,11 @@ Item{
                                                 }
                                            }
 
+                                           */
 
 
                                            Item{
-                                                width: parent.width - km_Item.width
+                                                width: parent.width //- km_Item.width
                                                 height: parent.height
                                                 clip: true
 
@@ -438,6 +439,82 @@ Item{
 
                                                    Charts_Anim{
                                                        id: chart_anim
+                                                   }
+
+                                                   Text {
+                                                          id: txt
+                                                          text: "Hello"
+                                                          color: "red"
+                                                      }
+
+                                                   /*LineSeries{
+                                                       id: series
+                                                       XYPoint { x: 10; y: 5  }
+                                                       XYPoint { x: 10; y: 1 }
+                                                       XYPoint { x: 15; y: 5 }
+                                                       XYPoint { x: 20; y: 10 }
+                                                       XYPoint { x: 25; y: 5 }
+                                                       XYPoint { x: 30; y: 20 }
+                                                       XYPoint { x: 40; y: 10 }
+                                                       axisX: x1
+                                                       axisY: y1
+
+                                                           // Создаём Границы По X Для Нашего Графика
+                                                           ValueAxis {
+                                                              id: x1
+                                                              min: 0
+                                                              max: 30
+                                                              tickType: ValueAxis.TicksDynamic
+                                                              tickInterval: 10
+                                                              labelFormat: "%i" // Делаем int Значения
+                                                              color: Style.light_Color
+                                                              gridLineColor: Style.light_Color  // Цвет Сетки
+                                                             // labelsColor: Style.primaryDark_Color // Цвет Чисел
+                                                             // labelsAngle: 90
+                                                             //labelsVisible: false
+
+                                                             // labelsFont: test_label.font// Копируем Шрифт С Вспомогательного Label
+                                                              labelsFont:Qt.font({pointSize: 1})
+
+                                                           }
+
+                                                           // Создаём Границы По Y Для Нашего Графика
+                                                           ValueAxis {
+                                                              id: y1
+                                                              min: 0
+                                                              max: 30
+                                                              tickType: ValueAxis.TicksFixed
+                                                              tickInterval: 10
+                                                              reverse: true
+
+                                                              labelsVisible: false
+                                                              //labelFormat: "%i" // Делаем int Значения
+                                                              //color: "red" //Style.light_Color //"#d0d0d0"//Style.light_Color //Style.secondaryText_Color
+                                                              gridLineColor: Style.light_Color //  "#d0d0d0"//Style.light_Color// Style.secondaryText_Color // Цвет Сетки
+                                                              //labelsColor: Style.primaryDark_Color
+                                                              labelsFont:Qt.font({pointSize: 1})
+                                                           }
+                                                   }
+
+                                                   */
+
+                                                      onWidthChanged: measure_Km.updatePointPosition();
+                                                      onHeightChanged: measure_Km.updatePointPosition();
+
+
+
+                                                   Measure_Km{
+                                                       id: measure_Km
+
+                                                       Component.onCompleted: {
+
+                                                          // km_ChartView.setAxisY(yKm_ValueAxis)
+
+                                                           create_RailsLine()
+
+                                                        //   create_KmLine(20)
+                                                       }
+
                                                    }
 
                                                    Measure_Lines{  // Скорость
@@ -659,12 +736,15 @@ Item{
                                 id: startStop_Button
                                 width: parent.width
                                 height: ui.height_Button
+                                outlined: true
                                 isIcon: true
-                                source: "qrc:/icons/"+ Style.theme + "/utils/play.svg"
+                                source: isCheck ? "qrc:/icons/"+ Style.theme + "/utils/pause.svg" : "qrc:/icons/"+ Style.theme + "/utils/play.svg"
+
 
                                 onClicked_Signal: {
 
-                                    if(outlined){
+                                    create_rotation_anim()
+                                   /* if(outlined){
 
                                         outlined = false
 
@@ -679,7 +759,7 @@ Item{
 
 
 
-                                    }
+                                    } */
 
                                 }
 
@@ -944,7 +1024,7 @@ Item{
 
                                           //chartView.scrollDown(100)
 
-                                          measure_Km.update_Pickets(100)
+                                          //measure_Km.update_Pickets(100)
 
                                       }
 
@@ -960,7 +1040,7 @@ Item{
 
                                          // chartView.scrollUp(100)
 
-                                          measure_Km.update_Pickets(-100)
+                                         // measure_Km.update_Pickets(-100)
 
                                       }
 

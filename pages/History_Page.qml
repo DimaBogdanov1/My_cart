@@ -14,6 +14,9 @@ Item {
     width: parent.width
     height: parent.height
 
+    property int tmp_Index: 0
+
+
     property var subscription: 0
 
     function addMessage(payload)
@@ -23,6 +26,8 @@ Item {
         if (messageModel.count >= 100)
             messageModel.remove(99)
     }
+
+
     MqttClient {
         id: client
         hostname: '127.0.0.1'
@@ -40,6 +45,8 @@ Item {
 
 
     }
+
+
     Column {
         width: parent.width
         height: parent.height
@@ -206,6 +213,62 @@ Item {
 
          }
 
+         Button{
+             width: 100
+             height: parent.height
+             text:  qsTr("back 1") + mytrans.emptyString
+             onClicked: {
+
+                 tmp_Index = page_Loader.open_back(tmp_Index, 0)
+
+
+
+             }
+
+         }
+
+         Button{
+             width: 100
+             height: parent.height
+             text:  qsTr("page 2") + mytrans.emptyString
+             onClicked: {
+
+              tmp_Index = page_Loader.open_next(1)
+
+             }
+
+         }
+
+         Button{
+             width: 100
+             height: parent.height
+             text:  qsTr("page 3") + mytrans.emptyString
+             onClicked: {
+
+              tmp_Index = page_Loader.open_next(2)
+
+             }
+
+         }
+
+
+    }
+
+
+    Page_Loader{
+
+        id: page_Loader
+
+        width: 300
+        height: 300
+
+        anchors.centerIn: parent
+        model: [
+            "qrc:/my_components/Page_Components/test_Page/Page_1.qml",
+            "qrc:/my_components/Page_Components/test_Page/Page_2.qml",
+            "qrc:/my_components/Page_Components/test_Page/Page_3.qml"
+         ]
+
 
     }
 
@@ -213,7 +276,10 @@ Item {
 
     Custom_Slider{
         width: 200
-        anchors.centerIn: parent
+        anchors.right: parent.right
+        anchors.top: parent.top
+
+        anchors.margins: 50
 
     }
 
