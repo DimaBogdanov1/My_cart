@@ -30,7 +30,7 @@ Item {
         Rectangle {
             width: sub_index_LoginPage === 0 ? parent.width : parent.width / 2
             height: parent.height
-            color: Style.light_Color
+            color: Style.background_Color
 
             Loader{
                 id: page_Loader
@@ -53,7 +53,7 @@ Item {
             width: sub_index_LoginPage === 0 ? 0 : parent.width / 2
             height: parent.height
             visible: sub_index_LoginPage !== 0
-            color: Style.background_Color
+            color: Style.light_Color
 
             Column{
                 width: parent.width

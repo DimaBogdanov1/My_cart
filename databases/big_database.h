@@ -9,6 +9,12 @@ class big_database : public QObject
 
 public:
 
+    QString task_Up_Nom;
+
+    QString task_Name_Direction;
+
+    QString task_Put_nom;
+
     explicit big_database(QObject *parent = nullptr);
 
     void set_roads();
@@ -25,6 +31,8 @@ public slots:  // Слоты
     void update_Type(int index);
 
     void check_Coordination(QString up_nom, QString name_Direction, QString put_nom, int Input_KM, int Input_M);
+
+    void get_Task_Param();
 
 signals:
 

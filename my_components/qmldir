@@ -50,6 +50,14 @@ List_Row 1.0 Lists/List_Row.qml
 List_Highlight 1.0 Lists/List_Highlight.qml
 List_With_Title 1.0 Lists/List_With_Title.qml
 
+Warning_Delegate 1.0 Lists/Delegates/Warning_Delegate.qml
+
+Road_ListElement 1.0 Lists/ListElements/Road_ListElement.qml
+
+Title_Sort 1.0 Lists/ListTitles/Title_Sort.qml
+Titles_With_Sorts 1.0 Lists/ListTitles/Titles_With_Sorts.qml
+Titles_With_Menu 1.0 Lists/ListTitles/Titles_With_Menu.qml
+
 # Keyboards
 Keyboard 1.0 Keyboards/Keyboard.qml
 
@@ -71,10 +79,14 @@ Admin_Block 1.0 Settings/Admin_Block.qml
 # Popups
 Content_Dialog 1.0 Popups/Content_Dialog.qml
 Loading_Popup 1.0 Popups/Loading_Popup.qml
+
 Menu_Popup 1.0 Popups/Menus/Menu_Popup.qml
 ChartsMore_Model 1.0 Popups/Menus/ChartsMore_Model.qml
 ChartsObjects_Model 1.0  Popups/Menus/ChartsObjects_Model.qml
 ChartsScale_Model 1.0 Popups/Menus/ChartsScale_Model.qml
+
+Test_menu 1.0 Popups/Menus/Table_Menu/Test_menu.qml
+
 Account_Popup 1.0 Popups/Account_Popup.qml
 Custom_Combobox 1.0 Popups/Custom_Combobox.qml
 Overlay_Popup 1.0 Popups/Overlay_Popup.qml
@@ -84,6 +96,8 @@ Calendar_Popup 1.0 Popups/Calendar_Popup.qml
 Push_Notifiaction 1.0  Popups/Notifications/Push_Notifiaction.qml
 Notification_Popup 1.0 Popups/Notifications/Notification_Popup.qml
 Counter_Notification 1.0 Popups/Notifications/Counter_Notification.qml
+
+UpNom_Helps 1.0 Popups/Helps/UpNom_Helps.qml
 
 # Calib_Elements
 Calib_Block 1.0 Calib_Elements/Calib_Block.qml

@@ -53,9 +53,53 @@ Item {
     }
 
 
-    function create_rotation_anim(){
+    function create_rotation_anim(isAll_Rotate){
 
-       if(isRotated){
+        var from_1, from_2, to_1, to_2
+
+        if(isAll_Rotate){
+
+            from_1 = -180
+
+            to_1 = 0
+
+            from_2 = 0
+
+            to_2 = -180
+
+        }
+        else{
+
+            from_1 = 90
+
+            to_1 = 0
+
+            from_2 = -90
+
+            to_2 = 0
+
+        }
+
+        if(isRotated){
+
+          rotate_Anim.from =  from_1 //animation_target.rotation
+
+          rotate_Anim.to = to_1
+
+          isRotated = false
+        }
+        else{
+
+          rotate_Anim.from = from_2//animation_target.rotation
+
+          rotate_Anim.to = to_2
+
+          isRotated = true
+
+        }
+
+
+    /*   if(isRotated){
 
            rotate_Anim.from =  90 //animation_target.rotation
 
@@ -71,7 +115,7 @@ Item {
 
            isRotated = true
 
-       }
+       } */
 
        rotate_Anim.stop()
 

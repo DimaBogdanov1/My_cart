@@ -18,6 +18,8 @@ Item{
 
     property int cur
 
+    property bool needHighlight: false
+
     onCurChanged: {
 
         if(listview.last_index === index){
@@ -31,8 +33,9 @@ Item{
 
     Hover_Anim{
         id: hover_Anim
-        width: parent.width - ui.big_spacing / 2
+        width: parent.width - ui.basic_spacing / 2
         height: parent.height
+        anchors.centerIn: parent
         outlined: true
         visible: listview !== null
         color: root_Item.color
@@ -43,7 +46,7 @@ Item{
 
         onClicked_Signal: {
 
-            if (!listview.moving){
+            if (!listview.moving && needHighlight){
 
                 if(listview !== null){
 
@@ -81,10 +84,11 @@ Item{
 
 
     Item {
-        width: parent.width - ui.big_spacing / 2/// 2
+        width: parent.width - ui.big_spacing /// 2
         height: parent.height //- 10 //ui.big_spacing / 2 //- 6 //ui.big_spacing / 2
-         anchors.right: parent.right
-        anchors.verticalCenter: parent.verticalCenter
+        // anchors.right: parent.right
+        anchors.centerIn: parent
+       // anchors.verticalCenter: parent.verticalCenter
     //    anchors.top: parent.top
       //  anchors.left: parent.left
         //anchors.leftMargin: ui.big_spacing / 3
@@ -149,7 +153,7 @@ Item{
 
         Component.onCompleted: {
 
-            if(listview !== null){
+            if(listview !== null && needHighlight){
 
                  if(listview.currentIndex === index){
 

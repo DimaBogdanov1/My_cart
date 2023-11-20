@@ -38,7 +38,13 @@
 My_pdf::My_pdf(QObject *parent) : QObject(parent)
 {
 
- broker_test();
+    m_client = new QMqttClient(this);
+
+    m_client->setHostname("127.0.0.1");
+    m_client->setPort(1883);
+
+    connect(m_client, &QMqttClient::stateChanged, this, &My_pdf::state_changed);
+
 
    // m_client = newQMqttClient(this);
      //  m_client->setHostname(ui->lineEditHost->text());
@@ -57,6 +63,12 @@ QTcpServer *tcpServer;
 
 void My_pdf::state_changed(){
 
+    const QString content = QDateTime::currentDateTime().toString()
+                    + QLatin1String(": State Change")
+                    + QString::number(m_client->state())
+                    + QLatin1Char('\n');
+
+qDebug() << "state_changed " + content;
 
 }
 
@@ -64,28 +76,25 @@ void My_pdf::state_changed(){
 
 void My_pdf::broker_test(){
 
- QMqttClient *m_client;
 
-    m_client = new QMqttClient(this);
 
-      m_client->setHostname("127.0.0.1");
-      m_client->setUsername("admin");
-      m_client->setPassword("public");
+   /* m_client = new QMqttClient(this);
 
-      m_client->setPort(1883);
+    m_client->setHostname("127.0.0.1");
+    m_client->setPort(1883);
 
-      connect(m_client, &QMqttClient::stateChanged, this, &My_pdf::state_changed);
+    connect(m_client, &QMqttClient::stateChanged, this, &My_pdf::state_changed);
 
- QMqttSubscription *m_sub;
+    QMqttSubscription *m_sub;
 
  //topic.setFilter("test");
    //auto subscription = m_client->subscribe(topic, qos0);
 
-   QMqttTopicFilter test_Topic{"sensor/width"};
+    QMqttTopicFilter test_Topic{"test_topic"};
 
-      m_client->subscribe(test_Topic, 1883);
+    m_client->subscribe(test_Topic, 1883);
 
-      connect(m_client, &QMqttClient::messageReceived, this, [this](const QByteArray &message, const QMqttTopicName &topic) {
+    connect(m_client, &QMqttClient::messageReceived, this, [this](const QByteArray &message, const QMqttTopicName &topic) {
              const QString content = QDateTime::currentDateTime().toString()
                          + " Received Topic: "
                          + topic.name()
@@ -97,6 +106,11 @@ void My_pdf::broker_test(){
 
              //ui->editLog->insertPlainText(content);
          });
+
+         */
+
+    qDebug() << "finish func";
+
 
       //qDebug() << "sssssssssssss";
 
@@ -128,93 +142,65 @@ void My_pdf::broker_test(){
 
 }
 
-void My_pdf::on_stoping_clicked()
-{
-    if(server_status==1){
-        foreach(int i,SClients.keys()){
-            QTextStream os(SClients[i]);
-            os.setAutoDetectUnicode(true);
-            os << QDateTime::currentDateTime().toString() << "\n";
-            SClients[i]->close();
-            SClients.remove(i);
-        }
-        tcpServer->close();
-      //  ui->textinfo->append(QString::fromUtf8("Сервер остановлен!"));
-        qDebug() << QString::fromUtf8("Сервер остановлен!");
-        server_status=0;
-    }
-}
+
+void My_pdf::test_slot(){
+
+    Chart_Work chart_work;
+
+    //emit Chart_Work->newPointCha;
+
+    chart_work.add_ChartPoint(0, 30, 30);
+    //  Chart_Work::add_ChartPoint(0, 30, 30);
 
 
-void My_pdf::init()
-{
+   // emit Chart_Work->add_ChartPoint(0, 30, 30);
 
- // https://github.com/valualit/QTcpServer01
-  tcpServer = new QTcpServer(this);
+   // emit chart_work->add  //  ->signalLogAppend("foo");
 
-        connect(tcpServer, SIGNAL(newConnection()), this, SLOT(newuser()));
 
-        if (!tcpServer->listen(QHostAddress::Any, 33333) && server_status==0) {
-            qDebug() <<  QObject::tr("Unable to start the server: %1.").arg(tcpServer->errorString());
-          //  ui->textinfo->append(tcpServer->errorString());
-        }
-        else {
-            server_status=1;
-            qDebug() << tcpServer->isListening() << "TCPSocket listen on port";
-         //   ui->textinfo->append(QString::fromUtf8("Сервер запущен!"));
-            qDebug() << QString::fromUtf8("Сервер запущен!");
-        }
+   // chart_work.add_ChartPoint(0, 30, 30);
 
-}
+    qDebug() << "aaaa";
 
-void My_pdf::newuser()
-{
-    if(server_status==1){
-        qDebug() << QString::fromUtf8("У нас новое соединение!");
-       // ui->textinfo->append(QString::fromUtf8("У нас новое соединение!"));
-        QTcpSocket* clientSocket=tcpServer->nextPendingConnection();
-        int idusersocs=clientSocket->socketDescriptor();
-        SClients[idusersocs]=clientSocket;
-        connect(SClients[idusersocs],SIGNAL(readyRead()),this, SLOT(slotReadClient()));
-    }
-}
-
-void My_pdf::slotReadClient()
-{
-    QTcpSocket* clientSocket = (QTcpSocket*)sender();
-    int idusersocs=clientSocket->socketDescriptor();
-    QTextStream os(clientSocket);
-    os.setAutoDetectUnicode(true);
-    os << "HTTP/1.0 200 Ok\r\n"
-          "Content-Type: text/html; charset=\"utf-8\"\r\n"
-          "\r\n"
-          "<h1>Nothing to see here</h1>\n"
-          << QDateTime::currentDateTime().toString() << "\n";
-    //ui->textinfo->append("ReadClient:"+clientSocket->readAll()+"\n\r");
-    // Если нужно закрыть сокет
-    clientSocket->close();
-    SClients.remove(idusersocs);
+    emit test_signal("qqqqqqq");
 }
 
 void My_pdf::print_pdf()
 {
 
-    Chart_Work* a = new Chart_Work();
+    broker_test();
+
+
+    /*Chart_Work* a = new Chart_Work();
 
     QThread *thread = new QThread;
 
     a->moveToThread(thread);
 
-    connect(thread, SIGNAL(started()), a, SLOT(openCSV()));
 
-    thread->start();
+     connect(thread, SIGNAL(started()), a, SLOT(openCSV()));
+
+     connect(a, &Chart_Work::openCSV, a, &Chart_Work::openCSV);
+
+
+     thread->start(); */
+
+
+
+     //QObject::connect(this, My_pdf::test_signal("www"), this, SLOT(test_slot()) );
+
+
+   // QObject::connect(&app, &QCoreApplication::aboutToQuit, &thread, &QThread::quit);
+
+
+
 
 
    // QPrinter printer;
     //printer.setOutputFileName("/Users/Shared/example.pdf");
     //printer.setOutputFormat(QPrinter::PdfFormat);
 
-    QString html =
+ /*   QString html =
     "<div align=right>"
        "City, 11/11/2015"
     "</div>"
@@ -238,15 +224,6 @@ void My_pdf::print_pdf()
 
     QPrinter printer(QPrinter::PrinterResolution);
 
-
-    /*QPrintDialog *dlg = new QPrintDialog(&printer,0);
-           if(dlg->exec() == QDialog::Accepted) {
-                   QImage img(":/icons/moon_stars_light.svg");
-                   QPainter painter(&printer);
-                   painter.drawImage(QPoint(0,0),img);
-                   painter.end();
-           }*/
-
    // QPainter painter(&printer);
 
     const QPoint imageCoordinates(0,0);
@@ -260,15 +237,8 @@ void My_pdf::print_pdf()
       for (int i=0; i<3; ++i) {
           painter.drawImage(imageCoordinates, image);
           pdfWriter.newPage();
-      }
+      } */
 
-
-   /* printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setPaperSize(QPrinter::A4);
-    printer.setOutputFileName("/Users/Shared/example.pdf");
-    printer.setPageMargins(QMarginsF(15, 15, 15, 15));
-
-    document.print(&printer); */
 
 }
 
@@ -283,61 +253,4 @@ void My_pdf::create_json(){
 
        qDebug() << doc.toJson();
 }
-
-void My_pdf::insertApi(QString str)
-{
-    QUrl serviceUrl = QUrl(str);
-    QNetworkRequest request(serviceUrl);
-    QJsonObject json;
-
-    json.insert("name", QString( "Amazing Pillow 92.10" ));
-    json.insert("price", QString( "199" ));
-    json.insert("description", QString( "The best pillow for amazing programmers." ));
-    json.insert("category_id", QString( "2" ));
-    json.insert("created",QString("2018-06-01 00:35:07"));
-    request.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
-
-    QNetworkAccessManager* networkManager = new QNetworkAccessManager(this);
-
-    connect(networkManager,SIGNAL(finished(QNetworkReply)),this,SLOT(replyFinished(QNetworkReply*)));
-
-
-    QJsonDocument doc(json);
-
-    QByteArray data = doc.toJson();
-
-    networkManager->post(request, data);
-
-    qDebug() << "json:" << json;
-}
-
-void My_pdf::readAPI()
-{
-    QNetworkRequest request(QUrl("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=obamacare+socialism"));
-
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    QNetworkAccessManager *m_nam=new QNetworkAccessManager();
-    QNetworkReply *reply = m_nam->get(request);
-
-    connect(reply, &QNetworkReply::finished, this, [this, reply] {
-    reply->deleteLater();
-
-    const QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
-    const QJsonArray array = doc.array();
-
-    for (const QJsonValue &value : array) {
-    qDebug() << value.toObject();
-   /* qDebug() << "EMPID:" << value.toObject().find("empId")->toString();
-    qDebug() << "NCODE:" << value.toObject().find("ncode")->toString();
-    qDebug() << "EMPCODE:" << value.toObject().find("empcode")->toString();
-    qDebug() << "STATUES:" << value.toObject().find("statues")->toString(); */
-    }
-
-    });
-}
-
-
-
-
 

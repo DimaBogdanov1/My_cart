@@ -13,17 +13,17 @@ public:
 
     explicit Accounts(QObject *parent = nullptr);
 
-    QSqlDatabase Database;
+    //QSqlDatabase Database;
 
-    QString account_Table = "ACCOUNTS";
+    inline static QString account_Table = "ACCOUNTS";
 
-    QString id = "ID";
+    inline static QString id = "ID";
 
-    QString login = "LOGIN";
+    inline static QString login = "LOGIN";
 
     QString password = "PASSWORD";
 
-    QString color = "COLOR";
+    inline static QString color = "COLOR";
 
     int ID_AuthorizationUser;
 
@@ -31,7 +31,9 @@ public:
 
     bool check_identity(QString login);
 
-    void updateUser(QString login, int color);
+    void updateUser(int id, QString login, int color);
+
+    static QList<QString> get_User(int id);
 
 public slots:
 
@@ -50,7 +52,7 @@ signals:
 
     void result_of_Authorization_signal(const bool& value);
 
-    void update_AuthorizationUser_signal(const QString& login, const int& color);
+    void update_AuthorizationUser_signal(const int& id, const QString& login, const int& color);
 
     void newUser_signal(const int& id, const QString& login, const int& password, const int& color);
 

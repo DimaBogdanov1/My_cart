@@ -3,6 +3,7 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtCharts 2.15
 import Style 1.0
+import MqttClient 1.0
 
 import Qt.labs.platform 1.1 as Labs
 
@@ -19,6 +20,8 @@ ApplicationWindow {
     readonly property int port: 1883
 
     property bool flipped: false
+
+    property var subscription: 0
 
     title: qsTr("Проект") + mytrans.emptyString
 
@@ -82,6 +85,25 @@ ApplicationWindow {
         source: "qrc:/fonts/Circular_Std_Bold.ttf"
 
     }
+
+    MqttClient {
+        id: client
+        hostname: '127.0.0.1'
+        port:  applicationWindow.port
+
+        function addMessage(measure_number, x, y)
+        {
+           // var fixed = 2
+
+            //console.log("measure_number = " + measure_number + " x = " + x.toFixed(fixed) + " y = " + y.toFixed(fixed))
+
+            Chart_Work.add_ChartPoint(measure_number, x, y)
+
+        }
+    }
+
+
+
 
 
     Keyboard{

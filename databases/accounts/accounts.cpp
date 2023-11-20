@@ -14,8 +14,8 @@
 
 Accounts::Accounts(QObject *parent) : QObject(parent)
 {
-    qDebug() << "Конструктор аккаунтов";
-    create_table();
+   // qDebug() << "Конструктор аккаунтов";
+    //create_table();
 }
 
 int new_color = 0;
@@ -29,7 +29,7 @@ bool Accounts::check_identity(QString login){
 
     qDebug().nospace() << "\n" << "Проверяем на идентичность логин " + login;
 
-    QSqlQuery query(Database);
+    QSqlQuery query(My_Database::get_db());
 
     query.prepare("SELECT " + this->color +  " FROM " + account_Table + " WHERE " + this->login + " = (:login)");
     query.bindValue(":login", login);
@@ -108,19 +108,19 @@ bool Accounts::check_identity(QString login){
 
 void Accounts::create_table() {
 
-    My_Database my_database;
+   // My_Database my_database;
 
-    this->Database = my_database.Database;
+   // this->Database = My_Database::get_db(); //my_database.Database;
 
-    if (!Database.open())
+    if (!My_Database::get_db().open())
     {
-        qDebug() << Database.lastError().text();
+        qDebug() << My_Database::get_db().lastError().text();
     }
     else{
 
         // query.prepare("CREATE TABLE IF NOT EXISTS " + account_Table + " ( ID INTEGER PRIMARY KEY AUTOINCREMENT, LABEL TEXT  NOT NULL)");
 
-         QSqlQuery query(Database);
+         QSqlQuery query(My_Database::get_db());
 
          query.prepare("CREATE TABLE IF NOT EXISTS " + account_Table + " ( " + id + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ login  + " TEXT , " + password + " INTEGER, " + color + " INTEGER )");
 
@@ -132,7 +132,7 @@ void Accounts::create_table() {
          qmlRegisterType<Colors_Profile>("com.Colors_Profile", 1, 0, "Colors_Profile");
 
 
-       //  qmlRegisterType<Test>("Core", 1, 0, "Test");
+       //  qmlRegisterType<Test>("Core", 1, 0, "Tes t");
 
         // qmlRegisterType<Profile_Colors>("org.example", 1, 0, "Profile_Colors_Model");
 
@@ -142,16 +142,46 @@ void Accounts::create_table() {
 
 }
 
+QList<QString> Accounts::get_User(int id){
+
+   // qDebug() << "Проверяем пользователя";
+
+    QList<QString> answer;
+
+    QSqlQuery query("SELECT " + Accounts::login + ", " + Accounts::color + " FROM " + Accounts::account_Table + " WHERE " + Accounts::id + " = " + QString::number(id) , My_Database::get_db());
+
+ //   query.prepare("SELECT " + this->login + ", " + this->color + " FROM " + account_Table + " WHERE " + this->id + " = 72"  );
+
+   // query.prepare("SELECT LOGIN, COLOR FROM ACCOUNTS WHERE ID = 72");
+
+    query.exec();
+
+    query.first();
+
+    answer.append(query.value(0).toString());
+
+    answer.append(query.value(1).toString());
+
+   // qDebug() << "Пользовтель по id " + QVariant(query.value(1).toInt()) .toString() ;
+
+                //updateUser(query.value(0).toInt(), login, new_color);
+
+     return answer;
+
+//    SELECT LOGIN, COLOR FROM ACCOUNTS WHERE ID = 72
+
+}
+
 void Accounts::get_All_Users(){
 
     qDebug() << "get alllllll";
 
-    My_Database my_database;
+    //My_Database my_database;
 
-    this->Database = my_database.Database;
+   // this->Database = My_Database::get_db(); //my_database.Database;
 
 
-    QSqlQuery query(Database);
+    QSqlQuery query(My_Database::get_db());
 
 
     query.prepare("SELECT * FROM " + account_Table);
@@ -160,7 +190,7 @@ void Accounts::get_All_Users(){
     {
         qDebug()<<"Ошибка открытия аккаунтов"<< query.lastError();
 
-        if(!Database.open()){
+        if(!My_Database::get_db().open()){
 
             qDebug()<<"Пустая бд";
 
@@ -182,11 +212,11 @@ void Accounts::get_All_Users(){
 
 }
 
-void::Accounts::updateUser(QString login, int color){
+void::Accounts::updateUser(int id, QString login, int color){
 
-   // ID_AuthorizationUser = id;
+    ID_AuthorizationUser = id;
 
-    emit update_AuthorizationUser_signal(login, color);
+    emit update_AuthorizationUser_signal(ID_AuthorizationUser, login, color);
 
 }
 
@@ -194,7 +224,7 @@ void Accounts::add_User(QString login, int password) {
 
     bool result;
 
-    QSqlQuery query(Database);
+    QSqlQuery query(My_Database::get_db());
 
     if(check_identity(login)){
 
@@ -214,7 +244,9 @@ void Accounts::add_User(QString login, int password) {
 
             query.prepare("SELECT " + this->password + ", " + this->id + " FROM " + account_Table + " WHERE " + this->login + " = (:login) AND "  + this->color + " = (:color)");
 
-            updateUser(login, new_color);
+            query.exec();
+
+            updateUser(query.value(0).toInt(), login, new_color);
 
             result = true;
 
@@ -237,7 +269,7 @@ void Accounts::check_Password(QString login, int password, int color){
 
     bool result;
 
-    QSqlQuery query(Database);
+    QSqlQuery query(My_Database::get_db());
 
     query.prepare("SELECT " + this->password + ", " + this->id + " FROM " + account_Table + " WHERE " + this->login + " = (:login) AND "  + this->color + " = (:color)");
     query.bindValue(":login", login);
@@ -258,9 +290,9 @@ void Accounts::check_Password(QString login, int password, int color){
 
             result = true;
 
-            // ID_AuthorizationUser = query.value(1).toInt();
+            ID_AuthorizationUser = query.value(1).toInt();
 
-            updateUser(login, color);
+            updateUser(ID_AuthorizationUser, login, color);
 
             qDebug() <<"Пароль подошёл";
         }
@@ -282,7 +314,7 @@ void Accounts::delete_User(int index) {
 
     qDebug() << "Id на удаление " +  QString::number(index);
 
-    QSqlQuery query(Database);
+    QSqlQuery query(My_Database::get_db());
 
     query.prepare("DELETE FROM " + account_Table + " WHERE ID = (:id)");
 

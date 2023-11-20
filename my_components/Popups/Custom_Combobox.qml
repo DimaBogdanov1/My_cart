@@ -1,5 +1,4 @@
 import QtQuick 2.15
-import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtGraphicalEffects 1.15
 
@@ -54,7 +53,7 @@ Column{
                 id:back_Rectangle
                 width: parent.width
                 height: parent.height
-                color: Style.background_Color
+                color: Style.light_Color //Style.background_Color
                 radius: ui.radius
 
                 Hover_Anim{
@@ -144,15 +143,14 @@ Column{
                     verticalCenter: parent.verticalCenter
                     centerIn: null
                  }
-                   rotation: -90
-                 source: "qrc:/icons/light_theme/top_bar/arrow_left.svg"
+                 source: "qrc:/icons/" + Style.theme + "/utils/arrow_bottom_mini.svg"
            }
 
            popup: Popup {
                  id:popup
                  //y: equipmentList.height + 4
                  width: equipmentList.width
-                 height: contentItem.implicitHeigh
+                // height: contentItem.implicitHeight
                 // clip: true
                  modal: true
                  padding: ui.basic_spacing / 2

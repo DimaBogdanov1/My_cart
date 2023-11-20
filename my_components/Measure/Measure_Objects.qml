@@ -88,6 +88,50 @@ Item {
 
     }
 
+    function help_create_IsolatedJoin(x, y, height){
+
+        var arr_top = [ [x , y + height], [x + offset / 2, y + height]]
+
+        createLine_Structure(arr_top, "right_struct", Style.warning_Color, ChartView.SeriesTypeLine)
+
+
+        var arr_bottom = [ [x , y ], [x + offset / 2, y]]
+
+        createLine_Structure(arr_bottom, "right_struct", Style.warning_Color, ChartView.SeriesTypeLine)
+
+    }
+
+    function createIsolated_Joint_Structure(y_coord)
+    {
+        var a =  x_start - offset / 2
+
+        var x_offset = a - offset / 2
+
+        var y_offset = y_coord - arrow_y_offset
+
+
+
+
+
+        var b =   x_start + width_Line + offset / 2  //x_start + width_Line + arrow_offset
+
+        var c = b + offset / 2
+
+
+        var height_value = 3
+
+
+        var arr_right = [ [b + offset / 4, y_coord ], [b + offset / 4, y_coord + height_value]]
+
+        createLine_Structure(arr_right, "right_struct", Style.warning_Color, ChartView.SeriesTypeLine)
+
+        var arr_center = [ [b - offset / 4 , y_coord + height_value / 2], [b + offset / 4, y_coord + height_value / 2]]
+
+        createLine_Structure(arr_center, "right_struct", Style.warning_Color, ChartView.SeriesTypeLine)
+
+        help_create_IsolatedJoin(b, y_coord, height_value)
+    }
+
     function createArtificial_Structure(y_coord)
     {
         var a =  x_start - offset / 2//x_start - arrow_offset

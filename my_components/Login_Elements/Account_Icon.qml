@@ -16,28 +16,59 @@ Item{
 
     signal clicked_Signal
 
-    property bool big
-
     property bool isIcon
 
     property string source: "qrc:/icons/" + Style.theme + "/top_bar/plus.svg"
 
+    property int authorization_id: 0
+
     property int color_value: 0
 
-    property string name: "Dima"
+   // property string name: "Dima"
 
-    property string surname: "Bogdanov"
+   // property string surname: "Bogdanov"
 
     property string login: "Dima Bogdanov"
 
     property var colors_accont //: ["#BEBDFD", "#FF897F", "#99D7C4", "#FEC338", "#FF8E52", "#9B84DE"]
 
-    property int noti_size: 15
-
+    property int size: 1
 
     width: parent.width
-    height:  root_Item.big ? ui.height_Button * 2 : ui.height_Button
+    height:  parent.height // root_Item.big ? ui.height_Button * 2 : ui.height_Button
 
+    enum Size {
+           Small,
+           Medium,
+           Big
+       }
+
+    Component.onCompleted: {
+
+        switch(size){
+
+        case Account_Icon.Size.Small:
+
+            root_Item.height = ui.height_Button -  8 //(ui.height_Button - ui.height_RowList)
+
+
+            break
+
+        case Account_Icon.Size.Medium:
+
+            root_Item.height = ui.height_Button
+
+            break
+
+
+        case Account_Icon.Size.Big:
+
+            root_Item.height = ui.height_Button * 2
+
+            break
+
+        }
+    }
 
     Colors_Profile {
         id:colors_class
@@ -53,7 +84,7 @@ Item{
            id:account_Rectangle
            width:  parent.width
            height: parent.height
-           color: isIcon ? "white" : colors_class.colors_List[root_Item.color_value]
+           color: isIcon ? Style.light_Color : colors_class.colors_List[root_Item.color_value]
            layer.enabled: true
            layer.effect: Mask_Rectangle{target: account_Rectangle; radius: account_Rectangle.width / 2}
 
@@ -76,7 +107,7 @@ Item{
                 verticalAlignment: Text.AlignVCenter
                 font.weight:  ui.font_weight_Bigsize
                // font.family: customTitle_FontLoader.name
-                font.pixelSize: root_Item.big ? 30 : 15 //ui.text_MiddleSize
+                font.pixelSize:  (root_Item.height * 15) /  ui.height_Button //  root_Item.big ? 30 : 15 //ui.text_MiddleSize
                 text: isIcon ? "" : createText(login)
                 visible: !isIcon
                 color: "white"

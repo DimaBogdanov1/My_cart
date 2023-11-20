@@ -25,6 +25,10 @@ Item {
 
         if (messageModel.count >= 100)
             messageModel.remove(99)
+
+
+        Chart_Work.add_ChartPoint(0, 10, 10)
+
     }
 
 
@@ -99,7 +103,8 @@ Item {
         text: "Subscribe"
         onClicked: {
 
-            subscription = client.subscribe("test_topic")
+           // sensors/+/temperature
+           subscription = client.subscribe("test_topic/+/ww")
 
             subscription.messageReceived.connect(addMessage)
         }
@@ -130,21 +135,7 @@ Item {
         }
     }
 
-        Label {
-            function stateToString(value) {
-                if (value === 0)
-                    return "Disconnected"
-                else if (value === 1)
-                    return "Connecting"
-                else if (value === 2)
-                    return "Connected"
-                else
-                    return "Unknown"
-            }
-            color: "white"
-            text: "Status:" + stateToString(client.state) + "(" + client.state + ")"
-            enabled: client.state === MqttClient.Connected
-        }
+
 
 
     }

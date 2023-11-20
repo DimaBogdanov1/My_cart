@@ -63,7 +63,11 @@ int main(int argc, char *argv[])
 
     Accounts accounts;
 
+    accounts.create_table();
+
     Warnings warnings;
+
+    warnings.create_table();
 
 
     qmlRegisterSingletonType(QUrl("qrc:/Style.qml"), "Style", 1, 0, "Style"); // Регестрируем Тип Style В QML Для Изменения Темы В Приложении

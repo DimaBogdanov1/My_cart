@@ -66,7 +66,7 @@ bool check_coord_from_database(QString up_nom, QString put_nom, QString Input_KM
     }
 }
 
-QSqlQuery create_query(QString sql_file, bool prepare){
+QSqlQuery create_query(QString sql_file, bool check){
 
     QString NF= sql_file;
 
@@ -82,7 +82,7 @@ QSqlQuery create_query(QString sql_file, bool prepare){
 
         query.clear();
 
-        if(prepare){
+        if(check){
 
             query.prepare(FileSQL.readAll());
 
@@ -146,9 +146,21 @@ void big_database::check_Coordination(QString up_nom, QString name_Direction, QS
 
     if(result){ // Приёмка Этого Сигнала Будет На Другом Слое
 
-        emit newTask_signal(up_nom, name_Direction, put_nom);
+        task_Up_Nom = up_nom;
+
+        task_Name_Direction = name_Direction;
+
+        task_Put_nom = put_nom;
+
+     //   emit newTask_signal(up_nom, name_Direction, put_nom);
 
     }
+}
+
+void big_database::get_Task_Param(){
+
+    emit newTask_signal(task_Up_Nom, task_Name_Direction, task_Put_nom);
+
 }
 
 void big_database::update_numRoad(QString combo_text){
@@ -286,7 +298,7 @@ void big_database::set_roads(){
     {
         nameRoad = query.value("ID").toString() + " - " + query.value("NAME").toString();
 
-        //qDebug() << st;
+      //  qDebug() << nameRoad;
 
         if (query.value("ID").toString() == numRoad_picked) {id=nom;}
         nom++;

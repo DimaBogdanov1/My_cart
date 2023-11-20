@@ -51,32 +51,34 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
+#include <measures/chart_work.h>
 #include "qmlmqttclient.h"
 
 
-QmlMqttClient::QmlMqttClient(QObject *parent)
-    : QMqttClient(parent)
-{
+QmlMqttClient::QmlMqttClient(QObject *parent): QMqttClient(parent) {
+
 }
 
 QmlMqttSubscription* QmlMqttClient::subscribe(const QString &topic)
 {
     auto sub = QMqttClient::subscribe(topic, 0);
+
     auto result = new QmlMqttSubscription(sub, this);
     return result;
 }
 
-QmlMqttSubscription::QmlMqttSubscription(QMqttSubscription *s, QmlMqttClient *c)
-    : sub(s)
-    , client(c)
-{
+QmlMqttSubscription::QmlMqttSubscription(QMqttSubscription *s, QmlMqttClient *c) : sub(s), client(c) {
+
     connect(sub, &QMqttSubscription::messageReceived, this, &QmlMqttSubscription::handleMessage);
+
     m_topic = sub->topic();
+
 }
 
-QmlMqttSubscription::~QmlMqttSubscription()
-{
+QmlMqttSubscription::~QmlMqttSubscription(){
+
 }
+
 
 void QmlMqttSubscription::handleMessage(const QMqttMessage &qmsg)
 {
@@ -84,43 +86,45 @@ void QmlMqttSubscription::handleMessage(const QMqttMessage &qmsg)
 
     QString message = qmsg.payload();
 
-    qDebug() << "wwwwwwwwwww " + message;
-
-    QJsonDocument jsonResponse = QJsonDocument::fromJson(message.toUtf8());
-
-    QJsonObject jsonObject = jsonResponse.object();
-
-    QJsonObject bookHeavyInfo = jsonObject["Address"].toObject();
+   // qDebug().nospace() << "\n" <<"Пришло JSON сообщение ";
 
 
-    QString answer =  bookHeavyInfo["Street"].toString();
+    //QJsonDocument doc(message);
 
-    qDebug() << "Answer = " + answer;
+    QJsonDocument doc = QJsonDocument::fromJson(message.toUtf8());
+
+    QString formatted = doc.toJson(QJsonDocument::Indented);
+
+  //  qWarning().noquote() << formatted;
 
 
 
-   // QJsonDocument jsonmsg = new QJsonDocument(qmsg.payload().toStdString());
+   // QJsonDocument jsonResponse = QJsonDocument::fromJson(message.toUtf8());
 
-  //  QJsonObject jsonmsg = new QJsonObject(new QString(qmsg.payload()));
+    QJsonObject jsonObject = doc.object();
 
+    QJsonObject bookHeavyInfo = jsonObject[title_JSON].toObject();
 
-   // QJsonDocument jsonmsg = new QJsonDocument(qmsg);
+    for(int i = 0; i < 6; i++){
 
-  /*  QJsonDocument sd = QJsonDocument::fromJson(qmsg);
+        float value_x = round( (bookHeavyInfo[titles_List.at(i)].toString()).toFloat()  * 10) / 10.0;
 
-    qWarning() << sd.isNull(); // <- print false :)
-    QJsonObject sett2 = sd.object();
-    qWarning() << sett2.value(QString("title")); */
+        emit messageReceived(i, value_x, 0);
 
-  /*  QJsonDocument d = QJsonDocument::fromJson(qmsg);
-
-          QJsonObject sett2 = d.object();
-          QJsonValue value = sett2.value(QString("appName"));
-          qWarning() << value;
-          QJsonObject item = value.toObject();
-          qWarning() << tr("QJsonObject of description: ") << item;
-                  */
+    }
 
 
-    emit messageReceived(answer);
+   /* QJsonObject bookHeavyInfo = jsonObject[title_JSON].toObject();
+
+   // QString level =  bookHeavyInfo[level_Title].toString();
+
+    float level = round( (bookHeavyInfo[level_Title].toString()).toFloat()  * 10) / 10.0;
+
+    qDebug() << "level = " + QString::number(level);
+
+    emit messageReceived(0, level, 0);
+
+    */
+
+
 }

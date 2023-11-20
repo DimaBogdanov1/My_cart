@@ -4,12 +4,15 @@ import Style 1.0
 import my_components 1.0
 
 Item{
+    id: root_Item
     width: parent.width
     height: ui.height_Button
 
     property string text_1
 
     property string text_2
+
+    property string color:  Style.background_Color
 
     Highlight_Glow{id: glow; target: bg_Rectangle}
 
@@ -18,7 +21,7 @@ Item{
         id: bg_Rectangle
         width: parent.width
         height: ui.height_Button
-        color: Style.background_Color
+        color: root_Item.color //Style.background_Color
         radius: ui.radius
 
         Hover_Anim{
@@ -29,7 +32,7 @@ Item{
 
             onClicked_Signal: {
 
-               button_Anim.create_rotation_anim()
+               button_Anim.create_rotation_anim(true)
 
             }
 

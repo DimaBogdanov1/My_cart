@@ -14,7 +14,7 @@ Item {
 
     property int index_Page: -1
 
-    property int sub_index_HomePage: 1 //2  // Я его сюда вынес чисто из за флипа на старт мы падаем сюда
+    property int sub_index_HomePage: 2 //1 //2  // Я его сюда вынес чисто из за флипа на старт мы падаем сюда
 
     readonly property var sourcePages_Array: [
                                                "../pages/Home_Page.qml",
@@ -135,8 +135,8 @@ Item {
                       icon_checked_path: "qrc:/icons/"+ Style.theme + "/navigation/question_accent.svg"
                       onClicked_Signal: {
 
-                          push_Notification.open()
-                         // opacity_Anim.create_page_anim(5)  // Переходим В Справку
+                         // push_Notification.open()
+                          opacity_Anim.create_page_anim(5)  // Переходим В Справку
 
                       }
                   }
@@ -214,7 +214,9 @@ Item {
                    Connections{
                        target: Accounts
 
-                       function onUpdate_AuthorizationUser_signal(login, color){
+                       function onUpdate_AuthorizationUser_signal(id, login, color){
+
+                           authorization_Account_Icon.authorization_id = id
 
                            authorization_Account_Icon.login = login
 

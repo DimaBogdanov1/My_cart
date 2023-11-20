@@ -21,7 +21,7 @@ Item{
             width: parent.width / 2
             height: parent.height
             radius: ui.radius
-            color: Style.light_Color
+            color: Style.background_Color //Style.light_Color
 
             Column{ // Создаём Основную Колонку
                 width: 450
@@ -50,7 +50,7 @@ Item{
 
                 }*/
 
-                Custom_Row_ComboBox{
+             /*   Custom_Row_ComboBox{
                     id: road_ComboBox
                     width: parent.width
                     height: ui.block_height
@@ -73,47 +73,46 @@ Item{
 
                         big_db.update_numRoad(num_Value)
                     }
+                }*/
+
+                Custom_Row_ComboBox{
+                    id: road_ComboBox
+                    width: parent.width
+                    height: ui.block_height
+                    source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
+                    //title: qsTr("Код дороги") + mytrans.emptyString
+                    model:ListModel {
+
+                        ListElement {
+                            title: "Код дороги"
+                            values: []
+
+                        }
+
+                    }
+
+
+                    property int num_Value: 1
+
+                    onChange_index_signal: {
+
+                        if(index_model == 0){
+
+                            num_Value = road_ComboBox.model.get(0).values.get(index).value.split(" - ")[0];
+
+                            //num_Value = road_ComboBox.model.get(index).value.split(" - ")[0];
+
+                         //  toast.show(num_Value[0].toString(), 3000, 1)
+
+                           putNom_ListModel.clear()
+
+                           upNom_ListModel.clear()
+
+                           big_db.update_numRoad(num_Value)
+                        }
+                    }
+
                 }
-
-                 /*Row{
-                     width: parent.width
-                     height: ui.block_height
-                     spacing: ui.basic_spacing
-
-                     Custom_Icon{
-                         height: parent.height
-                         source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
-
-                      }
-
-
-                     Custom_Combobox{
-                         id: road_ComboBox
-                         width: parent.width - ui.icon_nav_size - ui.basic_spacing
-                         height: ui.height_Button
-                         title: qsTr("Код дороги") + mytrans.emptyString
-                         model: ListModel {}
-
-
-                         onCurrentIndexChanged: {
-
-                             var num_Value = road_ComboBox.model.get(currentIndex).value.split(" - ");
-
-                           //  toast.show(num_Value[0].toString(), 3000, 1)
-
-                             putNom_ListModel.clear()
-
-                             upNom_ListModel.clear()
-
-                             big_db.update_numRoad(num_Value[0])
-                         }
-
-                     }
-
-
-                 }
-
-                 */
 
                 Custom_Tabs{
                      width: parent.width
@@ -131,20 +130,104 @@ Item{
                      }
                  }
 
-                 Row{
+                  /*Row{
+                     id: row
                      width: parent.width
                      height: 150
                      spacing: ui.basic_spacing
 
-                     Rectangle{
+
+                     function listModelSort(listModel, compareFunction) {
+
+                         let indexes = [ ...Array(listModel.count).keys() ]
+
+                         indexes.sort( (a, b) => compareFunction( listModel.get(a), listModel.get(b) ) )
+                         let sorted = 0
+
+                         console.log("11111111111")
+
+                         while ( sorted < indexes.length && sorted === indexes[sorted] ) sorted++
+
+                         console.log(listModel.get(0).code)
+
+                         if ( sorted === indexes.length ) return
+
+                         for ( let i = sorted; i < indexes.length; i++ ) {
+                             listModel.move( indexes[i], listModel.count - 1, 1 )
+                             listModel.insert( indexes[i], { } )
+                         }
+
+                         listModel.remove( sorted, indexes.length - sorted )
+
+                         console.log("wwwwwwwwwwwww")
+
+                     }
+
+                     Column{
+                         width: 300
+                         height: parent.height
+
+                         Row{
+                             width: parent.width
+                             height: parent.height / 2
+
+                             Button {
+                                 width: parent.width / 2
+                                         text: qsTr("  По возрастанию  ")
+                                         onClicked: row.listModelSort( upNom_ListModel,
+                                                                   (a, b) => (a.code - b.code) )
+
+
+                                     }
+
+                             Button {
+                                 width: parent.width / 2
+
+                                         text: qsTr("  По убыванию  ")
+                                         onClicked: row.listModelSort( upNom_ListModel,
+                                                                   (a, b) => (b.code - a.code) )
+
+
+                                     }
+                         }
+
+                         Row{
+                             width: parent.width
+                             height: parent.height / 2
+
+                             Button {
+                                 width: parent.width / 2
+                                         text: qsTr("  По возрастанию  ")
+                                         onClicked: row.listModelSort( upNom_ListModel,
+                                                                   (a, b) => a.name.localeCompare(b.name) )
+
+
+                                     }
+
+                             Button {
+                                 width: parent.width / 2
+
+                                         text: qsTr("  По убыванию  ")
+                                         onClicked: row.listModelSort( upNom_ListModel,
+                                                                   (a, b) => - a.name.localeCompare(b.name)  )
+
+
+                                     }
+                         }
+
+                     }
+
+
+
+                    Rectangle{
                          width: parent.width //- ui.basic_spacing / 2
                          height: parent.height
-                         color: Style.background_Color
+                         color:  Style.light_Color // Style.background_Color
                          radius: ui.radius
                          clip: true
 
                          Column{
-                             width: parent.width - ui.big_spacing
+                             width: parent.width //- ui.big_spacing
                              height:  parent.height - ui.basic_spacing / 2
                              anchors.centerIn: parent
                              spacing: ui.border_Size
@@ -165,9 +248,7 @@ Item{
                                 height: parent.height - title_Row.height - ui.border_Size * 2
                                 model: ListModel{id: upNom_ListModel}
 
-                             /*   highlight: Rectangle {
-                                          color: 'grey'
-                                } */
+
 
                                 delegate: List_Row{
                                     listview: list
@@ -175,6 +256,7 @@ Item{
                                     model: [code, name]
                                     sizes: title_Row.sizes
                                     cur: list.currentIndex
+                                    needHighlight: true
 
                                 }
 
@@ -194,9 +276,130 @@ Item{
                      }
 
 
-                 }
 
-                 Row{
+                 }*/
+
+                 List_With_Title{
+                    id: list
+                    width: parent.width
+                    height: 150
+                    noTitle: true
+                    color: Style.light_Color
+                    title_name_model: [ qsTr("Код"), qsTr("Направление")]
+                    title_size_model: [0.3, 0.7]
+                    title_Type: List_With_Title.Title_Types.Title_Sort_All
+
+                    sort_func: [
+
+                        [(a, b) => (a.code - b.code),  (a, b) => (b.code - a.code)],
+                        [(a, b) => a.name.localeCompare(b.name),   (a, b) => - a.name.localeCompare(b.name)],
+                    ]
+
+
+                    model: ListModel{id: upNom_ListModel}
+
+                    delegate: List_Row{
+                        listview: list.get_list()
+                        width: list.width
+                        model:[code, name]
+                        sizes: list.title_size_model
+                        needHighlight: true
+                        cur: list.currentIndex
+
+
+                    }
+
+                    function sort(index, isAscending){
+
+                        listModelSort(list.model, list.sort_func[index][isAscending])
+
+                    }
+
+                    onCurrentIndexChanged: {
+
+                       // toast.show(currentIndex.toString(), 3000, 1)
+
+                        putNom_ListModel.clear()
+
+                        big_db.update_putNom(upNom_ListModel.get(currentIndex).code)
+                    }
+                }
+
+
+                 List_With_Title{
+                    id: list2
+                    width: parent.width
+                    height: 150
+                    noTitle: true
+                    color: Style.light_Color
+                    title_name_model: [ qsTr("Путь"), qsTr("Тип")]
+                    title_size_model: [0.3, 0.7]
+                    title_Type: List_With_Title.Title_Types.Title_Sort_All
+
+                    sort_func: [
+
+                        [(a, b) => (a.put - b.put),  (a, b) => (b.put - a.put)],
+                        [(a, b) => a.name.localeCompare(b.name),   (a, b) => - a.name.localeCompare(b.name)],
+                    ]
+
+
+                    model: ListModel{id: putNom_ListModel}
+
+                    delegate: List_Row{
+                        listview: list2.get_list()
+                        width: list2.width
+                        model:[put, type]
+                        sizes: list2.title_size_model
+                        needHighlight: true
+                        cur: list2.currentIndex
+
+
+                    }
+
+                    function sort(index, isAscending){
+
+                        listModelSort(list2.model, list2.sort_func[index][isAscending])
+
+                       /* var c = [ [ (a, b) => (a.put - b.put),  (a, b) => (b.put - a.put)] ]
+
+                        switch(index){
+
+                        case 0:
+
+                            if(isAscending){
+
+                                listModelSort(putNom_ListModel, c[0][0])
+                            }
+                            else{
+
+                                console.log("rrrrrrrrrrrr")
+                                listModelSort(putNom_ListModel, (a, b) => (b.put - a.put))
+
+                            }
+
+                            break
+
+                        case 1:
+
+                            if(isAscending){
+
+                                listModelSort(putNom_ListModel, (a, b) => (b.type + a.type))
+                            }
+                            else{
+
+                                listModelSort(putNom_ListModel, (a, b) => (b.type - a.type))
+
+                            }
+
+                            break
+                        }
+
+                        */
+
+                    }
+                }
+
+                 /*Row{
                      width: parent.width
                      height: 150
                      spacing: ui.basic_spacing
@@ -204,12 +407,12 @@ Item{
                      Rectangle{
                          width: parent.width
                          height: 150
-                         color: Style.background_Color
+                         color: Style.light_Color //Style.background_Color
                          radius: ui.radius
                          clip: true
 
                          Column{
-                             width: parent.width - ui.big_spacing
+                             width: parent.width //- ui.big_spacing
                              height:  parent.height - ui.basic_spacing / 2
                              anchors.centerIn: parent
                              spacing: ui.border_Size
@@ -238,6 +441,7 @@ Item{
                                     model: [put, type]
                                     sizes: title_Row2.sizes
                                     cur: list2.currentIndex
+                                    needHighlight: true
 
                                 }
 
@@ -248,9 +452,12 @@ Item{
 
                  }
 
-                 Custom_Text_Arrow{
+                 */
+
+                Custom_Text_Arrow{
                     id: km_Text_Arrow
                     height: ui.height_Button
+                    color: Style.light_Color
                  }
 
                  Custom_Row_TextField{
@@ -281,7 +488,7 @@ Item{
                      id: start_Button
                      width: parent.width
                      icon_with_Text: true
-                     source: "qrc:/icons/" + Style.theme + "/top_bar/arrow_right_1_white.svg" // "qrc:/icons/" + Style.theme + "/navigation/home.svg"
+                     source:  "qrc:/icons/" + Style.theme + "/utils/arrow_right_mini_white.svg" // "qrc:/icons/" + Style.theme + "/navigation/home.svg"
                      text:  qsTr("Продолжить") + mytrans.emptyString
                      onClicked_Signal: {
 
@@ -307,7 +514,8 @@ Item{
         Rectangle{
             width: parent.width / 2
             height: parent.height
-            //color: "red"
+            radius: ui.radius
+            color: Style.light_Color
 
 
 
@@ -328,11 +536,11 @@ Item{
                console.log("Код = " + upNom_ListModel.get(list.currentIndex).code    ) // + " Направление = " + putNom_ListModel.get(list.currentIndex) + " Путь = " + list2.get(list2.currentIndex))
 
 
-               finish_Task_Loader.item.picked_siteID = road_ComboBox.num_Value
+           //    finish_Task_Loader.item.picked_siteID = road_ComboBox.num_Value
 
-               finish_Task_Loader.item.picked_upNom = upNom_ListModel.get(list.currentIndex).code
+         //      finish_Task_Loader.item.picked_upNom = upNom_ListModel.get(list.currentIndex).code
 
-               finish_Task_Loader.item.picked_putNom = putNom_ListModel.get(list2.currentIndex).put
+           //    finish_Task_Loader.item.picked_putNom = putNom_ListModel.get(list2.currentIndex).put
 
                index_Task = 1 // Переход На Финишное Завершение Задания
 
@@ -348,7 +556,11 @@ Item{
 
        function onNewRoad_signal(nameRoad){
 
-           road_ComboBox.model.append({"value": nameRoad})
+           road_ComboBox.model.get(0).values.append({ "value": nameRoad })
+
+        //   road_ComboBox.model.values.append({"value": nameRoad})
+
+        //   road_ComboBox.model.append({"value": nameRoad})
 
        }
 
@@ -364,9 +576,10 @@ Item{
 
            putNom_ListModel.append({"put": put, "type": type})
 
-           km_Text_Arrow.text_1 = km_start + " км " + m_start + " м "
 
-           km_Text_Arrow.text_2 =  km_end + " км " + m_end + " м"
+           km_Text_Arrow.text_1 = km_start + str.km + " " + m_start + str.meter
+
+           km_Text_Arrow.text_2 =  km_end + str.km + " " + m_end + str.meter
 
        }
 

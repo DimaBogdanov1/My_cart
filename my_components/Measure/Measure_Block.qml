@@ -45,6 +45,7 @@ Item {
 
     property bool reverse
 
+    property int tmp_offset: 24
 
 
     function create_model(){
@@ -245,15 +246,47 @@ Item {
                  width: parent.width
                  height:  parent.height / 2  //- ui.border_Size / 2
 
-                 Custom_Label{
-                     id: label
-                     horizontalAlignment: Text.AlignHCenter
-                     font.pixelSize: 12 //ui.text_SmallSize
-                   //  color: Style.accent_Color // Меняем Цвет Текста
-                     text: title + ": " + value
+                 Item{
+                     width: title_Label.width + tmp_offset // 36 - это значение width на сколько влезет value
+                     height:  parent.height
+                     anchors.centerIn: parent
+
+                    // color: "red"
+
+                     Item{
+                        width: parent.width // 2
+                        height:  parent.height
+
+                        Custom_Rectangle_Label {
+                            id: title_Label
+                           // width: parent.width / 2
+                            height: parent.height
+                            needBack: false
+                            anchors.left: parent.left
+                            pixel_size:  ui.text_miniSize
+                            text: title + ": " //+ value
+
+                        }
+
+                        Custom_Rectangle_Label {
+                            id: value_Label
+                            width: tmp_offset - 4 //parent.width / 2
+                            height: parent.height
+                            needBack: false
+                            color:"green"
+
+                            horizontal: Text.AlignLeft //Text.AlignRight // Text.AlignLeft
+
+                            anchors.right: parent.right
+                            pixel_size:  ui.text_miniSize
+                            text: value //"-30.54" //value
+
+                        }
+
+                     }
+
 
                  }
-
 
 
              }

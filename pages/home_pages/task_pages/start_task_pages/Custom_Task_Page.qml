@@ -18,7 +18,7 @@ Item{
             width: parent.width / 2
             height: parent.height
             radius: ui.radius
-            color: Style.light_Color
+            color: Style.background_Color //Style.light_Color
 
             Column{ // Создаём Основную Колонку
                 width: 450
@@ -108,13 +108,26 @@ Item{
                     }
                 }
 
-
                 Custom_Row_ComboBox{
                     width: parent.width
                     height: ui.block_height
                     source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
-                    title: qsTr("Ширина колеи") + mytrans.emptyString
-                    model: ["1520 мм", "1524 мм", "1435 мм", "1680 мм"]
+                    model:ListModel {
+
+                        ListElement {
+                            title: "Ширина колеи"
+                            values: [
+                                ListElement { value: "1520 мм" },
+                                ListElement { value: "1524 мм" },
+                                ListElement { value: "1435 мм" },
+                                ListElement { value: "1680 мм" }
+
+                                ]
+
+                        }
+
+                    }
+
 
                 }
 
@@ -122,8 +135,19 @@ Item{
                     width: parent.width
                     height: ui.block_height
                     source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
-                    title: qsTr("Виды шпал") + mytrans.emptyString
-                    model: [qsTr("После 1996 г.") + mytrans.emptyString ,qsTr("До 1996 г.") + mytrans.emptyString]
+                    model:ListModel {
+
+                        ListElement {
+                            title: "Виды шпал"
+                            values: [
+                                ListElement { value: "После 1996 г." },
+                                ListElement { value: "До 1996 г." }
+                                ]
+
+                        }
+
+                    }
+
 
                 }
 
@@ -145,6 +169,15 @@ Item{
             }
         }
 
+        Rectangle{
+            width: parent.width / 2
+            height: parent.height
+            radius: ui.radius
+            color: Style.light_Color
+
+
+
+        }
 
     }
 

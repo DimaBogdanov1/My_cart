@@ -27,15 +27,11 @@ Item {
 
     function open(value){
 
-        if(app_Settings.tablet_mode){
+        keyboard_Anim.up_val = value
 
-            keyboard_Anim.up_val = value
+        on_keyboard = true
 
-            on_keyboard = true
-
-            keyboard_Anim.up_content()
-
-        }
+        keyboard_Anim.up_content()
 
     }
 

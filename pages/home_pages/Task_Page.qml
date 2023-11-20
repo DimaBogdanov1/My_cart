@@ -21,6 +21,17 @@ Item{
                                                "../home_pages/task_pages/Finish_Task_Page.qml"
                                             ]
 
+    onIndex_TaskChanged: {
+
+        if(index_Task == 1){
+
+            finish_Task_Loader.item.clear()
+
+            Warnings.get_All_Warnings()
+
+        }
+    }
+
     StackLayout{
         id: task_StackLayout
         width: parent.width

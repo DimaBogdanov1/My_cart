@@ -11,7 +11,11 @@ public:
 
     My_Database();
 
-    QSqlDatabase Database;
+    static QSqlDatabase& get_db();
+
+
+  //  QSqlDatabase Database = QSqlDatabase::addDatabase("QSQLITE") ;//.setDatabaseName("/Users/dimabogdanov/Documents/MyCart_res/my_cart.db");
+
 
    // explicit My_Database(QObject *parent = nullptr);
 
@@ -35,5 +39,7 @@ signals:
     void newUser_signal(const QString& login, const int& password, const int& color); */
 
 };
+
+
 
 #endif // MY_DATABASE_H

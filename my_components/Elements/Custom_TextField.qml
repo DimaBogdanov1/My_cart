@@ -127,7 +127,7 @@ Column{
                 width: parent.width
                 height: parent.height
                 radius: ui.radius
-                color: Style.background_Color //"transparent"
+                color: Style.light_Color // Style.background_Color //"transparent"
 
                 Border_Gradient{visible: isReady}
 

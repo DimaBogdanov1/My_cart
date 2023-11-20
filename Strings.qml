@@ -22,4 +22,20 @@ Item {
 
     readonly property string putNom: qsTr("Номер пути") + mytrans.emptyString
 
+    readonly property string user: qsTr("Пользователь") + mytrans.emptyString
+
+    readonly property string km_hour: qsTr(" км/ч") + mytrans.emptyString
+
+    readonly property string km: qsTr(" км") + mytrans.emptyString
+
+    readonly property string meter: qsTr(" м") + mytrans.emptyString
+
+    readonly property string km_big: qsTr("Километр") + mytrans.emptyString
+
+    readonly property string set_speed: qsTr("Скорость уст.") + mytrans.emptyString
+
+    readonly property string limit_speed: qsTr("Скорость огр.") + mytrans.emptyString
+
+    readonly property string extent: qsTr("Степень") + mytrans.emptyString
+
 }

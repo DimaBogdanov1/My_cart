@@ -20,7 +20,7 @@ ScrollBar {
     contentItem: Rectangle {
             implicitWidth: width_bar                      
             layer.enabled: true
-            color: Style.light_Color
+            color: Style.background_Color //Style.light_Color
             layer.effect: Mask_Rectangle{target: parent}
 
           //  Main_Gradient{}

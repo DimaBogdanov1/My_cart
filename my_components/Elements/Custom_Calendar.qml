@@ -218,6 +218,8 @@ Item{
 
                                   newDate_signal(year, month, day)
 
+                                  newDate_signal(calendar.selectedDate.getFullYear(), calendar.selectedDate.getMonth(), calendar.selectedDate.getDate())
+
                                  // popup.close()
 
                                  // toast.show(styleData.title , 3000, 1) // Показываем Тоcт

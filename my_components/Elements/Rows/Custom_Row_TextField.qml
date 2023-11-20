@@ -125,12 +125,18 @@ Row{
 
                     keyboard.open(root_Row.start_Keyboard)
 
+                   // heplps.open()
                 }
 
             }
+
+
         }
     }
 
+    /*UpNom_Helps{
+        id: heplps
+    }*/
 
 
 }

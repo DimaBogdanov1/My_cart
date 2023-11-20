@@ -8,7 +8,7 @@ import MyLang 1.0
 // Основная Линия
 LineSeries {
     id: measure_LineSeries
-    color: "#6BCE87" //Style.accent_Color E9FAA7 B9B2F9
+    color: "#F68160" //Style.accent_Color E9FAA7 B9B2F9
     axisX: x_ValueAxis
     axisY: y_ValueAxis
   //  axisXTop: x_ValueAxis
@@ -53,6 +53,7 @@ LineSeries {
     }
 
 
+
     // Добавляем Точку Для Линии Основной Линии
     function addPoint(x, y, value) {
 
@@ -60,20 +61,40 @@ LineSeries {
         
         measure_LineSeries.append(x, y)
 
+        // add_point_border(y)
+
+        if(chart_anim.checkScroll){
+
+            return value.toFixed(2)
+
+        }
+        else{ // Здесь Будет Значение Визера
+
+            return 0
+
+        }
+
+    }
+
+    function test_function(){
+
+        for(var i = 0; i < model.length; i++){
+
+            var name = line_name + "border_" + i
+
+            create_Line(model[i], 0, model[i], 1000, Style.primaryDark_Color, Qt.DotLine, name) // Создаём Границу
+
+            border_arr.push(name)
+
+        }
     }
 
     // Продлеваем Границу
-    function add_point_border(){
-
-        var step_x = 0
-
-        console.log("sd", "sssssss " + border_arr.length)
+    function add_point_border(y_value){
 
         for(var i = 0; i < border_arr.length; i++){
 
-            chartView.series(border_arr[i]).append(x_start + step_x, 60)
-
-            step_x += (x_finish - x_start) / (count - 1)
+            chartView.series(border_arr[i]).append(model[i], y_value)
         }
     }
 
@@ -99,13 +120,15 @@ LineSeries {
 
             var name = line_name + "border_" + i
 
-            create_Line(model[i], 0, model[i], chartView.y_finish, Style.primaryDark_Color, Qt.DotLine, name) // Создаём Границу
+            create_Line(model[i], 0, model[i], 0, Style.primaryDark_Color, Qt.DotLine, name) // Создаём Границу
 
             border_arr.push(name)
 
 
            // step_x += (x_finish - x_start) / (count - 1)
         }
+
+        test_function()
 
 //       create_middleLine(x_start + 2) // Сейчас Здесь Потом Перенесу
 
@@ -138,7 +161,9 @@ LineSeries {
    // Создание Линии Из Базы Данных
   function create_db_Line(x_start){
 
-      var series = change_series("#E17259", Qt.SolidLine, "db_line")
+      // FF747A - for error ?
+
+      var series = change_series("#7BBBFF", Qt.SolidLine, "db_line") // #E17259"
 
       series.append(x_start, 0);
 

@@ -102,9 +102,9 @@ Item{
 
     }
 
-    Rectangle{
+    Item{
         width: 200
-        height: 600
+        height: parent.height - 100
         //color: "orange"
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -121,6 +121,7 @@ Item{
                 anchors.horizontalCenter: parent.horizontalCenter
                 text:  qsTr("finish task") + mytrans.emptyString
                 onClicked_Signal: {
+
 
                     index_Task = 1
 
@@ -229,6 +230,35 @@ Item{
 
              }
 
+             Custom_Button{
+                 width: 200
+                 height: ui.height_Button
+                  outlined: true
+                 anchors.horizontalCenter: parent.horizontalCenter
+                 text:  qsTr("add old warning") + mytrans.emptyString
+                 onClicked_Signal: {
+
+                     Warnings.add_Warning(2, 1, "2", "2", "", "", "","", "10.03.2023", "06.07.2023", 40)
+
+
+                 }
+
+             }
+
+             Custom_Button{
+                 width: 200
+                 height: ui.height_Button
+                  outlined: true
+                 anchors.horizontalCenter: parent.horizontalCenter
+                 text:  qsTr("delete old warning") + mytrans.emptyString
+                 onClicked_Signal: {
+
+                     Warnings.remove_Old_Warnings()
+
+
+                 }
+
+             }
 
 
         }

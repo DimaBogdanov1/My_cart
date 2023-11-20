@@ -8,7 +8,7 @@ Rectangle{ // Создаём Блок С Заголовком
     width: parent.width
     height: ui.border_Size
 
-    color: Style.light_Color
+    color: Style.background_Color //Style.light_Color
 
 
 

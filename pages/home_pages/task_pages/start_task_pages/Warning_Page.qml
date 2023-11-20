@@ -18,7 +18,7 @@ Item{
             width: parent.width / 2
             height: parent.height
             radius: ui.radius
-            color: Style.light_Color
+            color: Style.background_Color //Style.light_Color
 
             Column{ // Создаём Основную Колонку
                 width: 450
@@ -27,28 +27,31 @@ Item{
                 spacing: ui.middle_spacing //ui.basic_spacing * 2
 
                 Custom_Row_ComboBox{
-                    id: road_ComboBox
                     width: parent.width
                     height: ui.block_height
                     source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
-                    title: qsTr("Код дороги") + mytrans.emptyString
-                    model: ListModel {}
+                    model:ListModel {
 
-                    property int num_Value: 1
+                        ListElement {
+                            title: "Код дороги"
+                            values: [
+                                ListElement { value: "a" },
+                                ListElement { value: "b" }
+                                ]
 
+                        }
 
-                    onCurrentIndexChanged: {
+                        ListElement {
+                            title: "Пути"
+                            values: [
+                                ListElement { value: "Главные пути" },
+                                ListElement { value: "Станционные пути" }
+                                ]
 
-                         num_Value = road_ComboBox.model.get(currentIndex).value.split(" - ")[0];
+                        }
 
-                      //  toast.show(num_Value[0].toString(), 3000, 1)
-
-                        putNom_ListModel.clear()
-
-                        upNom_ListModel.clear()
-
-                        big_db.update_numRoad(num_Value)
                     }
+
                 }
 
                 Custom_Row_TextField{
@@ -79,6 +82,48 @@ Item{
                     width: parent.width
                     height: ui.block_height
                     source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
+
+                    property int speed: 15
+
+                    model:ListModel { id: speed_ListModel
+
+                        ListElement {
+                            title: "Скорость"
+                            values: []
+                        }
+
+                    }
+
+                    onChange_index_signal: {
+
+                        speed = speed_ComboBox.model.get(index_model).values.get(index).value.split(" ")[0];
+
+                        console.log("speed = " + speed)
+
+                    }
+
+                    Component.onCompleted: {
+
+                        var a = new Array
+
+                        //a.push()
+                        for(var i = speed; i < 150; i+= 15){
+
+                            a.push(i + str.km_hour)
+
+                            model.get(0).values.append({ "value": i + str.km_hour })
+
+                        }
+
+                        //model.values.append = a
+                    }
+                }
+
+                /*Custom_Row_ComboBox{
+                    id: speed_ComboBox
+                    width: parent.width
+                    height: ui.block_height
+                    source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
                     title: qsTr("Скорость") + mytrans.emptyString
                     property int speed: 15
                   //  model:  [qsTr("Рабочая") + mytrans.emptyString , qsTr("Контрольная") + mytrans.emptyString , qsTr("Дополнительная") + mytrans.emptyString]
@@ -96,13 +141,14 @@ Item{
                         //a.push()
                         for(var i = speed; i < 150; i+= 15){
 
-                            a.push(i + qsTr(" Км/ч") + mytrans.emptyString)
+                            a.push(i + str.km_hour)
                         }
 
                         model = a
                     }
                 }
 
+                */
 
                 Custom_Row_TextField{
                     id: startPoint_Row
@@ -204,7 +250,7 @@ Item{
                                     result = true
                                     // нужно ли сравнивать километры
 
-                                    Warnings.add_Warning(road_ComboBox.num_Value, roadInfo_TextField.get_text(0), roadInfo_TextField.get_text(1), startPoint_Row.get_text(0), startPoint_Row.get_text(1), endPoint_Row.get_text(0), endPoint_Row.get_text(1), date_Block.get_dates(0), date_Block.get_dates(1), speed_ComboBox.speed)
+                                    Warnings.add_Warning(authorization_Account_Icon.authorization_id, 0, roadInfo_TextField.get_text(0), roadInfo_TextField.get_text(1), startPoint_Row.get_text(0), startPoint_Row.get_text(1), endPoint_Row.get_text(0), endPoint_Row.get_text(1), date_Block.get_dates(2), date_Block.get_dates(0), date_Block.get_dates(1), speed_ComboBox.speed)
 
                                 }
 
@@ -228,5 +274,12 @@ Item{
             }
         }
 
+        Rectangle{
+            width: parent.width / 2
+            height: parent.height
+            radius: ui.radius
+            color: Style.light_Color
+
+        }
     }
 }

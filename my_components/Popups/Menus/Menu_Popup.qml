@@ -13,6 +13,8 @@ Popup {
 
     property int width_block: 300
 
+    property real height_menu_element: ui.height_Button //+ ui.border_Size + ui.basic_spacing / 2
+
    /* property bool start_Enter
 
     onStart_EnterChanged: {
@@ -65,7 +67,7 @@ Popup {
 
 
     width: width_block
-    height: popup.model.count * ui.height_Button + ((popup.model.count - 1) * ui.basic_spacing / 2 ) + ui.basic_spacing
+    height: popup.model.count * popup.height_menu_element  + ((popup.model.count - 1) * ui.basic_spacing / 2 ) + ui.basic_spacing // + (ui.text_miniSize + ui.basic_spacing / 2)
     modal: true
 
     padding: 0
@@ -99,7 +101,12 @@ Popup {
                anchors.right: parent.right
                color: Style.background_Color
 
-               Column{
+               Menu_Block{
+                   model: popup.model
+
+               }
+
+              /* Column{
                    width: parent.width - ui.basic_spacing
                    height: parent.height - ui.basic_spacing
                    anchors.centerIn: parent
@@ -111,33 +118,43 @@ Popup {
                        height: parent.height
                        model: popup.model
 
-                       Menu_Element{
-                           source: popup.model.get(index).source !== undefined ? popup.model.get(index).source : ""
-                           text: popup.model.get(index).text
-                           checkable: popup.model.get(index).checkable
-                           checked: popup.model.get(index).checked
-                           onlyTrueCheck: popup.model.get(index).onlyTrueCheck !== undefined ? popup.model.get(index).onlyTrueCheck : false
+                       Column{
+                           width: parent.width
+                           height: popup.height_menu_element //ui.height_Button + ui.border_Size + spacing
+                           spacing: ui.basic_spacing / 2
 
-                           onClicked_Signal: {
+                           Menu_Element{
+                               height: ui.height_Button
+                               source: popup.model.get(index).source !== undefined ? popup.model.get(index).source : ""
+                               text: popup.model.get(index).text
+                               checkable: popup.model.get(index).checkable
+                               checked: popup.model.get(index).checked
+                               onlyTrueCheck: popup.model.get(index).onlyTrueCheck !== undefined ? popup.model.get(index).onlyTrueCheck : false
 
-                               var update_index = popup.model.get(index).pick(checked)
+                               onClicked_Signal: {
 
-                               if(update_index !== null){
+                                   var update_index = popup.model.get(index).pick(checked)
 
-                                   update_elements(update_index)
+                                   if(update_index !== null){
+
+                                       update_elements(update_index)
+
+                                   }
 
                                }
 
                            }
 
-
-
+                        //   Custom_Border{color: "red"}
 
                        }
+
+
                    }
 
                }
 
+               */
            }
     }
 

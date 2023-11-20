@@ -10,7 +10,7 @@ ListModel{
 
         pick: function(value){
 
-            measure_Km.create_KmLine(5, "257", true, 1)
+            measure_Km.create_KmLine(5, "257", true, 1, false)
 
            // Chart_Work.create_KmLine()
 
@@ -29,11 +29,11 @@ ListModel{
 
         pick: function(value){
 
-            measure_Km.create_KmLine(5, "258", true, 2)
+            measure_Km.create_KmLine(5, "258", true, 2, true)
 
          //   measure_Km.create_KmLine(5, 110)
 
-            //toast.show("Тест", 3000, 1)
+          //  toast.show("Тест", 3000, 1)
 
          //   measure_Km.create_KmLine(50, 20, 50)
 

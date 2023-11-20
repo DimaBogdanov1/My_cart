@@ -49,7 +49,7 @@ Item {
 
             new_km_start = 0
 
-            create_KmLine(4, "256", false, 0)
+            create_KmLine(4, "256", false, 0, false)
 
 
         }
@@ -72,13 +72,13 @@ Item {
     }
 
     // Функция Для Отображения Линии Километра
-    function create_KmLine(values, km_text, needFirst, sleepers_Type){
+    function create_KmLine(values, km_text, needFirst, sleepers_Type, isReverse){
 
        // const step_picket = 10
 
        // values -= 2
 
-       // console.log("Зашли в create_KmLine " + " " + values + " ")
+       // console.log("Зашли в create_KmLine isReverse " + " " + isReverse + " ")
 
         var y_finish = step_picket * values
 
@@ -117,7 +117,7 @@ Item {
         */
 
 
-        create_KmMeasure(values, new_km_start)
+        create_KmMeasure(values, new_km_start, isReverse)
 
         console.log("sleepers_Type = " + sleepers_Type + " y_value = " + y_value)
 
@@ -126,7 +126,7 @@ Item {
 
     }
 
-    function create_KmMeasure(value, y_start){
+    function create_KmMeasure(value, y_start, isReverse){
 
         const size_mes = 0.6
 
@@ -135,19 +135,28 @@ Item {
         const picket_start = 2 // Пикеты начинаются с 2
 
 
-        for(var i = 0; i < value; i += 1){  //for(var i = value; i > 0; i -= 1){
-
-            console.log("i = " + i)
+        for(var i = 0; i < value; i += 1){ //       for(var i = value; i > 0; i -= 1)
 
             var name = "mes" + pickets_arr.length + i
 
-        //    var arr = [ [x_max + tmp_offset_mes , ((i -value) * size_y) + y_start] , [x_max + tmp_offset_mes -size_mes, ((i -value) * size_y) + y_start]]
-
-        var arr = [ [x_max + tmp_offset_mes , (i * size_y) + y_start] , [x_max + tmp_offset_mes -size_mes, (i * size_y) + y_start]]
+            var arr = [ [x_max + tmp_offset_mes , (i * size_y) + y_start] , [x_max + tmp_offset_mes -size_mes, (i * size_y) + y_start]]
 
             measure_Objects.createLine_Structure(arr, name,  Style.secondaryAccent_Color, ChartView.SeriesTypeLine)
 
-            create_Mesure(chartView.series(name).at(1), chartView.series(name) , name, i  + picket_start)
+           create_Mesure(chartView.series(name).at(1), chartView.series(name) , name, i  + picket_start)
+
+            if(!isReverse){
+
+                create_Mesure(chartView.series(name).at(1), chartView.series(name) , name, i  + picket_start)
+
+            }
+            else{
+
+                var reverse_value = value - i - 1
+
+                create_Mesure(chartView.series(name).at(1), chartView.series(name) , name, reverse_value  + picket_start)
+            }
+
         }
 
     }

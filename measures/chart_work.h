@@ -18,6 +18,11 @@ public:
 
     void help_get_line(int index, std::string sk, int y);
 
+private:
+
+    bool check_drawChart = false;
+
+
 public slots:  // Слоты
     void openCSV();
     void create_KmLine();
@@ -28,6 +33,11 @@ public slots:  // Слоты
     void calibPage_Ready();
 
     int max(int a, int b);
+
+    void add_ChartPoint(int index, float val, int y);
+
+    void change_check_Draw(bool check);
+
 
 signals:
     void newPoint_Chart_signal(const int& index, const float& x_val, const float& y_val);

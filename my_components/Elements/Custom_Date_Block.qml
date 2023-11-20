@@ -24,9 +24,11 @@ Row{
 
     property var right_Date: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + calendar.max_days)
 
+    readonly property var maximum: new Date(currentDate.getFullYear(), currentDate.getMonth() + 6, currentDate.getDate())
+
     function convert_date(value){
 
-        if(value < 9){
+        if(value < 10){
 
             return "0" + value
         }
@@ -49,10 +51,9 @@ Row{
 
     function get_dates(index){
 
-        var arr = [label_1.text, label_2.text]
+        var arr = [label_1.text, label_2.text, set_date(currentDate, 0)]
 
         return arr[index]
-
     }
 
     Icon_In_Row{}
@@ -85,7 +86,7 @@ Row{
                    outlined: true
                    basic_text: true
                    isOnlyText: true
-                   //color: Style.primaryDark_Color
+                   color: Style.light_Color //Style.primaryDark_Color
 
                    text: set_date(currentDate, 0)
                    onClicked_Signal: {
@@ -96,18 +97,22 @@ Row{
 
                        if(a > currentDate){
 
-                           calendar.minimumDate = a
+                        //   calendar.minimumDate = a
 
                        }
                        else{
 
-                           calendar.minimumDate = currentDate
+                         //  calendar.minimumDate = currentDate
 
                        }
 
+                       calendar.minimumDate = currentDate
 
-                       calendar.maximumDate = right_Date
+                       calendar.maximumDate = root_Row.maximum
 
+                   //    calendar.maximumDate = right_Date
+
+                       label_2.text = ""
 
                        calendar.selectedDate = left_Date //new Date(left_Date.getFullYear(), left_Date.getMonth(), left_Date.getDate())
 
@@ -136,7 +141,7 @@ Row{
                    basic_text: true
                    outlined: true
                    isOnlyText: true
-                   //color: Style.primaryDark_Color
+                   color: Style.light_Color //Style.primaryDark_Color
                    text: set_date(currentDate, calendar.max_days)
                    onClicked_Signal: {
 
@@ -173,7 +178,7 @@ Row{
 
 
         minimumDate: new Date() //left_Date
-        maximumDate: right_Date
+        maximumDate: root_Row.maximum // right_Date
 
         onNewDate_signal: {
 

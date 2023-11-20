@@ -63,6 +63,12 @@ int Chart_Work::max(int a, int b)
     return b;
 }
 
+
+void Chart_Work::change_check_Draw(bool check){
+
+    check_drawChart = check;
+}
+
 void Chart_Work::create_KmLine()
 {
     //  Здесь я беру текущий y графика и строю линию
@@ -115,6 +121,24 @@ void Chart_Work::clearPoints(){
     for (int i = 0; i < Measure_List.size(); i++) {
 
         Measure_List[i].Chart_points.clear();
+
+    }
+
+}
+
+void Chart_Work::add_ChartPoint(int index, float val, int y){
+
+    val +=  Measure_List[index].bias_value;
+
+   // if(index == 0){
+
+     //   qDebug() << "Index = " + QString::number(index) + " val = " + QString::number(val);
+
+    //}
+
+    if(check_drawChart){
+
+        emit newPoint_Chart_signal(index, val , y); // Отправляем Сигнал
 
     }
 

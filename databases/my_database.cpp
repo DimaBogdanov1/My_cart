@@ -14,7 +14,7 @@ My_Database::My_Database()
 
     //create_database();
 
-    Database = QSqlDatabase::addDatabase("QSQLITE");
+  /*  Database = QSqlDatabase::addDatabase("QSQLITE");
 
     Database.setDatabaseName("/Users/dimabogdanov/Documents/MyCart_res/my_cart.db");
 
@@ -24,8 +24,21 @@ My_Database::My_Database()
     }
     else{
 
-    }
+    } */
 
+}
+
+QSqlDatabase& My_Database::get_db()
+{
+    static QSqlDatabase db;
+    if (!db.isValid()){
+
+        db = QSqlDatabase::addDatabase("QSQLITE");
+
+        db.setDatabaseName("/Users/dimabogdanov/Documents/MyCart_res/my_cart.db");
+
+    }
+    return db;
 }
 
 /*My_Database::~My_Database()

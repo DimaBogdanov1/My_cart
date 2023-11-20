@@ -63,20 +63,44 @@ class QmlMqttSubscription : public QObject
     Q_PROPERTY(QMqttTopicFilter topic MEMBER m_topic NOTIFY topicChanged)
 public:
     QmlMqttSubscription(QMqttSubscription *s, QmlMqttClient *c);
+
     ~QmlMqttSubscription();
+
 
 Q_SIGNALS:
     void topicChanged(QString);
-    void messageReceived(const QString &msg);
+
+    void messageReceived(const int &measure, const float &x, const float &y);
 
 public slots:
     void handleMessage(const QMqttMessage &qmsg);
+
 
 private:
     Q_DISABLE_COPY(QmlMqttSubscription)
     QMqttSubscription *sub;
     QmlMqttClient *client;
     QMqttTopicFilter m_topic;
+
+
+    QString title_JSON = "Title_Message";
+
+    QString level_Title = "Level_Value";
+
+    QString riht_Left_Title = "Riht_Left_Value";
+
+    QString riht_Right_Title = "Riht_Right_Value";
+
+    QString sample_Title = "Sample_Value";
+
+    QString down_Left_Title = "Down_Left_Value";
+
+    QString down_Right_Title = "Down_Right_Value";
+
+
+
+    QList<QString> titles_List = {level_Title, riht_Left_Title, riht_Right_Title, sample_Title, down_Left_Title, down_Right_Title};
+
 };
 
 class QmlMqttClient : public QMqttClient
@@ -84,6 +108,7 @@ class QmlMqttClient : public QMqttClient
     Q_OBJECT
 public:
     QmlMqttClient(QObject *parent = nullptr);
+
 
     Q_INVOKABLE QmlMqttSubscription *subscribe(const QString &topic);
 private:

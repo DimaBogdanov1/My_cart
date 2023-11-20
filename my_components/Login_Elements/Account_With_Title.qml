@@ -23,7 +23,7 @@ Column{
 
     Account_Icon{
        id: account_Icon
-       big: true
+       size: Account_Icon.Size.Big
        isIcon: root_Column.isIcon
        login: root_Column.login_account
        color_value: root_Column.color_account

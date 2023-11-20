@@ -66,7 +66,7 @@ Item {
                     }
                 }
 
-                Custom_Button{
+               /* Custom_Button{
                     id: start_Button
                     width: parent.width
                     icon_with_Text: true
@@ -77,7 +77,7 @@ Item {
 
                     }
 
-                }
+                }*/
 
             }
 

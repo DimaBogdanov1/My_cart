@@ -94,5 +94,13 @@
         <file>my_components/Measure/Measure_Numbers.qml</file>
         <file>my_components/Animations/TextField_Anim.qml</file>
         <file>my_components/Elements/Rows/Icon_In_Row.qml</file>
+        <file>my_components/Lists/Delegates/Warning_Delegate.qml</file>
+        <file>my_components/Lists/ListElements/Road_ListElement.qml</file>
+        <file>my_components/Popups/Helps/UpNom_Helps.qml</file>
+        <file>my_components/Lists/ListTitles/Titles_With_Sorts.qml</file>
+        <file>my_components/Lists/ListTitles/Title_Sort.qml</file>
+        <file>my_components/Lists/ListTitles/Titles_With_Menu.qml</file>
+        <file>my_components/Popups/Menus/Table_Menu/Test_menu.qml</file>
+        <file>my_components/Popups/Menus/Menu_Block.qml</file>
     </qresource>
 </RCC>

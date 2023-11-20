@@ -25,7 +25,7 @@ Item {
 
     property string source: ""
 
-    property string color: Style.accent_Color
+    property string color: Style.background_Color
 
     property real pixelSize: ui.text_miniSize
 
@@ -69,7 +69,7 @@ Item {
             width: parent.width
             height: parent.height
             radius: ui.radius
-            color: !outlined ? Style.primaryDark_Color : Style.background_Color
+            color: !outlined ? Style.primaryDark_Color :  root_Item.color//Style.background_Color
             layer.enabled: true
             layer.effect: Mask_Rectangle{target: parent}
 

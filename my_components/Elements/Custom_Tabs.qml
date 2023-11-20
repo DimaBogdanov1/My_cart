@@ -42,6 +42,7 @@ Rectangle {
            width: parent.width - root_Item.margin_block
            height: parent.height - root_Item.margin_block
            anchors.centerIn: parent
+           color: Style.primaryDark_Color
            layer.enabled: true
            layer.effect: Mask_Rectangle{target: parent}
 
@@ -131,7 +132,7 @@ Rectangle {
                         height: parent.height
                         needBack: false
                         margin_text: 0
-                        text_color: Style.primaryDark_Color //root_Item.index === index ? Style.background_Color : Style.primary_Color
+                        text_color: Style.primaryDark_Color // root_Item.index === index ? Style.background_Color :  Style.primaryDark_Color// Style.primaryDark_Color //root_Item.index === index ? Style.background_Color : Style.primary_Color
                         text: modelData
 
                     }

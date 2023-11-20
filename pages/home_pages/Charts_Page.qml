@@ -4,6 +4,7 @@ import QtQuick.Controls 2.15
 import QtCharts 2.15
 import QtQuick.Controls.Material 2.15
 import QtGraphicalEffects 1.15
+import MqttClient 1.0
 
 import qml.measure 1.0
 import Style 1.0
@@ -21,6 +22,10 @@ Item{
     property int max: 100
 
     property real tmp_offset: 5.7
+
+    property int start_scroll: 90 // 80 // 100
+
+    property real y_0: 0
 
     Column{
       width: parent.width
@@ -63,12 +68,15 @@ Item{
                         height:  40 //96
 
                         Row{
+                            id: row
                             width: parent.width
                             height: parent.height
                             spacing: ui.basic_spacing / 2
 
+                            readonly property real offset: ui.basic_spacing * 2 / 5
+
                             Rectangle{ // Общая Информация
-                                width: parent.width - 200 -  ui.basic_spacing
+                                width: parent.width * 0.28 - row.offset
                                 radius: ui.radius
                                 height:  parent.height
                                 color: Style.background_Color
@@ -79,31 +87,139 @@ Item{
 
                                     Custom_Rectangle_Label {
                                         id: upNom_Label
-                                        width: parent.width * 0.15
+                                        width: parent.width * 0.3
                                         height: parent.height
                                         needBack: false
-                                        text: qsTr("Код: 11233") + mytrans.emptyString
+                                        text: qsTr("11233") + mytrans.emptyString
 
                                     }
 
                                     Custom_Rectangle_Label {
                                         id: direction_Label
-                                        width: parent.width * 0.3
+                                        width: parent.width * 0.4
                                         height: parent.height
                                         needBack: false
-                                        text: qsTr("Направление: Москва-Рига") + mytrans.emptyString
+                                        text: qsTr("Москва-Рига") + mytrans.emptyString
 
                                     }
 
 
+
                                     Custom_Rectangle_Label {
                                         id: putNom_Label
-                                        width: parent.width * 0.15
+                                        width: parent.width * 0.3
                                         height: parent.height
                                         needBack: false
                                         text: qsTr("Путь: 1") + mytrans.emptyString
 
                                     }
+                                }
+
+                            }
+
+                            Rectangle{
+                                width: parent.width * 0.28 - row.offset
+                                radius: ui.radius
+                                height:  parent.height
+                                color: Style.background_Color
+
+                                Row{
+                                    width: parent.width
+                                    height: parent.height
+
+                                    Custom_Rectangle_Label {
+                                        width: parent.width * 0.25
+                                        height: parent.height
+                                        needBack: false
+                                        text: qsTr("ПЧ: 1") + mytrans.emptyString
+
+                                    }
+
+                                    Custom_Rectangle_Label {
+                                        width: parent.width * 0.25
+                                        height: parent.height
+                                        needBack: false
+                                        text: qsTr("ПЧУ: 1") + mytrans.emptyString
+
+                                    }
+
+                                    Custom_Rectangle_Label {
+                                        width: parent.width * 0.25
+                                        height: parent.height
+                                        needBack: false
+                                        text: qsTr("ПД: 1") + mytrans.emptyString
+
+                                    }
+
+                                    Custom_Rectangle_Label {
+                                        width: parent.width * 0.25
+                                        height: parent.height
+                                        needBack: false
+                                        text: qsTr("ПДБ: 1") + mytrans.emptyString
+
+                                    }
+                                }
+
+                            }
+
+                            Custom_Text_Arrow{
+                               width: parent.width * 0.28 - row.offset
+                               height: ui.height_Button
+                               enabled: false
+                               text_1:  qsTr("Станиция 1") + mytrans.emptyString
+                               text_2:  qsTr("Станиция 2") + mytrans.emptyString
+
+                            }
+
+                            /*Rectangle{ // Общая Информация
+                                width: parent.width - 200 -  ui.basic_spacing
+                                radius: ui.radius
+                                height:  parent.height
+                                color: Style.background_Color
+
+                                Row{
+                                    width: parent.width
+                                    height: parent.height
+
+
+                                    Row{
+                                        width: parent.width * 0.3
+                                        height: parent.height
+
+                                        Custom_Rectangle_Label {
+                                            width: parent.width * 0.25
+                                            height: parent.height
+                                            needBack: false
+                                            text: qsTr("ПЧ: 1") + mytrans.emptyString
+
+                                        }
+
+                                        Custom_Rectangle_Label {
+                                            width: parent.width * 0.25
+                                            height: parent.height
+                                            needBack: false
+                                            text: qsTr("ПЧУ: 1") + mytrans.emptyString
+
+                                        }
+
+                                        Custom_Rectangle_Label {
+                                            width: parent.width * 0.25
+                                            height: parent.height
+                                            needBack: false
+                                            text: qsTr("ПД: 1") + mytrans.emptyString
+
+                                        }
+
+                                        Custom_Rectangle_Label {
+                                            width: parent.width * 0.25
+                                            height: parent.height
+                                            needBack: false
+                                            text: qsTr("ПДБ: 1") + mytrans.emptyString
+
+                                        }
+                                    }
+
+
 
                                     Custom_Text_Arrow{
                                        width: parent.width * 0.4 //- ui.basic_spacing
@@ -116,8 +232,10 @@ Item{
                                 }
                             }
 
+                            */
+
                             Custom_Rectangle_Label {
-                                width: 100
+                                width: parent.width * 0.08 - row.offset
                                 height: parent.height
                                 color: Style.background_Color
                                 property real speed: 6
@@ -126,27 +244,8 @@ Item{
 
                             }
 
-
-                            /*Rectangle{
-                                width: 100
-                                radius: ui.radius
-                                height:  parent.height
-                                color: Style.background_Color
-
-
-                                Custom_Text_With_Icon{
-                                  //  width: parent.width
-                                    height: parent.height
-                                    anchors.horizontalCenter: parent.horizontalCenter
-                                    icon_size: 24
-                                    source: "qrc:/icons/"+ Style.theme + "/utils/battery.svg"
-                                    text: "12 км/ч"
-                                }
-                            }*/
-
-
                             Rectangle{
-                                width: 100
+                                width: parent.width * 0.08 - row.offset
                                 radius: ui.radius
                                 height:  parent.height
                                 color: Style.background_Color
@@ -299,6 +398,8 @@ Item{
 
                                          Component.onCompleted: {
 
+                                             tmp_offset = tmp_offset + 10
+
                                              sample_MeasureLines.create_BorderSeries()
 
                                          }
@@ -347,11 +448,11 @@ Item{
                                    height:  parent.height - 48 - ui.basic_spacing / 2
 
                                    Rectangle{
-                                       id: bg_Rectangle
+                                       id: chart_Rectangle
                                        width: parent.width //- viser_Rectangle.width - ui.basic_spacing / 2
                                        height:  parent.height
                                        anchors.left: parent.left
-                                       color:  Style.light_Color //"transparent"
+                                       color: Style.light_Color //"transparent"
                                        radius: ui.radius
                                        layer.enabled: true
                                        layer.effect: Mask_Rectangle{target: parent}
@@ -359,64 +460,6 @@ Item{
                                        Row{
                                            width: parent.width
                                            height: parent.height
-
-                                           /*Item{
-                                                id: km_Item
-                                                width: km_MeasureBlock.width + measure_Row.spacing + 14.5
-                                                height: parent.height
-                                                clip: true
-
-                                                ChartView {
-                                                   id: km_ChartView
-                                                   x: -40
-                                                   y: -40 // -41
-                                                   width: parent.width + 70
-                                                   height: parent.height + 96 //95
-                                                   dropShadowEnabled: false
-                                                   antialiasing: true
-                                                   backgroundColor: Style.background_Color
-                                                   legend.visible:false
-                                                   plotAreaColor: Style.background_Color
-
-                                                   Text {
-                                                          id: txt
-                                                          text: "Hello"
-                                                          color: "red"
-                                                      }
-
-
-                                                      onWidthChanged: measure_Km.updatePointPosition();
-                                                      onHeightChanged: measure_Km.updatePointPosition();
-
-
-
-                                                   Measure_Km{
-                                                       id: measure_Km
-
-                                                       Component.onCompleted: {
-
-                                                          // km_ChartView.setAxisY(yKm_ValueAxis)
-
-                                                           create_RailsLine()
-
-                                                        //   create_KmLine(20)
-                                                       }
-
-                                                   }
-
-
-
-                                                   Component.onCompleted: {
-
-                                                       km_ChartView.scrollDown(20)
-
-                                                   }
-
-                                                }
-                                           }
-
-                                           */
-
 
                                            Item{
                                                 width: parent.width //- km_Item.width
@@ -431,7 +474,7 @@ Item{
                                                    height: parent.height + 75//96 //95
                                                    dropShadowEnabled: false
                                                    antialiasing: true
-                                                   backgroundColor: Style.background_Color //"red"//Style.background_Color
+                                                   backgroundColor:  Style.background_Color //"red"//Style.background_Color
                                                    legend.visible:false
                                                    plotAreaColor: Style.background_Color
 
@@ -441,62 +484,6 @@ Item{
                                                        id: chart_anim
                                                    }
 
-                                                   Text {
-                                                          id: txt
-                                                          text: "Hello"
-                                                          color: "red"
-                                                      }
-
-                                                   /*LineSeries{
-                                                       id: series
-                                                       XYPoint { x: 10; y: 5  }
-                                                       XYPoint { x: 10; y: 1 }
-                                                       XYPoint { x: 15; y: 5 }
-                                                       XYPoint { x: 20; y: 10 }
-                                                       XYPoint { x: 25; y: 5 }
-                                                       XYPoint { x: 30; y: 20 }
-                                                       XYPoint { x: 40; y: 10 }
-                                                       axisX: x1
-                                                       axisY: y1
-
-                                                           // Создаём Границы По X Для Нашего Графика
-                                                           ValueAxis {
-                                                              id: x1
-                                                              min: 0
-                                                              max: 30
-                                                              tickType: ValueAxis.TicksDynamic
-                                                              tickInterval: 10
-                                                              labelFormat: "%i" // Делаем int Значения
-                                                              color: Style.light_Color
-                                                              gridLineColor: Style.light_Color  // Цвет Сетки
-                                                             // labelsColor: Style.primaryDark_Color // Цвет Чисел
-                                                             // labelsAngle: 90
-                                                             //labelsVisible: false
-
-                                                             // labelsFont: test_label.font// Копируем Шрифт С Вспомогательного Label
-                                                              labelsFont:Qt.font({pointSize: 1})
-
-                                                           }
-
-                                                           // Создаём Границы По Y Для Нашего Графика
-                                                           ValueAxis {
-                                                              id: y1
-                                                              min: 0
-                                                              max: 30
-                                                              tickType: ValueAxis.TicksFixed
-                                                              tickInterval: 10
-                                                              reverse: true
-
-                                                              labelsVisible: false
-                                                              //labelFormat: "%i" // Делаем int Значения
-                                                              //color: "red" //Style.light_Color //"#d0d0d0"//Style.light_Color //Style.secondaryText_Color
-                                                              gridLineColor: Style.light_Color //  "#d0d0d0"//Style.light_Color// Style.secondaryText_Color // Цвет Сетки
-                                                              //labelsColor: Style.primaryDark_Color
-                                                              labelsFont:Qt.font({pointSize: 1})
-                                                           }
-                                                   }
-
-                                                   */
 
                                                       onWidthChanged: measure_Km.updatePointPosition();
                                                       onHeightChanged: measure_Km.updatePointPosition();
@@ -612,7 +599,7 @@ Item{
                                                       max: root_Item.max
                                                       tickType: ValueAxis.TicksFixed
                                                       tickInterval: 10
-                                                      reverse: true
+                                                     // reverse: true
 
                                                       labelsVisible: false
                                                       //labelFormat: "%i" // Делаем int Значения
@@ -724,13 +711,16 @@ Item{
                         id: bootom_Row
                         width: parent.width
                         height:  200 //parent.height * 0.35 - main_Column.spacing * 3
+                        anchors.left: parent.left
+
                         spacing: ui.basic_spacing
 
                         Column{
-                            width: parent.width * 0.15
+                            id: button_Map_Column
+                            width: parent.width *  0.15
                             height:  parent.height
+                           // anchors.left: parent.left
                             spacing: ui.basic_spacing
-
 
                             Custom_Button{
                                 id: startStop_Button
@@ -738,12 +728,17 @@ Item{
                                 height: ui.height_Button
                                 outlined: true
                                 isIcon: true
+
                                 source: isCheck ? "qrc:/icons/"+ Style.theme + "/utils/pause.svg" : "qrc:/icons/"+ Style.theme + "/utils/play.svg"
 
 
                                 onClicked_Signal: {
 
                                     create_rotation_anim()
+
+                                    Chart_Work.change_check_Draw(isCheck)
+
+
                                    /* if(outlined){
 
                                         outlined = false
@@ -765,36 +760,13 @@ Item{
 
                             }
 
-                            Rectangle{
-                                 width: parent.width
-                                 height:  parent.height - ui.height_Button -  ui.basic_spacing/// 2 - ui.basic_spacing / 2
-                                 radius: ui.radius
-                                 color: Style.background_Color
-                                 layer.enabled: true
-                                 layer.effect: Mask_Rectangle{target: parent}
 
-                                 Navigation_Map{
+                           /* Navigation_Map{
 
-                                 }
+                                     width: parent.width
+                                     height: parent.height - ui.height_Button -  ui.basic_spacing/// 2 - ui.basic_spacing / 2
 
-                                /* Rectangle{
-                                      width: parent.width
-                                      height:  1
-                                      anchors.centerIn: parent
-                                      color: "red"
-
-                                 }
-
-                                 Rectangle{
-                                      width: 1
-                                      height:  parent.height
-                                      anchors.centerIn: parent
-                                      color: "red"
-
-                                 }*/
-
-                            }
-
+                                } */
 
 
                           /*  Rectangle{
@@ -805,262 +777,86 @@ Item{
                             }*/
                         }
 
+                        List_With_Title{
+                               id: defect_List
+                               width: parent.width * 0.85 - ui.basic_spacing // //0.6 - ui.basic_spacing / 2
+                               height: parent.height
+                               noTitle: true
+                               title_name_model: [qsTr("Координата"), qsTr("Отстпуление"), str.extent, qsTr("Размер"), qsTr("Длинна"), qsTr("Признак"), str.set_speed, str.limit_speed]
+                               title_size_model: [0.12, 0.16, 0.1, 0.12, 0.1, 0.12, 0.14, 0.14]
 
+                               model: ListModel{
 
+                                   ListElement{
+                                       coord: "256 км 5 м"
+                                       defect: 1
+                                       st: 1
+                                       amp: 1
+                                       dl: 1
+                                       cou: 1
+                                       speed: "60 км/ч"
+                                       limit_speed: "100 км/ч"
 
-                        Rectangle{
-                             width: parent.width * 0.85 - ui.basic_spacing
-                             height:  parent.height
-                             radius: ui.radius
-                             color:  Style.background_Color
-
-
-                             Column{
-                                 width: parent.width - ui.big_spacing
-                                 height:  parent.height
-                                 anchors.horizontalCenter: parent.horizontalCenter
-                                 spacing: ui.border_Size
-
-                                // признак
-                                // установленная скорость
-                                // ограничение скорости
-
-                                 List_Row{
-                                     id: title_Row
-                                     model: [qsTr("Координата"), qsTr("Неисправность"), qsTr("Степень"), qsTr("Амплитуда"), qsTr("Длинна"), qsTr("Признак"), qsTr("Установленная скорость"), qsTr("Ограничение скорости")]
-                                     sizes: [0.11, 0.13, 0.09, 0.11, 0.09, 0.11, 0.18, 0.17]
-                                     clip: true
-                                 }
 
-                                 Custom_Border{}
+                                   }
 
-                                 My_List{
-                                    id: defect_ListView
-                                    width: parent.width
-                                    height: parent.height - title_Row.height - ui.border_Size * 2
-                                    model:     ListModel{
-
-                                        ListElement{
-                                            coord: 1
-                                            defect: 1
-                                            st: 1
-                                            amp: 1
-                                            dl: 1
-                                            cou: 1
-                                            u: 1
-
 
-                                        }
+                               }
 
-                                        ListElement{
-                                            coord: 1
-                                            defect: 1
-                                            st: 1
-                                            amp: 1
-                                            dl: 1
-                                            cou: 1
-                                            u: 1
+                               delegate: List_Row{
+                                 //  listview: defect_ListView
+                                   model: [coord, defect, st, amp, dl, cou, speed, limit_speed]
+                                   sizes: defect_List.title_size_model
+                                  // cur: defect_ListView.currentIndex
 
-                                        }
-                                        ListElement{
-                                            coord: 1
-                                            defect: 1
-                                            st: 1
-                                            amp: 1
-                                            dl: 1
-                                            cou: 1
-                                            u: 1
+                               }
 
-                                        }
-                                        ListElement{
-                                            coord: 1
-                                            defect: 1
-                                            st: 1
-                                            amp: 1
-                                            dl: 1
-                                            cou: 1
-                                            u: 1
+                           }
 
-                                        }
-                                        ListElement{
-                                            coord: 1
-                                            defect: 1
-                                            st: 1
-                                            amp: 1
-                                            dl: 1
-                                            cou: 1
-                                            u: 1
+                        List_With_Title{
+                               id: km_rating_List
+                               width: parent.width * 0.4 // - ui.basic_spacing //- ui.basic_spacing // 2
+                               height: parent.height
+                               noTitle: true
+                               title_name_model: [ str.km_big, str.set_speed, str.limit_speed, str.extent + mytrans.emptyString, qsTr("Оценка") + mytrans.emptyString]
+                               title_size_model: [0.18, 0.23, 0.23, 0.23, 0.13]
 
-                                        }
-                                        ListElement{
-                                            coord: 1
-                                            defect: 1
-                                            st: 1
-                                            amp: 1
-                                            dl: 1
-                                            cou: 1
-                                            u: 1
-                                        }
+                               model: ListModel{
+                                   id: warning_ListModel
 
-                                    }
+                                   ListElement{
+                                      km:"256 км"
+                                      speed: "60 км/ч"
+                                      limit_speed: "100 км/ч"
+                                      extent: "121"
+                                      mark: "Отлично"
 
+                                   }
 
-                                    /*highlight: List_Highlight{
-                                        width: 1// parent.width
-                                        height: 20
 
-                                    }*/
+                               }
 
-                                    delegate: List_Row{
-                                        listview: defect_ListView
-                                        model: [ index + 1, coord, defect, st, amp, dl, cou, u]
-                                        sizes: title_Row.sizes
-                                        cur: defect_ListView.currentIndex
+                               delegate: List_Row{
+                                   width: km_rating_List.width
+                                   model: [km, speed, limit_speed, extent, mark]
+                                   sizes: km_rating_List.title_size_model
+                                  // needHighlight: true
 
-                                    }
+                               }
 
+                           }
 
+                       /* Row{
+                          id: table_Row
+                          width: parent.width * 0.85 - ui.basic_spacing
+                          height:  parent.height
+                         // anchors.right: parent.right
+                          spacing: ui.basic_spacing
 
 
-                                }
 
-                             }
 
-
-
-                             Row{
-
-                                  width:800
-                                  height: 48
-                                  anchors.right: parent.right
-                                   anchors.bottom: parent.bottom
-
-                                  Button{
-                                      width: 100
-                                      height: parent.height
-                                      text:  qsTr("csv") + mytrans.emptyString
-                                      onClicked: Chart_Work.openCSV()
-
-                                  }
-
-                                  Button{
-                                      width: 100
-                                      height: parent.height
-                                      text:  qsTr("+") + mytrans.emptyString
-                                      onClicked: {
-
-                                         // sample_MeasureLines.add_area(10, 1, 20, 5)
-
-                                          y_ValueAxis.max = 200
-
-
-                                       //   chartView.zoomIn(Qt.rect(0, 0, charts_Item.width, charts_Item.height))
-
-                                     //     chartView.zoomIn(Qt.rect(0, 0, charts_Item.width, 300))
-
-                                          //chartView.zoom(2)
-
-                                      }
-
-
-                                  }
-
-                                  Button{
-                                      width: 100
-                                      height: parent.height
-                                      text:  qsTr("-") + mytrans.emptyString
-                                      onClicked: {
-
-
-                                          y_ValueAxis.max = 100
-
-                                         // chartView.zoomReset()
-                                          //main_ChartView.zoom(1)
-
-                                      }
-
-                                  }
-
-                                  Button{
-                                      width: 100
-                                      height: parent.height
-                                      text:  qsTr("rotate") + mytrans.emptyString
-                                      onClicked: {
-
-                                          applicationWindow.flipped = false
-
-                                         // chartView.scrollLeft(100)
-
-                                      }
-
-                                  }
-
-                                  Button{
-                                      width: 100
-                                      height: parent.height
-                                      text:  qsTr("down km chart") + mytrans.emptyString
-                                      onClicked: {
-
-                                          km_ChartView.scrollDown(20)
-
-                                          //my_pdf.print_pdf()
-
-                                        //  chartView.scrollRight(100)
-
-                                        //  viser_Line.update_ViserLine(50)
-
-
-                                      }
-
-                                  }
-
-                                  Button{
-                                      width: 100
-                                      height: parent.height
-                                      text:  qsTr("вниз") + mytrans.emptyString
-                                      onClicked: {
-
-                                          chart_anim.create_scroll(30, true)
-
-                                          //chartView.scrollDown(100)
-
-                                          //measure_Km.update_Pickets(100)
-
-                                      }
-
-                                  }
-
-                                  Button{
-                                      width: 100
-                                      height: parent.height
-                                      text:  qsTr("вверх") + mytrans.emptyString
-                                      onClicked: {
-
-                                          chart_anim.create_scroll(30, false)
-
-                                         // chartView.scrollUp(100)
-
-                                         // measure_Km.update_Pickets(-100)
-
-                                      }
-
-                                  }
-
-                                  Button{
-                                      width: 100
-                                      height: parent.height
-                                      text:  qsTr("добавить") + mytrans.emptyString
-                                      onClicked: {
-
-                                           level_MeasureLines.add_point_border()
-
-                                      }
-
-                                  }
-                              }
-
-                        }
-
+                        }*/
 
                     }
 
@@ -1068,6 +864,347 @@ Item{
 
 
             }
+
+
+            Column{
+                width:1000
+                height: 96
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+
+                Row{
+                    width:parent.width
+                    height: 48
+
+                    Button{
+                        width: 100
+                        height: parent.height
+                        text:  qsTr("вниз") + mytrans.emptyString
+                        onClicked: {
+
+                            if(!chart_anim.checkScroll){
+
+                                chart_anim.create_Scroll_on_Pause(chart_Rectangle.height / 10, true)
+
+                            }
+                            else{
+
+                                toast.show("график не на паузе!!!", 3000, 1)
+                            }
+
+
+                        }
+
+                    }
+
+                    Button{
+                        width: 100
+                        height: parent.height
+                        text:  qsTr("вверх") + mytrans.emptyString
+                        onClicked: {
+
+                            if(!chart_anim.checkScroll){
+
+                                chart_anim.create_Scroll_on_Pause(chart_Rectangle.height / 10, false)
+
+                            }
+                            else{
+
+                                toast.show("график не на паузе!!!", 3000, 1)
+
+                            }
+
+
+                        }
+
+                    }
+
+                    Button{
+                        id: coun_y_Btn
+                        width: 100
+                        height: parent.height
+                        onClicked: {
+
+
+                        }
+
+                    }
+                }
+
+                Row{
+
+                     width:parent.width
+                     height: 48
+
+
+                      Button {
+                          id: connectButton
+                          width: 100
+                          height: parent.height
+                          text: client.state === MqttClient.Connected ? "Disconnect" : "Connect"
+                          onClicked: {
+
+                             //  client.connectToHost()
+
+                             if (client.state === MqttClient.Connected) {
+                                  client.disconnectFromHost()
+                                  subscription.destroy()
+                                  subscription = 0
+                              } else
+                                  client.connectToHost()
+
+
+                          }
+                      }
+
+                      Button {
+                          id: subButton
+                          width: 100
+                          height: parent.height
+                          text: "Subscribe"
+                          onClicked: {
+
+                             // sensors/+/temperature
+                             subscription = client.subscribe("test_topic/+/ww")
+
+                             subscription.messageReceived.connect(client.addMessage)
+                          }
+
+                          Label {
+                              function stateToString(value) {
+                                  if (value === 0)
+                                      return "Disconnected"
+                                  else if (value === 1)
+                                      return "Connecting"
+                                  else if (value === 2)
+                                      return "Connected"
+                                  else
+                                      return "Unknown"
+                              }
+                              color: "white"
+                              text: "Status:" + stateToString(client.state) + "(" + client.state + ")"
+                              enabled: client.state === MqttClient.Connected
+                          }
+                      }
+
+                     Button{
+                         width: 100
+                         height: parent.height
+                         text:  qsTr("csv") + mytrans.emptyString
+                         onClicked: Chart_Work.openCSV()
+
+                     }
+
+                     Button{
+                         width: 100
+                         height: parent.height
+                         text:  qsTr("Уведомление") + mytrans.emptyString
+                         onClicked: {
+
+                            // sample_MeasureLines.add_area(10, 1, 20, 5)
+
+                             push_Notification.open()
+
+                          //   chartView.zoomIn(Qt.rect(0, 0, charts_Item.width, charts_Item.height))
+
+                        //     chartView.zoomIn(Qt.rect(0, 0, charts_Item.width, 300))
+
+                             //chartView.zoom(2)
+
+                         }
+
+
+                     }
+
+                     Button{
+                         width: 100
+                         height: parent.height
+                         text:  qsTr("Пауза для скрола") + mytrans.emptyString
+
+                         property bool checkButton: true
+
+
+                         onClicked: {
+
+                             if(!checkButton){
+
+                              checkButton = true
+
+                            }
+                              else{
+
+                                  checkButton = false
+
+
+                              }
+
+                             chart_anim.change_Pause(checkButton, y_0)
+
+                            // chartView.zoomReset()
+                             //main_ChartView.zoom(1)
+
+                         }
+
+                     }
+
+                     Button{
+                         width: 100
+                         height: parent.height
+                         text:  qsTr("добавить") + mytrans.emptyString
+                         onClicked: {
+
+                             level_MeasureLines.add_point_border()
+
+                            // applicationWindow.flipped = false
+
+                            // chartView.scrollLeft(100)
+
+                         }
+
+                     }
+
+                     Button{
+                         width: 100
+                         height: parent.height
+                         text:  qsTr("print_pdf") + mytrans.emptyString
+                         onClicked: {
+
+                            // km_ChartView.scrollDown(20)
+
+                             my_pdf.print_pdf()
+
+                           //  chartView.scrollRight(100)
+
+                           //  viser_Line.update_ViserLine(50)
+
+
+                         }
+
+                     }
+
+                     Button{
+                         width: 100
+                         height: parent.height
+                         text:  qsTr("вниз") + mytrans.emptyString
+                         onClicked: {
+
+                            // console.log("chart height = " + charts_Item.height)
+                             chart_anim.create_Main_Scroll(30, true)
+
+                             //chartView.scrollDown(100)
+
+                             //measure_Km.update_Pickets(100)
+
+                         }
+
+                     }
+
+                     Button{
+                         width: 100
+                         height: parent.height
+                         text:  qsTr("вверх") + mytrans.emptyString
+                         onClicked: {
+
+
+                             // Пропорция такая 20 - 446
+
+
+                             //chart_anim.create_Main_Scroll(30, false)
+
+
+                             chart_anim.create_Main_Scroll(chart_Rectangle.height / 10, false)
+
+
+                             //chartView.scrollDown(charts_Item.height / 10)
+                            // measure_Km.updatePointPosition();
+
+
+                            // chart_anim.create_Main_Scroll(charts_Item.height / 20, false)
+
+
+                            // chartView.scrollUp(100)
+
+                            // measure_Km.update_Pickets(-100)
+
+                         }
+
+                     }
+
+                     Button{
+                         width: 100
+                         height: parent.height
+                         text:  qsTr("анимация") + mytrans.emptyString
+
+                         property bool check: false
+
+                         onClicked: {
+
+                             if(!check){
+
+                                 check = true
+
+                                 table_Anim_open.stop()
+
+                                 table_Anim_open.start()
+
+                             }
+                             else{
+
+                                 check = false
+
+                                 table_Anim_close.stop()
+
+                                 table_Anim_close.start()
+
+                             }
+
+                              //level_MeasureLines.add_point_border()
+
+                         }
+
+                         SequentialAnimation{
+
+                            id: table_Anim_open
+
+                            ParallelAnimation{
+
+
+                                NumberAnimation {target: bootom_Row; property: "anchors.leftMargin"; from: bootom_Row.anchors.leftMargin; to: - 1 * button_Map_Column.width - ui.basic_spacing; duration: 250 }
+
+                                NumberAnimation {target: map; property: "anchors.leftMargin"; from: map.anchors.leftMargin; to: - 1 * button_Map_Column.width - ui.basic_spacing; duration: 250 }
+
+                            }
+
+                            NumberAnimation {target: defect_List; property: "width"; from: defect_List.width; to: bootom_Row.width * 0.6 -  ui.basic_spacing ; duration: 500 }
+
+
+                         }
+
+                         SequentialAnimation{
+
+                            id: table_Anim_close
+
+                            NumberAnimation {target: defect_List; property: "width"; from: defect_List.width; to: bootom_Row.width * 0.85 - ui.basic_spacing ; duration: 500 }
+
+
+                            ParallelAnimation{
+
+                                NumberAnimation {target: bootom_Row; property: "anchors.leftMargin"; from: bootom_Row.anchors.leftMargin; to: 0; duration: 250 }
+
+                                NumberAnimation {target: map; property: "anchors.leftMargin"; from: map.anchors.leftMargin; to: ui.big_spacing / 2; duration: 250 }
+
+                            }
+
+
+
+                         }
+                     }
+                 }
+
+            }
+
+
+
 
             Connections{
                 target: big_db
@@ -1087,73 +1224,123 @@ Item{
             Connections{
                target: Chart_Work
 
-               property int y_0: 0
 
-               property int y_1: 0
+               property real y_1: 0
 
-               property int y_2: 0
+               property real y_2: 0
 
-               property int y_3: 0
+               property real y_3: 0
 
-               property int y_4: 0
+               property real y_4: 0
 
-               property int y_5: 0
+               property real y_5: 0
+
+               property real offset:  0.5
 
                function onNewPoint_Chart_signal(index, x, y) {
 
+                 //  y = y.toFixed(2)
 
-                   switch(index){
 
-                   case Name_Measures.Level_Measure:
 
-                       level_MeasureLines.addPoint(level_MeasureBlock.convert_x(x), y_0, x)
+                   /*if(y_0 > root_Item.start_scroll){
 
-                       y_0++
+                       chartView.scrollDown(1)
 
-                       break
+                   }*/
 
-                   case Name_Measures.Riht_Left_Measure:
+                   if(true){ // 79 y_0 < 110
 
-                       riht_Left_MeasureLines.addPoint(riht_Left_MeasureBlock.convert_x(x), y_1, x)
+                       switch(index){
 
-                       y_1++
+                       case Name_Measures.Level_Measure:
 
-                       break
+                           level_MeasureBlock.value = level_MeasureLines.addPoint(level_MeasureBlock.convert_x(x), y_0, x)
 
-                   case Name_Measures.Riht_Right_Measure:
 
-                       riht_Right_MeasureLines.addPoint(riht_Right_MeasureBlock.convert_x(x), y_2, x)
 
-                       y_2++
+                           //level_MeasureBlock.value = x
 
-                       break
 
-                   case Name_Measures.Sample_Measure:
 
-                       sample_MeasureLines.addPoint(sample_MeasureBlock.convert_x(x), y_3, x)
+                           y_0 += offset
 
-                       y_3++
+                           coun_y_Btn.text = y_0
 
-                       break
+                           if(y_0 === root_Item.start_scroll){
 
-                   case Name_Measures.Down_Left_Measure:
+                               chart_anim.create_Main_Scroll(chart_Rectangle.height / 10, true)
 
-                       down_Left_MeasureLines.addPoint(down_Left_MeasureBlock.convert_x(x), y_4, x)
+                               //chartView.scrollDown(chart_Rectangle.height / 5)
 
-                       y_4++
+                               start_scroll+= 10
+                             //  root_Item.start_scroll = chart_anim.create_main_scroll(root_Item.start_scroll)
 
-                       break
+                                                     // chartView.scrollDown(chart_Rectangle.height / 10)
 
-                   case Name_Measures.Down_Right_Measure:
+                                                     // measure_Km.updatePointPosition();
 
-                       down_Right_MeasureLines.addPoint(down_Right_MeasureBlock.convert_x(x), y_5, x)
+                                                     // root_Item.start_scroll += 10
 
-                       y_5++
+                                                     // chartView.scrollDown(1)
 
-                       break
+                                                     // measure_Km.updatePointPosition();
 
+                                                      //console.log("Пора скролить " + )
+
+                                                    //  chart_anim.create_Main_Scroll(30, false)
+
+                                                  }
+
+                          //y_0+= 0.1
+
+                           break
+
+                       case Name_Measures.Riht_Left_Measure:
+
+                           riht_Left_MeasureBlock.value = riht_Left_MeasureLines.addPoint(riht_Left_MeasureBlock.convert_x(x), y_1, x)
+
+                           y_1 += offset
+
+                           break
+
+                       case Name_Measures.Riht_Right_Measure:
+
+                           riht_Right_MeasureBlock.value = riht_Right_MeasureLines.addPoint(riht_Right_MeasureBlock.convert_x(x), y_2, x)
+
+                           y_2 += offset
+
+                           break
+
+                       case Name_Measures.Sample_Measure:
+
+                           sample_MeasureBlock.value = sample_MeasureLines.addPoint(sample_MeasureBlock.convert_x(x), y_3, x)
+
+                           y_3 += offset
+
+                           break
+
+                       case Name_Measures.Down_Left_Measure:
+
+                           down_Left_MeasureBlock.value = down_Left_MeasureLines.addPoint(down_Left_MeasureBlock.convert_x(x), y_4, x)
+
+                           y_4 += offset
+
+                           break
+
+                       case Name_Measures.Down_Right_Measure:
+
+                           down_Right_MeasureBlock.value = down_Right_MeasureLines.addPoint(down_Right_MeasureBlock.convert_x(x), y_5, x)
+
+                           y_5 += offset
+
+                           break
+
+
+                       }
 
                    }
+
 
 
                    // chart_LineSeries.append(x, y)
@@ -1219,7 +1406,20 @@ Item{
             }
 
 
+          /*  Connections{
+                target: my_pdf
+
+                function onTest_Signal(word){
+
+
+
+                    console.log("woooooord === " + word)
+                }
+            } */
+
             Component.onCompleted: {
+
+                big_db.get_Task_Param()
 
                 // Если мы уже работали с графиком и переключились на другую вкладку, то при возвращении посторим линию которая уже была
              //   toast.show("график готов", 3000, 1) // Показываем Тоcт
@@ -1232,6 +1432,30 @@ Item{
             }
 
         }
+
+    }
+
+
+    Navigation_Map{
+        id: map
+        start_width: button_Map_Column.width
+        start_height: button_Map_Column.height - ui.height_Button -  ui.basic_spacing
+
+        width: start_width // button_Map_Column.width //parent.width
+        height: start_height // button_Map_Column.height - ui.height_Button -  ui.basic_spacing //parent.height - ui.height_Button -  ui.basic_spacing/// 2 - ui.basic_spacing / 2
+
+
+        anchors {
+
+            bottom: parent.bottom
+            left: parent.left
+
+            leftMargin: ui.big_spacing / 2
+            bottomMargin: ui.big_spacing / 2
+        }
+
+
+
 
     }
 

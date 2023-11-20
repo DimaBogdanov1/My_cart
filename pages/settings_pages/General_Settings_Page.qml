@@ -119,22 +119,16 @@ Item{
 
             Custom_Border{color: Style.primaryDark_Color}
 
-            Settings_Switch{
-               checked: app_Settings.tablet_mode
-               title: qsTr("Режим планшета") + mytrans.emptyString
+            Settings_Text{
+                title: qsTr("Путь до априорной базы данных") + mytrans.emptyString
+                text_value: "1.0"
 
-               onChecked_Signal: {
-
-                   app_Settings.tablet_mode = value
-
-                   toast.show("Режим планшета " + value.toString(), 3000, 1)
-               }
             }
 
             Custom_Border{color: Style.primaryDark_Color}
 
             Settings_Text{
-                title: qsTr("Путь до базы данных") + mytrans.emptyString
+                title: qsTr("Путь до нашей базы данных") + mytrans.emptyString
                 text_value: "1.0"
 
             }

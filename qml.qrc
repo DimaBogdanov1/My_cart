@@ -98,5 +98,9 @@
         <file>icons/light_theme/utils/add.svg</file>
         <file>icons/light_theme/utils/programming.svg</file>
         <file>pages/home_pages/task_pages/start_task_pages/Warning_Page.qml</file>
+        <file>icons/light_theme/utils/arrow_bottom_mini.svg</file>
+        <file>icons/light_theme/utils/arrow_right_mini_white.svg</file>
+        <file>icons/light_theme/utils/more_mini.svg</file>
+        <file>icons/light_theme/utils/arrow_top_mini.svg</file>
     </qresource>
 </RCC>
