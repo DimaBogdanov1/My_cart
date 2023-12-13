@@ -14,56 +14,62 @@ Item {
 
    property var model
 
+   property string title
+
+ //  property string text
+
+
     function update_elements(index_arr){
 
         for(var i = 0; i <  index_arr.length; i++){
 
-            repeater.itemAt(index_arr[i]).text = popup.model.get(index_arr[i]).text
+            repeater.itemAt(index_arr[i]).text = root_Item.model.get(index_arr[i]).text
 
-            repeater.itemAt(index_arr[i]).checked = popup.model.get(index_arr[i]).checked
+            repeater.itemAt(index_arr[i]).checked = root_Item.model.get(index_arr[i]).checked
         }
     }
 
-    Column{
-        id: root_Column
+    Item{
         width: parent.width - ui.basic_spacing
         height: parent.height - ui.basic_spacing
         anchors.centerIn: parent
-        spacing: ui.basic_spacing / 2
-
-      /*  Mini_Title{
-            id: title_Block
-            text: "Заголовок"
-
-        } */
 
         Column{
+            id: root_Column
             width: parent.width
-            height: parent.height
+            height: parent.height - ui.basic_spacing / 2
+            anchors.bottom: parent.bottom
             spacing: ui.basic_spacing / 2
 
-            Repeater{
-                id: repeater
-                width: parent.width
-                height: parent.height
-                model: root_Item.model // popup.model
+            Mini_Title{
+                id: title_Block
+                boldStyle: true
+                text: root_Item.title //"Заголовок"
 
-                Column{
+            }
+
+            Column{
+                width: parent.width
+                height: parent.height //- title_Block.height - ui.basic_spacing / 2
+                spacing: ui.basic_spacing / 2
+
+                Repeater{
+                    id: repeater
                     width: parent.width
-                    height: popup.height_menu_element //ui.height_Button + ui.border_Size + spacing
-                    spacing: ui.basic_spacing / 2
+                    height: parent.height
+                    model: root_Item.model // popup.model
 
                     Menu_Element{
-                        height: ui.height_Button
-                        source: popup.model.get(index).source !== undefined ? popup.model.get(index).source : ""
-                        text: popup.model.get(index).text
-                        checkable: popup.model.get(index).checkable
-                        checked: popup.model.get(index).checked
-                        onlyTrueCheck: popup.model.get(index).onlyTrueCheck !== undefined ? popup.model.get(index).onlyTrueCheck : false
+                        height: ui.height_Button //popup.height_menu_element //ui.height_Button
+                        source: root_Item.model.get(index).source !== undefined ? root_Item.model.get(index).source : ""
+                        text: root_Item.model.get(index).text
+                        checkable: root_Item.model.get(index).checkable
+                        checked: root_Item.model.get(index).checked
+                        onlyTrueCheck: root_Item.model.get(index).onlyTrueCheck !== undefined ? root_Item.model.get(index).onlyTrueCheck : false
 
                         onClicked_Signal: {
 
-                            var update_index = popup.model.get(index).pick(checked)
+                            var update_index = root_Item.model.get(index).pick(checked)
 
                             if(update_index !== null){
 
@@ -75,15 +81,25 @@ Item {
 
                     }
 
-                 //   Custom_Border{color: "red"}
+
+                    /*Column{
+                        width: parent.width
+                        height: popup.height_menu_element //ui.height_Button + ui.border_Size + spacing
+                        spacing: ui.basic_spacing / 2
+
+
+                     //   Custom_Border{color: "red"}
+
+                    } */
+
 
                 }
 
-
             }
+
 
         }
 
-
     }
+
 }

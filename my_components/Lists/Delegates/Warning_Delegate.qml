@@ -18,28 +18,85 @@ Item{
 
     property real account_width
 
+    property var listview: null
+
+
+    Hover_Anim{
+        id: hover_Anim
+        width: parent.width - ui.basic_spacing / 2
+        height: parent.height
+        anchors.centerIn: parent
+        outlined: true
+        visible: listview !== null
+       // color: root_Item.color
+        scale: 20
+        highlight: true
+        width_start_highlight:  parent.width * 3 / scale
+        height_start_highlight: parent.height
+
+        onClicked_Signal: {
+
+
+
+
+            /*if (!listview.moving && needHighlight){
+
+                warning_Popup.open()
+            }*/
+
+
+
+        }
+
+        onHover_Signal: {
+
+            if (!listview.moving){
+
+
+                glow.change_glow(value)
+
+            }
+
+
+        }
+    }
 
     Item {
         width: parent.width - ui.big_spacing /// 2
         height: parent.height
         anchors.centerIn: parent
 
+        Highlight_Glow{id: glow; target: back_Row;}
+
         Row{
+            id: back_Row
             width: parent.width
             height: parent.height
 
-            Item{
+            Row{
                 id: account
                 width: parent.width * root_Item.sizes[0]
                 height: parent.height
+                spacing: ui.basic_spacing / 2
                // color: "red"
 
                 Account_Icon{
+                    id: account_icon
                     size: Account_Icon.Size.Small
                     anchors.verticalCenter: parent.verticalCenter
                     width: height
                     login: root_Item.login
                     color_value:  root_Item.color_value
+                }
+
+                Custom_Rectangle_Label {
+                    width: parent.width - account_icon.width - account.spacing
+                    height: parent.height
+                    needBack: true
+                    horizontal: Text.AlignLeft
+                    text: root_Item.login
+                    color: "red"
+
                 }
             }
 
@@ -57,7 +114,7 @@ Item{
 
                     required property string modelData
 
-                    width: parent.width *  root_Item.sizes[index]
+                    width: parent.width *  root_Item.sizes[index + 1]
                     height: parent.height
                     needBack: false
                     horizontal: Text.AlignLeft
@@ -71,6 +128,9 @@ Item{
         }
 
     }
+
+
+
 
 
     function get_size(index){

@@ -74,7 +74,7 @@ Popup {
                          width: parent.width / 2 - ui.basic_spacing / 2
                          outlined: true
                          isOnlyText: true
-                         text:  qsTr("Выйти") + mytrans.emptyString
+                         text:  qsTr("Выйти")
                          onClicked_Signal: {
 
                              popup.close()
@@ -93,7 +93,7 @@ Popup {
                          icon_with_Text: true
                          source: "qrc:/icons/" + Style.theme + "/top_bar/plus_white.svg" // "qrc:/icons/" + Style.theme + "/navigation/home.svg"
 
-                         text:  qsTr("Добавить аккаунт") + mytrans.emptyString
+                         text:  qsTr("Добавить аккаунт")
                          onClicked_Signal: {
 
                              popup.close()

@@ -79,6 +79,9 @@ Item{
                   //  toast.show("график готов", 3000, 1) // Показываем Тоcт
 
                     menu.x = root_Item.width - menu.width - ui.basic_spacing / 2
+
+                    menu.model = [test]
+
                     menu.open()
                 }
 
@@ -93,13 +96,14 @@ Item{
 
     }
 
+    Test_menu{id: test}
 
     Menu_Popup{
         id: menu
         //x: parent.width - menu.width //calculate_offset(0)
         y: ui.basic_spacing / 4 // 0 //- ui.basic_spacing / 4
 
-        model: Test_menu{}
+        model: []
     }
 
    // ChartsMore_Model{id: more_model}

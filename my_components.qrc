@@ -10,7 +10,6 @@
         <file>my_components/Elements/Custom_Label.qml</file>
         <file>my_components/Measure/Measure_Block.qml</file>
         <file>my_components/Measure/Measure_Lines.qml</file>
-        <file>my_components/Measure/Measure_Km.qml</file>
         <file>my_components/Elements/Custom_ToolTip.qml</file>
         <file>my_components/Elements/Custom_Rectangle_Label.qml</file>
         <file>my_components/Elements/Custom_Border.qml</file>
@@ -44,8 +43,6 @@
         <file>my_components/Popups/Loading_Popup.qml</file>
         <file>my_components/Popups/Background_Popup.qml</file>
         <file>my_components/Popups/Overlay_Popup.qml</file>
-        <file>my_components/Measure/Measure_Viser.qml</file>
-        <file>my_components/Measure/Measure_ViserLine.qml</file>
         <file>my_components/Animations/Charts_Anim.qml</file>
         <file>my_components/Navigation_Map.qml</file>
         <file>my_components/Elements/Custom_Text_Arrow.qml</file>
@@ -73,7 +70,6 @@
         <file>my_components/Elements/Rows/Custom_Row_TextField.qml</file>
         <file>my_components/Mini_Title.qml</file>
         <file>my_components/Elements/Custom_Picked_Block.qml</file>
-        <file>my_components/Measure/Measure_Objects.qml</file>
         <file>my_components/Popups/Menus/ChartsScale_Model.qml</file>
         <file>my_components/Elements/Custom_Calendar.qml</file>
         <file>my_components/Popups/Calendar_Popup.qml</file>
@@ -90,8 +86,6 @@
         <file>my_components/Page_Components/test_Page/Page_3.qml</file>
         <file>my_components/Settings/Admin_Block.qml</file>
         <file>my_components/Lists/List_With_Title.qml</file>
-        <file>my_components/Measure/Measure_Rails.qml</file>
-        <file>my_components/Measure/Measure_Numbers.qml</file>
         <file>my_components/Animations/TextField_Anim.qml</file>
         <file>my_components/Elements/Rows/Icon_In_Row.qml</file>
         <file>my_components/Lists/Delegates/Warning_Delegate.qml</file>
@@ -102,5 +96,15 @@
         <file>my_components/Lists/ListTitles/Titles_With_Menu.qml</file>
         <file>my_components/Popups/Menus/Table_Menu/Test_menu.qml</file>
         <file>my_components/Popups/Menus/Menu_Block.qml</file>
+        <file>my_components/Popups/Helps/Warnings_Helps.qml</file>
+        <file>my_components/Measure/Measure_Logic.qml</file>
+        <file>my_components/Measure/Km/Measure_Km.qml</file>
+        <file>my_components/Measure/Km/Measure_Numbers.qml</file>
+        <file>my_components/Measure/Km/Measure_Objects.qml</file>
+        <file>my_components/Measure/Km/Measure_Rails.qml</file>
+        <file>my_components/Measure/Viser/Measure_Scroll.qml</file>
+        <file>my_components/Measure/Viser/Measure_Viser.qml</file>
+        <file>my_components/Measure/Viser/Measure_ViserLine.qml</file>
+        <file>my_components/Measure/Km/Km_Item.qml</file>
     </qresource>
 </RCC>

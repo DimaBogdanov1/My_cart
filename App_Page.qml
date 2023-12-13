@@ -3,7 +3,7 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 
 import QtQuick.Dialogs 1.3
-import MyLang 1.0
+
 import Style 1.0
 import my_components 1.0
 
@@ -14,7 +14,7 @@ Item {
 
     property int index_Page: -1
 
-    property int sub_index_HomePage: 2 //1 //2  // Я его сюда вынес чисто из за флипа на старт мы падаем сюда
+    property int sub_index_HomePage: 2 // 1 //2  // Я его сюда вынес чисто из за флипа на старт мы падаем сюда
 
     readonly property var sourcePages_Array: [
                                                "../pages/Home_Page.qml",
@@ -126,20 +126,7 @@ Item {
                       }
                   }
 
-                  Custom_Icon_Button{
-                      width:  parent.width - 16
-                      anchors.horizontalCenter: parent.horizontalCenter
-                      height: ui.iconBlock_Size
-                      isChecked: index_Page == 5
-                      icon_path: "qrc:/icons/" + Style.theme + "/navigation/question.svg"
-                      icon_checked_path: "qrc:/icons/"+ Style.theme + "/navigation/question_accent.svg"
-                      onClicked_Signal: {
 
-                         // push_Notification.open()
-                          opacity_Anim.create_page_anim(5)  // Переходим В Справку
-
-                      }
-                  }
 
                   Custom_Icon_Button{
                       width:  parent.width - 16
@@ -162,14 +149,31 @@ Item {
 
            Column {
                width: parent.width
-               height: ui.height_Button +  ui.iconBlock_topBar_Size + ui.icon_nav_size
+               height: ui.height_Button + 2 * ( ui.iconBlock_topBar_Size + ui.icon_nav_size)
                anchors.bottom: parent.bottom
                anchors.bottomMargin: ui.middle_spacing
                spacing: ui.icon_nav_size
 
                Custom_Icon_Button{
+                   width:  parent.width - 16
+                   anchors.horizontalCenter: parent.horizontalCenter
+                   height: ui.iconBlock_Size
+                   isChecked: index_Page == 5
+                   icon_path: "qrc:/icons/" + Style.theme + "/navigation/question.svg"
+                   icon_checked_path: "qrc:/icons/"+ Style.theme + "/navigation/question_accent.svg"
+                   onClicked_Signal: {
+
+                      // push_Notification.open()
+                       opacity_Anim.create_page_anim(5)  // Переходим В Справку
+
+                   }
+               }
+
+               Custom_Icon_Button{
                    isNeedRectangle: true
-                   color_rec: Style.light_Color
+                   color_rec: Style.light_Color //"transparent"
+                  // needBorder: true
+                  // color_border: Style.light_Color
                    anchors.horizontalCenter: parent.horizontalCenter
                    icon_path: "qrc:/icons/" + Style.theme + "/utils/moon.svg"
                    icon_checked_path: "qrc:/icons/" + Style.theme + "/utils/sun.svg"
@@ -203,6 +207,8 @@ Item {
 
                Account_Icon{
                    id: authorization_Account_Icon
+                  // isIcon: true
+                  // source: "qrc:/images/memoji_2.png"
 
                    onClicked_Signal: {
 
@@ -352,7 +358,7 @@ Item {
 
     FileDialog {
         id: fileDialog
-        title: qsTr("Выберите базу данных") + mytrans.emptyString
+        title: qsTr("Выберите базу данных")
         folder: shortcuts.documents
         nameFilters: ["(*.db)"]; // Фильтр Для Расширений Файлов
 

@@ -4,15 +4,17 @@ ListModel{
 
     id: model
 
+    readonly property string title: qsTr("Масштаб графика")
+
     ListElement{
-        text: "Обычный масштаб"
+        text: "Обычный"
         checked: true
         checkable: true
         onlyTrueCheck: true
 
         pick: function(value){
 
-            y_ValueAxis.max = 100
+            chartView.max = 100
 
             var arr = [1, 2]
 
@@ -23,14 +25,14 @@ ListModel{
 
 
     ListElement{
-        text: "Средний масштаб"
+        text: "Средний"
         checked: false
         checkable: true
         onlyTrueCheck: true
 
         pick: function(value){
 
-            y_ValueAxis.max = 125
+            chartView.max = 125
 
             var arr = [0, 2]
 
@@ -40,14 +42,14 @@ ListModel{
     }
 
     ListElement{
-        text: "Большой масштаб"
+        text: "Большой"
         checked: false
         checkable: true
         onlyTrueCheck: true
 
         pick: function(value){
 
-            y_ValueAxis.max = 150
+            chartView.max = 150
 
             var arr = [0, 1]
 

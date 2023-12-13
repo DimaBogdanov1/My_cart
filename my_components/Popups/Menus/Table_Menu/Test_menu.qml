@@ -4,6 +4,8 @@ ListModel{
 
     id: model
 
+    readonly property string title: qsTr("Сортировка")
+
     ListElement{
         text: "По возрастанию даты"
         source: "qrc:/icons/light_theme/utils/arrow_top_mini.svg"

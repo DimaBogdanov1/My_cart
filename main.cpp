@@ -29,7 +29,7 @@
 
 #include "test_smart.h"
 
-#include "export/my_pdf.h"
+#include "export/pdf/my_pdf.h"
 #include "mqtt/qmlmqttclient.h"
 
 
@@ -50,6 +50,7 @@ int main(int argc, char *argv[])
     app.setOrganizationName("Some Company");
     app.setOrganizationDomain("somecompany.com");
     app.setApplicationName("MyCart");
+
 
    // app.setWindowIcon(QIcon(":/icons/test_icon.icns")); // Добавляем Иконку
 
@@ -72,7 +73,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterSingletonType(QUrl("qrc:/Style.qml"), "Style", 1, 0, "Style"); // Регестрируем Тип Style В QML Для Изменения Темы В Приложении
 
-    qmlRegisterType<MyLang>("MyLang", 1, 0, "MyLang");
+   // qmlRegisterType<MyLang>("MyLang", 1, 0, "MyLang");
 
     qmlRegisterType<StartTask_Model>("StartTask_Model", 1, 0, "StartTask_Model");
 
@@ -81,11 +82,17 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<QmlMqttSubscription>("MqttClient", 1, 0, "MqttSubscription", QLatin1String("Subscriptions are read-only"));
 
 
-    MyTranslator mTrans(&app);
+   // MyTranslator mTrans(&app);
+
+    QTranslator mTranslator;
+
+    mTranslator.load("England", ":/translator");
+
+    app.installTranslator(&mTranslator);
 
 
     QQmlApplicationEngine engine;    
-    engine.rootContext()->setContextProperty("mytrans", (QObject*)&mTrans);
+   // engine.rootContext()->setContextProperty("mytrans", (QObject*)&mTrans);
 
     engine.rootContext()->setContextProperty("big_db", &big_db);
 

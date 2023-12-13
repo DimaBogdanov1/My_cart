@@ -1,20 +1,18 @@
-#ifndef MY_PDF_H
-#define MY_PDF_H
+#ifndef TEST_CLASS_H
+#define TEST_CLASS_H
 
 #include <QObject>
 #include <QMqttClient>
 
-
-class My_pdf : public QObject
+class test_class : public QObject
 {
     Q_OBJECT
 public:
-    explicit My_pdf(QObject *parent = nullptr);
+    explicit test_class(QObject *parent = nullptr);
 
     QMqttClient *m_client;
 
 public slots:  // Слоты
-    void print_pdf();
 
     void create_json();
 
@@ -32,4 +30,4 @@ signals:
     void test_signal(const QString& strqqqq);
 };
 
-#endif // MY_PDF_H
+#endif // TEST_CLASS_H

@@ -2,6 +2,7 @@
 #define CHART_WORK_H
 
 #include <QObject>
+#include <measures/measure.h>
 
 class Chart_Work : public QObject
 {
@@ -19,6 +20,8 @@ public:
     void help_get_line(int index, std::string sk, int y);
 
 private:
+
+    QList<Measure> Measure_List;
 
     bool check_drawChart = false;
 
@@ -38,6 +41,9 @@ public slots:  // Слоты
 
     void change_check_Draw(bool check);
 
+  //  const void& dropLine(const Measure * const arg) const;
+
+   void dropLine(int y);
 
 signals:
     void newPoint_Chart_signal(const int& index, const float& x_val, const float& y_val);

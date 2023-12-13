@@ -1,7 +1,7 @@
 import QtQuick 2.15
 
 import Style 1.0
-import MyLang 1.0
+
 
 import my_components 1.0
 Item {
@@ -98,7 +98,7 @@ Item {
                     height: ui.height_Button
                      outlined: true
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text:  qsTr("add person") + mytrans.emptyString
+                    text:  qsTr("add person")
                     onClicked_Signal: {
 
                         Accounts.add_Person("name ddd", 9999, 1)
@@ -112,7 +112,7 @@ Item {
                     height: ui.height_Button
                      outlined: true
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text:  qsTr("delete_person") + mytrans.emptyString
+                    text:  qsTr("delete_person")
                     onClicked_Signal: {
 
                         Accounts.delete_Person(1)
@@ -127,7 +127,7 @@ Item {
                     height: ui.height_Button
                      outlined: true
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text:  qsTr("get all") + mytrans.emptyString
+                    text:  qsTr("get all")
                     onClicked_Signal: {
 
                         Accounts.get_All_Users()
@@ -142,7 +142,7 @@ Item {
                     width: 200
                     outlined: true
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text:  qsTr("flip") + mytrans.emptyString
+                    text:  qsTr("flip")
                     onClicked_Signal: {
 
                         applicationWindow.flipped = true

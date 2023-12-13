@@ -32,7 +32,9 @@ Item{
 
     property int font_weight: ui.font_weight_Smallsize
 
-   property int wrap: Text.NoWrap
+    property int wrap: Text.NoWrap
+
+    property bool boldStyle: false
 
     width: label.paintedWidth + margin_text
     height: label.paintedHeight + margin_text / 2
@@ -61,8 +63,8 @@ Item{
         id: label
         horizontalAlignment: root_Item.horizontal
         verticalAlignment: root_Item.vertical
-        font.weight:  root_Item.font_weight
-        font.family: root_Item.font_family
+        font.weight:  !boldStyle ? root_Item.font_weight : ui.font_weight_Bigsize
+        font.family: !boldStyle ? root_Item.font_family : customTitle_FontLoader.name
         font.pixelSize: root_Item.pixel_size
         wrapMode: root_Item.wrap
         text: root_Item.text

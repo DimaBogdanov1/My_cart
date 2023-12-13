@@ -9,11 +9,21 @@ import my_components 1.0
 Popup {
     id: popup
 
-    property var model: []
+   // property var big_model: [1]
+
+    property var model: [1]
 
     property int width_block: 300
 
     property real height_menu_element: ui.height_Button //+ ui.border_Size + ui.basic_spacing / 2
+
+    property real one_block_height: (popup.model.count * popup.height_menu_element  + ((popup.model.count - 1) * ui.basic_spacing / 2 ) + ui.basic_spacing  + ui.height_MiniTitle + ui.basic_spacing )
+
+    function get_height(count){
+
+
+        return (count * popup.height_menu_element  + ((count - 1) * ui.basic_spacing / 2 ) + ui.basic_spacing  + ui.height_MiniTitle + ui.basic_spacing )
+    }
 
    /* property bool start_Enter
 
@@ -51,23 +61,25 @@ Popup {
 
     }*/
 
+    function get_all_height(){
 
-    function update_elements(index_arr){
+        var answer = 0
 
-        for(var i = 0; i <  index_arr.length; i++){
+        for(var i = 0; i < popup.model.length; i++){
 
-            repeater.itemAt(index_arr[i]).text = popup.model.get(index_arr[i]).text
-
-            repeater.itemAt(index_arr[i]).checked = popup.model.get(index_arr[i]).checked
+           answer +=  get_height(popup.model[i].count)
         }
+
+        return answer
     }
+
 
    // x: parent.width - width_block - ui.basic_spacing
     y: ui.toolBar_Size //+ ui.basic_spacing
 
 
     width: width_block
-    height: popup.model.count * popup.height_menu_element  + ((popup.model.count - 1) * ui.basic_spacing / 2 ) + ui.basic_spacing // + (ui.text_miniSize + ui.basic_spacing / 2)
+    height: get_all_height() //get_height(popup.model[0].count) + get_height(popup.model[1].count) //popup.model.length * one_block_height // +     // + (ui.text_miniSize + ui.basic_spacing / 2)
     modal: true
 
     padding: 0
@@ -93,6 +105,7 @@ Popup {
 
           // Highlight_Glow{target: bg_Rectangle; shadow: true;} // glowRadius: 0
 
+
            Rectangle{
                id: bg_Rectangle
                width: parent.width
@@ -101,61 +114,30 @@ Popup {
                anchors.right: parent.right
                color: Style.background_Color
 
-               Menu_Block{
-                   model: popup.model
-
-               }
-
-              /* Column{
-                   width: parent.width - ui.basic_spacing
-                   height: parent.height - ui.basic_spacing
-                   anchors.centerIn: parent
-                   spacing: ui.basic_spacing / 2
+               Column{
+                   width: parent.width
+                   height: parent.height //- title_Block.height - ui.basic_spacing / 2
 
                    Repeater{
                        id: repeater
                        width: parent.width
                        height: parent.height
-                       model: popup.model
+                       model: popup.model // 2 //model //root_Item.model // popup.model
 
-                       Column{
-                           width: parent.width
-                           height: popup.height_menu_element //ui.height_Button + ui.border_Size + spacing
-                           spacing: ui.basic_spacing / 2
+                       Menu_Block{
+                           height: get_height(popup.model[index].count) //  parent.height / model.length
+                           title: popup.model[index].title
+                           model: popup.model[index]//popup.model
 
-                           Menu_Element{
-                               height: ui.height_Button
-                               source: popup.model.get(index).source !== undefined ? popup.model.get(index).source : ""
-                               text: popup.model.get(index).text
-                               checkable: popup.model.get(index).checkable
-                               checked: popup.model.get(index).checked
-                               onlyTrueCheck: popup.model.get(index).onlyTrueCheck !== undefined ? popup.model.get(index).onlyTrueCheck : false
-
-                               onClicked_Signal: {
-
-                                   var update_index = popup.model.get(index).pick(checked)
-
-                                   if(update_index !== null){
-
-                                       update_elements(update_index)
-
-                                   }
-
-                               }
-
-                           }
-
-                        //   Custom_Border{color: "red"}
 
                        }
-
-
                    }
 
                }
 
-               */
+
            }
+
     }
 
 
@@ -165,9 +147,4 @@ Popup {
 
     }
 
-    Component.onCompleted: {
-
-     //   console.log("zzzzzzzzzzzzzz " , model_size);
-
-    }
 }

@@ -8,7 +8,7 @@ import MqttClient 1.0
 
 import qml.measure 1.0
 import Style 1.0
-import MyLang 1.0
+
 import my_components 1.0
 
 
@@ -18,8 +18,6 @@ Item{
     height: parent.height
 
     property int zoom_Chart: 0
-
-    property int max: 100
 
     property real tmp_offset: 5.7
 
@@ -90,7 +88,7 @@ Item{
                                         width: parent.width * 0.3
                                         height: parent.height
                                         needBack: false
-                                        text: qsTr("11233") + mytrans.emptyString
+                                        text: qsTr("11233")
 
                                     }
 
@@ -99,7 +97,7 @@ Item{
                                         width: parent.width * 0.4
                                         height: parent.height
                                         needBack: false
-                                        text: qsTr("Москва-Рига") + mytrans.emptyString
+                                        text: qsTr("Москва-Рига")
 
                                     }
 
@@ -110,7 +108,7 @@ Item{
                                         width: parent.width * 0.3
                                         height: parent.height
                                         needBack: false
-                                        text: qsTr("Путь: 1") + mytrans.emptyString
+                                        text: qsTr("Путь: 1")
 
                                     }
                                 }
@@ -131,7 +129,7 @@ Item{
                                         width: parent.width * 0.25
                                         height: parent.height
                                         needBack: false
-                                        text: qsTr("ПЧ: 1") + mytrans.emptyString
+                                        text: qsTr("ПЧ: 1")
 
                                     }
 
@@ -139,7 +137,7 @@ Item{
                                         width: parent.width * 0.25
                                         height: parent.height
                                         needBack: false
-                                        text: qsTr("ПЧУ: 1") + mytrans.emptyString
+                                        text: qsTr("ПЧУ: 1")
 
                                     }
 
@@ -147,7 +145,7 @@ Item{
                                         width: parent.width * 0.25
                                         height: parent.height
                                         needBack: false
-                                        text: qsTr("ПД: 1") + mytrans.emptyString
+                                        text: qsTr("ПД: 1")
 
                                     }
 
@@ -155,7 +153,7 @@ Item{
                                         width: parent.width * 0.25
                                         height: parent.height
                                         needBack: false
-                                        text: qsTr("ПДБ: 1") + mytrans.emptyString
+                                        text: qsTr("ПДБ: 1")
 
                                     }
                                 }
@@ -166,8 +164,8 @@ Item{
                                width: parent.width * 0.28 - row.offset
                                height: ui.height_Button
                                enabled: false
-                               text_1:  qsTr("Станиция 1") + mytrans.emptyString
-                               text_2:  qsTr("Станиция 2") + mytrans.emptyString
+                               text_1:  qsTr("Станиция 1")
+                               text_2:  qsTr("Станиция 2")
 
                             }
 
@@ -190,7 +188,7 @@ Item{
                                             width: parent.width * 0.25
                                             height: parent.height
                                             needBack: false
-                                            text: qsTr("ПЧ: 1") + mytrans.emptyString
+                                            text: qsTr("ПЧ: 1")
 
                                         }
 
@@ -198,7 +196,7 @@ Item{
                                             width: parent.width * 0.25
                                             height: parent.height
                                             needBack: false
-                                            text: qsTr("ПЧУ: 1") + mytrans.emptyString
+                                            text: qsTr("ПЧУ: 1")
 
                                         }
 
@@ -206,7 +204,7 @@ Item{
                                             width: parent.width * 0.25
                                             height: parent.height
                                             needBack: false
-                                            text: qsTr("ПД: 1") + mytrans.emptyString
+                                            text: qsTr("ПД: 1")
 
                                         }
 
@@ -214,7 +212,7 @@ Item{
                                             width: parent.width * 0.25
                                             height: parent.height
                                             needBack: false
-                                            text: qsTr("ПДБ: 1") + mytrans.emptyString
+                                            text: qsTr("ПДБ: 1")
 
                                         }
                                     }
@@ -225,8 +223,8 @@ Item{
                                        width: parent.width * 0.4 //- ui.basic_spacing
                                        height: ui.height_Button
                                        enabled: false
-                                       text_1:  qsTr("Станиция 1") + mytrans.emptyString
-                                       text_2:  qsTr("Станиция 2") + mytrans.emptyString
+                                       text_1:  qsTr("Станиция 1")
+                                       text_2:  qsTr("Станиция 2")
 
                                     }
                                 }
@@ -240,7 +238,7 @@ Item{
                                 color: Style.background_Color
                                 property real speed: 6
 
-                                text: speed + qsTr(" км/ч") + mytrans.emptyString
+                                text: speed + qsTr(" км/ч")
 
                             }
 
@@ -304,7 +302,7 @@ Item{
 
                                           Custom_Label{
                                               horizontalAlignment: Text.AlignHCenter
-                                              text: qsTr("255.50") + mytrans.emptyString
+                                              text: qsTr("255.50")
 
                                           }
                                      }
@@ -478,12 +476,22 @@ Item{
                                                    legend.visible:false
                                                    plotAreaColor: Style.background_Color
 
+                                                   property real drop_value: 0
+
+                                                   property real offset:  0.5
+
                                                    property int y_finish: 40
+
+                                                   property int max: 100
 
                                                    Charts_Anim{
                                                        id: chart_anim
                                                    }
 
+                                                   Measure_Logic {
+                                                       id: measure_Logic
+
+                                                   }
 
                                                       onWidthChanged: measure_Km.updatePointPosition();
                                                       onHeightChanged: measure_Km.updatePointPosition();
@@ -596,7 +604,7 @@ Item{
                                                    ValueAxis {
                                                       id: y_ValueAxis
                                                       min: 0
-                                                      max: root_Item.max
+                                                      max: chartView.max
                                                       tickType: ValueAxis.TicksFixed
                                                       tickInterval: 10
                                                      // reverse: true
@@ -618,7 +626,47 @@ Item{
                                        }
 
 
+                                       Measure_Scroll{
 
+                                       }
+
+                                       /*Column{
+                                           width: ui.iconBlock_topBar_Size
+                                           height: 2 * ui.iconBlock_topBar_Size + ui.basic_spacing
+                                           spacing: ui.basic_spacing
+
+                                           anchors {
+                                              verticalCenter: parent.verticalCenter
+                                              right: parent.right
+                                              rightMargin: ui.basic_spacing / 2
+                                           }
+
+
+                                           Custom_Icon_Button{
+                                               isNeedRectangle: true
+                                               color_rec: Style.light_Color
+
+                                               icon_path: "qrc:/icons/" + Style.theme + "/top_bar/location.svg"
+                                               onClicked_Signal: {
+
+
+
+                                               }
+                                           }
+
+                                           Custom_Icon_Button{
+                                               isNeedRectangle: true
+                                               color_rec: Style.light_Color
+
+                                               icon_path: "qrc:/icons/" + Style.theme + "/top_bar/location.svg"
+                                               onClicked_Signal: {
+
+
+                                               }
+                                           }
+                                       }
+
+                                       */
                                        Rectangle {
                                            anchors.centerIn: parent
                                            width: parent.width
@@ -659,7 +707,7 @@ Item{
                                         color_rec: Style.background_Color
                                         icon_path: "qrc:/icons/" + Style.theme + "/top_bar/location.svg"
                                        // needTip: true
-                                        //tip_text: qsTr("Отметить пикет") + mytrans.emptyString
+                                        //tip_text: qsTr("Отметить пикет")
                                         onClicked_Signal: {
 
                                           // Chart_Work.add_New_Picket()
@@ -686,15 +734,13 @@ Item{
 
                                                     // это мой у
 
-                                                          Chart_Work.get_points_line(value * 100)
+                                                  //        Chart_Work.get_points_line(value * 100)
 
 
-                                                 viser_Line.update_ViserLine((value * 100))
+                                                // viser_Line.update_ViserLine((value * 100))
                                              }
 
-                                             Component.onCompleted: {
-                                                 viser_Line.create_ViserLine(50)
-                                             }
+
                                         }
                                     }
 
@@ -722,43 +768,51 @@ Item{
                            // anchors.left: parent.left
                             spacing: ui.basic_spacing
 
-                            Custom_Button{
-                                id: startStop_Button
+                            Row{
                                 width: parent.width
                                 height: ui.height_Button
-                                outlined: true
-                                isIcon: true
 
-                                source: isCheck ? "qrc:/icons/"+ Style.theme + "/utils/pause.svg" : "qrc:/icons/"+ Style.theme + "/utils/play.svg"
+                                Custom_Button{
+                                    id: startStop_Button
+                                    width: parent.width
+                                    height: ui.height_Button
+                                    outlined: true
+                                    isIcon: true
 
-
-                                onClicked_Signal: {
-
-                                    create_rotation_anim()
-
-                                    Chart_Work.change_check_Draw(isCheck)
+                                    source: isCheck ? "qrc:/icons/"+ Style.theme + "/utils/pause.svg" : "qrc:/icons/"+ Style.theme + "/utils/play.svg"
 
 
-                                   /* if(outlined){
+                                    onClicked_Signal: {
 
-                                        outlined = false
+                                        create_rotation_anim()
 
-                                        source = "qrc:/icons/"+ Style.theme + "/utils/play.svg"
+                                        Chart_Work.change_check_Draw(isCheck)
+
+
+                                       /* if(outlined){
+
+                                            outlined = false
+
+                                            source = "qrc:/icons/"+ Style.theme + "/utils/play.svg"
+
+                                        }
+                                        else{
+
+                                            outlined = true
+
+                                            source = "qrc:/icons/"+ Style.theme + "/utils/pause.svg"
+
+
+
+                                        } */
 
                                     }
-                                    else{
-
-                                        outlined = true
-
-                                        source = "qrc:/icons/"+ Style.theme + "/utils/pause.svg"
-
-
-
-                                    } */
 
                                 }
 
+
                             }
+
 
 
                            /* Navigation_Map{
@@ -818,7 +872,7 @@ Item{
                                width: parent.width * 0.4 // - ui.basic_spacing //- ui.basic_spacing // 2
                                height: parent.height
                                noTitle: true
-                               title_name_model: [ str.km_big, str.set_speed, str.limit_speed, str.extent + mytrans.emptyString, qsTr("Оценка") + mytrans.emptyString]
+                               title_name_model: [ str.km_big, str.set_speed, str.limit_speed, str.extent , qsTr("Оценка") ]
                                title_size_model: [0.18, 0.23, 0.23, 0.23, 0.13]
 
                                model: ListModel{
@@ -879,7 +933,7 @@ Item{
                     Button{
                         width: 100
                         height: parent.height
-                        text:  qsTr("вниз") + mytrans.emptyString
+                        text:  qsTr("вниз")
                         onClicked: {
 
                             if(!chart_anim.checkScroll){
@@ -900,7 +954,7 @@ Item{
                     Button{
                         width: 100
                         height: parent.height
-                        text:  qsTr("вверх") + mytrans.emptyString
+                        text:  qsTr("вверх")
                         onClicked: {
 
                             if(!chart_anim.checkScroll){
@@ -926,6 +980,19 @@ Item{
                         onClicked: {
 
 
+                        }
+
+                    }
+
+                    Button{
+                        width: 100
+                        height: parent.height
+                        text:  qsTr("Drop line")
+                        onClicked: {
+
+                           chartView.drop_value += measure_Logic.dropLine(40)
+
+                           // Chart_Work.dropLine(40)
                         }
 
                     }
@@ -965,7 +1032,10 @@ Item{
                           onClicked: {
 
                              // sensors/+/temperature
-                             subscription = client.subscribe("test_topic/+/ww")
+
+                             //subscription = client.subscribe("test_topic/+/ww")
+
+                              subscription = client.subscribe("Parameters/widthTrack")
 
                              subscription.messageReceived.connect(client.addMessage)
                           }
@@ -990,7 +1060,7 @@ Item{
                      Button{
                          width: 100
                          height: parent.height
-                         text:  qsTr("csv") + mytrans.emptyString
+                         text:  qsTr("csv")
                          onClicked: Chart_Work.openCSV()
 
                      }
@@ -998,7 +1068,7 @@ Item{
                      Button{
                          width: 100
                          height: parent.height
-                         text:  qsTr("Уведомление") + mytrans.emptyString
+                         text:  qsTr("Уведомление")
                          onClicked: {
 
                             // sample_MeasureLines.add_area(10, 1, 20, 5)
@@ -1019,24 +1089,14 @@ Item{
                      Button{
                          width: 100
                          height: parent.height
-                         text:  qsTr("Пауза для скрола") + mytrans.emptyString
+                         text:  qsTr("Пауза для скрола")
 
                          property bool checkButton: true
 
 
                          onClicked: {
 
-                             if(!checkButton){
 
-                              checkButton = true
-
-                            }
-                              else{
-
-                                  checkButton = false
-
-
-                              }
 
                              chart_anim.change_Pause(checkButton, y_0)
 
@@ -1050,7 +1110,7 @@ Item{
                      Button{
                          width: 100
                          height: parent.height
-                         text:  qsTr("добавить") + mytrans.emptyString
+                         text:  qsTr("добавить")
                          onClicked: {
 
                              level_MeasureLines.add_point_border()
@@ -1066,7 +1126,7 @@ Item{
                      Button{
                          width: 100
                          height: parent.height
-                         text:  qsTr("print_pdf") + mytrans.emptyString
+                         text:  qsTr("print_pdf")
                          onClicked: {
 
                             // km_ChartView.scrollDown(20)
@@ -1085,11 +1145,12 @@ Item{
                      Button{
                          width: 100
                          height: parent.height
-                         text:  qsTr("вниз") + mytrans.emptyString
+                         text:  qsTr("вниз")
                          onClicked: {
 
+                             chart_anim.create_Main_Scroll(chart_Rectangle.height / 10, false)
+
                             // console.log("chart height = " + charts_Item.height)
-                             chart_anim.create_Main_Scroll(30, true)
 
                              //chartView.scrollDown(100)
 
@@ -1102,7 +1163,7 @@ Item{
                      Button{
                          width: 100
                          height: parent.height
-                         text:  qsTr("вверх") + mytrans.emptyString
+                         text:  qsTr("вверх")
                          onClicked: {
 
 
@@ -1111,8 +1172,8 @@ Item{
 
                              //chart_anim.create_Main_Scroll(30, false)
 
+                             chart_anim.create_Main_Scroll(30, true)
 
-                             chart_anim.create_Main_Scroll(chart_Rectangle.height / 10, false)
 
 
                              //chartView.scrollDown(charts_Item.height / 10)
@@ -1133,7 +1194,7 @@ Item{
                      Button{
                          width: 100
                          height: parent.height
-                         text:  qsTr("анимация") + mytrans.emptyString
+                         text:  qsTr("анимация")
 
                          property bool check: false
 
@@ -1213,196 +1274,12 @@ Item{
 
                     direction_Label.text = name
 
-                    upNom_Label.text = qsTr("Код: ") + up_nom + mytrans.emptyString
+                    upNom_Label.text = qsTr("Код: ") + up_nom
 
-                    putNom_Label.text = qsTr("Путь: ") + put_nom + mytrans.emptyString
+                    putNom_Label.text = qsTr("Путь: ") + put_nom
 
                     console.log("Код = " + up_nom + " Направление = " + name + " Путь = " + put_nom)
                 }
-            }
-
-            Connections{
-               target: Chart_Work
-
-
-               property real y_1: 0
-
-               property real y_2: 0
-
-               property real y_3: 0
-
-               property real y_4: 0
-
-               property real y_5: 0
-
-               property real offset:  0.5
-
-               function onNewPoint_Chart_signal(index, x, y) {
-
-                 //  y = y.toFixed(2)
-
-
-
-                   /*if(y_0 > root_Item.start_scroll){
-
-                       chartView.scrollDown(1)
-
-                   }*/
-
-                   if(true){ // 79 y_0 < 110
-
-                       switch(index){
-
-                       case Name_Measures.Level_Measure:
-
-                           level_MeasureBlock.value = level_MeasureLines.addPoint(level_MeasureBlock.convert_x(x), y_0, x)
-
-
-
-                           //level_MeasureBlock.value = x
-
-
-
-                           y_0 += offset
-
-                           coun_y_Btn.text = y_0
-
-                           if(y_0 === root_Item.start_scroll){
-
-                               chart_anim.create_Main_Scroll(chart_Rectangle.height / 10, true)
-
-                               //chartView.scrollDown(chart_Rectangle.height / 5)
-
-                               start_scroll+= 10
-                             //  root_Item.start_scroll = chart_anim.create_main_scroll(root_Item.start_scroll)
-
-                                                     // chartView.scrollDown(chart_Rectangle.height / 10)
-
-                                                     // measure_Km.updatePointPosition();
-
-                                                     // root_Item.start_scroll += 10
-
-                                                     // chartView.scrollDown(1)
-
-                                                     // measure_Km.updatePointPosition();
-
-                                                      //console.log("Пора скролить " + )
-
-                                                    //  chart_anim.create_Main_Scroll(30, false)
-
-                                                  }
-
-                          //y_0+= 0.1
-
-                           break
-
-                       case Name_Measures.Riht_Left_Measure:
-
-                           riht_Left_MeasureBlock.value = riht_Left_MeasureLines.addPoint(riht_Left_MeasureBlock.convert_x(x), y_1, x)
-
-                           y_1 += offset
-
-                           break
-
-                       case Name_Measures.Riht_Right_Measure:
-
-                           riht_Right_MeasureBlock.value = riht_Right_MeasureLines.addPoint(riht_Right_MeasureBlock.convert_x(x), y_2, x)
-
-                           y_2 += offset
-
-                           break
-
-                       case Name_Measures.Sample_Measure:
-
-                           sample_MeasureBlock.value = sample_MeasureLines.addPoint(sample_MeasureBlock.convert_x(x), y_3, x)
-
-                           y_3 += offset
-
-                           break
-
-                       case Name_Measures.Down_Left_Measure:
-
-                           down_Left_MeasureBlock.value = down_Left_MeasureLines.addPoint(down_Left_MeasureBlock.convert_x(x), y_4, x)
-
-                           y_4 += offset
-
-                           break
-
-                       case Name_Measures.Down_Right_Measure:
-
-                           down_Right_MeasureBlock.value = down_Right_MeasureLines.addPoint(down_Right_MeasureBlock.convert_x(x), y_5, x)
-
-                           y_5 += offset
-
-                           break
-
-
-                       }
-
-                   }
-
-
-
-                   // chart_LineSeries.append(x, y)
-
-
-               }
-
-               function onNewPicket_signal(y) {
-
-                   measure_Km.create_KmLine(y)
-
-               }
-
-               function onNewViserValue_signal(index, value) {
-
-                   let fixed_value = 3
-
-                   switch(index){
-
-                   case Name_Measures.Level_Measure:
-
-                       level_MeasureBlock.value = value.toFixed(fixed_value).toString()
-
-                       break
-
-                   case Name_Measures.Riht_Left_Measure:
-
-                       riht_Left_MeasureBlock.value = value.toFixed(fixed_value).toString()
-
-                       break
-
-                   case Name_Measures.Riht_Right_Measure:
-
-                       riht_Right_MeasureBlock.value = value.toFixed(fixed_value).toString()
-
-                       break
-
-                   case Name_Measures.Sample_Measure:
-
-                       sample_MeasureBlock.value = value.toFixed(fixed_value).toString()
-
-                       break
-
-                   case Name_Measures.Down_Left_Measure:
-
-                       down_Left_MeasureBlock.value = value.toFixed(fixed_value).toString()
-
-                       break
-
-                   case Name_Measures.Down_Right_Measure:
-
-                       down_Right_MeasureBlock.value = value.toFixed(fixed_value).toString()
-
-                       break
-
-
-                   }
-
-
-
-               }
-
             }
 
 

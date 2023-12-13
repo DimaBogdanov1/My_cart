@@ -2,6 +2,8 @@ import QtQuick 2.15
 
 ListModel{
 
+    readonly property string title: qsTr("Заголовок 2")
+
     ListElement{
         text: "Километр"
         source: "qrc:/icons/light_theme/top_bar/plus.svg"

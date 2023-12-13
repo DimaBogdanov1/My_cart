@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtCharts 2.15
 
 import Style 1.0
-import MyLang 1.0
+
 
 import my_components 1.0
 
@@ -15,6 +15,11 @@ Item {
 
     property real x_max:  5.9
 
+    property var km_item_arr: []
+
+    property int km_id_global: 0
+
+
 
     property real width_Line: 1.5
 
@@ -24,12 +29,14 @@ Item {
 
     property real x_center: x_start + width_Line / 2
 
-    property var kmLines_arr: []
+   // property var kmLines_arr: []
 
-    property var pickets_arr: []
+  //  property var pickets_arr: []
 
 
     property int new_km_start: 0
+
+  //  property var km_id: [0]
 
     readonly property real tmp_offset_mes:  0.8 //0.38
 
@@ -50,6 +57,9 @@ Item {
 
     }
 
+    Km_Item{
+        id: km_Item
+    }
 
 
     function updatePointPosition(){
@@ -60,6 +70,58 @@ Item {
     function create_KmLine(values, km_text, needFirst, sleepers_Type, isReverse){
 
         measure_Numbers.create_KmLine(values, km_text, needFirst, sleepers_Type, isReverse)
+
+        if(km_id_global == 1){
+
+            measure_Objects.createArrow_Structure(20)
+
+            measure_Objects.createDoubleArrow_Structure(10)
+
+        }
+
+        if(km_id_global == 2){
+
+            measure_Objects.createBridge_Structure(55)
+
+            measure_Objects.createIsolated_Junction_Structure(80)
+
+            measure_Objects.createRailroad_Crossing(90)
+
+        }
+
+        var component = Qt.createComponent("qrc:/my_components/Measure/Km/Km_Item.qml")
+
+        var item = component.createObject(null, {"km_id": km_Item.km_id,
+                                                 "y_count": km_Item.y_count,
+                                                 "type_Sleepers": km_Item.type_Sleepers,
+                                                 "kmLines_arr": km_Item.kmLines_arr,
+                                                 "pickets_arr": km_Item.pickets_arr,
+                                                 "sleepers_arr": km_Item.sleepers_arr,
+                                                 "objects_arr": km_Item.objects_arr,
+                                                 "km_Finish_Line": km_Item.km_Finish_Line})
+
+
+        km_item_arr.push(item)
+
+        km_Item.kmLines_arr = []
+
+        km_Item.pickets_arr = []
+
+        km_Item.sleepers_arr = []
+
+        km_Item.objects_arr = []
+
+        //console.log("size = " + km_item_arr.length)
+
+
+        //console.log("km_item sleepers_Type = " + km_item_arr[km_item_arr.length - 1].kmLines_arr.length)
+
+    }
+
+    function dropLine(y) {
+
+        return measure_Rails.dropRails()
+
     }
 
     function test_for_scroll(){
@@ -92,17 +154,17 @@ Item {
 
 
 
-        measure_Objects.createArtificial_Structure(55)
+       // measure_Objects.createArtificial_Structure(55)
 
         //measure_Objects.createBorder_Structure(60)
 
-        measure_Objects.createArrowSwitch_Structure(10)
+      //  measure_Objects.createArrowSwitch_Structure(10)
 
-        measure_Objects.createArrowSensors_Structure(20)
+       // measure_Objects.createArrowSensors_Structure(20)
 
-        measure_Objects.createIsolated_Joint_Structure(80)
+   //     measure_Objects.createIsolated_Joint_Structure(80)
 
-        measure_Objects.createRailroad_Crossing(90)
+    //    measure_Objects.createRailroad_Crossing(90)
 
        // const tmp = [[0, 30], [1000, 30]]
 
@@ -140,6 +202,10 @@ Item {
 
         measure_Numbers.tmp_check = true
 
+
+        measure_Numbers.updatePointPosition()
+
+      //  console.log("eeeeeeeeeeee")
 
     }
 

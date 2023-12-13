@@ -30,7 +30,7 @@
          Down_Right_Measure
       }; */
 
-QList<Measure> Measure_List;
+//QList<Measure> Measure_List;
 
 using namespace std;
 
@@ -41,7 +41,7 @@ Chart_Work::Chart_Work(QObject *parent) : QObject(parent)
 
     for(int i = 0; i < count_measures; i++){
 
-        Measure measure(i);
+        const Measure&  measure(i);
 
         Measure_List.append(measure);
 
@@ -68,6 +68,22 @@ void Chart_Work::change_check_Draw(bool check){
 
     check_drawChart = check;
 }
+
+void Chart_Work::dropLine(int y) {
+
+    for(int i = 0; i < Measure_List.size(); i++){
+
+
+    }
+
+    for(int j = 0; j < y; j++){
+
+       Measure_List[0].Chart_points.removeAt(0);
+
+    }
+}
+
+
 
 void Chart_Work::create_KmLine()
 {

@@ -45,7 +45,7 @@ Popup {
            Adjustment
        }
 
-    readonly property var message: [qsTr("До окончания срока юстировки осталось 29 дней!") + mytrans.emptyString,
+    readonly property var message: [qsTr("До окончания срока юстировки осталось 29 дней!") ,
 
     ]
 
@@ -80,7 +80,7 @@ Popup {
                        font_family: customTitle_FontLoader.name
 
                        //horizontal: Text.AlignLeft
-                       text: qsTr("Уведомления") + mytrans.emptyString
+                       text: qsTr("Уведомления")
 
                    }
 
@@ -110,7 +110,7 @@ Popup {
                        height: ui.height_Button
                        outlined: true
                        anchors.horizontalCenter: parent.horizontalCenter
-                       text:  qsTr("Отметить прочитанными") + mytrans.emptyString
+                       text:  qsTr("Отметить прочитанными")
                        onClicked_Signal: {
 
                            model.clear()

@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import Style 1.0
-import MyLang 1.0
+
 
 import my_components 1.0
 
@@ -16,7 +16,7 @@ Item {
         Custom_Button{
             width: 300
             anchors.horizontalCenter: parent.horizontalCenter
-            text:  qsTr("Продолжить") + mytrans.emptyString
+            text:  qsTr("Продолжить")
             onClicked_Signal: {
 
             }
@@ -26,7 +26,7 @@ Item {
         Custom_Button{
             width: 300
             anchors.horizontalCenter: parent.horizontalCenter
-            text:  qsTr("Добавить аккаунт") + mytrans.emptyString
+            text:  qsTr("Добавить аккаунт")
             onClicked_Signal: {
                 sub_index_LoginPage = 2
 
@@ -37,7 +37,7 @@ Item {
         Custom_Button{
             width: 300
             anchors.horizontalCenter: parent.horizontalCenter
-            text:  qsTr("Удалить аккаунт") + mytrans.emptyString
+            text:  qsTr("Удалить аккаунт")
             onClicked_Signal: {
 
                 Accounts.delete_User(account_model.get(0).id_val)
@@ -56,8 +56,8 @@ Item {
         spacing: ui.middle_spacing
 
         Titles{
-            first_title: qsTr("C возвращением!)") + mytrans.emptyString
-            second_title: qsTr("Для смены или создания аккаунта нажмите ниже") + mytrans.emptyString
+            first_title: qsTr("C возвращением!)")
+            second_title: qsTr("Для смены или создания аккаунта нажмите ниже")
         }
 
 
@@ -166,7 +166,7 @@ Item {
 
         }
 
-        text: qsTr("Версия приложения 1.0") + mytrans.emptyString
+        text: qsTr("Версия приложения 1.0")
     }
 
 }

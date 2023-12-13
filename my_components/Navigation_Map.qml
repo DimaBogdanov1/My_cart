@@ -4,7 +4,7 @@ import QtPositioning 5.15
 import QtQuick.Controls 2.15
 
 import Style 1.0
-import MyLang 1.0
+
 
 
 /*
@@ -40,6 +40,8 @@ Rectangle{
      property real start_height
 
      property int time_anim: 500
+
+
 
      Map {
          id: map

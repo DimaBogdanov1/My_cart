@@ -1,7 +1,7 @@
 import QtQuick 2.15
 
 import Style 1.0
-import MyLang 1.0
+
 
 import my_components 1.0
 
@@ -31,14 +31,14 @@ Item{
     }
 
     Column{
-        width: 445 //parent.width * 0.7
+        width: ui.width_conetent_halfPage //parent.width * 0.7
         height: ui.text_BigSize + 50 + ui.block_height * 3 + ui.height_Button + ui.middle_spacing * 4
         anchors.centerIn: parent
         spacing:  ui.middle_spacing
 
         Titles{
-            first_title: qsTr("Создадим аккаунт!") + mytrans.emptyString
-            second_title: qsTr("Пожалуйста, введите свои данные для создания аккаунта") + mytrans.emptyString
+            first_title: qsTr("Создадим аккаунт!")
+            second_title: qsTr("Пожалуйста, введите свои данные для создания аккаунта")
         }
 
         /*Row{
@@ -56,7 +56,7 @@ Item{
             Custom_TextField {
                 id: name_TextField
                 width: parent.width / 2 - ui.basic_spacing - ui.icon_nav_size / 2
-                title: qsTr("Имя") + mytrans.emptyString
+                title: qsTr("Имя")
                 maximumLength: 15
                 validator: IntValidator{}
 
@@ -75,7 +75,7 @@ Item{
             Custom_TextField {
                 id: surname_TextField
                 width: parent.width / 2 - ui.basic_spacing - ui.icon_nav_size / 2
-                title: qsTr("Фамилия") + mytrans.emptyString
+                title: qsTr("Фамилия")
                 maximumLength: 15
                 validator: IntValidator{}
 
@@ -162,7 +162,7 @@ Item{
             Custom_TextField {
                 id: password_TextField
                 width: parent.width - ui.basic_spacing - ui.icon_nav_size
-                title: qsTr("Пароль") + mytrans.emptyString
+                title: qsTr("Пароль")
                 password: true
                 maximumLength: 4
                 validator: IntValidator{}
@@ -197,7 +197,7 @@ Item{
             Custom_TextField {
                 id: passwordRepeat_TextField
                 width: parent.width - ui.basic_spacing - ui.icon_nav_size
-                title: qsTr("Повторите пароль") + mytrans.emptyString
+                title: qsTr("Повторите пароль")
                 password: true
                 maximumLength: 4
                 validator: IntValidator{}
@@ -222,7 +222,7 @@ Item{
             id: addUser_Button
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
-            text:  qsTr("Создать аккаунт") + mytrans.emptyString
+            text:  qsTr("Создать аккаунт")
             onClicked_Signal: {
 
                 var name =  name_and_surname_Row.get_text(0)  //name_TextField.get_target().text

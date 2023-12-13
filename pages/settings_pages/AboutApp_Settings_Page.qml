@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 import Style 1.0
-import MyLang 1.0
+
 import my_components 1.0
 
 Item{
@@ -23,7 +23,7 @@ Item{
             spacing: ui.basic_spacing
 
             Settings_Text{
-                title: qsTr("Версия приложения") + mytrans.emptyString
+                title: qsTr("Версия приложения")
                 text_value: "1.0"
 
             }
@@ -31,14 +31,14 @@ Item{
 
             Settings_Link{
                 link: "mailto: to@adress.com" + "?subject=This is a subject" + "&body=This is the message"
-                title: qsTr("Обратная связь") + mytrans.emptyString
+                title: qsTr("Обратная связь")
             }
 
             Custom_Border{color: Style.primaryDark_Color}
 
             Settings_Link{
                 link: "http://www.radioavionica.ru"
-                title: qsTr("АО Радиоавионика") + mytrans.emptyString
+                title: qsTr("АО Радиоавионика")
             }
         }
     }

@@ -11,6 +11,8 @@ Item {
 
     readonly property int height_Button: 40 // Высота Кнопки
 
+    readonly property real height_MiniTitle: text_miniSize // Высота Мини Заголовка
+
     readonly property int height_RowList: 35
 
     readonly property int height_Big: 72
@@ -19,10 +21,12 @@ Item {
 
     readonly property int toolBar_Size: 56 // Размер Тулбара
 
-    readonly property real block_height:  ui.height_Button + ui.basic_spacing + 2 * ui.text_miniSize //ui.height_Button + ui.basic_spacing / 2 + ui.text_miniSize
+    readonly property real block_height:  ui.height_Button + ui.basic_spacing + 2 *  height_MiniTitle //ui.text_miniSize //ui.height_Button + ui.basic_spacing / 2 + ui.text_miniSize
 
-    readonly property real mini_block_height:  block_height - ui.basic_spacing / 2 - ui.text_miniSize //     readonly property real block_height:  ui.height_Button + ui.basic_spacing / 2 + ui.text_miniSize
+    readonly property real mini_block_height:  block_height - ui.basic_spacing / 2 - height_MiniTitle //ui.text_miniSize //     readonly property real block_height:  ui.height_Button + ui.basic_spacing / 2 + ui.text_miniSize
 
+
+    readonly property int width_conetent_halfPage: 450
 
     readonly property real block_ratio: 1.8
 

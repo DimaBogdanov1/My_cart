@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 import Style 1.0
-import MyLang 1.0
+
 import my_components 1.0
 
 Item{
@@ -24,7 +24,7 @@ Item{
             color: Style.background_Color //Style.light_Color
 
             Column{ // Создаём Основную Колонку
-                width: 450
+                width: ui.width_conetent_halfPage
                 height: ui.height_Button * 3 + ui.block_height * 2 + 300 + ui.middle_spacing * 6
                 anchors.centerIn: parent
                 spacing: ui.middle_spacing //ui.basic_spacing * 2
@@ -41,7 +41,7 @@ Item{
                         font.pixelSize:  ui.text_BigSize // Меняем Размер Шрифта
                         color: Style.primaryDark_Color // Меняем Цвет Текста
                         //visible: false
-                        text: qsTr("Создадим маршрут!") + mytrans.emptyString
+                        text: qsTr("Создадим маршрут!")
 
                     }
 
@@ -55,7 +55,7 @@ Item{
                     width: parent.width
                     height: ui.block_height
                     source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
-                    title: qsTr("Код дороги") + mytrans.emptyString
+                    title: qsTr("Код дороги")
                     model: ListModel {}
 
                     property int num_Value: 1
@@ -80,7 +80,7 @@ Item{
                     width: parent.width
                     height: ui.block_height
                     source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
-                    //title: qsTr("Код дороги") + mytrans.emptyString
+                    //title: qsTr("Код дороги")
                     model:ListModel {
 
                         ListElement {
@@ -117,7 +117,7 @@ Item{
                 Custom_Tabs{
                      width: parent.width
                      height: ui.height_Button
-                     model: [qsTr("Главные пути") + mytrans.emptyString, qsTr("Станционные пути") + mytrans.emptyString]
+                     model: [qsTr("Главные пути") , qsTr("Станционные пути") ]
 
                      onIndexChanged: {
 
@@ -489,7 +489,7 @@ Item{
                      width: parent.width
                      icon_with_Text: true
                      source:  "qrc:/icons/" + Style.theme + "/utils/arrow_right_mini_white.svg" // "qrc:/icons/" + Style.theme + "/navigation/home.svg"
-                     text:  qsTr("Продолжить") + mytrans.emptyString
+                     text:  qsTr("Продолжить")
                      onClicked_Signal: {
 
 

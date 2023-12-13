@@ -56,7 +56,7 @@ Popup {
                          font.family: customTitle_FontLoader.name
                          font.pixelSize:  ui.text_MiddleSize // Меняем Размер Шрифта
                          horizontalAlignment: Text.AlignHCenter
-                         text: qsTr("Пожалуйста подождите") + mytrans.emptyString
+                         text: qsTr("Пожалуйста подождите")
 
                     }
 

@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 import Style 1.0
-import MyLang 1.0
+
 import my_components 1.0
 
 Item{
@@ -21,7 +21,7 @@ Item{
             color: Style.background_Color //Style.light_Color
 
             Column{ // Создаём Основную Колонку
-                width: 450
+                width: ui.width_conetent_halfPage
                 height: parent.height - 24
                 anchors.centerIn: parent
                 spacing: ui.middle_spacing //ui.basic_spacing * 2
@@ -124,9 +124,9 @@ Item{
                     width: parent.width
                     height: ui.block_height
                     source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
-                    title: qsTr("Скорость") + mytrans.emptyString
+                    title: qsTr("Скорость")
                     property int speed: 15
-                  //  model:  [qsTr("Рабочая") + mytrans.emptyString , qsTr("Контрольная") + mytrans.emptyString , qsTr("Дополнительная") + mytrans.emptyString]
+                  //  model:  [qsTr("Рабочая")  , qsTr("Контрольная")  , qsTr("Дополнительная") ]
 
                     onCurrentIndexChanged: {
 
@@ -199,7 +199,7 @@ Item{
 
                 Custom_Date_Block {
                     id: date_Block
-                    title: qsTr("Время действия") + mytrans.emptyString
+                    title: qsTr("Время действия")
                     source:  "qrc:/icons/" + Style.theme + "/utils/calendar.svg"
 
                 }
@@ -230,7 +230,7 @@ Item{
 
                 Custom_Button{
                     width: parent.width
-                    text:  qsTr("Добавить предупреждение") + mytrans.emptyString
+                    text:  qsTr("Добавить предупреждение")
                     icon_with_Text: true
                     source: "qrc:/icons/" + Style.theme + "/top_bar/plus_white.svg" // "qrc:/icons/" + Style.theme + "/navigation/home.svg"
                     onClicked_Signal: {

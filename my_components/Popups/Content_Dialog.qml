@@ -77,7 +77,7 @@ Dialog {
                               font.family: customTitle_FontLoader.name
                               font.pixelSize:  ui.text_MiddleSize // Меняем Размер Шрифта
                               horizontalAlignment: Text.AlignHCenter
-                              text: qsTr("Информация") + mytrans.emptyString
+                              text: qsTr("Информация")
 
                          }
 
@@ -115,7 +115,7 @@ Dialog {
                                       height: parent.height
                                  Custom_Label{
 
-                                      text: qsTr("Переход на другую страницу отменит текущий прогресс") + mytrans.emptyString
+                                      text: qsTr("Переход на другую страницу отменит текущий прогресс")
                                       wrapMode: Text.WordWrap
 
 
@@ -146,7 +146,7 @@ Dialog {
                          outlined: true
                          isOnlyText: true
                          color: Style.primaryDark_Color
-                         text:  qsTr("Отмена") + mytrans.emptyString
+                         text:  qsTr("Отмена")
                          onClicked_Signal: {
 
                             dialog.close()
@@ -164,7 +164,7 @@ Dialog {
                          outlined: true
                          isOnlyText: true
                          color: Style.accent_Color
-                         text:  qsTr("Ок") + mytrans.emptyString
+                         text:  qsTr("Ок")
                          onClicked_Signal: {
 
                             dialog.agree_click()

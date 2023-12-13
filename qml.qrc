@@ -102,5 +102,8 @@
         <file>icons/light_theme/utils/arrow_right_mini_white.svg</file>
         <file>icons/light_theme/utils/more_mini.svg</file>
         <file>icons/light_theme/utils/arrow_top_mini.svg</file>
+        <file>images/memoji.png</file>
+        <file>images/memoji_2.png</file>
+        <file>images/memoji_3.PNG</file>
     </qresource>
 </RCC>

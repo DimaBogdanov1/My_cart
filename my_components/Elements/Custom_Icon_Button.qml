@@ -26,6 +26,13 @@ Item {
 
     property string color_rec
 
+    property string color_border
+
+    property real rotation: 0
+
+    property bool needBorder
+
+
     function create_icon_anim(){
 
         button_Anim.create_icon_anim(isChecked)
@@ -37,8 +44,15 @@ Item {
         height: parent.height
         color: color_rec
         visible: isNeedRectangle
-        layer.enabled: true
-        layer.effect: Mask_Rectangle{target: parent}
+        radius: ui.radius
+       // layer.enabled: true
+       // layer.effect: Mask_Rectangle{target: parent}
+
+        border{
+
+            width: needBorder ?  ui.border_Size : 0
+            color: color_border
+        }
 
        // Border_Gradient{visible: isChecked }
 
@@ -64,6 +78,7 @@ Item {
        id: icon
        width: parent.width
        height: parent.height
+       rotation: root_Item.rotation
        source: isChecked ? icon_checked_path : icon_path
 
     }

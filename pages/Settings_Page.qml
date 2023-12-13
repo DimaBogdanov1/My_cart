@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 import Style 1.0
-import MyLang 1.0
+
 import my_components 1.0
 
 Item {
@@ -37,7 +37,7 @@ Item {
 
                 Custom_Picked_Block{
                     source:  "qrc:/icons/" + Style.theme + "/utils/lock.svg"
-                    text:  qsTr("Общие настройки") + mytrans.emptyString
+                    text:  qsTr("Общие настройки")
 
                     onClicked_Signal :{
 
@@ -48,7 +48,7 @@ Item {
 
                 Custom_Picked_Block{
                     source:  "qrc:/icons/" + Style.theme + "/utils/add.svg"
-                    text: qsTr("Программируемая кнопка") + mytrans.emptyString
+                    text: qsTr("Программируемая кнопка")
 
                     onClicked_Signal :{
 
@@ -58,7 +58,7 @@ Item {
 
                 Custom_Picked_Block{
                     source:  "qrc:/icons/" + Style.theme + "/utils/user.svg"
-                    text: qsTr("Мастер") + mytrans.emptyString
+                    text: qsTr("Мастер")
 
                     onClicked_Signal :{
 
@@ -71,7 +71,7 @@ Item {
                     width: parent.width
                     icon_with_Text: true
                     source: "qrc:/icons/" + Style.theme + "/top_bar/arrow_right_1_white.svg" // "qrc:/icons/" + Style.theme + "/navigation/home.svg"
-                    text:  qsTr("Начать маршрут") + mytrans.emptyString
+                    text:  qsTr("Начать маршрут")
                     onClicked_Signal: {
 
 
@@ -95,7 +95,7 @@ Item {
 
                 Custom_Picked_Block{
                     source:  "qrc:/icons/" + Style.theme + "/utils/programming.svg"
-                    text:  qsTr("О приложении") + mytrans.emptyString
+                    text:  qsTr("О приложении")
 
                     onClicked_Signal :{
 

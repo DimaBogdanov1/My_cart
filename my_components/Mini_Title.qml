@@ -8,7 +8,7 @@ import my_components 1.0
 Custom_Rectangle_Label{
     property bool error: false
 
-    height:  ui.text_miniSize
+    height: ui.height_MiniTitle // ui.text_miniSize
     horizontal: Text.AlignLeft
     needBack: false
     pixel_size: ui.text_miniSize
@@ -17,7 +17,6 @@ Custom_Rectangle_Label{
 
 
     anchors {
-
         left: parent.left
         leftMargin:  10 //ui.basic_spacing //2
 

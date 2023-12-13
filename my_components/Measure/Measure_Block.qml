@@ -66,12 +66,12 @@ Item {
 
                // console.log(title + " b = " + b)
 
-                x_values_model.push(convert_x(b))
+                x_values_model.push(convert_x(b, true))
 
             }
             else{
 
-                x_values_model.push(convert_x(measure_model[i]) )
+                x_values_model.push(convert_x(measure_model[i], true) )
 
               //  console.log(title + " convert_x(i) = " +  convert_x(measure_model[i])  )
 
@@ -90,7 +90,7 @@ Item {
 
     }
 
-    function convert_x(x_value){
+    function convert_x(x_value, isReal_X_to_Chart_X){
 
         var max = measure_model[measure_model.length - 1]
 
@@ -100,11 +100,25 @@ Item {
 
         var delta_x = x_finish - x_start
 
-        var percent = (x_value - min) * 100 / delta_value
+        var answer, percent
+
+        if(!isReal_X_to_Chart_X){
+
+            // В этом случае answer я знаю
+          //  percent =  (100 * (answer - x_start)) / delta_x
+
+            percent =  (100 * (x_value - x_start)) / delta_x
+
+            answer = (percent * delta_value + 100 * min) / 100
 
 
-        var answer = ((delta_x * percent) / 100) + x_start
+        }
+        else{
 
+            percent = (x_value - min) * 100 / delta_value
+
+            answer = ((delta_x * percent) / 100) + x_start
+        }
 
         //console.log("answer = " , answer )
 

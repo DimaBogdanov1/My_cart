@@ -78,7 +78,7 @@ Popup {
                              font_family: customTitle_FontLoader.name
 
                              horizontal: Text.AlignLeft
-                             text: qsTr("Уведомление") + mytrans.emptyString
+                             text: qsTr("Уведомление")
 
                          }
 

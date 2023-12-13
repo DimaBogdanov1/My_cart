@@ -6,7 +6,7 @@ import QtQuick.Dialogs 1.0
 import QtQuick.Layouts 1.15
 
 import Style 1.0
-import MyLang 1.0
+
 import my_components 1.0
 
 Item{

@@ -33,9 +33,9 @@ Item {
     property int test_val: 0
 
 
-    property int left_Scroll_Border: 0
+    property int top_Scroll_Border: 0
 
-    property int right_Scroll_Border: 0
+    property int bottom_Scroll_Border: 0
 
 
 
@@ -50,7 +50,7 @@ Item {
 
             if(coun_scroll > -1 * maxUp){  //   if(c >= 0)
 
-                coun_scroll -= 1 * coef // 1
+                coun_scroll += 1 * coef // 1
 
                 chartView.scrollUp(1 * coef)
 
@@ -69,7 +69,7 @@ Item {
 
             if(coun_scroll < maxUp){ // if(c > 0)
 
-                coun_scroll += 1 * coef //1
+                coun_scroll -= 1 * coef //1
 
              //   console.log("c = " + coun_scroll)
 
@@ -130,9 +130,9 @@ Item {
 
             var range_scroll = 200
 
-            left_Scroll_Border = coun_scroll - 200
+            top_Scroll_Border = coun_scroll //- 200
 
-            right_Scroll_Border = coun_scroll //+ 200
+            bottom_Scroll_Border = coun_scroll - 200//+ 200
 
             //rangePause_scroll = coun_scroll
 
@@ -152,7 +152,7 @@ Item {
 
     function convert_y_to_pixel(value){
 
-        return (chart_Rectangle.height * value) / 100
+        return (chart_Rectangle.height * value) /  100
     }
 
     function create_fast_scroll(value){
@@ -247,13 +247,13 @@ Item {
 
     function create_Scroll_on_Pause(value, down){
 
-        console.log("coun_scroll = " + coun_scroll + " left_Scroll_Border = " + left_Scroll_Border + " right_Scroll_Border = " + right_Scroll_Border)
+        console.log("coun_scroll = " + coun_scroll + " top_Scroll_Border = " + top_Scroll_Border + " bottom_Scroll_Border = " + bottom_Scroll_Border)
 
         var range_scroll = 200
 
-        if(down){
+        if(!down){
 
-            if(left_Scroll_Border < coun_scroll){
+            if(bottom_Scroll_Border < coun_scroll ){
 
                 create_scroll(value, down)
 
@@ -266,7 +266,7 @@ Item {
         }
         else{
 
-            if(coun_scroll < right_Scroll_Border){
+            if(coun_scroll < top_Scroll_Border ){
 
                 create_scroll(value, down)
 
@@ -282,9 +282,9 @@ Item {
 
 
 
-/*        if(left_Scroll_Border < coun_scroll && coun_scroll < right_Scroll_Border){
+/*        if(top_Scroll_Border < coun_scroll && coun_scroll < bottom_Scroll_Border){
 
-            //console.log("успех = " + left_Scroll_Border + " < " + coun_scroll + " < " + right_Scroll_Border)
+            //console.log("успех = " + top_Scroll_Border + " < " + coun_scroll + " < " + bottom_Scroll_Border)
 
             create_scroll(value, down)
 

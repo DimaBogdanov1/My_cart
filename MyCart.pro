@@ -30,10 +30,19 @@ CONFIG += c++17 qmltestcase #sdk_no_version_check
 
 SOURCES += \
         databases/accounts/accounts.cpp \
+        databases/aprior/peregon.cpp \
         databases/big_database.cpp \
         databases/my_database.cpp \
         databases/warnings/warnings.cpp \
-        export/my_pdf.cpp \
+        export/file/test_class.cpp \
+        export/pdf/analysis/analysis_draw.cpp \
+        export/pdf/analysis/table_element.cpp \
+        export/pdf/chart_draw.cpp \
+        export/pdf/km/km_draw.cpp \
+        export/pdf/km/objects_draw.cpp \
+        export/pdf/measure_block.cpp \
+        export/pdf/my_pdf.cpp \
+        export/pdf/pdf_values.cpp \
         main.cpp \
         measures/chart_work.cpp \
         measures/measure.cpp \
@@ -66,10 +75,19 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     databases/accounts/accounts.h \
     databases/accounts/colors_profile.h \
+    databases/aprior/peregon.h \
     databases/big_database.h \
     databases/my_database.h \
     databases/warnings/warnings.h \
-    export/my_pdf.h \
+    export/file/test_class.h \
+    export/pdf/analysis/analysis_draw.h \
+    export/pdf/analysis/table_element.h \
+    export/pdf/chart_draw.h \
+    export/pdf/km/km_draw.h \
+    export/pdf/km/objects_draw.h \
+    export/pdf/measure_block.h \
+    export/pdf/my_pdf.h \
+    export/pdf/pdf_values.h \
     measures/chart_work.h \
     measures/measure.h \
     measures/name_measures.h \

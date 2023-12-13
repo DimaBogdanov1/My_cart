@@ -19,7 +19,7 @@ Item {
     }
 
     Column{
-        width: 445
+        width: ui.width_conetent_halfPage
         height: 300
         anchors.centerIn: parent
         spacing: ui.middle_spacing

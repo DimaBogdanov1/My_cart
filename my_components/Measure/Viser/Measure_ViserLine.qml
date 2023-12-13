@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtCharts 2.15
 
 import Style 1.0
-import MyLang 1.0
+
 import my_components 1.0
 
 
@@ -25,14 +25,14 @@ Item {
            chartView.series("viser_Line").opacity = 0
 
         }
-        console.log("dd ", value)
+      //  console.log("dd ", value)
 
     }
 
     // Функция Для Отображения Линии Визера
     function create_ViserLine(y_coord){
 
-        measureLines.create_Line(0, y_coord, x_ValueAxis.max, y_coord, Style.accentLight_Color, Qt.DotLine, "viser_Line") // Создаём Линию Визера
+        measureLines.create_Line(0, 0, x_ValueAxis.max, 0, Style.accentLight_Color, Qt.DotLine, "viser_Line") // Создаём Линию Визера
 
         chartView.series("viser_Line").width = 1
 
@@ -60,4 +60,7 @@ Item {
 
     }*/
 
+    Component.onCompleted: {
+        create_ViserLine()
+    }
 }

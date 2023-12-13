@@ -7,7 +7,6 @@ import MqttClient 1.0
 
 import Qt.labs.platform 1.1 as Labs
 
-import MyLang 1.0
 import my_components 1.0
 
 
@@ -17,23 +16,40 @@ ApplicationWindow {
     height: 1080 * 0.75 //1080 //480
     visible: true
 
+    //visibility: Qt.WindowFullScreen
+
     readonly property int port: 1883
 
     property bool flipped: false
 
     property var subscription: 0
 
-    title: qsTr("Проект") + mytrans.emptyString
-
+    title: qsTr("Проект")
 
     Component.onCompleted: {
 
         minimumWidth = applicationWindow.width
         minimumHeight = applicationWindow.height
 
-      //  mytrans.updateLanguage(MyLang.ENG)
+        //applicationWindow.showFullScreen()
+
+        //mytrans.updateLanguage(MyLang.ENG)
 
     }
+
+
+
+   /* onClosing: {
+
+        close.accepted = false
+
+        toast_tmp.show("Хочу закрыть приложение!", 3000, 1) // Показываем Тоcт
+
+    }
+
+    ToastManager {
+         id: toast_tmp
+     } */
 
     Flipable_Page{
         id: flipable_Page
@@ -88,7 +104,7 @@ ApplicationWindow {
 
     MqttClient {
         id: client
-        hostname: '127.0.0.1'
+        hostname: '192.168.1.42'  //'127.0.0.1'
         port:  applicationWindow.port
 
         function addMessage(measure_number, x, y)

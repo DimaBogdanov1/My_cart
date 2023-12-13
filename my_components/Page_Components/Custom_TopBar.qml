@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 import Style 1.0
-import MyLang 1.0
+
 import my_components 1.0
 
 Item{
@@ -126,7 +126,7 @@ Item{
 
                      menu.x = calculate_offset(3)
 
-                     menu.model = scale_model
+                     menu.model = [scale_model]
 
                      menu.open()
 
@@ -139,7 +139,7 @@ Item{
                  icon_path: "qrc:/icons/" + Style.theme + "/utils/notification.svg"
                 // needTip: true
                  clip: false
-                 //tip_text: qsTr("Уведомления") + mytrans.emptyString
+                 //tip_text: qsTr("Уведомления")
                  onClicked_Signal: {
 
                      if(notidication_Popup.model.count !== 0){
@@ -173,7 +173,7 @@ Item{
 
                      menu.x = calculate_offset(1)
 
-                     menu.model = objects_model
+                     menu.model = [objects_model]
 
                      menu.open()
 
@@ -185,7 +185,7 @@ Item{
                  isNeedRectangle: true
                  color_rec: Style.light_Color
                 // needTip: true
-                // tip_text: qsTr("Ещё") + mytrans.emptyString
+                // tip_text: qsTr("Ещё")
                  icon_path: "qrc:/icons/" + Style.theme + "/top_bar/more.svg"
 
                  onClicked_Signal: {
@@ -194,7 +194,7 @@ Item{
 
                      menu.x = calculate_offset(0)
 
-                     menu.model = more_model
+                     menu.model = [more_model, objects_model]
 
                      menu.open()
 
@@ -218,6 +218,7 @@ Item{
 
     Menu_Popup{
         id: menu
+        model: []
         //x: calculate_offset(0)
         //model: ChartsMore_Model{}
     }

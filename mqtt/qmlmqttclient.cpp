@@ -61,6 +61,7 @@ QmlMqttClient::QmlMqttClient(QObject *parent): QMqttClient(parent) {
 
 QmlMqttSubscription* QmlMqttClient::subscribe(const QString &topic)
 {
+
     auto sub = QMqttClient::subscribe(topic, 0);
 
     auto result = new QmlMqttSubscription(sub, this);
@@ -95,7 +96,7 @@ void QmlMqttSubscription::handleMessage(const QMqttMessage &qmsg)
 
     QString formatted = doc.toJson(QJsonDocument::Indented);
 
-  //  qWarning().noquote() << formatted;
+    qWarning().noquote() << formatted;
 
 
 
@@ -114,17 +115,6 @@ void QmlMqttSubscription::handleMessage(const QMqttMessage &qmsg)
     }
 
 
-   /* QJsonObject bookHeavyInfo = jsonObject[title_JSON].toObject();
-
-   // QString level =  bookHeavyInfo[level_Title].toString();
-
-    float level = round( (bookHeavyInfo[level_Title].toString()).toFloat()  * 10) / 10.0;
-
-    qDebug() << "level = " + QString::number(level);
-
-    emit messageReceived(0, level, 0);
-
-    */
 
 
 }

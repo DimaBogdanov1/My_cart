@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 
 import qml.measure 1.0
 import Style 1.0
-import MyLang 1.0
+
 import my_components 1.0
 
 
@@ -81,7 +81,7 @@ Item {
                             Custom_Button{
                                 width: parent.width / 2 - ui.basic_spacing / 2
                                 height: ui.height_Button
-                                text: qsTr("По умолчанию") + mytrans.emptyString
+                                text: qsTr("По умолчанию")
 
                                 onClicked_Signal: {
 
@@ -105,7 +105,7 @@ Item {
                             Custom_Button{
                                 width: parent.width / 2 - ui.basic_spacing / 2
                                 height: ui.height_Button
-                                text: qsTr("Ок") + mytrans.emptyString
+                                text: qsTr("Ок")
 
                                 onClicked_Signal: {
 
@@ -303,7 +303,7 @@ Item {
                             width: 200
                             height: ui.height_Button
                             anchors.horizontalCenter: parent.horizontalCenter
-                            text:  qsTr("Up") + mytrans.emptyString
+                            text:  qsTr("Up")
                             onClicked_Signal: {
 
 
@@ -316,7 +316,7 @@ Item {
                             width: 200
                             height: ui.height_Button
                             anchors.horizontalCenter: parent.horizontalCenter
-                            text:  qsTr("Down") + mytrans.emptyString
+                            text:  qsTr("Down")
                             onClicked_Signal: {
 
 

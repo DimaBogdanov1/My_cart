@@ -6,7 +6,7 @@ import QtQuick.Dialogs 1.0
 import QtQuick.Layouts 1.15
 
 import Style 1.0
-import MyLang 1.0
+
 import my_components 1.0
 
 
@@ -40,7 +40,7 @@ Item{
                     id: tabs
                     width:  800
                     anchors.centerIn: parent
-                    model: [qsTr("Маршрут из базы данных") + mytrans.emptyString, qsTr("Пользовательский маршрут") + mytrans.emptyString, qsTr("Предупреждения") + mytrans.emptyString]
+                    model: [qsTr("Маршрут из базы данных") , qsTr("Пользовательский маршрут") , qsTr("Предупреждения") ]
 
                     onIndexChanged: {
 
@@ -119,7 +119,7 @@ Item{
                 width: 200
                  outlined: true
                 anchors.horizontalCenter: parent.horizontalCenter
-                text:  qsTr("finish task") + mytrans.emptyString
+                text:  qsTr("finish task")
                 onClicked_Signal: {
 
 
@@ -133,7 +133,7 @@ Item{
                 width: 200
                  outlined: true
                 anchors.horizontalCenter: parent.horizontalCenter
-                text:  qsTr("custom task") + mytrans.emptyString
+                text:  qsTr("custom task")
                 onClicked_Signal: {
 
 
@@ -146,7 +146,7 @@ Item{
                 width: 200
                  outlined: true
                 anchors.horizontalCenter: parent.horizontalCenter
-                text:  qsTr("basic task") + mytrans.emptyString
+                text:  qsTr("basic task")
                 onClicked_Signal: {
 
 
@@ -160,7 +160,7 @@ Item{
                  width: 200
                  height: ui.height_Button
                  anchors.horizontalCenter: parent.horizontalCenter
-                 text:  qsTr("Up") + mytrans.emptyString
+                 text:  qsTr("Up")
                  onClicked_Signal: {
                 sub_index_HomePage = 0
 
@@ -175,7 +175,7 @@ Item{
                  height: ui.height_Button
                   outlined: true
                  anchors.horizontalCenter: parent.horizontalCenter
-                 text:  qsTr("Down") + mytrans.emptyString
+                 text:  qsTr("Down")
                  onClicked_Signal: {
 
 
@@ -190,7 +190,7 @@ Item{
                  height: ui.height_Button
                   outlined: true
                  anchors.horizontalCenter: parent.horizontalCenter
-                 text:  qsTr("next") + mytrans.emptyString
+                 text:  qsTr("next")
                  onClicked_Signal: {
 
                      sub_index_HomePage++
@@ -205,7 +205,7 @@ Item{
                  height: ui.height_Button
                   outlined: true
                  anchors.horizontalCenter: parent.horizontalCenter
-                 text:  qsTr("open db") + mytrans.emptyString
+                 text:  qsTr("open db")
                  onClicked_Signal: {
 
                      big_db.openDatabase("/Users/dimabogdanov/Documents/MyCart_res/ApBAZE.db")
@@ -220,7 +220,7 @@ Item{
                  height: ui.height_Button
                   outlined: true
                  anchors.horizontalCenter: parent.horizontalCenter
-                 text:  qsTr("dialog") + mytrans.emptyString
+                 text:  qsTr("dialog")
                  onClicked_Signal: {
 
                      dialog.open()
@@ -235,7 +235,7 @@ Item{
                  height: ui.height_Button
                   outlined: true
                  anchors.horizontalCenter: parent.horizontalCenter
-                 text:  qsTr("add old warning") + mytrans.emptyString
+                 text:  qsTr("add old warning")
                  onClicked_Signal: {
 
                      Warnings.add_Warning(2, 1, "2", "2", "", "", "","", "10.03.2023", "06.07.2023", 40)
@@ -250,7 +250,7 @@ Item{
                  height: ui.height_Button
                   outlined: true
                  anchors.horizontalCenter: parent.horizontalCenter
-                 text:  qsTr("delete old warning") + mytrans.emptyString
+                 text:  qsTr("delete old warning")
                  onClicked_Signal: {
 
                      Warnings.remove_Old_Warnings()

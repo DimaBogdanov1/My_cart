@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtGraphicalEffects 1.0
 
 import Style 1.0
-import MyLang 1.0
+
 
 //import org.example 1.0
 
@@ -122,10 +122,21 @@ Item{
 
            }
 
+           /*Image {
+               anchors.fill: parent
+              //sourceSize.width:  parent.width
+              //sourceSize.height: parent.height
+
+              visible: isIcon
+              //smooth: false // Убираем Сглаживание
+              source: root_Item.source
+              fillMode: Image.PreserveAspectFit
+           } */
+
            Custom_Icon{
                width: parent.width
                height: parent.height
-               icon_size: ui.icon_nav_size * 1.7
+              // icon_size: ui.icon_nav_size * 1.7
                source: root_Item.source
                visible: isIcon
 

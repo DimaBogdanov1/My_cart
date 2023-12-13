@@ -121,8 +121,9 @@ Item {
                 //horizontal: Text.AlignLeft
                 visible: !isIcon
                 pixel_size:  !root_Item.basic_text ? root_Item.pixelSize : ui.text_SmallSize
-                font_weight: !root_Item.basic_text ? ui.font_weight_Bigsize : ui.font_weight_Smallsize
-                font_family: !root_Item.basic_text ?  customTitle_FontLoader.name : custom_FontLoader.name
+                boldStyle: true
+                //font_weight: !root_Item.basic_text ? ui.font_weight_Bigsize : ui.font_weight_Smallsize
+               // font_family: !root_Item.basic_text ?  customTitle_FontLoader.name : custom_FontLoader.name
                 text_color: outlined || isOnlyText ? Style.primaryDark_Color : Style.background_Color
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: root_Item.text

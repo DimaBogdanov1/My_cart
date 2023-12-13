@@ -2,54 +2,67 @@ import QtQuick 2.15
 import QtCharts 2.15
 
 import Style 1.0
-import MyLang 1.0
+
 
 import my_components 1.0
 
 Item {
     property bool tmp_check
 
+    property bool tmp_tmp_check
+
 
     function updatePointPosition(){
+
         if(tmp_check){
 
-            //var p = chartView.mapToPosition(  chartView.series("middle_struct").at(0),  chartView.series("left_rail") );
-            //txt.x = p.x;
-           // txt.y = p.y;
+            for(var i = 0; i < km_item_arr.length; i++){  // i < kmLines_arr.length
 
+                for(var k = 0; k < km_item_arr[i].kmLines_arr.length; k++){
 
-            for(var i = 0; i < kmLines_arr.length; i++){
+                    var e = chartView.mapToPosition(  chartView.series(km_item_arr[i].kmLines_arr[k][0]).at(1),  chartView.series(km_item_arr[i].kmLines_arr[k][1]) );
 
-                var e = chartView.mapToPosition(  chartView.series(kmLines_arr[i][0]).at(1),  chartView.series(kmLines_arr[i][0]) );
+                    km_item_arr[i].kmLines_arr[k][1].x = e.x - km_item_arr[i].kmLines_arr[k][1].width / 2
 
-                kmLines_arr[i][1].x = e.x - kmLines_arr[i][1].width / 2
+                    km_item_arr[i].kmLines_arr[k][1].y = e.y - km_item_arr[i].kmLines_arr[k][1].height / 2
 
-                kmLines_arr[i][1].y = e.y - kmLines_arr[i][1].height / 2
+                }
 
+                for(var j = 0; j < km_item_arr[i].pickets_arr.length; j++){  // km_item_arr[i].kmLines_arr.length   // pickets_arr.length
 
-                //txt.x = e.x;
-                //txt.y = e.y;
-            }
+                    var r = chartView.mapToPosition(  chartView.series(km_item_arr[i].pickets_arr[j][0]).at(1),  chartView.series(km_item_arr[i].pickets_arr[j][1]) );
 
-            for(var j = 0; j < pickets_arr.length; j++){
+                    km_item_arr[i].pickets_arr[j][1].x =  r.x - km_item_arr[i].pickets_arr[j][1].width / 2
 
-                var r = chartView.mapToPosition(  chartView.series(pickets_arr[j][0]).at(1),  chartView.series(pickets_arr[j][0]) );
+                    km_item_arr[i].pickets_arr[j][1].y =  r.y - km_item_arr[i].pickets_arr[j][1].height / 2
 
-                pickets_arr[j][1].x = r.x - pickets_arr[j][1].width / 2
-
-               pickets_arr[j][1].y = r.y - pickets_arr[j][1].height / 2
-
+                }
 
             }
 
         }
         else{
 
-            measure_Rails.createRails()
+            if(!tmp_tmp_check){
 
-            new_km_start = 0
+                measure_Rails.createRails()
 
-            create_KmLine(4, "256", false, 0, false)
+                measure_Km.create_KmLine(4, "256", false, 0, false)
+
+                //  create_KmLine(4, "256", false, 0, false)
+
+               // km_item_arr.push(km_Item)
+
+               // new_km_start = 0
+
+                tmp_tmp_check = true
+            }
+
+        //    measure_Rails.createRails()
+
+        //    new_km_start = 0
+
+          //  create_KmLine(4, "256", false, 0, false)
 
 
         }
@@ -61,13 +74,19 @@ Item {
 
         var tmp_y_offset = 5
 
-        var name_line = name + kmLines_arr.length
+        var name_line = "name"  + km_Item.km_id +  km_Item.kmLines_arr.length  //+ dd
 
-        var km_line = [[x_center, y_value - tmp_y_offset] , [x_center, y_value - tmp_y_offset]]
+     //   var km_line = [[x_center, y_value - tmp_y_offset] , [x_center, y_value - tmp_y_offset]]
+
+        var km_line = [[x_center, y_value - tmp_y_offset], [x_center, y_value - tmp_y_offset] ] // [30, y_value - tmp_y_offset]
 
         measure_Objects.createLine_Structure(km_line, name_line,  "blue", ChartView.SeriesTypeLine)      //(0, y_coord, x_ValueAxis.max, y_coord, Style.accentLight_Color, Qt.DotLine, "km_1") // Создаём Линию Километра (Дефекта)
 
+
+      //  console.log("input name_line = " + name_line)
+
         createKm_Label(y_label - tmp_y_offset, text, chartView.series(name_line).at(1), chartView.series(name_line), name_line)
+
 
     }
 
@@ -84,13 +103,39 @@ Item {
 
         var y_value = y_finish + new_km_start
 
+        if(km_item_arr.length > 0){
+
+            km_Item.y_count = y_finish + step_picket
+        }
+        else{
+
+            km_Item.y_count = y_finish
+
+        }
+
+
+        console.log("km_Item.y_count = " + km_Item.y_count )
 
         var km_line = [[0, y_value], [x_ValueAxis.max, y_value]]
 
-        var name = "kmLine" + kmLines_arr.length
+        var name = "kmLine" + km_Item.km_id
 
+        km_Item.km_Finish_Line = name
 
         measure_Objects.createLine_Structure(km_line, name,  "#BEBDFD", ChartView.SeriesTypeLine)
+
+        km_Item.km_id = km_id_global
+
+        km_id_global++
+
+       /* if(km_item_arr.length > 0){
+
+            //console.log("wwwwww = " + (km_item_arr[km_item_arr.length - 1].km_id + 1))
+
+            km_Item.km_id = km_item_arr[km_item_arr.length - 1].km_id + 1
+
+        } */
+
 
         if(needFirst){
 
@@ -105,7 +150,10 @@ Item {
 
         }
 
+        km_Item.type_Sleepers = sleepers_Type
+
         help_createKmLine("km_bottom_line",  y_value  , y_finish, km_text)
+
 
 
     /*   const tmp_offset_mes  = 1 ///  0.5
@@ -119,11 +167,24 @@ Item {
 
         create_KmMeasure(values, new_km_start, isReverse)
 
-        console.log("sleepers_Type = " + sleepers_Type + " y_value = " + y_value)
+        //console.log("sleepers_Type = " + sleepers_Type + " y_value = " + y_value)
 
 
         new_km_start += (values + 1) * step_picket
 
+        //km_id.push(km_id[km_id.length - 1] + 1)
+
+
+
+       // km_Item.km_id = 0
+
+
+
+
+
+       // km_Item.km_id.push(km_Item.km_id[km_Item.km_id.length - 1] + 1)
+
+        // km_count++
     }
 
     function create_KmMeasure(value, y_start, isReverse){
@@ -135,15 +196,19 @@ Item {
         const picket_start = 2 // Пикеты начинаются с 2
 
 
-        for(var i = 0; i < value; i += 1){ //       for(var i = value; i > 0; i -= 1)
+        for(var i = 0; i < value; i += 1){
 
-            var name = "mes" + pickets_arr.length + i
+            var name = "mes" + km_Item.km_id + km_Item.pickets_arr.length   //+ ff + i
+
+           // console.log("xxxxxxx km_Item.km_id = " + km_Item.km_id)
+
+           // console.log("xxxxxxx km_Item.pickets_arr = " + km_Item.pickets_arr.length)
 
             var arr = [ [x_max + tmp_offset_mes , (i * size_y) + y_start] , [x_max + tmp_offset_mes -size_mes, (i * size_y) + y_start]]
 
             measure_Objects.createLine_Structure(arr, name,  Style.secondaryAccent_Color, ChartView.SeriesTypeLine)
 
-           create_Mesure(chartView.series(name).at(1), chartView.series(name) , name, i  + picket_start)
+           //create_Mesure(chartView.series(name).at(1), chartView.series(name) , name, i  + picket_start)
 
             if(!isReverse){
 
@@ -199,11 +264,14 @@ Item {
 
         var arr = [name, mesLabel]
 
-        pickets_arr.push(arr)
+
+        km_Item.pickets_arr.push(arr)
+
     }
 
 
     function createKm_Label(y_coord, title, series, line, name){
+
        // var name = "picket" + pickets_arr.length
 
 //        var p = chartView.mapToPosition(Qt.point(x_start + width_Line / 2 , y_coord), name);
@@ -216,28 +284,25 @@ Item {
 
        // pickets_arr.push(kmLabel)
 
-        //picket.id = name
-
-       // picket.anchors.left = parent.left
-
-        //picket.anchors.right = parent.right
-
         kmLabel.text = title
 
         kmLabel.margin_text = 16 //16 // 32
 
-       // picket.margin_text = 24
         kmLabel.x -= kmLabel.width / 2
 
         kmLabel.y -= kmLabel.height / 2
 
         kmLabel.needBorder = true
 
-
         var arr = [name, kmLabel]
 
+        //kmLines_arr.push(arr)
 
-        kmLines_arr.push(arr)
+        //km_Item.kmLabel_arr.push(kmLabel)
+
+        //km_Item.kmName_arr.push(name)
+
+        km_Item.kmLines_arr.push(arr)
 
 
        // picket.width = 100

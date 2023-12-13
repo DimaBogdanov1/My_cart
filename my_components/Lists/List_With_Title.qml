@@ -7,7 +7,7 @@ import my_components 1.0
 Column{
     id: root_Column
     width: parent.width
-    height: ui.block_height //ui.height_Button +  ui.text_miniSize + ui.basic_spacing / 2
+    height:  parent.height //ui.block_height //ui.height_Button +  ui.text_miniSize + ui.basic_spacing / 2
     spacing: ui.basic_spacing / 2
 
     property string title
@@ -30,6 +30,8 @@ Column{
     property var model
 
     property var sort_func
+
+    signal clickedDelegate_Signal(index: int)
 
     readonly property var sourceTitle_Array: [
                                                "qrc:/my_components/Lists/ListTitles/Titles_With_Menu.qml",  // "qrc:/my_components/Lists/List_Row.qml",
@@ -153,6 +155,13 @@ Column{
                model: root_Column.model
 
                delegate: root_Column.delegate
+
+               signal clickedDelegate_Signal(index: int)
+
+               onClickedDelegate_Signal: {
+
+                   root_Column.clickedDelegate_Signal(index)
+               }
 
                /*delegate: List_Row{
                    listview: list

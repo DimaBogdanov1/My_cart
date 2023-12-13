@@ -20,9 +20,11 @@ Item{
 
     property bool needHighlight: false
 
+    signal clicked_Signal
+
     onCurChanged: {
 
-        if(listview.last_index === index){
+        if(listview.last_index === index && needHighlight){
 
             highlight.close_highlight()
 
@@ -46,25 +48,33 @@ Item{
 
         onClicked_Signal: {
 
-            if (!listview.moving && needHighlight){
+            if (!listview.moving){ //&& needHighlight
 
-                if(listview !== null){
-
-                    //console.log( highlight.x)
+                if(needHighlight){
 
                     highlight.open_highlight()
 
-                    if(listview.currentIndex !== index){
 
-                        listview.last_index = listview.currentIndex
+                }
+                else{
 
-                        listview.currentIndex = index
-                    }
+                    listview.clickedDelegate_Signal(index)
+                }
+
+                if(listview.currentIndex !== index){
+
+                    listview.last_index = listview.currentIndex
+
+                    listview.currentIndex = index
+                }
+
+
+                if(listview !== null){
+
+
 
                 }
             }
-
-
 
         }
 
@@ -75,12 +85,15 @@ Item{
 
                 glow.change_glow(value)
 
-                back_Rectangle.z = 10
+                //back_Rectangle.z = 10
             }
 
 
         }
     }
+
+
+
 
 
     Item {

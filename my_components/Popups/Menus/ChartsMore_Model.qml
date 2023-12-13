@@ -2,21 +2,7 @@ import QtQuick 2.15
 
 ListModel{
 
-    ListElement{
-        text: "Экспорт"
-        source: "qrc:/icons/light_theme/top_bar/export.svg"
-        checked: false
-        checkable: false
-
-        pick: function(value){
-            toast.show("Экспорт", 3000, 1)
-
-            return null
-
-        }
-
-
-    }
+    readonly property string title: qsTr("Заголовок 1")
 
     ListElement{
         text: "Сетка"
@@ -100,4 +86,21 @@ ListModel{
         }
 
     }
+
+    ListElement{
+        text: "Завершить проезд"
+        source: "qrc:/icons/light_theme/top_bar/export.svg"
+        checked: false
+        checkable: false
+
+        pick: function(value){
+            toast.show("Завершить проезд", 3000, 1)
+
+            return null
+
+        }
+
+
+    }
+
 }

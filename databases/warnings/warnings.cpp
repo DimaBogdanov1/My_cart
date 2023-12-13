@@ -116,25 +116,33 @@ void Warnings::get_All_Warnings(){
 
         //query.prepare("SELECT * FROM " + name_Table);
 
-        if (!query.exec())
-        {
-            qDebug()<< "Ошибка открытия предупреждений"<< query.lastError();
+        query.exec();
 
-        }
-
-        //query.prepare("SELECT * FROM " + name_Table + " WHERE "+  end_Date + " > date('now')");
+     //   query.first();
 
         while (query.next())
         {
 
-          //  Accounts accounts;
-
-           // accounts.get_User(query.value(1).toInt());
-
             QList account = Accounts::get_User(query.value(1).toInt());
 
-            emit newWarning_signal(account.at(0), account.at(1).toInt(), query.value(3).toInt(), query.value(4).toInt(), query.value(5).toInt(), query.value(6).toInt(), query.value(7).toInt(), query.value(8).toInt(), conver_to_date(query.value(9).toString(), true), conver_to_date(query.value(10).toString(), true), conver_to_date(query.value(11).toString(), true), query.value(12).toInt() );
+            //QList<QString> account = {"Dima Bogdanov", "1"};
+
+            emit newWarning_signal(account.at(0),
+                                   account.at(1).toInt(),
+
+                                   query.value(3).toInt(),
+                                   query.value(4).toInt(),
+                                   query.value(5).toInt(),
+                                   query.value(6).toInt(),
+                                   query.value(7).toInt(),
+                                   query.value(8).toInt(),
+                                   conver_to_date(query.value(9).toString(), true),
+                                   conver_to_date(query.value(10).toString(), true),
+                                   conver_to_date(query.value(11).toString(), true),
+                                   query.value(12).toInt() );
+
         }
+
 
     }
 

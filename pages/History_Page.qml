@@ -6,7 +6,7 @@ import QtCharts 2.15
 import MqttClient 1.0
 
 import Style 1.0
-import MyLang 1.0
+
 import my_components 1.0
 
 Item {
@@ -152,7 +152,7 @@ Item {
          Button{
              width: 100
              height: parent.height
-             text:  qsTr("back") + mytrans.emptyString
+             text:  qsTr("back")
              onClicked: {
 
                //  homePage_Loader.index_Page--
@@ -166,7 +166,7 @@ Item {
          Button{
              width: 100
              height: parent.height
-             text:  qsTr("next") + mytrans.emptyString
+             text:  qsTr("next")
              onClicked: {
 
              //    homePage_Loader.index_Page++
@@ -178,7 +178,7 @@ Item {
          Button{
              width: 100
              height: parent.height
-             text:  qsTr("pdf / json") + mytrans.emptyString
+             text:  qsTr("pdf / json")
              onClicked: {
 
               //   my_pdf.init()
@@ -194,7 +194,7 @@ Item {
          Button{
              width: 100
              height: parent.height
-             text:  qsTr("size+") + mytrans.emptyString
+             text:  qsTr("size+")
              onClicked: {
 
                  applicationWindow.width = 1920
@@ -207,7 +207,7 @@ Item {
          Button{
              width: 100
              height: parent.height
-             text:  qsTr("back 1") + mytrans.emptyString
+             text:  qsTr("back 1")
              onClicked: {
 
                  tmp_Index = page_Loader.open_back(tmp_Index, 0)
@@ -221,7 +221,7 @@ Item {
          Button{
              width: 100
              height: parent.height
-             text:  qsTr("page 2") + mytrans.emptyString
+             text:  qsTr("page 2")
              onClicked: {
 
               tmp_Index = page_Loader.open_next(1)
@@ -233,7 +233,7 @@ Item {
          Button{
              width: 100
              height: parent.height
-             text:  qsTr("page 3") + mytrans.emptyString
+             text:  qsTr("page 3")
              onClicked: {
 
               tmp_Index = page_Loader.open_next(2)

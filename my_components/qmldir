@@ -38,10 +38,16 @@ TextField_Anim 1.0 Animations/TextField_Anim.qml
 # Measure
 Measure_Block 1.0 Measure/Measure_Block.qml
 Measure_Lines 1.0 Measure/Measure_Lines.qml
-Measure_Km 1.0 Measure/Measure_Km.qml
-Measure_Viser 1.0 Measure/Measure_Viser.qml
-Measure_ViserLine 1.0 Measure/Measure_ViserLine.qml
-Measure_Rails 1.0 Measure/Measure_Rails.qml
+
+Measure_Km 1.0 Measure/Km/Measure_Km.qml
+Measure_Rails 1.0 Measure/Km/Measure_Rails.qml
+
+
+Measure_Viser 1.0 Measure/Viser/Measure_Viser.qml
+Measure_ViserLine 1.0 Measure/Viser/Measure_ViserLine.qml
+Measure_Scroll 1.0 Measure/Viser/Measure_Scroll.qml
+
+Measure_Logic 1.0 Measure/Measure_Logic.qml
 
 # Lists
 My_List 1.0 Lists/My_List.qml
@@ -98,6 +104,7 @@ Notification_Popup 1.0 Popups/Notifications/Notification_Popup.qml
 Counter_Notification 1.0 Popups/Notifications/Counter_Notification.qml
 
 UpNom_Helps 1.0 Popups/Helps/UpNom_Helps.qml
+Warnings_Helps 1.0 Popups/Helps/Warnings_Helps.qml
 
 # Calib_Elements
 Calib_Block 1.0 Calib_Elements/Calib_Block.qml

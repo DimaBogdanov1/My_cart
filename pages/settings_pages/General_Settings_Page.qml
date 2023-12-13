@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 import Style 1.0
-import MyLang 1.0
+
 import my_components 1.0
 
 Item{
@@ -32,7 +32,7 @@ Item{
                     needBack: false
                     horizontal: Text.AlignLeft
                     vertical: Text.AlignTop
-                    text: qsTr("Цветовое оформление") + mytrans.emptyString
+                    text: qsTr("Цветовое оформление")
 
                 }
 
@@ -53,7 +53,7 @@ Item{
                            id: light_ThemeBlock
                            width: theme_Item.width_block
                            checked: true
-                           text_theme: qsTr("Светлая") + mytrans.emptyString
+                           text_theme: qsTr("Светлая")
 
                            onClicked_Signal: {
 
@@ -73,7 +73,7 @@ Item{
                            id: dark_ThemeBlock
                            width: theme_Item.width_block
                            checked: false
-                           text_theme: qsTr("Тёмная") + mytrans.emptyString
+                           text_theme: qsTr("Тёмная")
 
                            onClicked_Signal: {
 
@@ -93,7 +93,7 @@ Item{
                            id: automatic_ThemeBlock
                            width: theme_Item.width_block
                            checked: false
-                           text_theme: qsTr("Автоматически") + mytrans.emptyString
+                           text_theme: qsTr("Автоматически")
 
                            onClicked_Signal: {
 
@@ -114,13 +114,13 @@ Item{
 
             Settings_Switch{
                checked: true
-               title: qsTr("Сезонность измерений") + mytrans.emptyString
+               title: qsTr("Сезонность измерений")
             }
 
             Custom_Border{color: Style.primaryDark_Color}
 
             Settings_Text{
-                title: qsTr("Путь до априорной базы данных") + mytrans.emptyString
+                title: qsTr("Путь до априорной базы данных")
                 text_value: "1.0"
 
             }
@@ -128,19 +128,19 @@ Item{
             Custom_Border{color: Style.primaryDark_Color}
 
             Settings_Text{
-                title: qsTr("Путь до нашей базы данных") + mytrans.emptyString
+                title: qsTr("Путь до нашей базы данных")
                 text_value: "1.0"
 
             }
 
             Settings_Text{
-                title: qsTr("Путь до сохранения pdf ?") + mytrans.emptyString
+                title: qsTr("Путь до сохранения pdf ?")
                 text_value: "1.0"
 
             }
 
             Settings_Text{
-                title: qsTr("Дополнительные параметры") + mytrans.emptyString
+                title: qsTr("Дополнительные параметры")
                 text_value: "1.0"
 
             }
@@ -170,7 +170,7 @@ Item{
 
             Custom_Rectangle_Label{
                 color: Style.light_Color // Меняем Цвет Текста
-                text: qsTr("Язык") + mytrans.emptyString
+                text: qsTr("Язык")
 
             }
 

@@ -42,7 +42,7 @@ Column{
       // vertical: Text.AlignTop
 
        // horizontal: Text.AlignLeft
-        text: id_account !== -1 ?  account_Icon.login  : qsTr("Новый аккаунт") + mytrans.emptyString
+        text: id_account !== -1 ?  account_Icon.login  : qsTr("Новый аккаунт")
 
 
 
