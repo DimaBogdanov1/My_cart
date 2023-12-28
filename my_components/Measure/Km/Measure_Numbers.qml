@@ -11,6 +11,8 @@ Item {
 
     property bool tmp_tmp_check
 
+    readonly property int picket_offset: -10
+
 
     function updatePointPosition(){
 
@@ -34,7 +36,7 @@ Item {
 
                     km_item_arr[i].pickets_arr[j][1].x =  r.x - km_item_arr[i].pickets_arr[j][1].width / 2
 
-                    km_item_arr[i].pickets_arr[j][1].y =  r.y - km_item_arr[i].pickets_arr[j][1].height / 2
+                    km_item_arr[i].pickets_arr[j][1].y =  r.y - km_item_arr[i].pickets_arr[j][1].height / 2  + get_PicketOffset(km_item_arr[i].isReverse) //- 10
 
                 }
 
@@ -47,7 +49,7 @@ Item {
 
                 measure_Rails.createRails()
 
-                measure_Km.create_KmLine(4, "256", false, 0, false)
+                measure_Km.create_KmLine(400, "256", false, 0, false)
 
                 //  create_KmLine(4, "256", false, 0, false)
 
@@ -70,22 +72,34 @@ Item {
 
     }
 
-    function help_createKmLine(name, y_value, y_label, text){
+    function help_createKmLine(name, y_value, text , isBottom){
 
         var tmp_y_offset = 5
 
-        var name_line = "name"  + km_Item.km_id +  km_Item.kmLines_arr.length  //+ dd
+        var name_line = "name"  + km_Item.km_id +  km_Item.kmLines_arr.length
 
-     //   var km_line = [[x_center, y_value - tmp_y_offset] , [x_center, y_value - tmp_y_offset]]
 
-        var km_line = [[x_center, y_value - tmp_y_offset], [x_center, y_value - tmp_y_offset] ] // [30, y_value - tmp_y_offset]
+        var y_label
+
+        if(isBottom){
+
+            y_label = y_value - tmp_y_offset
+        }
+        else{
+
+            y_label = y_value + tmp_y_offset
+
+        }
+
+
+        var km_line = [[x_center, y_label], [x_center, y_label] ] // [30, y_value - tmp_y_offset]
 
         measure_Objects.createLine_Structure(km_line, name_line,  "blue", ChartView.SeriesTypeLine)      //(0, y_coord, x_ValueAxis.max, y_coord, Style.accentLight_Color, Qt.DotLine, "km_1") // Создаём Линию Километра (Дефекта)
 
 
       //  console.log("input name_line = " + name_line)
 
-        createKm_Label(y_label - tmp_y_offset, text, chartView.series(name_line).at(1), chartView.series(name_line), name_line)
+        createKm_Label(text, chartView.series(name_line).at(1), chartView.series(name_line), name_line)
 
 
     }
@@ -93,34 +107,63 @@ Item {
     // Функция Для Отображения Линии Километра
     function create_KmLine(values, km_text, needFirst, sleepers_Type, isReverse){
 
-       // const step_picket = 10
+        
+        var a = values / 100
 
-       // values -= 2
+        var main_picket_count = Math.floor(a)
+
+        var dop_value = a - main_picket_count
+
+       // console.log("a = " + a + " main_picket_count = " + main_picket_count + " dop_value = " + dop_value)
+
+        
 
        // console.log("Зашли в create_KmLine isReverse " + " " + isReverse + " ")
 
-        var y_finish = step_picket * values
+        // step_picket
 
-        var y_value = y_finish + new_km_start
 
-        if(km_item_arr.length > 0){
 
-            km_Item.y_count = y_finish + step_picket
+        var distance = step_picket *  a //tmp //(a - 1) //main_picket_count  //values
+
+
+
+        var y_finish = distance + new_km_start
+
+       /* if(km_item_arr.length > 0){
+
+            km_Item.y_count = distance + step_picket
         }
         else{
 
-            km_Item.y_count = y_finish
+            km_Item.y_count = distance
+
+        } */
+
+        km_Item.distance = distance
+
+
+
+        console.log("km_Item.distance = " + km_Item.distance )
+
+
+        if(km_item_arr.length == 0){
+
+           let km_line = [[0, new_km_start], [x_ValueAxis.max, new_km_start]]
+
+           measure_Objects.createLine_Structure(km_line, measure_Rails.first_kmLine_name,  "#BEBDFD", ChartView.SeriesTypeLine)
+
 
         }
 
 
-        console.log("km_Item.y_count = " + km_Item.y_count )
-
-        var km_line = [[0, y_value], [x_ValueAxis.max, y_value]]
+        var km_line = [[0, y_finish], [x_ValueAxis.max, y_finish]]
 
         var name = "kmLine" + km_Item.km_id
 
         km_Item.km_Finish_Line = name
+
+
 
         measure_Objects.createLine_Structure(km_line, name,  "#BEBDFD", ChartView.SeriesTypeLine)
 
@@ -128,105 +171,131 @@ Item {
 
         km_id_global++
 
-       /* if(km_item_arr.length > 0){
-
-            //console.log("wwwwww = " + (km_item_arr[km_item_arr.length - 1].km_id + 1))
-
-            km_Item.km_id = km_item_arr[km_item_arr.length - 1].km_id + 1
-
-        } */
-
 
         if(needFirst){
 
-            help_createKmLine("km_top_line", new_km_start , y_finish , km_text)
+            help_createKmLine("km_top_line", new_km_start, km_text, false)
 
-            measure_Rails.createSleepers(new_km_start - step_picket, y_value, sleepers_Type)
+        }
+
+
+        measure_Rails.createSleepers(new_km_start, y_finish, sleepers_Type)
+
+
+        km_Item.type_Sleepers = sleepers_Type
+
+        help_createKmLine("km_bottom_line",  y_finish , km_text, true)
+
+
+
+
+        var counNumbers
+
+        if(dop_value == 0){
+
+            console.log("dop_value = " + dop_value)
+
+            counNumbers = main_picket_count -1 //- 2
 
         }
         else{
 
-            measure_Rails.createSleepers(new_km_start  , y_value, sleepers_Type)
+            counNumbers = main_picket_count //- 1
+
 
         }
 
-        km_Item.type_Sleepers = sleepers_Type
 
-        help_createKmLine("km_bottom_line",  y_value  , y_finish, km_text)
-
+        create_KmMeasure(counNumbers, newSecondPicket_Start, y_finish, isReverse)
 
 
-    /*   const tmp_offset_mes  = 1 ///  0.5
+        measure_Rails.create_Riht(new_km_start, new_km_start + (distance) / 2, true)
 
-        var border_3 = [[x_max + tmp_offset_mes, 0], [x_max + tmp_offset_mes, y_ValueAxis.max]]
-
-        measure_Objects.createLine_Structure(border_3, "border_2",  "red" , ChartView.SeriesTypeLine)
-
-        */
-
-
-        create_KmMeasure(values, new_km_start, isReverse)
-
-        //console.log("sleepers_Type = " + sleepers_Type + " y_value = " + y_value)
-
-
-        new_km_start += (values + 1) * step_picket
-
-        //km_id.push(km_id[km_id.length - 1] + 1)
+        measure_Rails.create_Riht(new_km_start + (distance) / 2, y_finish, false)
 
 
 
-       // km_Item.km_id = 0
+        new_km_start +=  distance
+
+        newSecondPicket_Start += distance
 
 
-
-
-
-       // km_Item.km_id.push(km_Item.km_id[km_Item.km_id.length - 1] + 1)
-
-        // km_count++
     }
 
-    function create_KmMeasure(value, y_start, isReverse){
+    function create_KmMeasure(counNumbers, y_start, y_finish, isReverse){
 
         const size_mes = 0.6
-
-        const size_y = 10 // Растояние по у
 
         const picket_start = 2 // Пикеты начинаются с 2
 
 
-        for(var i = 0; i < value; i += 1){
+        var picketStart_y
 
-            var name = "mes" + km_Item.km_id + km_Item.pickets_arr.length   //+ ff + i
 
-           // console.log("xxxxxxx km_Item.km_id = " + km_Item.km_id)
+        if(!isReverse){
 
-           // console.log("xxxxxxx km_Item.pickets_arr = " + km_Item.pickets_arr.length)
+            picketStart_y = y_start
 
-            var arr = [ [x_max + tmp_offset_mes , (i * size_y) + y_start] , [x_max + tmp_offset_mes -size_mes, (i * size_y) + y_start]]
+            for(var i = 0; i < counNumbers; i++){
 
-            measure_Objects.createLine_Structure(arr, name,  Style.secondaryAccent_Color, ChartView.SeriesTypeLine)
+                var name = "mes" + km_Item.km_id + km_Item.pickets_arr.length   //+ ff + i
 
-           //create_Mesure(chartView.series(name).at(1), chartView.series(name) , name, i  + picket_start)
+                var arr = [ [x_max + tmp_offset_mes , (i * step_picket) + picketStart_y] , [x_max + tmp_offset_mes -size_mes, (i * step_picket) + picketStart_y]]
 
-            if(!isReverse){
 
-                create_Mesure(chartView.series(name).at(1), chartView.series(name) , name, i  + picket_start)
+                measure_Objects.createLine_Structure(arr, name,  Style.secondaryAccent_Color, ChartView.SeriesTypeLine)
 
-            }
-            else{
 
-                var reverse_value = value - i - 1
+                create_Mesure(chartView.series(name).at(1), chartView.series(name) , name, i  + picket_start, isReverse)
 
-                create_Mesure(chartView.series(name).at(1), chartView.series(name) , name, reverse_value  + picket_start)
+                /*if(!isReverse){
+
+                    create_Mesure(chartView.series(name).at(1), chartView.series(name) , name, i  + picket_start, isReverse)
+
+                }
+                else{
+
+                    var reverse_value = counNumbers - i - 1
+
+                    create_Mesure(chartView.series(name).at(1), chartView.series(name) , name, reverse_value  + picket_start, isReverse)
+                }*/
             }
 
         }
+        else{
+
+
+            var km_line = [[0, picketStart_y], [x_ValueAxis.max, picketStart_y]]
+
+            measure_Objects.createLine_Structure(km_line, "sdsadsadasda",  "red", ChartView.SeriesTypeLine)
+
+
+            picketStart_y = y_finish
+
+            for(var j = 0; j < counNumbers; j++){
+
+                let name = "mes" + km_Item.km_id + km_Item.pickets_arr.length   //+ ff + i
+
+                let y_picket = picketStart_y - ((j + 1) * step_picket)
+
+
+                let arr = [ [x_max + tmp_offset_mes ,  y_picket] , [x_max + tmp_offset_mes -size_mes, y_picket]]
+
+                measure_Objects.createLine_Structure(arr, name,  Style.secondaryAccent_Color, ChartView.SeriesTypeLine)
+
+
+
+                create_Mesure(chartView.series(name).at(1), chartView.series(name) , name, j  + picket_start , isReverse)
+
+            }
+        }
+
+
+        km_Item.isReverse = isReverse
 
     }
 
-    function create_Mesure(series, line, name, title){
+    function create_Mesure(series, line, name, title, isReverse){
 
         var p = chartView.mapToPosition(series, line);
 
@@ -257,7 +326,9 @@ Item {
 
         mesLabel.x  -= mesLabel.width / 2
 
-        mesLabel.y -=  mesLabel.height / 2
+        mesLabel.y -=  mesLabel.height / 2 - get_PicketOffset(isReverse)
+
+      //  mesLabel.y += 10;
 
         //kmLabel.needBorder = true
 
@@ -270,7 +341,19 @@ Item {
     }
 
 
-    function createKm_Label(y_coord, title, series, line, name){
+    function get_PicketOffset(isReverse){
+
+        var _picket_offset = picket_offset
+
+        if(isReverse){
+
+            _picket_offset *= -1
+        }
+
+        return  _picket_offset
+    }
+
+    function createKm_Label(title, series, line, name){
 
        // var name = "picket" + pickets_arr.length
 

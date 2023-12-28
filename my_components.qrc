@@ -106,5 +106,7 @@
         <file>my_components/Measure/Viser/Measure_Viser.qml</file>
         <file>my_components/Measure/Viser/Measure_ViserLine.qml</file>
         <file>my_components/Measure/Km/Km_Item.qml</file>
+        <file>my_components/Popups/Stories/Stories_Block.qml</file>
+        <file>my_components/Popups/Stories/Stories_Popup.qml</file>
     </qresource>
 </RCC>

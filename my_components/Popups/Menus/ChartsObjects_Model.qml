@@ -12,7 +12,12 @@ ListModel{
 
         pick: function(value){
 
-            measure_Km.create_KmLine(5, "257", true, 1, false)
+           // measure_Km.create_KmLine(650, "257", true, 1, false)
+
+            measure_Km.create_KmLine(600, "258", true, 1, true)
+
+
+         //   measure_Km.create_KmLine(650, "258", true, 1, false)
 
            // Chart_Work.create_KmLine()
 
@@ -31,7 +36,11 @@ ListModel{
 
         pick: function(value){
 
-            measure_Km.create_KmLine(5, "258", true, 2, true)
+            //measure_Km.create_KmLine(600, "258", true, 1, false)
+
+            measure_Km.create_KmLine(650, "258", true, 1, true)
+
+         //   measure_Km.create_KmLine(680, "258", true, 2, true)
 
          //   measure_Km.create_KmLine(5, 110)
 

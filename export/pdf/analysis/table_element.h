@@ -6,13 +6,18 @@
 class Table_Element
 {
 public:
-    Table_Element(int y_start, int y_stop, int y_line, QString title);
 
-    int y_start;
+   // Table_Element(int y_start, int y_stop, int y_line, QString title);
 
-    int y_stop;
+    Table_Element(float x_start, float y_start, float x_finish, float y_finish,  QString title);
 
-    int y_line;
+    float x_start;
+
+    float y_start;
+
+    float x_finish;
+
+    float y_finish;
 
     QString title;
 

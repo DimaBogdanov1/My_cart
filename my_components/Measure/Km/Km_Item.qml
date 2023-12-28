@@ -8,7 +8,7 @@ Item {
 
  //   property real y_finish
 
-    property real y_count
+    property real distance
 
     property int type_Sleepers
 
@@ -19,6 +19,8 @@ Item {
     property var sleepers_arr: []
 
     property var objects_arr: []
+
+    property var isReverse
 
     property string km_Finish_Line
 

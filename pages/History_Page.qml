@@ -3,7 +3,6 @@ import QtQuick.Controls 2.15
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.3
 import QtCharts 2.15
-import MqttClient 1.0
 
 import Style 1.0
 
@@ -32,12 +31,7 @@ Item {
     }
 
 
-    MqttClient {
-        id: client
-        hostname: '127.0.0.1'
-        port:  applicationWindow.port
 
-    }
 
     Rectangle {
         width: parent.width
@@ -59,81 +53,36 @@ Item {
 
 
 
-    Custom_TextField {
-        id: textField_1
-        width: parent.width
-        title: str.riht_Left
-        maximumLength: 3
-        validator: IntValidator{}
+        Custom_TextField {
+            id: textField_1
+            width: parent.width
+            title: str.riht_Left
+            maximumLength: 3
+            validator: IntValidator{}
 
-        onReady_to_write_signal: {
+            onReady_to_write_signal: {
 
-            keyboard.text_target = textField_1.get_target()
+                keyboard.text_target = textField_1.get_target()
 
-            keyboard.open(0)
+                keyboard.open(0)
 
-        }
-
-    }
-
-
-    Button {
-        id: connectButton
-        Layout.columnSpan: 2
-        Layout.fillWidth: true
-        text: client.state === MqttClient.Connected ? "Disconnect" : "Connect"
-        onClicked: {
-
-           //  client.connectToHost()
-
-           if (client.state === MqttClient.Connected) {
-                client.disconnectFromHost()
-                messageModel.clear()
-                subscription.destroy()
-                subscription = 0
-            } else
-                client.connectToHost()
-
+            }
 
         }
-    }
 
-    Button {
-        id: subButton
-        text: "Subscribe"
-        onClicked: {
+        Stories_Block{
 
-           // sensors/+/temperature
-           subscription = client.subscribe("test_topic/+/ww")
+            onClicked_Signal: {
 
-            subscription.messageReceived.connect(addMessage)
-        }
-    }
+             //   stories_Popup.open()
 
-
-
-    ListView {
-        id: messageView
-        model:     ListModel {
-            id: messageModel
-        }
-        height: 300
-        width: 200
-        Layout.columnSpan: 2
-        Layout.fillHeight: true
-        Layout.fillWidth: true
-        clip: true
-        delegate: Rectangle {
-            width: messageView.width
-            height: 30
-            color: index % 2 ? "white" : "orange"
-            radius: 5
-            Text {
-                text: payload
-                anchors.centerIn: parent
             }
         }
-    }
+
+
+        Stories_Popup{
+            id: stories_Popup
+        }
 
 
 

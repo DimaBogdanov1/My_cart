@@ -4,7 +4,6 @@ import QtQuick.Controls 2.15
 import QtCharts 2.15
 import QtQuick.Controls.Material 2.15
 import QtGraphicalEffects 1.15
-import MqttClient 1.0
 
 import qml.measure 1.0
 import Style 1.0
@@ -483,6 +482,9 @@ Item{
                                                    property int y_finish: 40
 
                                                    property int max: 100
+
+                                                   property real coef:  chart_Rectangle.width / chart_Rectangle.height
+
 
                                                    Charts_Anim{
                                                        id: chart_anim
@@ -1004,59 +1006,6 @@ Item{
                      height: 48
 
 
-                      Button {
-                          id: connectButton
-                          width: 100
-                          height: parent.height
-                          text: client.state === MqttClient.Connected ? "Disconnect" : "Connect"
-                          onClicked: {
-
-                             //  client.connectToHost()
-
-                             if (client.state === MqttClient.Connected) {
-                                  client.disconnectFromHost()
-                                  subscription.destroy()
-                                  subscription = 0
-                              } else
-                                  client.connectToHost()
-
-
-                          }
-                      }
-
-                      Button {
-                          id: subButton
-                          width: 100
-                          height: parent.height
-                          text: "Subscribe"
-                          onClicked: {
-
-                             // sensors/+/temperature
-
-                             //subscription = client.subscribe("test_topic/+/ww")
-
-                              subscription = client.subscribe("Parameters/widthTrack")
-
-                             subscription.messageReceived.connect(client.addMessage)
-                          }
-
-                          Label {
-                              function stateToString(value) {
-                                  if (value === 0)
-                                      return "Disconnected"
-                                  else if (value === 1)
-                                      return "Connecting"
-                                  else if (value === 2)
-                                      return "Connected"
-                                  else
-                                      return "Unknown"
-                              }
-                              color: "white"
-                              text: "Status:" + stateToString(client.state) + "(" + client.state + ")"
-                              enabled: client.state === MqttClient.Connected
-                          }
-                      }
-
                      Button{
                          width: 100
                          height: parent.height
@@ -1131,7 +1080,9 @@ Item{
 
                             // km_ChartView.scrollDown(20)
 
-                             my_pdf.print_pdf()
+                             mqtt_Client.print_pdf()
+
+                             //my_pdf.print_pdf()
 
                            //  chartView.scrollRight(100)
 

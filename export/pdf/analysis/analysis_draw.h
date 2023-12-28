@@ -20,15 +20,17 @@ private:
 
     void drawInfoBlock_Stage_1(QString num, QString r, QString h, QString sample, QString tmp, float x, bool isCurve);
 
-    void drawInfoBlock_Stage_1(bool isUp, float x);
+    void drawInfoBlock_Stage_1(bool isRepair, bool isUp, float x);
 
-    void drawInfoBlock_Stage_2(QString title, float x);
+    void drawInfoBlock_Stage_2(QString title, float x, bool isNeedRect);
 
-    void drawCorrectBlock(float x, int meter_value, int index, int value);
+    void drawCorrect_or_Station_Block(bool isCorrectBlock, float x, int meter_value, int index, int value);
+
+
 
     QList<QString> titles = {"м", "Отст.", "Ст.", "Откл.", "Дл.", "Балл", "Огр. ск."};
 
-    QList<float> sizes = {6, 6, 4, 7, 5, 6, 10.6};
+    QList<float> sizes = {6, 7, 5, 7, 5, 7, 10.4};
 
    // QPen *analysisis_Pen;
 

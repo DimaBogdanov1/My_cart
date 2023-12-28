@@ -34,13 +34,15 @@ Item {
   //  property var pickets_arr: []
 
 
+    property int newSecondPicket_Start: step_picket
+
     property int new_km_start: 0
 
   //  property var km_id: [0]
 
     readonly property real tmp_offset_mes:  0.8 //0.38
 
-    readonly property int step_picket: 10
+    readonly property int step_picket:  100 / 6   //   10
 
 
     Measure_Numbers{
@@ -73,31 +75,47 @@ Item {
 
         if(km_id_global == 1){
 
-            measure_Objects.createArrow_Structure(20)
+            measure_Objects.createArrow_Structure(18, 0, true, true)
 
-            measure_Objects.createDoubleArrow_Structure(10)
+            measure_Objects.createArrow_Structure(35, 1, false, true)
+
+            measure_Objects.createIsolated_Junction_Structure(25)
+
+            //measure_Objects.createIsolated_Junction_Structure(28, true)
+
+            measure_Objects.createDoubleArrow_Structure(4, true, true)
+
+            measure_Objects.createKmPillar_Structure(7)
+
+
+            measure_Objects.createArrow_Structure(50, 2, true, false)
 
         }
 
         if(km_id_global == 2){
 
-            measure_Objects.createBridge_Structure(55)
+            measure_Objects.createBridge_Structure(80, 100)
 
-            measure_Objects.createIsolated_Junction_Structure(80)
+            measure_Objects.createKm_Mark_Structure(105)
 
-            measure_Objects.createRailroad_Crossing(90)
+
+            measure_Objects.createRailroad_Crossing(120)
+
+
+            measure_Objects.createArrow_Structure(113, 3, false, false)
 
         }
 
         var component = Qt.createComponent("qrc:/my_components/Measure/Km/Km_Item.qml")
 
         var item = component.createObject(null, {"km_id": km_Item.km_id,
-                                                 "y_count": km_Item.y_count,
+                                                 "distance": km_Item.distance,
                                                  "type_Sleepers": km_Item.type_Sleepers,
                                                  "kmLines_arr": km_Item.kmLines_arr,
                                                  "pickets_arr": km_Item.pickets_arr,
                                                  "sleepers_arr": km_Item.sleepers_arr,
                                                  "objects_arr": km_Item.objects_arr,
+                                                 "isReverse": km_Item.isReverse,
                                                  "km_Finish_Line": km_Item.km_Finish_Line})
 
 

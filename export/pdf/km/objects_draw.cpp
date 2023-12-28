@@ -1,8 +1,9 @@
 #include <QPainter>
 #include <QPainterPath>
+#include <QFontDatabase>
 
 #include "objects_draw.h"
-#include "export/pdf/chart_draw.h"
+#include "export/pdf/chart/chart_draw.h"
 
 #include "export/pdf/pdf_values.h"
 
@@ -47,7 +48,7 @@ Objects_Draw::Objects_Draw(My_pdf *pointer, float leftX, float rightX, float y_T
 
     this->part_arrowLine_width = 1 * m_pointer->coef;
 
-    drawLinesBorders();
+   // drawLinesBorders();
 
 
 
@@ -63,11 +64,11 @@ Objects_Draw::Objects_Draw(My_pdf *pointer, float leftX, float rightX, float y_T
 
     drawBridge(rightX - 5000, 1000);
 
-    drawDoubleArrow(rightX - 7000, 8, true, true);
+    drawDoubleArrow(rightX - 7010, 8, true, true);
 
-    drawIsolated_Junction(rightX - 8000, true);
+    drawIsolated_Junction(rightX - 8000);
 
-    drawIsolated_Junction(rightX - 8300, false);
+  //  drawIsolated_Junction(rightX - 8300);
 
     drawRailroad_Crossing(rightX - 8550);
 
@@ -79,8 +80,67 @@ Objects_Draw::Objects_Draw(My_pdf *pointer, float leftX, float rightX, float y_T
 
 void Objects_Draw::drawKm_Mark(int x){
 
-    m_pointer->drawLine(QPointF(x , y_TopRail), QPointF(x, half_top_border - spacing / 2), Pdf_Values::getPen(Pdf_Values::Test));
+    m_pointer->drawLine(QPointF(x , y_TopRail), QPointF(x, half_top_border ), Pdf_Values::getPen(Pdf_Values::Test));
 
+
+    QRect rect(x - spacing, half_top_border - 2 * spacing, 2 * spacing, 2 * spacing);
+
+    m_pointer->painter->drawRect(rect);
+
+
+
+    //half_top_border
+
+   // m_pointer->painter->rotate(-90);
+
+  //  QList<float> size = m_pointer->getSize(title);
+
+    m_pointer->painter->setPen(Pdf_Values::getPen(Pdf_Values::Error_Sensors));
+
+
+    m_pointer->painter->setFont(Pdf_Values::getFont(Pdf_Values::Mini_Font));
+
+
+
+
+    m_pointer->drawRotateText(x - spacing, half_top_border - 2 * spacing, x + spacing, half_top_border,  "к", 0);
+
+  /*  m_pointer->painter->rotate(-90);
+
+
+    QList<float> size = m_pointer->getSize("к");
+
+    float a = ((x - spacing) - size[0]) / 2 ;
+
+
+    float e = (2 * spacing - size[0]) / 2;
+
+    qDebug() << "e = " + QString::number(e);
+
+
+    float r = (2 * spacing  - size[1]) ;
+
+
+    qDebug() << "size[0] = " + QString::number(size[0])
+            + " size[1] = " + QString::number(size[1])
+            + " 2 * spacing = " + QString::number(2 * spacing );
+
+
+    m_pointer->painter->drawText (-1 * (half_top_border -  e) ,  x + size[0] / 2 , "к"); // - b
+
+
+
+    m_pointer->painter->rotate(90); */
+
+   // m_pointer->drawTextByCentr(2 * spacing, x + spacing , half_top_border, 2 * spacing,  "к");
+
+
+    m_pointer->painter->setFont(Pdf_Values::getFont(Pdf_Values::Main_Font));
+
+
+    //QFont font2(family, 7);
+
+   // m_pointer->painter->setFont(font2);
 }
 
 
@@ -111,13 +171,13 @@ void Objects_Draw::drawRailroad_Crossing(int x){
 
 }
 
-void Objects_Draw::drawIsolated_Junction(int x, bool isTop){
+void Objects_Draw::drawIsolated_Junction(int x){
 
     int a = half_top_border - spacing / 4;
 
     int b = y_TopRail;
 
-    if(!isTop){
+    if(false){ // !isTop
 
         a = half_bottom_border + spacing / 4;
 
@@ -141,13 +201,17 @@ void Objects_Draw::drawDoubleArrow(int x, int number, bool isNeedChartLine, bool
     int arrow_line = 33 / 4 * m_pointer->coef; // Это из базы Дениса
 
 
-    m_pointer->drawLine(QPointF(x , top_border), QPointF(x, bottom_border), Pdf_Values::getPen(Pdf_Values::KmPen));
+    m_pointer->drawLine(QPointF(x , half_top_border), QPointF(x, half_bottom_border), Pdf_Values::getPen(Pdf_Values::KmPen));
 
 
-    drawArrow(QRectF(x - spacing/2, top_border,spacing, spacing / 2), true);
+    drawArrow_2(x, true);
+
+    //drawArrow(QRectF(x - spacing/2, top_border,spacing, spacing / 2), true);
 
 
-    drawArrow(QRectF(x - spacing/2, half_bottom_border,spacing, spacing / 2), false);
+    //drawArrow(QRectF(x - spacing/2, half_bottom_border,spacing, spacing / 2), false);
+
+    drawArrow_2(x, false);
 
 
     drawArrow_Stage_2(x, x + text_x, number, arrow_line, part_arrowLine_width, isNeedChartLine, isNeedDot);
@@ -197,9 +261,9 @@ void Objects_Draw::drawBranchBridge(int x_start, int width,  bool isTop){
 
 void Objects_Draw::drawBridge(int x_start, int width){
 
-    m_pointer->drawLine(QPointF(x_start, top_border), QPointF(x_start , top_border + 600), Pdf_Values::getPen(Pdf_Values::Basic));
+    //m_pointer->drawLine(QPointF(x_start, top_border), QPointF(x_start , top_border + 600), Pdf_Values::getPen(Pdf_Values::Basic));
 
-    m_pointer->drawLine(QPointF(x_start - width, top_border), QPointF(x_start - width , top_border + 600), Pdf_Values::getPen(Pdf_Values::Basic));
+    //m_pointer->drawLine(QPointF(x_start - width, top_border), QPointF(x_start - width , top_border + 600), Pdf_Values::getPen(Pdf_Values::Basic));
 
 
     drawBranchBridge(x_start, width, true);
@@ -228,7 +292,7 @@ void Objects_Draw::drawArrowSensors(int x, int number, int index_position,  bool
     float right_line_x = 1 * m_pointer->coef;
 
 
-    float startLine = top_border; //y_TopRail - m_pointer->spacingMeasure;
+    float startLine = half_top_border; //y_TopRail - m_pointer->spacingMeasure;
 
     float finishLine = half_bottom_border; //y_BottomRail + m_pointer->spacingMeasure / 2;
 
@@ -261,11 +325,11 @@ void Objects_Draw::drawArrowSensors(int x, int number, int index_position,  bool
 
         isTop_arrow = false;
 
-        arrowStart = bottom_border; //y_BottomRail + e / 2;
+        arrowStart = half_bottom_border; //y_BottomRail + e / 2;
 
         line_x *= -1;
 
-        startLine =  bottom_border; //y_BottomRail + m_pointer->spacingMeasure;
+        startLine =  half_bottom_border; //y_BottomRail + m_pointer->spacingMeasure;
 
         finishLine =  half_top_border; //y_TopRail - m_pointer->spacingMeasure / 2;
 
@@ -283,11 +347,11 @@ void Objects_Draw::drawArrowSensors(int x, int number, int index_position,  bool
 
         isTop_arrow = false;
 
-        arrowStart = bottom_border; //y_BottomRail + e / 2;
+        arrowStart = half_bottom_border; //y_BottomRail + e / 2;
 
 
 
-        startLine = bottom_border; // y_BottomRail + m_pointer->spacingMeasure;
+        startLine = half_bottom_border; // y_BottomRail + m_pointer->spacingMeasure;
 
         finishLine = half_top_border; // y_TopRail - m_pointer->spacingMeasure / 2;
 
@@ -306,7 +370,9 @@ void Objects_Draw::drawArrowSensors(int x, int number, int index_position,  bool
 
 
 
-    drawArrow(QRectF(x - spacing/2, arrowStart, spacing, spacing / 2), isTop_arrow);
+    drawArrow_2(x, isTop_arrow);
+
+//    drawArrow(QRectF(x - spacing/2, arrowStart, spacing, spacing / 2), isTop_arrow);
 
 
     // Влево на 1 мм
@@ -354,7 +420,7 @@ void Objects_Draw::drawArrow_Stage_2(int x, int text_x, int number, int left_lin
 
     }
 
-    m_pointer->drawLine(QPointF(line_x, heightTitle), QPointF(line_x, km_y), Pdf_Values::getPen(Pdf_Values::Test));
+    m_pointer->drawLine(QPointF(line_x, heightTitle), QPointF(line_x, km_y), Pdf_Values::getPen(Pdf_Values::Km_Opacity));
 
 
     if(isNeedDot){
@@ -371,6 +437,34 @@ void Objects_Draw::drawCircle(int x){
     m_pointer->painter->setPen(Pdf_Values::getPen(Pdf_Values::Basic));
 
     m_pointer->painter->drawEllipse(QRect(x - circle_size / 2, y_CenterRail - circle_size / 2, circle_size, circle_size));
+
+}
+
+void Objects_Draw::drawArrow_2(int x, bool isTop){
+
+    int arrow_offset = spacing / 2;
+
+    int start_y;
+
+    int finish_y;
+
+    if(isTop){
+
+        start_y = half_top_border;
+
+        finish_y = top_border;
+
+    }
+    else{
+
+        start_y = half_bottom_border;
+
+        finish_y = bottom_border;
+    }
+
+    m_pointer->drawLine(QPointF(x - arrow_offset, start_y), QPointF(x, finish_y), Pdf_Values::getPen(Pdf_Values::KmPen));
+
+    m_pointer->drawLine(QPointF(x + arrow_offset, start_y), QPointF(x, finish_y), Pdf_Values::getPen(Pdf_Values::KmPen));
 
 }
 

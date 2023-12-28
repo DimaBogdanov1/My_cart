@@ -3,7 +3,6 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtCharts 2.15
 import Style 1.0
-import MqttClient 1.0
 
 import Qt.labs.platform 1.1 as Labs
 
@@ -102,7 +101,7 @@ ApplicationWindow {
 
     }
 
-    MqttClient {
+    /*MqttClient {
         id: client
         hostname: '192.168.1.42'  //'127.0.0.1'
         port:  applicationWindow.port
@@ -116,7 +115,7 @@ ApplicationWindow {
             Chart_Work.add_ChartPoint(measure_number, x, y)
 
         }
-    }
+    }*/
 
 
 

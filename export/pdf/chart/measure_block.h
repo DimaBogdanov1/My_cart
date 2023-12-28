@@ -2,6 +2,7 @@
 #define MEASURE_BLOCK_H
 
 #include <QList>
+#include <QPointF>
 
 class Measure_Block
 {
@@ -13,9 +14,7 @@ public:
                   QList<int> noTextIndex,
                   QList<int> noLineIndex,
                   float startCorrect,
-                  float finishCorrect,
-                  float leftX,
-                  float rightX
+                  float finishCorrect
                   );
 
     QString title = "";
@@ -34,10 +33,11 @@ public:
 
     float finishCorrect = 0;
 
-    float leftX = 0;
+   // float leftX = 0;
 
-    float rightX = 0;
+   // float rightX = 0;
 
+    QList<QPointF> mainLine_Points;
 };
 
 #endif // MEASURE_BLOCK_H

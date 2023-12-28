@@ -13,6 +13,7 @@ Custom_Rectangle_Label {
 
     property int count: 12
 
+
     onCountChanged: {
 
         if(count == 0){
@@ -23,7 +24,7 @@ Custom_Rectangle_Label {
 
     radius: height / 2
     y: -1 * height / 3
-    x:  height + height / 2
+    x: parent.width - width * 2 / 3       //  height + height / 2
    // pixel_size: root_Item.big ? ui.text_SmallSize : 10
     //anchors.right: parent.right
     margin_text: 4

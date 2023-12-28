@@ -23,14 +23,15 @@
 #include "databases/warnings/warnings.h"
 
 
-#include "models/StartTask_Model.h"
 #include "measures/chart_work.h"
 #include "measures/name_measures.h"
 
 #include "test_smart.h"
 
 #include "export/pdf/my_pdf.h"
-#include "mqtt/qmlmqttclient.h"
+
+
+#include "mqtt_client.h"
 
 
 //#include <QtQuickTest>
@@ -58,7 +59,7 @@ int main(int argc, char *argv[])
 
     Chart_Work chart_work;
 
-    My_pdf my_pdf;
+    //My_pdf my_pdf;
 
     //My_Database my_db;
 
@@ -71,15 +72,18 @@ int main(int argc, char *argv[])
     warnings.create_table();
 
 
+    MQTT_Client mqtt_Client;
+
     qmlRegisterSingletonType(QUrl("qrc:/Style.qml"), "Style", 1, 0, "Style"); // Регестрируем Тип Style В QML Для Изменения Темы В Приложении
 
    // qmlRegisterType<MyLang>("MyLang", 1, 0, "MyLang");
 
-    qmlRegisterType<StartTask_Model>("StartTask_Model", 1, 0, "StartTask_Model");
+    //qmlRegisterType<StartTask_Model>("StartTask_Model", 1, 0, "StartTask_Model");
 
-    qmlRegisterType<QmlMqttClient>("MqttClient", 1, 0, "MqttClient");
 
-    qmlRegisterUncreatableType<QmlMqttSubscription>("MqttClient", 1, 0, "MqttSubscription", QLatin1String("Subscriptions are read-only"));
+   // qmlRegisterType<QmlMqttClient>("MqttClient", 1, 0, "MqttClient");
+
+    //qmlRegisterUncreatableType<QmlMqttSubscription>("MqttClient", 1, 0, "MqttSubscription", QLatin1String("Subscriptions are read-only"));
 
 
    // MyTranslator mTrans(&app);
@@ -102,7 +106,11 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("Warnings", &warnings);
 
-    engine.rootContext()->setContextProperty("my_pdf", &my_pdf);
+ //   engine.rootContext()->setContextProperty("my_pdf", &my_pdf);
+
+    engine.rootContext()->setContextProperty("Mqqt_Client", &mqtt_Client);
+
+
 
 
     engine.addImportPath("qrc:/");

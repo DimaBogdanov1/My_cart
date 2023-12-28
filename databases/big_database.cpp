@@ -7,7 +7,6 @@
 #include <QSqlQueryModel>
 
 #include "databases/big_database.h"
-#include "models/StartTask_Model.h"
 
 QSqlDatabase Database;
 
@@ -325,7 +324,7 @@ void big_database::openDatabase(QString path_db)
     //Database.setDatabaseName("/Users/dimabogdanov/Documents/MyCart_res/ApBAZE.db");
 
 
-    StartTask_Model task_model;
+   // StartTask_Model task_model;
 
     if (!Database.open())
     {

@@ -103,8 +103,14 @@ Push_Notifiaction 1.0  Popups/Notifications/Push_Notifiaction.qml
 Notification_Popup 1.0 Popups/Notifications/Notification_Popup.qml
 Counter_Notification 1.0 Popups/Notifications/Counter_Notification.qml
 
+
 UpNom_Helps 1.0 Popups/Helps/UpNom_Helps.qml
 Warnings_Helps 1.0 Popups/Helps/Warnings_Helps.qml
+
+
+Stories_Block 1.0 Popups/Stories/Stories_Block.qml
+Stories_Popup 1.0 Popups/Stories/Stories_Popup.qml
+
 
 # Calib_Elements
 Calib_Block 1.0 Calib_Elements/Calib_Block.qml

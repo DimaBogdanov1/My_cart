@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <QFontDatabase>
 
 #include "pdf_values.h"
 
@@ -22,6 +23,34 @@ QString Pdf_Values::getDeviceName(){
 
     return  deviceName;
 }
+
+QFont Pdf_Values::getFont(int index){
+
+    int id = QFontDatabase::addApplicationFont(":/fonts/CircularStd_Book.ttf");
+
+    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+
+    int answer_font_Size;
+
+    switch(index){
+
+    case Main_Font:
+
+        answer_font_Size = font_size;
+
+        break;
+
+    case Mini_Font:
+
+        answer_font_Size = mini_font_size;
+
+        break;
+    }
+
+    return QFont(family, answer_font_Size);
+
+}
+
 
 QPen Pdf_Values::getPen(int index){
 

@@ -18,10 +18,13 @@ Item {
 
     readonly property string mes_name: "mes"
 
-    enum Sleepers_Type {
-           Left_Sleepers,
-           Right_Sleepers,
-           Triple_Sleepers
+    readonly property string first_kmLine_name: "kmLine_startLine"
+
+
+    enum Sleepers_Type { // сейчас это копипаст, но птом это будет из базы данных
+           Wood,
+           Reinforced_Concrete,
+           Before_1996
        }
 
     function createSleepers(y_start, y_finish, sleepers_Type){
@@ -32,27 +35,74 @@ Item {
 
         chartView.series(mesLine_name).append(x_max + tmp_offset_mes, y_finish)
 
+
+        const offset = 1
+
+        const step = step_picket / 2
+
+        const center = step / 2
+
+
+        var startCycle
+
+        var breakCycle
+
+        var countCycle
+
+
         switch(sleepers_Type){
 
-        case Measure_Rails.Sleepers_Type.Left_Sleepers:
+        case Measure_Rails.Sleepers_Type.Wood:
 
-            add_sleepers(y_start, y_finish, true)
+            startCycle = center
 
-            break
+            breakCycle = center
 
-        case Measure_Rails.Sleepers_Type.Right_Sleepers:
-
-            add_sleepers(y_start, y_finish, false)
+            countCycle = 1
 
             break
 
-        case Measure_Rails.Sleepers_Type.Triple_Sleepers:
+        case Measure_Rails.Sleepers_Type.Reinforced_Concrete:
 
-            add_triple(y_start, y_finish)
+            startCycle = center - offset
+
+            breakCycle = center + offset
+
+            countCycle = 2 * offset
+
+            break
+
+        case Measure_Rails.Sleepers_Type.Before_1996:
+
+            startCycle = center - offset
+
+            breakCycle = center + offset
+
+            countCycle = offset
 
             break
         }
 
+
+        for(var i = 0; i < y_finish - y_start; i += step){  // var i = y_start; i < y_finish; i += step
+
+            var arr
+
+            var new_slepper = y_start + i
+
+            // j = center - offset
+            for(var j = startCycle ; j <= breakCycle ; j+=  countCycle){ // j+=  2 * offset - 2палки ;   j+=  offset - 3палки
+
+                arr = [ [x_start, new_slepper + j] , [x_finish, new_slepper + j ]]
+
+                var name = sleeper_name + km_Item.km_id + (i + j)
+
+                km_Item.sleepers_arr.push(name)
+
+                measure_Objects.createLine_Structure(arr, name ,  Style.secondaryAccent_Color, ChartView.SeriesTypeLine)
+            }
+
+        }
 
     }
 
@@ -60,7 +110,7 @@ Item {
 
         // console.log("km_item_arr[0].sleepers_arr.length = " + km_item_arr[0].sleepers_arr.length)
 
-         var y_count = 0
+         //var y_count = 0
 
           if(km_item_arr.length > 0){
 
@@ -69,6 +119,14 @@ Item {
                chartView.series(right_name).remove(0)
 
                chartView.series(mesLine_name).remove(0)
+
+
+              if(km_item_arr[0].km_id === 0){
+
+                  chartView.removeSeries(chartView.series(first_kmLine_name) )
+
+              }
+
 
               for(var i = 0; i < km_item_arr[0].sleepers_arr.length; i++){
 
@@ -93,7 +151,7 @@ Item {
 
               chartView.removeSeries(chartView.series(km_item_arr[0].km_Finish_Line) )
 
-              y_count = km_item_arr[0].y_count
+              //y_count = km_item_arr[0].distance
 
               for(var r = 0; r < km_item_arr[0].objects_arr.length; r++){
 
@@ -119,62 +177,13 @@ Item {
           }
 
 
-          return y_count
+          return km_item_arr[0].distance
 
      }
 
 
-    function add_triple(y_start, y_finish){
 
-        const offset = 1
-
-        const step = step_picket / 2
-
-        for(var i = 0; i < y_finish - y_start; i += step){  // var i = y_start; i < y_finish; i += step
-
-            var arr
-
-            var center = step / 2
-
-            var new_slepper = y_start + i
-
-            for(var j = center - offset; j <= center + offset; j+= offset){
-
-                arr = [ [x_start, new_slepper + j] , [x_finish, new_slepper + j ]]
-
-                var name = sleeper_name + km_Item.km_id + (i + j)
-              //  console.log("name triple = " + name )
-
-               // console.log("center = " + center)
-
-               // console.log("offset = " + offset)
-
-                km_Item.sleepers_arr.push(name)
-
-                measure_Objects.createLine_Structure(arr, name ,  Style.secondaryAccent_Color, ChartView.SeriesTypeLine)
-            }
-
-
-
-           /* arr = [ [x_start, i + center - offset ] , [x_finish, i + center - offset ]]
-
-            measure_Objects.createLine_Structure(arr, "sleeper" + i ,  "red", ChartView.SeriesTypeLine)
-
-
-            arr = [ [x_start, i + center ] , [x_finish, i + center]]
-
-            measure_Objects.createLine_Structure(arr, "sleeper" + i ,  "green", ChartView.SeriesTypeLine)
-
-
-            arr = [ [x_start, i + center + offset] , [x_finish, i + center + offset]]
-
-            measure_Objects.createLine_Structure(arr, "sleeper" + i ,  "blue", ChartView.SeriesTypeLine)
-
-            */
-        }
-    }
-
-    function add_sleepers(y_start, y_finish, isLeft){
+    function create_Riht(y_start, y_finish, isLeft){
 
         //console.log("km_count = " + km_count)
 
@@ -188,23 +197,23 @@ Item {
 
         if(isLeft){
 
-           left_border = x_start - measure_Objects.offset / 2
+         //  left_border = x_start - measure_Objects.offset / 2
 
-            right_border = x_finish
+          //  right_border = x_finish
 
-            miniLeft_border = left_border
+            miniLeft_border =  x_start - measure_Objects.offset / 2  //left_border
 
             miniRight_border = x_start
         }
         else{
 
-            left_border = x_start
+         //   left_border = x_start
 
-            right_border = x_finish + measure_Objects.offset / 2
+         //   right_border = x_finish + measure_Objects.offset / 2
 
             miniLeft_border = x_finish
 
-            miniRight_border = right_border
+            miniRight_border = x_finish + measure_Objects.offset / 2 //right_border
 
         }
 
@@ -226,9 +235,12 @@ Item {
 
             var new_slepper = y_start + i
 
-            if(check){
+            arr = [ [miniLeft_border, new_slepper] , [miniRight_border, new_slepper]]
 
-                arr = [ [left_border, new_slepper] , [right_border, new_slepper]]  //  arr = [ [left_border, i] , [right_border, i]]
+
+          /*  if(check){
+
+                arr = [] // [ [left_border, new_slepper] , [right_border, new_slepper]]  //  arr = [ [left_border, i] , [right_border, i]]
 
                 check = false
             }
@@ -238,7 +250,7 @@ Item {
 
                 check = true
 
-            }
+            } */
 
 
             measure_Objects.createLine_Structure(arr, sleeper_name + km_Item.km_id +  i ,   Style.secondaryAccent_Color, ChartView.SeriesTypeLine)

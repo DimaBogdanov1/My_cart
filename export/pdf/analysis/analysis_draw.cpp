@@ -24,16 +24,18 @@ Analysis_Draw::Analysis_Draw(My_pdf *pointer, float y_top, float rightX)
 
     drawInfoBlock_Stage_1("666", "850", "55", "1535", "-", m_pointer->printer->width()  - 6000, false);
 
-    drawCorrectBlock(m_pointer->printer->width()  - 8000, 956, Correct_Arrow, -2);
+    drawCorrect_or_Station_Block(true, m_pointer->printer->width()  - 8000, 956, Correct_Arrow, -2);
 
-    drawCorrectBlock(m_pointer->printer->width()  - 9000, 111, Correct_GNSS, -2);
+    drawCorrect_or_Station_Block(true, m_pointer->printer->width()  - 9000, 111, Correct_GNSS, -2);
 
-    drawCorrectBlock(m_pointer->printer->width()  - 10000, 718, Correct_Km_Pole, -2);
+    drawCorrect_or_Station_Block(true, m_pointer->printer->width()  - 10000, 718, Correct_Km_Pole, -2);
 
-    drawCorrectBlock(m_pointer->printer->width()  - 11000, 976, Correct_Not_Required, NULL);
+    drawCorrect_or_Station_Block(true, m_pointer->printer->width()  - 11000, 976, Correct_Not_Required, NULL);
 
 
-    drawInfoBlock_Stage_1(true, rightX);
+    drawInfoBlock_Stage_1(false, true, m_pointer->printer->width() - m_pointer->width_Measure);
+
+    drawInfoBlock_Stage_1(true, true, rightX);
 
 
 
@@ -42,6 +44,10 @@ Analysis_Draw::Analysis_Draw(My_pdf *pointer, float y_top, float rightX)
     drawTable(tmp, sizes, m_pointer->printer->width() - 12000, false, true);
 
     drawTable(tmp, sizes, m_pointer->printer->width() - 12000 + m_pointer->width_Measure, false, false);
+
+
+
+    drawCorrect_or_Station_Block(false, m_pointer->printer->width()  - 12500, 976, NULL, NULL);
 
 
 
@@ -54,11 +60,15 @@ Analysis_Draw::Analysis_Draw(My_pdf *pointer, float y_top, float rightX)
 
 }
 
-void Analysis_Draw::drawCorrectBlock(float x, int meter_value, int index, int value){
+void Analysis_Draw::drawCorrect_or_Station_Block(bool isCorrectBlock, float x, int meter_value, int index, int value){
 
     QString str_1 = "Привязка координат: Коррекция";
 
+
+
     QString str_2;
+
+
 
     //QString title = "Привязка координат: Коррекция";
 
@@ -85,11 +95,11 @@ void Analysis_Draw::drawCorrectBlock(float x, int meter_value, int index, int va
 
 
 
+    m_pointer->drawRotateText(x - 2 * m_pointer->width_Measure, b - fist_size, x - m_pointer->width_Measure, m_pointer->printer->height(), QString::number(meter_value), true);
 
-    m_pointer->drawTextByCentr(m_pointer->width_Measure, x - m_pointer->width_Measure, b, fist_size,  QString::number(meter_value));
 
+   // m_pointer->drawTextByCentr(m_pointer->width_Measure, x - m_pointer->width_Measure, b, fist_size,  QString::number(meter_value));
 
-    m_pointer->drawTextByLeft(m_pointer->width_Measure,  x - m_pointer->width_Measure, (b - fist_size),  str_1);
 
 
     QString meter = " м";
@@ -123,32 +133,17 @@ void Analysis_Draw::drawCorrectBlock(float x, int meter_value, int index, int va
     }
 
 
-    m_pointer->drawTextByLeft(m_pointer->width_Measure,  x, (b - fist_size),  str_2);
 
+    if(!isCorrectBlock){
 
-  /*  m_pointer->painter->rotate(-90);
+        str_1 = "Борисова Грива-Ладожское озеро";
 
-    QList<float> size = m_pointer->getSize(title);
+        str_2 = "Станция: Борисово Грива";
+    }
 
-    float b_1 = (m_pointer->width_Measure - size[1])  * 1.5;
+    m_pointer->drawRotateText(x - 2 * m_pointer->width_Measure, y_top, x - m_pointer->width_Measure, b - fist_size, str_1, 1);
 
-    m_pointer->painter->drawText(-1 * (b - fist_size) + m_pointer->spacingMeasure,  (x - m_pointer->width_Measure) - b_1, title);
-
-    m_pointer->painter->drawText(-1 * (b - fist_size) + m_pointer->spacingMeasure,  (x) - b_1, "положения стрелки на -1 м");
-
-    m_pointer->painter->rotate(90); */
-
-
-   // m_pointer->drawTextByCentr(m_pointer->width_Measure, x - m_pointer->width_Measure, b - fist_size,  b - fist_size - y_top , "Привязка координат: Коррекция");
-
-
-   // m_pointer->drawTextByCentr(m_pointer->width_Measure, x, b - fist_size,  b - fist_size - y_top , "положения стреклик на  -1 м");
-
-
-   // m_pointer->drawLine(QPointF(x , m_pointer->printer->height() - fist_size - 10 * m_pointer->coef), QPointF(x - 2 * m_pointer->width_Measure  ,  m_pointer->printer->height() - fist_size - 10 * m_pointer->coef), *m_pointer->basicPen);
-
-
-
+    m_pointer->drawRotateText(x - m_pointer->width_Measure, y_top, x, b - fist_size, str_2, 1);
 
 
 
@@ -162,33 +157,26 @@ void Analysis_Draw::drawCorrectBlock(float x, int meter_value, int index, int va
 }
 
 
-void Analysis_Draw::drawInfoBlock_Stage_2(QString title, float x){
+void Analysis_Draw::drawInfoBlock_Stage_2(QString title, float x, bool isNeedRect){
 
-    QRect rect(x - m_pointer->width_Measure, y_top, m_pointer->width_Measure,  m_pointer->printer->height() - y_top);
+    if(isNeedRect){
 
-    m_pointer->painter->drawRect(rect);
+        QRect rect(x - m_pointer->width_Measure, y_top, m_pointer->width_Measure,  m_pointer->printer->height() - y_top);
 
+        m_pointer->painter->drawRect(rect);
 
+    }
 
-    m_pointer->painter->rotate(-90);
-
-    QList<float> size = m_pointer->getSize(title);
-
-
-    float b = (m_pointer->width_Measure - size[1])  * 1.5;
+    m_pointer->drawRotateText(x - m_pointer->width_Measure, y_top, x, m_pointer->printer->height(), title, 1);
 
 
-    m_pointer->painter->drawText(-1 * m_pointer->printer->height() + m_pointer->spacingMeasure,  x - b, title);
+  //  m_pointer->drawLine(QPointF(x - m_pointer->width_Measure / 4,  y_top), QPointF(x - m_pointer->width_Measure / 4,  m_pointer->printer->height()), Pdf_Values::getPen(Pdf_Values::Basic));
 
-    m_pointer->painter->rotate(90);
+   // m_pointer->drawLine(QPointF(x - m_pointer->width_Measure * 0.75,  y_top), QPointF(x - m_pointer->width_Measure * 0.75,  m_pointer->printer->height()), Pdf_Values::getPen(Pdf_Values::Basic));
 
-
-    m_pointer->drawLine(QPointF(x - m_pointer->width_Measure / 4,  y_top), QPointF(x - m_pointer->width_Measure / 4,  m_pointer->printer->height()), Pdf_Values::getPen(Pdf_Values::Basic));
-
-    m_pointer->drawLine(QPointF(x - m_pointer->width_Measure * 0.75,  y_top), QPointF(x - m_pointer->width_Measure * 0.75,  m_pointer->printer->height()), Pdf_Values::getPen(Pdf_Values::Basic));
 }
 
-void Analysis_Draw::drawInfoBlock_Stage_1(bool isUp, float x){
+void Analysis_Draw::drawInfoBlock_Stage_1(bool isRepair, bool isUp, float x){
 
     QString title_form_db = "Капремонт старый 8.1994";
 
@@ -201,7 +189,12 @@ void Analysis_Draw::drawInfoBlock_Stage_1(bool isUp, float x){
 
     QString title = arrow + " " + title_form_db;
 
-    drawInfoBlock_Stage_2(title, x);
+    if(!isRepair){
+
+        title = "Ручей-Борисова Грива Км: 38";
+    }
+
+    drawInfoBlock_Stage_2(title, x, isRepair);
 
 }
 
@@ -229,7 +222,7 @@ void Analysis_Draw::drawInfoBlock_Stage_1(QString num, QString r, QString h, QSt
             "h: " + h + " " +
             last_str;
 
-    drawInfoBlock_Stage_2(title, x);
+    drawInfoBlock_Stage_2(title, x, true);
 
 }
 
@@ -247,7 +240,10 @@ void Analysis_Draw::drawTitle(Table_Element element, float x, bool needDrawLine,
 
     }
 
-    m_pointer->drawTextByCentr(m_pointer->width_Measure, x, element.y_start, element.y_stop, element.title);
+   // m_pointer->drawTextByCentr(m_pointer->width_Measure, x, element.y_start, element.y_stop, element.title);
+
+
+    m_pointer->drawRotateText(element.x_start, element.y_start, element.x_finish, element.y_finish, element.title, 0);
 
 
 
@@ -279,16 +275,16 @@ void Analysis_Draw::drawTitle(Table_Element element, float x, bool needDrawLine,
 
     if(needDrawLine){
 
-        m_pointer->drawLine(QPointF(x, element.y_line), QPointF(x - m_pointer->width_Measure, element.y_line), Pdf_Values::getPen(Pdf_Values::Basic));
+        m_pointer->drawLine(QPointF(element.x_start, element.y_start), QPointF(element.x_finish, element.y_start), Pdf_Values::getPen(Pdf_Values::Basic));
 
     }
 
 
 
     //////////
-    m_pointer->drawLine(QPointF(m_pointer->printer->width() - m_pointer->width_Measure / 4,  y_top), QPointF(m_pointer->printer->width() - m_pointer->width_Measure / 4,  m_pointer->printer->height()), Pdf_Values::getPen(Pdf_Values::Basic));
+ //   m_pointer->drawLine(QPointF(m_pointer->printer->width() - m_pointer->width_Measure / 4,  y_top), QPointF(m_pointer->printer->width() - m_pointer->width_Measure / 4,  m_pointer->printer->height()), Pdf_Values::getPen(Pdf_Values::Basic));
 
-    m_pointer->drawLine(QPointF(m_pointer->printer->width() - m_pointer->width_Measure * 0.75,  y_top), QPointF(m_pointer->printer->width() - m_pointer->width_Measure * 0.75,  m_pointer->printer->height()), Pdf_Values::getPen(Pdf_Values::Basic));
+   // m_pointer->drawLine(QPointF(m_pointer->printer->width() - m_pointer->width_Measure * 0.75,  y_top), QPointF(m_pointer->printer->width() - m_pointer->width_Measure * 0.75,  m_pointer->printer->height()), Pdf_Values::getPen(Pdf_Values::Basic));
 
 }
 
@@ -308,23 +304,72 @@ void Analysis_Draw::drawTable(QList<QString> titles,  QList<float> sizes, float 
 
 
 
+    float x_start = x - m_pointer->width_Measure;
 
-    float r = m_pointer->printer->height();
+    float y_start;
+
+
+    float x_finish = x;
+
+    float y_finish = m_pointer->printer->height();
+
+   // float last_val = 0 ;
 
     for(int i = 0; i < titles.length(); i++){
 
         // Table_Element elem()
 
-        Table_Element element_1(r, sizes.at(i) * m_pointer->coef,      r - sizes.at(i) * m_pointer->coef,     titles.at(i));
+        //Table_Element element_1(r, sizes.at(i) * m_pointer->coef,      r - sizes.at(i) * m_pointer->coef,     titles.at(i));
 
-        r -= sizes.at(i) * m_pointer->coef;
+
+         if(i == 1){
+
+
+
+
+         }
+         y_start = y_finish - sizes.at(i) * m_pointer->coef;
+
+         Table_Element element_1(x_start, y_start, x_finish,  y_finish,  titles.at(i));
+
+         drawTitle(element_1, x , needDrawLine, isBasicPen);
+
+         y_finish = y_start;
+
+
+
+       // r -= sizes.at(i) * m_pointer->coef;
 
         if(i == titles.length() - 1){
 
             needDrawLine = false;
         }
 
-        drawTitle(element_1, x , needDrawLine, isBasicPen);
+        if(i == 0){
+
+          //  y_start = m_pointer->printer->height() - sizes.at(i) * m_pointer->coef;
+
+
+            //float x_start = x - m_pointer->width_Measure;
+
+           // float y_start = m_pointer->printer->height() - sizes.at(i) * m_pointer->coef;;
+
+
+           // float x_finish = x;
+
+           // float y_finish = m_pointer->printer->height();
+
+            //Table_Element element_1(x_start, y_start, x_finish,  y_finish,  titles.at(i));
+
+          //  drawTitle(element_1, x , needDrawLine, isBasicPen);
+
+         //   m_pointer->drawRotateTextByCentr(element_1.x_start, element_1.y_start, element_1.x_finish, element_1.y_finish, element_1.title);
+
+          //  m_pointer->drawRotateTextByCentr(x_start, y_start, x_finish, y_finish, element_1.title);
+
+        }
+
+
 
     }
 

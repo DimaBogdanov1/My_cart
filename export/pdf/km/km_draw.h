@@ -38,6 +38,8 @@ private:
 
     int coun_1996_sleepers_on_km = 10;
 
+    int helpLine_y, earthLine_y;
+
     enum typeSleepers {
 
         Wood,
@@ -47,11 +49,21 @@ private:
 
     void createKmValues(float km_y);
 
-    void createSleepers(float y_TopRail, float y_BottomRail, float rightX, int index_type);
+    void createSleepers_Stage1(int x_start, int x_stop, int index_type);
+
+    void createSleepers_Stage2(int x_start, int x_stop, int index_start_sleeper, int coun_mini_sleeper, int bias_cycle);
+
 
     void createRiht(int x_start, int x_stop, bool isTop);
 
-    void createHelpLine(int x_start, int x_stop, int y);
+
+    int getSpacing(QString text);
+
+    void createHelpLine(int x_start, int x_stop);
+
+    void createEarthLine(int x_start, int x_stop);
+
+
 
     void createErrorSensorsLine(int x_start, int x_stop, int y);
 

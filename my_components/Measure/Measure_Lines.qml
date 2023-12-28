@@ -35,6 +35,9 @@ LineSeries {
     property var realValue_arr: []
 
 
+    property real border_opacity: 0.2
+
+
     onClicked: {
 
         // var point = measure_LineSeries.at(0);
@@ -328,7 +331,7 @@ LineSeries {
 
        if(series.style === Qt.DotLine){
 
-           series.opacity = 0.2
+           series.opacity = measure_LineSeries.border_opacity //0.2
 
        }
 

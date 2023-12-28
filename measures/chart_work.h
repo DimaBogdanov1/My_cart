@@ -14,7 +14,6 @@ public:
 
     int count_measures;
 
-    void threadFunction();
     int tmp_y = 0;
 
     void help_get_line(int index, std::string sk, int y);
@@ -28,8 +27,8 @@ private:
 
 public slots:  // Слоты
     void openCSV();
-    void create_KmLine();
-    void get_points_line(float y_viser);
+
+   // void get_points_line(float y_viser);
     void clearPoints();
     void change_param_measure(int index, float bias_value, float multiplier_value);
 

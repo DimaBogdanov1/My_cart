@@ -5,7 +5,7 @@
 #include <QMqttClient>
 #include <QPrinter>
 
-#include "measure_block.h"
+#include "export/pdf/chart/measure_block.h"
 
 class My_pdf : public QObject
 {
@@ -43,11 +43,11 @@ public:
 
     QList<float> counKm_OnPages = {};
 
-    int distanse = 730; // 28600; //6300; // 10000; // 6300;
+    int distanse = 1730; // 28600; //6300; // 10000; // 6300;
 
 
 
-    int counLayer = 1, pageMargin = 5, font_size = 6;
+    int counLayer = 1; // font_size = 7;//
 
     bool needNextPage = false;
 
@@ -57,10 +57,27 @@ public:
 
 
 
+    void drawRotateText(float x_start, float y_start, float x_finish, float y_finish,  QString title, int index_position);
 
-    void drawTextByCentr(float width_block, float x, float y_start, float y_stop, QString title);
 
-    void drawTextByLeft(float width_block, float x, float y_start,  QString title);
+
+
+
+    QList<QPointF> level_Points; //= {QPointF(-40, 8), QPointF(-30, 4), QPointF(-20, 4), QPointF(-10, 4), QPointF(0, 4), QPointF(-10, 4) };
+
+    QList<QPointF> rihtLeft_Points;
+
+    QList<QPointF> rihtRight_Points;
+
+    QList<QPointF> sample_Points;
+
+    QList<QPointF> downLeft_Points;
+
+    QList<QPointF> downRight_Points;
+
+
+
+    QList<QList<QPointF>> pointList;
 
 private:
 
@@ -74,6 +91,11 @@ private:
 
     void createRouteBlock(float height);
 
+
+
+    void openCSV();
+
+    void help_get_line( int index, std::string sk, int y);
 
 protected:
 

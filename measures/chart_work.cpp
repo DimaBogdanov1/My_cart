@@ -85,13 +85,6 @@ void Chart_Work::dropLine(int y) {
 
 
 
-void Chart_Work::create_KmLine()
-{
-    //  Здесь я беру текущий y графика и строю линию
-
-    emit newPicket_signal(70); // Отправляем Сигнал
-
-}
 
 void Chart_Work::change_param_measure(int index, float bias_value, float multiplier_value){
 
@@ -118,7 +111,7 @@ void Chart_Work::calibPage_Ready()
 }
 
 
-void Chart_Work::get_points_line(float y_viser){
+/*void Chart_Work::get_points_line(float y_viser){
 
     for(int i = 0; i < Measure_List.size(); i++){
 
@@ -131,6 +124,8 @@ void Chart_Work::get_points_line(float y_viser){
     //int i = 0;
 
 }
+
+*/
 
 void Chart_Work::clearPoints(){
 
@@ -254,31 +249,6 @@ void Chart_Work::openCSV()
 
 
         tmp_y++;
-
-        //sk.erase(remove(sk.begin(),sk.end(), '  '),sk.end());
-
-       /* QString aa = QString::fromStdString(sk);
-
-        aa = aa.simplified();
-
-        aa.replace(" ","");
-
-
-       // qDebug() <<  QString::number(delete_space(sk));
-
-        double val = QString(aa).toDouble();
-
-        qDebug() << QString::number(val) ; // QString::fromStdString(sk);
-
-        emit newPoint_Chart_signal(Name_Measures::Sample_Measure, QString(aa).toDouble() , tmp_y); // Отправляем Сигнал
-
-        Measure_List[Name_Measures::Sample_Measure].Chart_points.append(QPointF(QString(aa).toDouble(), tmp_y));
-
-        tmp_y++; */
-
-      //  Measure_List[Name_Measures::Down_Left_Measure].Chart_points.append(QPointF(QString(aa).toDouble(), tmp_y));
-
-       // Sample_points.append(QPointF(QString(aa).toDouble(), tmp_y));
 
 
 

@@ -1,6 +1,6 @@
 #include "measure_block.h"
 
-Measure_Block::Measure_Block(QString title, float size,  float width_Measure, QList<float> measureVal, QList<int> noTextIndex, QList<int> noLineIndex, float startCorrect, float finishCorrect, float leftX, float rightX  )
+Measure_Block::Measure_Block(QString title, float size,  float width_Measure, QList<float> measureVal, QList<int> noTextIndex, QList<int> noLineIndex, float startCorrect, float finishCorrect)
 {
 
     this->title = title;
@@ -19,8 +19,8 @@ Measure_Block::Measure_Block(QString title, float size,  float width_Measure, QL
 
     this->finishCorrect = finishCorrect;
 
-    this->leftX = leftX;
+   // this->leftX = leftX;
 
-    this->rightX = rightX;
+  //  this->rightX = rightX;
 
 }

@@ -8,13 +8,16 @@
 
 #include "my_pdf.h"
 #include "km/km_draw.h"
-#include "measure_block.h"
-#include "chart_draw.h"
+
+#include "export/pdf/chart/chart_draw.h"
 #include "export/pdf/pdf_values.h"
+
+
+#include <sstream>
+#include <fstream>
 
 My_pdf::My_pdf(QObject *parent) : QObject(parent)
 {
-
 
 }
 
@@ -96,37 +99,84 @@ QList<float> My_pdf::getSize(QString str){
     return size;
 }
 
-void My_pdf::drawTextByCentr(float width_block, float x, float y_start, float y_stop, QString title){
+void My_pdf::drawRotateText(float x_start, float y_start, float x_finish, float y_finish,  QString title, int index_position){
+
 
     painter->rotate(-90);
 
-    QList<float> size = getSize(title);
 
-    float a = (y_stop - size[0]) / 2 ;
+    float height = y_finish - y_start;
 
-    float b = (width_block - size[1])  * 1.5;
+    float x_centr = (x_start + x_finish) / 2;
 
 
-    painter->drawText(-1 * y_start + a,  x - b, title);
+   // QList<float> size = getSize(title);
+
+    QList<float> size = getSize("м");
+
+    QList<float> size_2 = getSize(title);
+
+
+    float e = (height - size_2[0]) / 2;  //  2 * spacing =  height
+
+    float t = (height  - size_2[0]) - spacingMeasure; // height;
+
+
+    float y_value;
+
+    float x_value = size[0] / 2;
+
+    switch(index_position){
+
+    case 0: // Центр
+
+        y_value = y_finish - e;
+
+        break;
+
+    case 1: // Левый край
+
+        y_value = y_finish - spacingMeasure;
+
+        break;
+
+    case 2: // Правый край
+
+        y_value = y_finish - t;//     + spacingMeasure;
+
+        break;
+    }
+
+    if(title == "к"){
+
+        // 7 - size[0]
+        // 4 - ?
+        //
+
+        qDebug() << "x_value = " + QString::number(x_value - ((7 - 4) * 2) );
+
+
+        x_value -= (7 - 4) * 2; // 17; // (4 * size[0]) / 7;
+
+        qDebug() << "size[0] = " + QString::number(size[0]);
+    }
+
+    /*if(!isCentr){
+
+        y_value = y_finish - spacingMeasure;
+    } */
+
+
+   // qDebug() << " size[0] / 2 = " + QString::number(size[0] / 2);
+
+    painter->drawText (-1 * y_value,  x_centr + x_value, title); // half_top_border - y_start   // x центр + size[0] / 2   // width_block / 2
 
     painter->rotate(90);
 
 }
 
 
-void My_pdf::drawTextByLeft(float width_block, float x, float y_start,  QString title){
 
-    painter->rotate(-90);
-
-    QList<float> size = getSize(title);
-
-    float b_1 = (width_Measure - size[1])  * 1.5;
-
-    painter->drawText(-1 * y_start + spacingMeasure,  x - b_1, title);
-
-    painter->rotate(90);
-
-}
 
 void My_pdf::drawLine(QPointF point_1, QPointF point_2, QPen pen){
 
@@ -253,11 +303,7 @@ void My_pdf::createRouteBlock(float height){
 
        // qDebug() << "Size = " + QString::number(size[0]);
 
-        painter->rotate(-90);
 
-       // qDebug() << "printer->height() = " + QString::number(printer->height()) + " size[1] = " + QString::number(size[1]);
-
-        painter->drawText(-1 * (size[0] + height + spacingMeasure),  (widthRoute - size[1] / 2) / 2, route);
 
 
         QString markString =
@@ -269,11 +315,27 @@ void My_pdf::createRouteBlock(float height){
                 tr("КрдПЧ")
                 ;
 
+
+
+     /*   painter->rotate(-90);
+
+       // qDebug() << "printer->height() = " + QString::number(printer->height()) + " size[1] = " + QString::number(size[1]);
+
+        painter->drawText(-1 * (size[0] + height + spacingMeasure),  (widthRoute - size[1] / 2) / 2, route);
+
+
+
         size = getSize(markString);
 
         painter->drawText(-1 * (size[0] + height + spacingMeasure), (widthRoute / 2 +  ((widthRoute + size[1]) / 2) / 2) , markString); //  QString::fromUtf8(header)
 
-        painter->rotate(90);
+        painter->rotate(90); */
+
+
+        drawRotateText(0, height, widthRoute / 2, heightRoute, route, 2);
+
+        drawRotateText(widthRoute / 2, height, widthRoute, heightRoute, markString, 2);
+
 
    }
 
@@ -284,9 +346,35 @@ void My_pdf::createRouteBlock(float height){
 }
 
 
+using namespace std;
+
+
+
+
 
 void My_pdf::print_pdf()
 {
+
+    level_Points.clear();
+
+    pointList.clear();
+
+    openCSV();
+
+
+    pointList.append(downRight_Points);
+
+    pointList.append(downLeft_Points);
+
+    pointList.append(sample_Points);
+
+    pointList.append(rihtRight_Points);
+
+    pointList.append(rihtLeft_Points);
+
+    pointList.append(level_Points);
+
+
 
     counLayer = 1;
 
@@ -324,28 +412,24 @@ void My_pdf::print_pdf()
 
    painter = new QPainter(printer);
 
-   //painter(&printer);
 
+   painter->setFont(Pdf_Values::getFont(Pdf_Values::Main_Font));
 
-   int id = QFontDatabase::addApplicationFont(":/fonts/CircularStd_Book.ttf");
-
-   QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-   QFont font(family, 7);
-
-   qDebug() << "font_size = " + QString::number(font_size) + " value = " +  move[movingForward ? 1 : 0];
-
- //  auto page_size = printer.pageRect(QPrinter::Unit::Millimeter);
-   //painter.setWindow(page_size.toRect());
-
-
-   painter->setFont(font);
 
    float counPages =  (float) distanse / 100; //   float(distanse / 1000) / 11;  // qCeil( float(distanse / 1000) / 11);
 
    int a = counPages / 11;
 
-   float b = counPages - a * 11;
+   float b;
 
+   if(a > 0){
+
+       b = (counPages - a * 11) ;
+   }
+   else{
+
+       b = (counPages - a * 11) ; //- 1;
+   }
 
    qDebug() << "a = " + QString::number(a);
 
@@ -417,9 +501,151 @@ void My_pdf::print_pdf()
 
    }*/
 
+
+
+
     painter->end();
+
+
 
 }
 
+
+void My_pdf::help_get_line( int index, string sk, int y){
+
+    QString aa = QString::fromStdString(sk);
+
+    aa = aa.simplified();
+
+    aa.replace(" ","");
+
+   // qDebug() <<  QString::number(delete_space(sk));
+
+   qDebug() <<  QString::number(QString(aa).toDouble()); // + " + bias = " + QString::number(Measure_List[index].bias_value);  // QString::fromStdString(sk);
+
+   float e = aa.toDouble();
+
+   switch(index){
+
+    case 0:
+
+       //level_Points.append( QPointF(-73.5, 0) );
+
+     //  level_Points.append( QPointF(55.5, 0) );
+
+
+       level_Points.append( QPointF(e, 0) );
+
+       break;
+
+   case 1:
+
+ //     rihtLeft_Points.append( QPointF(46, 0) );
+
+      rihtLeft_Points.append( QPointF(e, 0) );
+
+      break;
+
+   case 2:
+
+       //rihtRight_Points.append( QPointF(-46, 0) );
+
+      rihtRight_Points.append( QPointF(e, 0) );
+
+      break;
+
+   case 3:
+
+      sample_Points.append( QPointF(e, 0) );
+
+      break;
+
+   case 4:
+
+      downLeft_Points.append( QPointF(e, 0) );
+
+      break;
+
+   case 5:
+
+      downRight_Points.append( QPointF(e, 0) );
+
+      break;
+
+   }
+
+}
+
+void My_pdf::openCSV(){
+
+   std:: ifstream work_file("/Users/dimabogdanov/Documents/MyCart_res/railway.csv");
+
+    string line;
+
+    char delimiter = ';';
+
+    //Читаем первую строку, чтобы отбросить ее, так как она является заголовком
+    getline(work_file, line);
+
+    int count = 0;
+
+    // Прочитали все строчки
+    while (getline(work_file, line))
+    {
+        if(count >= 300){
+
+            break;
+        }
+
+        stringstream stream(line); // Преобразование строки в поток
+
+        string num_frame, sk, down_left, down_right, riht_left, riht_right, level;
+
+        for(int i = 0; i < 8; i++){
+
+            // Извлечение всех значений в этой строке
+
+            getline(stream, num_frame, delimiter);
+        }
+
+        getline(stream, level, delimiter);
+
+        help_get_line( 0, level, 0);
+
+
+        getline(stream, num_frame, delimiter);
+
+        getline(stream, sk, delimiter);
+
+        getline(stream, down_left, delimiter);
+
+        getline(stream, down_right, delimiter);
+
+        getline(stream, riht_left, delimiter);
+
+        getline(stream, riht_right, delimiter);
+
+
+
+        help_get_line( 3, sk, 0);
+
+        help_get_line( 4, down_left, 0);
+
+        help_get_line( 5, down_right, 0);
+
+        help_get_line( 1, riht_left, 0);
+
+        help_get_line( 2, riht_right, 0);
+
+
+        count++;
+
+    }
+
+    work_file.close();
+
+
+
+}
 
 

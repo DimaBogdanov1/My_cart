@@ -25,6 +25,11 @@ public:
         Error_Sensors
     };
 
+    enum Fonts {
+        Main_Font,
+        Mini_Font
+    };
+
    static QPen getPen(int index);
 
    static int getMargin(int index);
@@ -32,6 +37,8 @@ public:
    static QString getCompanyName();
 
    static QString getDeviceName();
+
+   static QFont getFont(int index);
 
 private:
 
@@ -48,6 +55,9 @@ private:
 
    inline static  QList<int> marginList = {10, 5, 10, 10};
 
+
+
+   inline static int font_size =  7, mini_font_size = 4;
 
    inline static QPen *basicPen = new QPen(Qt::black, bigSize, Qt::SolidLine, Qt::RoundCap);
 

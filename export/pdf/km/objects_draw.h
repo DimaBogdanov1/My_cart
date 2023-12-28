@@ -40,13 +40,15 @@ private:
 
     void drawArrow_Stage_2(int x, int text_x, int number, int left_line_x, int right_line_x, bool isNeedChartLine, bool isNeedDot);
 
-    void drawIsolated_Junction(int x, bool isTop);
+    void drawIsolated_Junction(int x); // bool isTop
 
     void drawRailroad_Crossing(int x);
 
     void drawPillar(int x);
 
     void drawKm_Mark(int x);
+
+    void drawArrow_2(int x, bool isTop);
 
     enum Positions_Arrow{
         Top_left,
