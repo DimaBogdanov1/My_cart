@@ -86,6 +86,37 @@ Item {
 
 
 
+        Rectangle {
+            width: 300
+            height: width
+            color: "brown"
+
+
+            Hover_Anim{
+                id: hover_Anim
+                width: parent.width
+                height: parent.height
+               // outlined: root_Item.outlined
+               // color: root_Item.color
+
+                onClicked_Signal: {
+
+                  //  button_Anim.create_scale_anim()
+
+                  //  glow.change_glow(true)
+
+                   /// root_Item.clicked_Signal()
+
+                }
+
+                onHover_Signal: {
+
+                   // glow.change_glow(value)
+
+                }
+            }
+        }
+
 
     }
 

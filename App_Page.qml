@@ -269,7 +269,7 @@ Item {
                 height: parent.height
                 focus: true
                 source: sourcePages_Array[index_Page]
-                Component.onCompleted: index_Page = 2// 0 //4 //2 //0 //1 //source = sourcePages_Array[index_Page]
+                Component.onCompleted: index_Page =  2 //4 //2 //0 //1 //source = sourcePages_Array[index_Page]
 
                 onSourceChanged: {
 

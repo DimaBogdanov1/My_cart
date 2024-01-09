@@ -1,7 +1,8 @@
 #include "peregon.h"
 
-Peregon::Peregon(QObject *parent) : QObject(parent)
-{}
+Peregon::Peregon(QObject *parent) : QObject(parent){
+
+}
 
 QVector<Station> Peregon::station{};//Наш вектор со станциями
 
@@ -12,10 +13,12 @@ QPair<Station,Station> Peregon::per{Station(),Station()};//собственно 
 void Peregon::Inp_station(const int Siteid,const  int Upnom,const  QString Putnom,QSqlDatabase &db)
 {
     qDebug()<<QTime::currentTime()<<"Формирование вектора станций начало";
+
     if (station.size()>0)
         station.clear();
-    if (db.open())
-    {
+
+    if (db.open()){
+
         QSqlQuery q(db);
         q.prepare("SELECT "
                   "x1.KMIN2 as BEGIN_KM, "

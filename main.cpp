@@ -28,10 +28,7 @@
 
 #include "test_smart.h"
 
-#include "export/pdf/my_pdf.h"
-
-
-#include "mqtt_client.h"
+#include "mqtt/mqtt_client.h"
 
 
 //#include <QtQuickTest>

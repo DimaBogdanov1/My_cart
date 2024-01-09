@@ -41,6 +41,8 @@ Rectangle{
 
      property int time_anim: 500
 
+     property bool isCheck: false
+
 
 
      Map {
@@ -58,6 +60,7 @@ Rectangle{
             name: "osm"
 
          }
+
 
          MouseArea {
          anchors.fill: parent
@@ -94,7 +97,7 @@ Rectangle{
              id: cart_Marker
              rotation: 0
 
-             coordinate: map.center // QtPositioning.coordinate(map.center., longitude)
+             coordinate:  QtPositioning.coordinate(59.9386300, 30.3141300) //map.center // QtPositioning.coordinate(map.center., longitude)
              anchorPoint.x: cart_Marker.width / 2
              anchorPoint.y: cart_Marker.height / 2
              sourceItem: Image{
@@ -103,6 +106,25 @@ Rectangle{
                  sourceSize.height: 40
 
              }
+
+
+
+            CoordinateAnimation {
+                id:anim_Coord
+                target: cart_Marker
+                property: "coordinate"
+            }
+
+            function start_anim(next_Position){
+
+                anim_Coord.stop()
+                anim_Coord.from = cart_Marker.coordinate
+                anim_Coord.to = next_Position
+                anim_Coord.duration = 10
+                anim_Coord.start()
+            }
+
+
          }
 
          Button{
@@ -111,7 +133,6 @@ Rectangle{
              anchors.right: parent.right
              anchors.top: parent.top
 
-             property bool isCheck: false
 
             // text:  qsTr("Пауза для скрола") + mytrans.emptyStrin
 
@@ -143,6 +164,11 @@ Rectangle{
                      marginLeft_anim.to = ui.big_spacing / 2
 
                      marginBottom_anim.to = ui.big_spacing / 2
+
+
+                     //map.start_anim(cart_Marker.coordinate)
+
+                     //map.center = cart_Marker.coordinate
 
                      isCheck = false
 
@@ -185,6 +211,29 @@ Rectangle{
 
       }
 
+
+     Connections {
+         target: Mqqt_Client
+
+
+         function onNewGPS_signal(latitude, longitude, yaw) {
+
+             cart_Marker.rotation = yaw
+
+             cart_Marker.start_anim(QtPositioning.coordinate(latitude, longitude))
+
+            // cart_Marker.coordinate =  QtPositioning.coordinate(latitude, longitude)
+
+             line.addCoordinate(cart_Marker.coordinate)
+
+             if(!isCheck){
+
+                map.center = cart_Marker.coordinate
+
+             }
+         }
+
+     }
 }
 
 

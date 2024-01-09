@@ -94,7 +94,9 @@ Item{
                height: parent.height
               // color: root_Item.color
 
-               onPressed_and_Hold_Signal: {
+               //onPressed_and_Hold_Signal
+
+               onClicked_Signal: {
 
                    root_Item.clicked_Signal()
 

@@ -8,6 +8,8 @@
 
 #include "databases/big_database.h"
 
+#include "mqtt/log_microservice.h"
+
 QSqlDatabase Database;
 
 QString numRoad_picked = "1"; //Дорога начальная (Октябрьская)
@@ -331,6 +333,8 @@ void big_database::openDatabase(QString path_db)
         qDebug() << Database.lastError().text();
     }
     else{
+
+       Log_Microservice::create_LogRecord("Открыли базу данных РЖД");
 
        set_roads();
 

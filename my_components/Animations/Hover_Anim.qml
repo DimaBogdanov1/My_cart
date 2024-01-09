@@ -17,6 +17,10 @@ Item {
 
     signal pressed_Signal()
 
+
+    signal stopPressed_Signal()
+
+
     signal pressed_and_Hold_Signal()
 
     property int radius: ui.radius // Радиус Скругления Эффекта
@@ -68,87 +72,125 @@ Item {
     }
 
 
-
-    Rectangle {
-        id: bg_Rectangle
+    Item{
         width: parent.width
         height: parent.height
-        opacity: 0
         clip: true
-        color: "#20FFFFFF" // outlined ? "#40ffc3a0"  : "#20FFFFFF" // "blue" //
 
-        layer.enabled: true
-        layer.effect: Mask_Rectangle{target: parent}
+        Rectangle {
+            id: bg_Rectangle
+            width: parent.width
+            height: parent.height
+            opacity: 0
+            clip: true
+            color: "#20FFFFFF" // outlined ? "#40ffc3a0"  : "#20FFFFFF" // "blue" //
 
-        Main_Gradient{visible: outlined; light: true;}
+            layer.enabled: true
+            layer.effect: Mask_Rectangle{target: parent}
 
-
-       Rectangle {
-           id: round_rec
-           width: 20
-           height: 20
-           radius: width / 2
-           opacity: 0
-           color:  outlined ? root_Item.color : Style.background_Color
-
-       }
+            Main_Gradient{visible: outlined; light: true;}
 
 
 
-       Rectangle {
-           id: high_rec
-           width: width_start_highlight
-           height: height_start_highlight
-           radius: width / 2
-           opacity: 0
-           color:  outlined ? root_Item.color : Style.background_Color
+        }
 
-       }
+        Rectangle {
+            id: round_rec
+            width: 20
+            height: 20
+            radius: 180// width / 2
+            opacity: 0
+            scale: 0
+            color:  outlined ? root_Item.color : Style.background_Color
+
+
+        }
+
+
+
+        Rectangle {
+            id: high_rec
+            width: width_start_highlight
+            height: height_start_highlight
+            radius: width / 2
+            opacity: 0
+            color:  outlined ? root_Item.color : Style.background_Color
+
+        }
+
 
     }
 
 
+    Timer {
+        id: timer
+           interval: 35
+         //  running: true
+           repeat: true
+
+           property int oldScale: 0
+
+           onTriggered: {
+
+               if(mouseArea.pressed){
+
+                   // toast.show("exit", 3000, 1)
+
+                   test_Anim.from = oldScale
+
+                   test_Anim.to = oldScale + 1
+
+                   test_Anim.stop()
+
+                   test_Anim.start()
+
+                   oldScale++;
+                  // console.log("gsadygsadg")
+
+               }
+               else{
+
+                   if(!mouseArea.containsMouse){
+
+                       stopPressed_Signal()
+                   }
+                   else{
+
+                       clicked_Signal()
+                   }
+
+                   test_Anim_2.from = 0.4
+
+                   test_Anim_2.to = 0
+
+                   test_Anim_2.stop()
+
+                   test_Anim_2.start()
+
+                   timer.stop()
+               }
+
+           }
+       }
+
     MouseArea {
+        id: mouseArea
          anchors.fill: parent
          hoverEnabled: true
         // enabled: root_Item.mouse_enabled
 
-         pressAndHoldInterval: 50
+       //  pressAndHoldInterval: 50
 
          acceptedButtons:  Qt.LeftButton //| Qt.RightButton
 
-         onPressAndHold: {
 
-             root_Item.pressed_and_Hold_Signal()
 
-         }
 
-         onEntered: {
+         /*onPressAndHold: {
 
-              if(root_Item.mouse_enabled){
-
-                  root_Item.hover_Signal(true)
-
-                  toolTip.show_ToolTip(tip_text)
-
-                  start_Anim(bg_Rectangle.opacity)
-              }
-
-         }
-
-         onExited: {
-
-            // toast.show("exit", 3000, 1)
-
-             root_Item.hover_Signal(false)
-
-            toolTip.close_ToolTip()
-
-            stop_Anim(bg_Rectangle.opacity)
-
-         }
-
-         onPressed: {
+             timer.oldScale = 0
+             timer.start()
+ //  root_Item.pressed_and_Hold_Signal()
 
              if(root_Item.mouse_enabled){
 
@@ -162,14 +204,80 @@ Item {
 
                  high_rec.y =  round_rec.y
 
-                 test_Anim.stop()
+                /// test_Anim.stop()
 
-                 test_Anim.start()
+                // test_Anim.start()
              }
 
+         }*/
 
 
-           //  highlight_Anim.start()
+         /*
+         onEntered: {
+
+              if(root_Item.mouse_enabled){
+
+                  root_Item.hover_Signal(true)
+
+                  toolTip.show_ToolTip(tip_text)
+
+                  start_Anim(bg_Rectangle.opacity)
+              }
+
+         }
+
+
+
+         */
+
+
+
+         onExited: {
+
+            // toast.show("exit", 3000, 1)
+
+
+             root_Item.hover_Signal(false)
+
+            toolTip.close_ToolTip()
+
+            stop_Anim(bg_Rectangle.opacity)
+
+         }
+
+
+         onPressed: {
+
+             round_rec.scale = 0
+
+             timer.oldScale = 0
+             timer.start()
+
+             test_Anim_2.from = 0
+
+             test_Anim_2.to = 0.4
+
+             test_Anim_2.stop()
+
+             test_Anim_2.start()
+
+ //  root_Item.pressed_and_Hold_Signal()
+
+             if(root_Item.mouse_enabled){
+
+                 root_Item.pressed_Signal()
+
+                 round_rec.x = mouse.x - round_rec.width / 2
+                 round_rec.y = mouse.y - round_rec.height / 2
+
+                 high_rec.x =  round_rec.x
+
+                 high_rec.y =  round_rec.y
+
+                /// test_Anim.stop()
+
+                // test_Anim.start()
+             }
 
         }
 
@@ -177,18 +285,36 @@ Item {
      }
 
 
+
+
+
     NumberAnimation {id: hoverAnim ; target: bg_Rectangle; property: "opacity"; from: 0; to: 0; duration: 200}
 
 
 
-    ParallelAnimation {
+    NumberAnimation { id: test_Anim; target: round_rec; property: "scale"; from: 0; to: 1; duration: timer.interval} // Math.round(parent.width / 20)
+
+
+    NumberAnimation {id: test_Anim_2; target: round_rec; property: "opacity"; from: 0; to: 0.4; duration: 400}
+
+
+    //NumberAnimation {id: opacity_Anim; target: round_rec; property: "opacity"; from: 0; to: 0.4; duration: 100}
+
+   /* SequentialAnimation {
         id: test_Anim
 
-        NumberAnimation { target: round_rec; property: "scale"; from: 0; to: 10; duration: 400} // Math.round(parent.width / 20)
+        ParallelAnimation{
+
+            NumberAnimation { target: round_rec; property: "opacity"; from: 0; to: 0.4; duration: 100}
+
+            NumberAnimation { target: round_rec; property: "scale"; from: 0; to: 100; duration: 4000} // Math.round(parent.width / 20)
+
+        }
+
 
         NumberAnimation { target: round_rec; property: "opacity"; from: 0.4; to: 0; duration: 400}
 
-    }
+    }*/
 
     ParallelAnimation {
         id: highlight_Anim

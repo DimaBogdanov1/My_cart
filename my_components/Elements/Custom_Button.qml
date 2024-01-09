@@ -97,11 +97,23 @@ Item {
 
                 onClicked_Signal: {
 
-                    button_Anim.create_scale_anim()
-
                     glow.change_glow(true)
 
                     root_Item.clicked_Signal()
+
+                    button_Anim.create_scale_anim(false)
+
+                }
+
+                onPressed_Signal: {
+
+                    button_Anim.create_scale_anim(true)
+
+                }
+
+                onStopPressed_Signal: {
+
+                    button_Anim.create_scale_anim(false)
 
                 }
 

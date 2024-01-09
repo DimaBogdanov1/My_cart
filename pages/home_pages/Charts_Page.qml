@@ -1080,7 +1080,7 @@ Item{
 
                             // km_ChartView.scrollDown(20)
 
-                             mqtt_Client.print_pdf()
+                             Mqqt_Client.print_pdf()
 
                              //my_pdf.print_pdf()
 

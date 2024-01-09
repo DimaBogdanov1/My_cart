@@ -34,20 +34,14 @@ SOURCES += \
         databases/big_database.cpp \
         databases/my_database.cpp \
         databases/warnings/warnings.cpp \
-        #export/pdf/analysis/analysis_draw.cpp \
-        #export/pdf/analysis/table_element.cpp \
-        #export/pdf/chart/chart_draw.cpp \
-        #export/pdf/chart/measure_block.cpp \
-        #export/pdf/chart/measure_lines.cpp \
-        #export/pdf/km/km_draw.cpp \
-        #export/pdf/km/objects_draw.cpp \
-        #export/pdf/my_pdf.cpp \
-        #export/pdf/pdf_values.cpp \
         main.cpp \
         measures/chart_work.cpp \
         measures/measure.cpp \
         measures/name_measures.cpp \
-        mqtt_client.cpp \
+        mqtt/export_microservice.cpp \
+        mqtt/log_microservice.cpp \
+        mqtt/mqtt_client.cpp \
+        mqtt/sensorsregister_microservice.cpp \
         mythread.cpp \
         test_smart.cpp
 
@@ -77,20 +71,14 @@ HEADERS += \
     databases/big_database.h \
     databases/my_database.h \
     databases/warnings/warnings.h \
-   # export/pdf/analysis/analysis_draw.h \
-   # export/pdf/analysis/table_element.h \
-   # export/pdf/chart/chart_draw.h \
-   # export/pdf/chart/measure_block.h \
-   # export/pdf/chart/measure_lines.h \
-   # export/pdf/km/km_draw.h \
-   # export/pdf/km/objects_draw.h \
-   #export/pdf/my_pdf.h \
-   # export/pdf/pdf_values.h \
     measures/chart_work.h \
     measures/measure.h \
     measures/name_measures.h \
     models_headers/big_database.h \
-    mqtt_client.h \
+    mqtt/export_microservice.h \
+    mqtt/log_microservice.h \
+    mqtt/mqtt_client.h \
+    mqtt/sensorsregister_microservice.h \
     mythread.h \
     test_smart.h \
     translate_headers/mylang.h \

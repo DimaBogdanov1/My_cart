@@ -23,7 +23,20 @@ Item {
         error_anim.start()
     }
 
-    function create_scale_anim(){
+    function create_scale_anim(isSmall){
+
+        if(isSmall){
+
+           scale_Anim.from = 1
+
+           scale_Anim.to = scale_val
+        }
+        else{
+
+            scale_Anim.from = scale_val
+
+            scale_Anim.to = 1
+        }
 
         scale_Anim.stop()
 
@@ -163,14 +176,8 @@ Item {
         }
     }
 
-    SequentialAnimation{
-        id: scale_Anim
+    NumberAnimation {id: scale_Anim; target: animation_target; property: "scale"; from: 1; to: scale_val; duration: 200}
 
-        NumberAnimation {target: animation_target; property: "scale"; from: 1; to: scale_val; duration: 200}
-
-        NumberAnimation {target: animation_target; property: "scale"; from: scale_val; to: 1; duration: 200}
-
-    }
 
     NumberAnimation {id: rotate_Anim; target: animation_target; property: "rotation"; from: animation_target.rotation; duration: 200}
 
