@@ -67,7 +67,7 @@ Item{
 
                 var cp = chartView.mapToValue(p, chartView.series("") );
 
-                console.log("chartView.drop_value = " + chartView.drop_value)
+                console.log("chartView.drop_value = " + chartView.drop_value + " y_0 = " + y_0)
 
                 if(chartView.drop_value <= cp.y && cp.y <= y_0){
 

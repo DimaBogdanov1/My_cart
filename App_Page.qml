@@ -4,6 +4,7 @@ import QtQuick.Controls 2.15
 
 import QtQuick.Dialogs 1.3
 
+//import Authorized_Account 1.0
 import Style 1.0
 import my_components 1.0
 
@@ -29,6 +30,21 @@ Item {
    // "../pages/Charts_test.qml"
 
 
+    ListModel{
+                       id: km_mark_ListModel
+
+                       ListElement{
+                          Km:"256 км"
+                          Speed: "60 км/ч"
+                          Speed_Limit: "100 км/ч"
+                          Extent: 121
+                          Mark: "Отлично"
+
+                       }
+
+
+                   }
+
     Row{
         width: parent.width
         height: parent.height
@@ -38,10 +54,12 @@ Item {
            height: parent.height
            color: Style.primaryDark_Color
 
+
            Item{
               width: parent.width
               height: ui.iconBlock_Size * 9 + 72
             //  anchors.centerIn: parent
+
 
               Column {
                   width: parent.width
@@ -56,7 +74,7 @@ Item {
                           Image {
                              width:  parent.height
                              height: parent.height
-                             source: "../images/logo_white_trans.png"
+                             source: "qrc:/my_components/images/logo_white_trans.png"
                              anchors.centerIn: parent
                              smooth: false // Убираем Сглаживание
                              fillMode: Image.PreserveAspectCrop
@@ -70,8 +88,8 @@ Item {
                       anchors.horizontalCenter: parent.horizontalCenter
                       height: ui.iconBlock_Size
                       isChecked: index_Page == 0
-                      icon_path: "qrc:/icons/" + Style.theme + "/navigation/home.svg"
-                      icon_checked_path: "qrc:/icons/"+ Style.theme + "/navigation/home_accent.svg"
+                      icon_path: "qrc:/my_components/icons/" + Style.theme + "/navigation/home.svg"
+                      icon_checked_path: "qrc:/my_components/icons/"+ Style.theme + "/navigation/home_accent.svg"
                       onClicked_Signal: {
 
                           opacity_Anim.create_page_anim(0)  // Переходим На Старт
@@ -84,8 +102,8 @@ Item {
                       anchors.horizontalCenter: parent.horizontalCenter
                       height: ui.iconBlock_Size
                       isChecked: index_Page == 1
-                      icon_path: "qrc:/icons/" + Style.theme + "/navigation/edit.svg"
-                      icon_checked_path: "qrc:/icons/" + Style.theme + "/navigation/edit_accent.svg"
+                      icon_path: "qrc:/my_components/icons/" + Style.theme + "/navigation/edit.svg"
+                      icon_checked_path: "qrc:/my_components/icons/" + Style.theme + "/navigation/edit_accent.svg"
                       onClicked_Signal: {
 
                           opacity_Anim.create_page_anim(1) // Переходим На Калибровку
@@ -117,8 +135,8 @@ Item {
                       anchors.horizontalCenter: parent.horizontalCenter
                       height: ui.iconBlock_Size
                       isChecked: index_Page == 2
-                      icon_path: "qrc:/icons/" + Style.theme + "/navigation/document.svg"
-                      icon_checked_path: "qrc:/icons/"+ Style.theme + "/navigation/document_accent.svg"
+                      icon_path: "qrc:/my_components/icons/" + Style.theme + "/navigation/document.svg"
+                      icon_checked_path: "qrc:/my_components/icons/"+ Style.theme + "/navigation/document_accent.svg"
                       onClicked_Signal: {
 
                           opacity_Anim.create_page_anim(2) // Переходим В Историю
@@ -133,14 +151,15 @@ Item {
                       anchors.horizontalCenter: parent.horizontalCenter
                       height: ui.iconBlock_Size
                       isChecked: index_Page == 4
-                      icon_path: "qrc:/icons/" + Style.theme + "/navigation/setting.svg"
-                      icon_checked_path: "qrc:/icons/" + Style.theme + "/navigation/setting_accent.svg"
+                      icon_path: "qrc:/my_components/icons/" + Style.theme + "/navigation/setting.svg"
+                      icon_checked_path: "qrc:/my_components/icons/" + Style.theme + "/navigation/setting_accent.svg"
                       onClicked_Signal: {
 
                           opacity_Anim.create_page_anim(4) // Переходим В Настройки
 
                       }
                   }
+
 
               }
 
@@ -159,8 +178,8 @@ Item {
                    anchors.horizontalCenter: parent.horizontalCenter
                    height: ui.iconBlock_Size
                    isChecked: index_Page == 5
-                   icon_path: "qrc:/icons/" + Style.theme + "/navigation/question.svg"
-                   icon_checked_path: "qrc:/icons/"+ Style.theme + "/navigation/question_accent.svg"
+                   icon_path: "qrc:/my_components/icons/" + Style.theme + "/navigation/question.svg"
+                   icon_checked_path: "qrc:/my_components/icons/"+ Style.theme + "/navigation/question_accent.svg"
                    onClicked_Signal: {
 
                       // push_Notification.open()
@@ -175,12 +194,14 @@ Item {
                   // needBorder: true
                   // color_border: Style.light_Color
                    anchors.horizontalCenter: parent.horizontalCenter
-                   icon_path: "qrc:/icons/" + Style.theme + "/utils/moon.svg"
-                   icon_checked_path: "qrc:/icons/" + Style.theme + "/utils/sun.svg"
+                   icon_path: "qrc:/my_components/icons/" + Style.theme + "/utils/moon.svg"
+                   icon_checked_path: "qrc:/my_components/icons/" + Style.theme + "/utils/sun.svg"
 
                    onClicked_Signal: {
 
                        create_icon_anim()
+
+                       toast.show("Login ==== " + Authorized_Account.login, 3000, 1) // Показываем Тоcт
 
                    }
 
@@ -205,19 +226,55 @@ Item {
                }
 
 
+               /*Authorized_Account{
+                   id: authorized_Account
+                   property string my_login: authorized_Account.login
+
+                   onMy_loginChanged: {
+                       console.log("new stringsdsd = " + authorized_Account.login)
+
+                   }
+
+                   onLoginChanged: {
+                       console.log("new string = " + login)
+
+                   }
+
+
+                   onString_changed: {
+
+                       console.log("new string = " + login)
+                   }
+
+                   Component.onCompleted: {
+
+                       console.log("ooooooooooo " + authorized_Account.login)
+                   }
+
+               } */
+
+               Label{
+                   text: Authorized_Account.login
+               }
+
                Account_Icon{
                    id: authorization_Account_Icon
+                   login: Authorized_Account.login
+                   color_value: 1 // authorized_Account.color
                   // isIcon: true
-                  // source: "qrc:/images/memoji_2.png"
+                  // source: "qrc:/my_components/images/memoji_2.png"
+
+
 
                    onClicked_Signal: {
 
+                       //authorized_Account.set_Login("asas")
+
                        account_Popup.openPopup(login, color_value)
 
-                        //opacity_Anim.create_page_anim(3)
                    }
 
-                   Connections{
+                   /*Connections{
                        target: Accounts
 
                        function onUpdate_AuthorizationUser_signal(id, login, color){
@@ -230,11 +287,12 @@ Item {
 
                        }
 
-                   }
+                   }*/
 
                }
 
            }
+
 
 
            Account_Popup{
@@ -269,7 +327,7 @@ Item {
                 height: parent.height
                 focus: true
                 source: sourcePages_Array[index_Page]
-                Component.onCompleted: index_Page =  2 //4 //2 //0 //1 //source = sourcePages_Array[index_Page]
+                Component.onCompleted: index_Page = 5 // 0 //4 //2 //0 //1 //source = sourcePages_Array[index_Page]
 
                 onSourceChanged: {
 

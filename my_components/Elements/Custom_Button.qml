@@ -53,7 +53,7 @@ Item {
 
         button_Anim.create_rotation_anim()
 
-        isCheck = button_Anim.isRotated
+        isCheck = !button_Anim.isRotated
 
     }
 

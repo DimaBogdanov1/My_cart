@@ -7,103 +7,35 @@
         <file>Toast.qml</file>
         <file>ToastManager.qml</file>
         <file>Utils.qml</file>
-        <file>icons/moon_stars_light.svg</file>
-        <file>icons/test_icon.icns</file>
         <file>pages/Home_Page.qml</file>
-        <file>Design_Values.qml</file>
-        <file>fonts/Circular_Std_Bold.ttf</file>
-        <file>fonts/CircularStd_Book.ttf</file>
-        <file>images/logo_white_trans.png</file>
         <file>starts_elements/Splash_Screen.qml</file>
         <file>starts_elements/Onboard_Screen.qml</file>
         <file>App_Page.qml</file>
         <file>test_qml.qml</file>
-        <file>icons/light_theme/home_2.svg</file>
         <file>pages/Calib_Page.qml</file>
         <file>pages/History_Page.qml</file>
         <file>pages/Settings_Page.qml</file>
         <file>pages/home_pages/Task_Page.qml</file>
         <file>pages/home_pages/Charts_Page.qml</file>
-        <file>icons/light_theme/navigation/add.svg</file>
-        <file>icons/light_theme/navigation/home.svg</file>
-        <file>icons/light_theme/navigation/setting.svg</file>
-        <file>icons/light_theme/navigation/edit.svg</file>
-        <file>icons/light_theme/navigation/document.svg</file>
-        <file>icons/light_theme/navigation/document_accent.svg</file>
-        <file>icons/light_theme/navigation/edit_accent.svg</file>
-        <file>icons/light_theme/navigation/home_accent.svg</file>
-        <file>icons/light_theme/navigation/setting_accent.svg</file>
         <file>pages/home_pages/Drop_db_Page.qml</file>
-        <file>icons/light_theme/home_page/arrow_top.svg</file>
-        <file>icons/light_theme/top_bar/arrow_left.svg</file>
-        <file>icons/light_theme/top_bar/arrow_left_1.svg</file>
-        <file>icons/light_theme/top_bar/export.svg</file>
-        <file>icons/light_theme/top_bar/more.svg</file>
-        <file>icons/light_theme/top_bar/location.svg</file>
-        <file>icons/light_theme/utils/info.svg</file>
-        <file>icons/light_theme/utils/delete.svg</file>
-        <file>icons/light_theme/utils/arrow_right.svg</file>
-        <file>icons/light_theme/utils/discovery.svg</file>
-        <file>icons/light_theme/utils/arrow_top.svg</file>
-        <file>sounds/agree.mp3</file>
         <file>sqlite/PUT.SQL</file>
         <file>sqlite/ROAD.SQL</file>
         <file>sqlite/NAIM.SQL</file>
         <file>sqlite/ITEMCORRECT.SQL</file>
-        <file>sounds/keyboard.mp3</file>
-        <file>icons/light_theme/home_page/pencil.svg</file>
-        <file>icons/light_theme/home_page/arrow_right_long.svg</file>
-        <file>icons/light_theme/utils/notification.svg</file>
-        <file>icons/light_theme/utils/shield.svg</file>
-        <file>icons/light_theme/utils/send.svg</file>
-        <file>icons/light_theme/utils/play.svg</file>
-        <file>fonts/Montserrat_Medium.ttf</file>
-        <file>icons/light_theme/top_bar/shield.svg</file>
-        <file>images/test.png</file>
         <file>Strings.qml</file>
-        <file>icons/light_theme/utils/pause.svg</file>
-        <file>icons/light_theme/top_bar/check_off.svg</file>
-        <file>icons/light_theme/top_bar/check_on.svg</file>
         <file>pages/Login_Page.qml</file>
-        <file>icons/light_theme/utils/lock.svg</file>
-        <file>icons/light_theme/utils/user.svg</file>
-        <file>icons/light_theme/utils/eye_slash.svg</file>
-        <file>icons/light_theme/utils/eye.svg</file>
         <file>pages/login_pages/Register_Page.qml</file>
         <file>pages/login_pages/Authorization_Page.qml</file>
-        <file>icons/light_theme/top_bar/plus.svg</file>
         <file>pages/login_pages/Pick_Account_Page.qml</file>
-        <file>icons/light_theme/navigation/question_accent.svg</file>
-        <file>icons/light_theme/navigation/question.svg</file>
         <file>pages/Help_Page.qml</file>
-        <file>icons/light_theme/utils/moon.svg</file>
-        <file>icons/light_theme/utils/sun.svg</file>
-        <file>icons/light_theme/utils/battery.svg</file>
-        <file>icons/light_theme/utils/close.svg</file>
         <file>pages/home_pages/task_pages/start_task_pages/Basic_Task_Page.qml</file>
         <file>pages/home_pages/task_pages/start_task_pages/Custom_Task_Page.qml</file>
         <file>pages/home_pages/task_pages/Finish_Task_Page.qml</file>
         <file>pages/home_pages/task_pages/Start_Task_Page.qml</file>
-        <file>icons/light_theme/top_bar/zoom_in.svg</file>
-        <file>icons/light_theme/top_bar/marking.svg</file>
-        <file>icons/light_theme/utils/calendar.svg</file>
-        <file>icons/light_theme/top_bar/minus.svg</file>
-        <file>icons/light_theme/top_bar/arrow_right_1.svg</file>
-        <file>icons/light_theme/top_bar/arrow_right_1_white.svg</file>
-        <file>icons/light_theme/top_bar/plus_white.svg</file>
         <file>pages/settings_pages/Admin_Page.qml</file>
         <file>pages/settings_pages/General_Settings_Page.qml</file>
         <file>pages/settings_pages/ProgButon_Settings_Page.qml</file>
         <file>pages/settings_pages/AboutApp_Settings_Page.qml</file>
-        <file>icons/light_theme/utils/add.svg</file>
-        <file>icons/light_theme/utils/programming.svg</file>
         <file>pages/home_pages/task_pages/start_task_pages/Warning_Page.qml</file>
-        <file>icons/light_theme/utils/arrow_bottom_mini.svg</file>
-        <file>icons/light_theme/utils/arrow_right_mini_white.svg</file>
-        <file>icons/light_theme/utils/more_mini.svg</file>
-        <file>icons/light_theme/utils/arrow_top_mini.svg</file>
-        <file>images/memoji.png</file>
-        <file>images/memoji_2.png</file>
-        <file>images/memoji_3.PNG</file>
     </qresource>
 </RCC>

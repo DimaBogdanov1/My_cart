@@ -65,6 +65,7 @@ Item {
                         text: root_Item.model.get(index).text
                         checkable: root_Item.model.get(index).checkable
                         checked: root_Item.model.get(index).checked
+                        isNegative: root_Item.model.get(index).isNegative !== undefined ?  root_Item.model.get(index).isNegative : false
                         onlyTrueCheck: root_Item.model.get(index).onlyTrueCheck !== undefined ? root_Item.model.get(index).onlyTrueCheck : false
 
                         onClicked_Signal: {

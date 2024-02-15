@@ -51,25 +51,25 @@ Item {
                         Calib_Block{
                             id: riht_Left_Calib_Block
                             index_block: Name_Measures.Riht_Left_Measure
-                            text: str.riht_Left
+                            text: my_str.riht_Left
                         }
 
                         Calib_Block{
                             id: riht_Right_Calib_Block
                             index_block: Name_Measures.Riht_Right_Measure
-                            text: str.riht_Right
+                            text: my_str.riht_Right
                         }
 
                         Calib_Block{
                             id: down_Left_Calib_Block
                             index_block: Name_Measures.Down_Left_Measure
-                            text: str.down_Left
+                            text: my_str.down_Left
                         }
 
                         Calib_Block{
                             id: down_Right_Calib_Block
                             index_block: Name_Measures.Down_Right_Measure
-                            text: str.down_Right
+                            text: my_str.down_Right
                         }
 
 

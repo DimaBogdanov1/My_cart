@@ -39,9 +39,23 @@ Item {
         return new_name
     }
 
-    function createLine_Structure(arr, id, color, type, isBorder, isLetter){
+    function createLine_Structure(arr, id, color, type, isBorder, isLetter, isMainChart){
 
-        var series = chartView.createSeries(type, id, x_ValueAxis, y_ValueAxis)
+        var series
+
+        if(isMainChart){
+
+           // id += "Main"
+
+            series = chartView.createSeries(type, id, x_ValueAxis, y_ValueAxis)
+
+        }
+        else{
+
+            series = km_ChartView.createSeries(type, id, xKm_ValueAxis, yKm_ValueAxis)
+
+        }
+
 
         series.color =  color
 
@@ -174,7 +188,7 @@ Item {
         var all_width = offset
 
 
-        var y_offset = offset * chartView.coef       //  2.608 //chart_Rectangle.height * offset / chart_Rectangle.width //offset
+        var y_offset = offset * km_ChartView.coef       //  2.608 //chart_Rectangle.height * offset / chart_Rectangle.width //offset
 
 
         var x_left = x_start - offset // x_finish //+ offset / 4
@@ -458,16 +472,19 @@ Item {
             border_2_name =  createName("arrowBorder2_sensor")
 
 
-
             borer_name = drawPart_Object(
                                       [[x_min, y_bottomLine],  [x_max + tmp_offset_mes, y_bottomLine]],
 
                                         "arrowBorder_sensor",  Style.secondaryAccent_Color)
 
 
-            const border_line_2 = [[x_max + tmp_offset_mes, y_bottomLine],  [x_ValueAxis.max, y_bottomLine]]
+            const border_line_2 = [[x_max + tmp_offset_mes, y_bottomLine],  [xKm_ValueAxis.max, y_bottomLine]]
+
+            const border_line_2_main = [[x_ValueAxis.min, y_bottomLine],  [x_ValueAxis.max, y_bottomLine]]
 
             createLine_Structure(border_line_2, border_2_name,  Style.primaryDark_Color, ChartView.SeriesTypeLine, true)
+
+            createLine_Structure(border_line_2_main, border_2_name,  Style.primaryDark_Color, ChartView.SeriesTypeLine, true, false, true)
 
         }
 

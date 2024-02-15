@@ -179,7 +179,7 @@ Item {
          hoverEnabled: true
         // enabled: root_Item.mouse_enabled
 
-       //  pressAndHoldInterval: 50
+         pressAndHoldInterval: 150
 
          acceptedButtons:  Qt.LeftButton //| Qt.RightButton
 
@@ -245,13 +245,9 @@ Item {
 
          }
 
+         onPressAndHold: {
 
-         onPressed: {
 
-             round_rec.scale = 0
-
-             timer.oldScale = 0
-             timer.start()
 
              test_Anim_2.from = 0
 
@@ -263,9 +259,22 @@ Item {
 
  //  root_Item.pressed_and_Hold_Signal()
 
+
+         }
+
+         onPressed: {
+
+             root_Item.pressed_Signal()
+
+             round_rec.scale = 0
+
+             timer.oldScale = 0
+
+             timer.start()
+
              if(root_Item.mouse_enabled){
 
-                 root_Item.pressed_Signal()
+                // root_Item.pressed_Signal()
 
                  round_rec.x = mouse.x - round_rec.width / 2
                  round_rec.y = mouse.y - round_rec.height / 2
@@ -278,6 +287,7 @@ Item {
 
                 // test_Anim.start()
              }
+
 
         }
 

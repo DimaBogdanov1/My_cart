@@ -1,12 +1,13 @@
 import QtQuick 2.15
+import qml.status_ind 1.0
 
 Item{
     width: 8
     height: parent.height
 
-    readonly property var colors_status: ["#FFA300", "#FFA300"]
+    readonly property var colors_status: ["green", "#FFA300", "red"]
 
-    property int status: 0
+    property int status: Status_Indicator.Positive_Status
 
     Rectangle{
         width: parent.width

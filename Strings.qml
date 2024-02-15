@@ -14,6 +14,15 @@ Item {
 
     readonly property string down_Right: qsTr("Просадка правая")
 
+    readonly property string side_Damage: qsTr("Боковой износ")
+
+    readonly property string vertical_Damage: qsTr("Вертикальный износ")
+
+    readonly property string bowing: qsTr("Подуклонка")
+
+    readonly property string rolling_Surface: qsTr("Наклон поверхности катания")
+
+
     readonly property string speed: qsTr("Скорость")
 
     readonly property string siteID: qsTr("Код дороги")

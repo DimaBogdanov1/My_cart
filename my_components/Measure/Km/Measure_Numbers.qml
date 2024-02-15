@@ -11,7 +11,7 @@ Item {
 
     property bool tmp_tmp_check
 
-    readonly property int picket_offset: -10
+    readonly property int picket_offset: -15
 
 
     function updatePointPosition(){
@@ -22,7 +22,7 @@ Item {
 
                 for(var k = 0; k < km_item_arr[i].kmLines_arr.length; k++){
 
-                    var e = chartView.mapToPosition(  chartView.series(km_item_arr[i].kmLines_arr[k][0]).at(1),  chartView.series(km_item_arr[i].kmLines_arr[k][1]) );
+                    var e = km_ChartView.mapToPosition(  km_ChartView.series(km_item_arr[i].kmLines_arr[k][0]).at(1),  km_ChartView.series(km_item_arr[i].kmLines_arr[k][1]) );
 
                     km_item_arr[i].kmLines_arr[k][1].x = e.x - km_item_arr[i].kmLines_arr[k][1].width / 2
 
@@ -32,7 +32,7 @@ Item {
 
                 for(var j = 0; j < km_item_arr[i].pickets_arr.length; j++){  // km_item_arr[i].kmLines_arr.length   // pickets_arr.length
 
-                    var r = chartView.mapToPosition(  chartView.series(km_item_arr[i].pickets_arr[j][0]).at(1),  chartView.series(km_item_arr[i].pickets_arr[j][1]) );
+                    var r = km_ChartView.mapToPosition(  km_ChartView.series(km_item_arr[i].pickets_arr[j][0]).at(1),  km_ChartView.series(km_item_arr[i].pickets_arr[j][1]) );
 
                     km_item_arr[i].pickets_arr[j][1].x =  r.x - km_item_arr[i].pickets_arr[j][1].width / 2
 
@@ -99,7 +99,7 @@ Item {
 
       //  console.log("input name_line = " + name_line)
 
-        createKm_Label(text, chartView.series(name_line).at(1), chartView.series(name_line), name_line)
+        createKm_Label(text, km_ChartView.series(name_line).at(1), km_ChartView.series(name_line), name_line)
 
 
     }
@@ -153,6 +153,8 @@ Item {
 
            measure_Objects.createLine_Structure(km_line, measure_Rails.first_kmLine_name,  "#BEBDFD", ChartView.SeriesTypeLine)
 
+            measure_Objects.createLine_Structure(km_line, measure_Rails.first_kmLine_name,  "#BEBDFD", ChartView.SeriesTypeLine, false, false, true)
+
 
         }
 
@@ -166,6 +168,8 @@ Item {
 
 
         measure_Objects.createLine_Structure(km_line, name,  "#BEBDFD", ChartView.SeriesTypeLine)
+
+        measure_Objects.createLine_Structure(km_line, name,  "#BEBDFD", ChartView.SeriesTypeLine, false, false, true)
 
         km_Item.km_id = km_id_global
 
@@ -209,9 +213,9 @@ Item {
         create_KmMeasure(counNumbers, newSecondPicket_Start, y_finish, isReverse)
 
 
-        measure_Rails.create_Riht(new_km_start, new_km_start + (distance) / 2, true)
+      //  measure_Rails.create_Riht(new_km_start, new_km_start + (distance) / 2, true)
 
-        measure_Rails.create_Riht(new_km_start + (distance) / 2, y_finish, false)
+       // measure_Rails.create_Riht(new_km_start + (distance) / 2, y_finish, false)
 
 
 
@@ -246,7 +250,7 @@ Item {
                 measure_Objects.createLine_Structure(arr, name,  Style.secondaryAccent_Color, ChartView.SeriesTypeLine)
 
 
-                create_Mesure(chartView.series(name).at(1), chartView.series(name) , name, i  + picket_start, isReverse)
+                create_Mesure(km_ChartView.series(name).at(1), km_ChartView.series(name) , name, i  + picket_start, isReverse)
 
                 /*if(!isReverse){
 
@@ -285,7 +289,7 @@ Item {
 
 
 
-                create_Mesure(chartView.series(name).at(1), chartView.series(name) , name, j  + picket_start , isReverse)
+                create_Mesure(km_ChartView.series(name).at(1), km_ChartView.series(name) , name, j  + picket_start , isReverse)
 
             }
         }
@@ -297,7 +301,7 @@ Item {
 
     function create_Mesure(series, line, name, title, isReverse){
 
-        var p = chartView.mapToPosition(series, line);
+        var p = km_ChartView.mapToPosition(series, line);
 
         var component = Qt.createComponent("qrc:/my_components/Elements/Custom_Rectangle_Label.qml")
 
@@ -359,7 +363,7 @@ Item {
 
 //        var p = chartView.mapToPosition(Qt.point(x_start + width_Line / 2 , y_coord), name);
 
-        var p = chartView.mapToPosition(series, line);
+        var p = km_ChartView.mapToPosition(series, line);
 
         var component = Qt.createComponent("qrc:/my_components/Elements/Custom_Rectangle_Label.qml")
 

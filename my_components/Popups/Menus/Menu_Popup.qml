@@ -111,7 +111,6 @@ Popup {
                width: parent.width
                height: parent.height
                radius: ui.radius
-               anchors.right: parent.right
                color: Style.background_Color
 
                Column{

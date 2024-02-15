@@ -22,6 +22,8 @@ Column{
 
     property int currentIndex: equipmentList.currentIndex
 
+    property int tmp_currentIndex: 0
+
 
     Mini_Title{
         id: title_Block
@@ -34,7 +36,7 @@ Column{
         width: parent.width
         height: ui.height_Button
         model: root_Column.model
-        currentIndex: 0
+        currentIndex: root_Column.tmp_currentIndex // 0
 
 
         contentItem: Custom_Label {
@@ -85,20 +87,39 @@ Column{
 
 
          delegate: ItemDelegate {
+             id: itemDelegate
               width: equipmentList.width
               height: ui.height_RowList
 
-              Hover_Anim{
+              /*Hover_Anim{
                   id: hover_Anim
                   width: parent.width - ui.basic_spacing
                   height: parent.height
                   outlined: true
+              //    z:1
                   color: root_Column.color
 
                   onClicked_Signal: {
 
+                      console.log("Сработал клик")
                       equipmentList.currentIndex = index
 
+
+
+                      popup.close()
+
+
+
+                  }
+              } */
+
+
+
+
+              MouseArea{
+                  anchors.fill: parent
+                  onClicked: {
+                      equipmentList.currentIndex = index
                       popup.close()
 
                   }
@@ -146,72 +167,73 @@ Column{
                  source: "qrc:/icons/" + Style.theme + "/utils/arrow_bottom_mini.svg"
            }
 
-           popup: Popup {
-                 id:popup
-                 //y: equipmentList.height + 4
-                 width: equipmentList.width
-                // height: contentItem.implicitHeight
-                // clip: true
-                 modal: true
-                 padding: ui.basic_spacing / 2
+         popup: Popup {
+             id:popup
+             //y: equipmentList.height + 4
+             width: equipmentList.width
+            // height: contentItem.implicitHeight
+            // clip: true
+             modal: true
+             padding: ui.basic_spacing / 2
 
-                 enter: popups_Anim.get_enter()
+             enter: popups_Anim.get_enter()
 
-                 exit: popups_Anim.get_exit()
+             exit: popups_Anim.get_exit()
 
-                 Overlay.modal:  Overlay_Popup {}
+             Overlay.modal:  Overlay_Popup {}
 
-                 background:         Item{
-                     width: parent.width
+             background:         Item{
+                 width: parent.width
+                 height: parent.height
+
+               //  Highlight_Glow{target: bg_Rectangle; shadow: true}
+
+                 Rectangle {
+                      id: bg_Rectangle
+                      width: parent.width
+                      height: parent.height
+                      radius: ui.radius
+                      color: Style.background_Color
+
+                      layer.enabled: true
+                      layer.effect: Mask_Rectangle{target: parent}
+
+                 }
+
+             }
+
+             closePolicy: Popup.CloseOnEscape | Popup.CloseOnReleaseOutsideParent
+
+             contentItem:  Item {
+                width: parent.width //- ui.big_spacing / 2
+                height: parent.height //- 50 //ui.basic_spacing / 2
+
+
+                ListView {
+                     id:listView
+                     width: parent.width //- ui.big_spacing /// 2
                      height: parent.height
-
-                   //  Highlight_Glow{target: bg_Rectangle; shadow: true}
-
-                     Rectangle {
-                          id: bg_Rectangle
-                          width: parent.width
-                          height: parent.height
-                          radius: ui.radius
-                          color: Style.background_Color
-
-                          layer.enabled: true
-                          layer.effect: Mask_Rectangle{target: parent}
-
-                     }
-
-                 }
-
-                 closePolicy: Popup.CloseOnEscape | Popup.CloseOnReleaseOutsideParent
-
-                 contentItem:  Item {
-                    width: parent.width //- ui.big_spacing / 2
-                    height: parent.height //- 50 //ui.basic_spacing / 2
-
-
-                    ListView {
-                         id:listView
-                         width: parent.width //- ui.big_spacing /// 2
-                          height: parent.height
-                         anchors.centerIn: parent
-                         property int max_elements: 8
-                         implicitHeight: equipmentList.delegateModel.count * ui.height_RowList //equipmentList.delegateModel.count > max_elements ? ui.height_Button * max_elements : equipmentList.delegateModel.count * ui.height_Button
-                         model: equipmentList.popup.visible ? equipmentList.delegateModel : null
-
-
-                     }
+                     anchors.centerIn: parent
+                     clip: true
+                     property int max_elements: 8
+                     implicitHeight: equipmentList.delegateModel.count * ui.height_RowList //equipmentList.delegateModel.count > max_elements ? ui.height_Button * max_elements : equipmentList.delegateModel.count * ui.height_Button
+                     model: equipmentList.popup.visible ? equipmentList.delegateModel : null
 
 
                  }
-
-
 
 
              }
 
-           Popups_Anim{
-               id: popups_Anim
 
-           }
+
+
+         }
+
+         Popups_Anim{
+            id: popups_Anim
+
+         }
 
 
 

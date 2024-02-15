@@ -1,24 +1,39 @@
 import QtQuick 2.15
 import QtCharts 2.15
 import QtQuick.Controls 2.15
+import qml.measure 1.0
 
 import Style 1.0
 
 
 // Основная Линия
-LineSeries {
+Basic_Line {
     id: measure_LineSeries
-    color: "#F68160" //Style.accent_Color E9FAA7 B9B2F9
-    axisX: x_ValueAxis
-    axisY: y_ValueAxis
-  //  axisXTop: x_ValueAxis
-   // axisYRight: y_ValueAxis
-    width: ui.line_width
-    useOpenGL: true
+    color: "#F68160" //"#F68160" //Style.accent_Color E9FAA7 B9B2F9
+
+    Component.onCompleted: {
+
+       // ChartPoints_Model.
+
+        if(line_name == Name_Measures.Level_Measure){
+
+            mapper.series = measure_LineSeries
+
+        }
+
+
+        //console.log( ChartPoints_Model.line_Path[0].x)
+
+        //console.log( lineModel.rowCount())
+
+    }
+
    // XYPoint { x: 10; y: 0 }
    // XYPoint { x: 10; y: 10 }
 
     property var border_arr: [] // Список Для Хранения Id Линий Границ
+
+    property var backLine_arr: []
 
     property var model: []
 
@@ -28,32 +43,21 @@ LineSeries {
 
    // property int count
 
-    property real x_start
 
-    property real x_finish
 
     property var realValue_arr: []
 
 
     property real border_opacity: 0.2
 
+    property bool lastMove
 
-    onClicked: {
 
-        // var point = measure_LineSeries.at(0);
-
-       // console.log(point.x, point.y)
-
-        // console.log("onClicked: " +  measure_LineSeries)
-
-        console.log("onClicked: " + point.x + ", " + point.y);
-
+    Lines_Logic{
+        id: lines_Logic
     }
 
-    onPointAdded: {
-      //  var point = measure_LineSeries.at(index);
-        //console.log("новая точка " + point.x, point.y)
-    }
+
 
     function get_x_viser(y_viser){
 
@@ -135,68 +139,159 @@ LineSeries {
 
     function dropLine(y) {
 
-        console.log("measure_LineSeries.count = " + measure_LineSeries.count + " y = " + y)
+        return lines_Logic.dropLine(y)
+    }
 
-        var result = 0
+    function test_add_function(x, y, value, isForward){
 
-        var multi = 1 / chartView.offset // 2
+        if(isForward){
 
+           // console.log("qqqqqqqqqqqqqqq ")
 
-        var check_diff =  measure_LineSeries.count - y * multi
-
-        var condition = y * multi
-
-        if(check_diff < 0){
-
-            condition = measure_LineSeries.count
-        }
-
-        for(var i = 0; i < condition; i++){  // (var i = 0; i < y * multi; i++
-
-           measure_LineSeries.remove(0)
-
-        }
-
-        result = y
-
-         /*if(measure_LineSeries.count >= y * multi){
-
-           for(var i = 0; i < y * multi; i++){  // (var i = 0; i < y * multi; i++
-
-               measure_LineSeries.remove(0)
-
-            }
-
-            result = y 8
+            ChartPoints_Model.addNewPoint(Qt.point(x, y))
 
         }
         else{
 
-            toast.show("Нельзя удалить!", 3000, 1) // Показываем Тоcт
-        } */
+            console.log("не добавляем точки")
 
-        if(chartView.series(border_arr[0]).count !== 0){
+            var name = line_name + "back_line_" + backLine_arr.length
 
-            for(var j = 0; j < border_arr.length; j++){
+            if(lastMove !== isForward){
 
-                chartView.series(border_arr[j]).remove(0)
+                var series = lines_Logic.change_series("#7BBBFF", Qt.SolidLine, name)
+
+                backLine_arr.push(name)
+            }
+
+
+            console.log("rowCount() = " + ChartPoints_Model.rowCount())
+            if(ChartPoints_Model.rowCount() !== 0){
+
+                ChartPoints_Model.removeLastPoint()
+
+                chartView.series(backLine_arr[backLine_arr.length - 1]).append(measure_LineSeries.at(measure_LineSeries.count - 1).x , measure_LineSeries.at(measure_LineSeries.count - 1).y)
+
+            }
+            else{
+
+                if(chartView.series(backLine_arr[backLine_arr.length - 1]).count === 0){
+
+                    var series2 = lines_Logic.change_series("#7BBBFF", Qt.SolidLine, name)
+
+                    backLine_arr.push(name)
+
+                }
+
+                chartView.series(backLine_arr[backLine_arr.length - 1]).append(x ,y)
 
 
             }
+
+            console.log("after rowCount() = " + ChartPoints_Model.rowCount())
+
+
+            //console.log("measure_LineSeries.model.length == " + measure_LineSeries.count)
+
+
+
+          //  chartView.series(backLine_arr[backLine_arr.length - 1]).append(x, y)
+
+
+            //series.append(x, y);
+
         }
 
-        return result
+        lastMove = isForward
 
-        //measure_LineSeries.pointRemoved(10, 40)
+        console.log("Количсетво точек = " + ChartPoints_Model.rowCount())
+
+        //        var series = change_series(color, style, id)
+
+//        series.append(x_start, y_start);
+
+        //
+
+        // add_point_border(y)
+
+      /*  if(chart_anim.checkScroll){
+
+            return value.toFixed(2)
+
+        }
+        else{ // Здесь Будет Значение Визера
+
+         //   return 0
+
+        }
+
+        return value.toFixed(2) */
     }
 
-
     // Добавляем Точку Для Линии Основной Линии
-    function addPoint(x, y, value) {
+    function addPoint(x, y, value, isForward) {
 
-        realValue_arr.push(value)
+        //realValue_arr.push(value)
         
-        measure_LineSeries.append(x, y)
+        if(isForward){
+
+            measure_LineSeries.append(x, y)
+
+        }
+        else{
+
+            console.log("не добавляем точки")
+
+            var name = line_name + "back_line_" + backLine_arr.length
+
+            if(lastMove !== isForward){
+
+                var series = lines_Logic.change_series("#7BBBFF", Qt.SolidLine, name)
+
+                backLine_arr.push(name)
+            }
+
+
+            if(measure_LineSeries.count != 0){
+
+                measure_LineSeries.remove(measure_LineSeries.count - 1)
+
+                chartView.series(backLine_arr[backLine_arr.length - 1]).append(measure_LineSeries.at(measure_LineSeries.count - 1).x , measure_LineSeries.at(measure_LineSeries.count - 1).y)
+
+            }
+            else{
+
+                if(chartView.series(backLine_arr[backLine_arr.length - 1]).count === 0){
+
+                    var series2 = lines_Logic.change_series("#7BBBFF", Qt.SolidLine, name)
+
+                    backLine_arr.push(name)
+
+                }
+
+                chartView.series(backLine_arr[backLine_arr.length - 1]).append(x ,y)
+
+
+            }
+
+            console.log("measure_LineSeries.model.length == " + measure_LineSeries.count)
+
+
+
+          //  chartView.series(backLine_arr[backLine_arr.length - 1]).append(x, y)
+
+
+            //series.append(x, y);
+
+        }
+
+        lastMove = isForward
+
+        //        var series = change_series(color, style, id)
+
+//        series.append(x_start, y_start);
+
+        //
 
         // add_point_border(y)
 
@@ -215,18 +310,6 @@ LineSeries {
 
     }
 
-    function test_function(){
-
-        for(var i = 0; i < model.length; i++){
-
-            var name = line_name + "border_" + i
-
-            create_Line(model[i], 0, model[i], 1000, Style.primaryDark_Color, Qt.DotLine, name) // Создаём Границу
-
-            border_arr.push(name)
-
-        }
-    }
 
     // Продлеваем Границу
     function add_point_border(y_value){
@@ -273,7 +356,7 @@ LineSeries {
 
     //    test_function()
 
-//       create_middleLine(x_start + 2) // Сейчас Здесь Потом Перенесу
+      create_middleLine(x_start + 2) // Сейчас Здесь Потом Перенесу
 
       create_db_Line(x_start + 6) // Сейчас Здесь Потом Перенесу
     }
@@ -281,7 +364,7 @@ LineSeries {
 
     function create_Line(x_start, y_start, x_finish, y_finish, color, style, id){
 
-        var series = change_series(color, style, id)
+        var series = lines_Logic.change_series(color, style, id)
 
         series.append(x_start, y_start);
 
@@ -293,7 +376,7 @@ LineSeries {
     // Создание Средней Линии Графика
    function create_middleLine(x_start){
 
-       var series = change_series(Style.secondaryAccent_Color, Qt.SolidLine, "middle_line")
+       var series = lines_Logic.change_series(Style.secondaryAccent_Color, Qt.SolidLine, "middle_line")
 
        series.append(x_start, 0);
 
@@ -306,7 +389,7 @@ LineSeries {
 
       // FF747A - for error ?
 
-      var series = change_series("#7BBBFF", Qt.SolidLine, "db_line") // #E17259"
+      var series = lines_Logic.change_series("#7BBBFF", Qt.SolidLine, "db_line") // #E17259"
 
       series.append(x_start, 0);
 
@@ -314,31 +397,8 @@ LineSeries {
 
   }
 
-   // Функция Для Изменения Серии
-   function change_series(color, style_line, id){
 
-       var series = chartView.createSeries(ChartView.SeriesTypeLine, id, x_ValueAxis, y_ValueAxis)
-
-       series.color = color
-
-       series.width = ui.line_width
-
-       series.style =  style_line
-
-       series.capStyle = Qt.DotLine
-
-       series.joinStyle =  Qt.RoundJoin
-
-       if(series.style === Qt.DotLine){
-
-           series.opacity = measure_LineSeries.border_opacity //0.2
-
-       }
-
-       return series
-   }
-
-   // Функция Для Добавления Зоны (Нарушения Выше 2 Уровня)
+  // Функция Для Добавления Зоны (Нарушения Выше 2 Уровня)
    function add_area(x_start, y_start, x_finish, y_finish){
 
        var series = chartView.createSeries(ChartView.SeriesTypeArea, "id", x_ValueAxis, y_ValueAxis)

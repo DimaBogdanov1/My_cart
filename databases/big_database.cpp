@@ -8,7 +8,6 @@
 
 #include "databases/big_database.h"
 
-#include "mqtt/log_microservice.h"
 
 QSqlDatabase Database;
 
@@ -108,7 +107,7 @@ QSqlQuery create_query(QString sql_file, bool check){
             query.exec(Fl);
 
 
-    }
+        }
 
 
         return query;
@@ -334,7 +333,7 @@ void big_database::openDatabase(QString path_db)
     }
     else{
 
-       Log_Microservice::create_LogRecord("Открыли базу данных РЖД");
+      // Log_Microservice::create_LogRecord("Открыли базу данных РЖД");
 
        set_roads();
 

@@ -8,7 +8,7 @@ import my_components 1.0
 Row{
     id: root_Row
     width: parent.width
-    height: ui.block_height
+    height: !miniSize ? ui.block_height : ui.mini_block_height
     spacing: ui.basic_spacing
 
     property string source
@@ -16,6 +16,13 @@ Row{
     property real start_Keyboard
 
     property var model
+    property var tmp_model
+
+    property bool needIcon: true
+
+    property bool miniSize: false
+
+    signal textChanged(index_model: int, text: string)
 
     function get_text(index){
 
@@ -94,10 +101,10 @@ Row{
 
     }
 
-    Icon_In_Row{}
+    Icon_In_Row{visible: needIcon}
 
     Row{
-        width: parent.width - ui.basic_spacing - ui.icon_nav_size
+        width: needIcon ?  parent.width - ui.basic_spacing - ui.icon_nav_size : parent.width
         height: parent.height
         spacing: ui.basic_spacing
 
@@ -109,10 +116,11 @@ Row{
             model: root_Row.model
 
             Custom_TextField {
-                width: parent.width / root_Row.model.count - (ui.basic_spacing * (root_Row.model.count - 1)) / root_Row.model.count
-                title: model.title
+                width: parent.width / root_Row.model.length - (ui.basic_spacing * (root_Row.model.length - 1)) / root_Row.model.length                    //parent.width / root_Row.model.count - (ui.basic_spacing * (root_Row.model.count - 1)) / root_Row.model.count
+                title: root_Row.model[index].title
                 password: model.password === undefined ? false : model.password
-                maximumLength: model.km ? 4 : ( model.meter ? 3 : password ? 4 : model.maximumLength )
+                text: root_Row.model[index].text
+                //maximumLength: model.km ? 4 : ( model.meter ? 3 : password ? 4 : model.maximumLength )
                 validator: IntValidator{}
 
                 onReady_to_write_signal: {
@@ -127,6 +135,12 @@ Row{
 
                    // heplps.open()
                 }
+
+                onTextChanged: {
+
+                   root_Row.textChanged(index, text)
+                }
+
 
             }
 

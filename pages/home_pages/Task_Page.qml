@@ -27,7 +27,7 @@ Item{
 
             finish_Task_Loader.item.clear()
 
-            Warnings.get_All_Warnings()
+            //Warnings.get_All_Warnings()
 
         }
     }

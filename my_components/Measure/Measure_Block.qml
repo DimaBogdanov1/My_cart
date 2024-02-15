@@ -47,6 +47,9 @@ Item {
 
     property int tmp_offset: 24
 
+    Lines_Logic{
+        id: lines_Logic
+    }
 
     function create_model(){
 
@@ -92,37 +95,8 @@ Item {
 
     function convert_x(x_value, isReal_X_to_Chart_X){
 
-        var max = measure_model[measure_model.length - 1]
+        return lines_Logic.convert_x(x_value, isReal_X_to_Chart_X,  measure_model[0], measure_model[measure_model.length - 1], x_start, x_finish, reverse)
 
-        var min = measure_model[0]
-
-        var delta_value =  max - min
-
-        var delta_x = x_finish - x_start
-
-        var answer, percent
-
-        if(!isReal_X_to_Chart_X){
-
-            // В этом случае answer я знаю
-          //  percent =  (100 * (answer - x_start)) / delta_x
-
-            percent =  (100 * (x_value - x_start)) / delta_x
-
-            answer = (percent * delta_value + 100 * min) / 100
-
-
-        }
-        else{
-
-            percent = (x_value - min) * 100 / delta_value
-
-            answer = ((delta_x * percent) / 100) + x_start
-        }
-
-        //console.log("answer = " , answer )
-
-        return answer
     }
 
     function check_visible(value){
@@ -278,7 +252,7 @@ Item {
                             needBack: false
                             anchors.left: parent.left
                             pixel_size:  ui.text_miniSize
-                            text: title + ": " //+ value
+                            text: my_str.addColon(title)  //+ value
 
                         }
 

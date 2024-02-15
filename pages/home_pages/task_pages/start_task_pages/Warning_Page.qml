@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 import Style 1.0
+import Warning_Page 1.0
 
 import my_components 1.0
 
@@ -9,6 +10,10 @@ Item{
     id: root_Item
     width: parent.width
     height: parent.height
+
+    Warning_Page{
+        id: warning_Page
+    }
 
     Row{
         width: parent.width
@@ -29,50 +34,25 @@ Item{
                 Custom_Row_ComboBox{
                     width: parent.width
                     height: ui.block_height
-                    source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
-                    model:ListModel {
+                    source: "qrc:/my_components/icons/" + Style.theme + "/home_page/pencil.svg"
 
-                        ListElement {
-                            title: "Код дороги"
-                            values: [
-                                ListElement { value: "a" },
-                                ListElement { value: "b" }
-                                ]
-
-                        }
-
-                        ListElement {
-                            title: "Пути"
-                            values: [
-                                ListElement { value: "Главные пути" },
-                                ListElement { value: "Станционные пути" }
-                                ]
-
-                        }
-
-                    }
+                    model: [
+                        { title: my_str.siteID, combo_model: warning_Page.SiteId_Model, picked_index: warning_Page.pickedindex_SiteIDModel},
+                        { title: my_str.typeTracks,  combo_model: warning_Page.Type_Tracks_Model, picked_index: warning_Page.pickedindex_Type_Tracks_Model}
+                    ]
 
                 }
 
-                Custom_Row_TextField{
+                Custom_Row_ComboBox{
                     id: roadInfo_TextField
-                    source: "qrc:/icons/" + Style.theme + "/utils/lock.svg"
-                    start_Keyboard: 0 //root_Item.start_Keyboard + ui.block_height + ui.middle_spacing
-                    model: ListModel{
+                    source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
 
-                        ListElement{
-                            title: "Код направления"
-                            isLetter: false
-                            maximumLength: 5
+                    model: [
+                        { title: my_str.upNom, combo_model: warning_Page.Up_Nom_Model, picked_index: warning_Page.pickedindex_Up_Nom_Model},
+                        { title: my_str.putNom, combo_model: [], picked_index: 0}
+                    ]
 
-                        }
-
-                        ListElement{
-                            title: "Номер пути"
-                            isLetter: false
-                            maximumLength: 1
-
-                        }
+                    onChange_index_signal: {
 
                     }
                 }
@@ -81,18 +61,15 @@ Item{
                     id: speed_ComboBox
                     width: parent.width
                     height: ui.block_height
-                    source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
+                    source: "qrc:/my_components/icons/" + Style.theme + "/home_page/pencil.svg"
+
+                    property var speed_Model: [15, 30, 45, 60, 75, 90, 105, 120, 135, 150]
 
                     property int speed: 15
 
-                    model:ListModel { id: speed_ListModel
-
-                        ListElement {
-                            title: "Скорость"
-                            values: []
-                        }
-
-                    }
+                    model: [
+                        { title: my_str.speed, combo_model: speed_Model, picked_index: 0, needConvert: true},
+                    ]
 
                     onChange_index_signal: {
 
@@ -109,99 +86,126 @@ Item{
                         //a.push()
                         for(var i = speed; i < 150; i+= 15){
 
-                            a.push(i + str.km_hour)
+                            a.push(i + " км/ч")
 
-                            model.get(0).values.append({ "value": i + str.km_hour })
+
+                            model[0].combo_model.push(i + " км/ч")
 
                         }
+
+                        speed_Model.push(111)
+
+                        //model[0].combo_model = a
+
+                        console.log("размер = " + model[0].combo_model.length)
 
                         //model.values.append = a
                     }
                 }
 
-                /*Custom_Row_ComboBox{
-                    id: speed_ComboBox
-                    width: parent.width
-                    height: ui.block_height
-                    source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
-                    title: qsTr("Скорость")
-                    property int speed: 15
-                  //  model:  [qsTr("Рабочая")  , qsTr("Контрольная")  , qsTr("Дополнительная") ]
-
-                    onCurrentIndexChanged: {
-
-                        speed = speed_ComboBox.model[currentIndex].split(" ")[0]
-
-                    }
-
-                    Component.onCompleted: {
-
-                        var a = new Array
-
-                        //a.push()
-                        for(var i = speed; i < 150; i+= 15){
-
-                            a.push(i + str.km_hour)
-                        }
-
-                        model = a
-                    }
-                }
-
-                */
 
                 Custom_Row_TextField{
                     id: startPoint_Row
-                    source:  "qrc:/icons/" + Style.theme + "/top_bar/location.svg"
+                    source:  "qrc:/my_components/icons/" + Style.theme + "/top_bar/location.svg"
                     start_Keyboard: 300
-                    model: ListModel{
 
-                        ListElement{
-                            title: "Начальный километр"
-                            isLetter: false
-                            km: true
-                        }
+                    model: [
+                         { title: "Начальный километр", text: warning_Page.start_Km, maximumLength: ui.km_textLength},
+                         { title: "Начальный метр", text: warning_Page.start_M, maximumLength: ui.meter_textLength}
+                    ]
 
-                        ListElement{
-                            title: "Начальный метр"
-                            isLetter: false
-                            meter: true
+                    onTextChanged: {
 
+                        switch(index_model){
 
+                        case 0:
+
+                            warning_Page.set_StartKm(text)
+
+                            break
+
+                        case 1:
+
+                            warning_Page.set_StartM(text)
+
+                            break
                         }
 
                     }
+
                 }
 
                 Custom_Row_TextField{
                     id: endPoint_Row
-                    source:  "qrc:/icons/" + Style.theme + "/top_bar/location.svg"
+                    source:  "qrc:/my_components/icons/" + Style.theme + "/top_bar/location.svg"
                     start_Keyboard: 300
-                    model: ListModel{
 
-                        ListElement{
-                            title: "Конечный километр"
-                            isLetter: false
-                            km: true
-                        }
+                    model: [
+                         { title: "Конечный километр", text:  warning_Page.end_Km, maximumLength: ui.km_textLength},
+                         { title: "Конечный метр", text: warning_Page.end_M, maximumLength: ui.meter_textLength}
+                    ]
 
-                        ListElement{
-                            title: "Конечный метр"
-                            isLetter: false
-                            meter: true
+                    onTextChanged: {
 
+                        switch(index_model){
 
+                        case 0:
+
+                            warning_Page.set_EndKm(text)
+
+                            break
+
+                        case 1:
+
+                            warning_Page.set_EndM(text)
+
+                            break
                         }
 
                     }
+
                 }
 
 
                 Custom_Date_Block {
                     id: date_Block
                     title: qsTr("Время действия")
-                    source:  "qrc:/icons/" + Style.theme + "/utils/calendar.svg"
+                    source:  "qrc:/my_components/icons/" + Style.theme + "/utils/calendar.svg"
+                    left_Date: warning_Page.left_date
+                    right_Date: warning_Page.right_date
 
+                    onNewDate_signal: {
+
+                        var date = new Date(year, month, day)
+
+                        if(isStartDate){
+
+                            warning_Page.set_LeftDate(date)
+
+                        }
+                        else{
+
+                            warning_Page.set_RightDate(date)
+
+                        }
+                    }
+
+                    Component.onCompleted: {
+
+                        /*var date_1 = new Date()
+
+                        var date_2 = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + get_max_days())
+
+                        warning_Page.set_LeftDate(date_1)
+
+                        warning_Page.set_RightDate(date_2) */
+
+
+                        //warning_Page.set_LeftDate(date_1.toString())
+
+                        //warning_Page.set_RightDate(date_2.toString())
+
+                    }
                 }
 
                 /*Custom_Row_TextField{
@@ -232,7 +236,7 @@ Item{
                     width: parent.width
                     text:  qsTr("Добавить предупреждение")
                     icon_with_Text: true
-                    source: "qrc:/icons/" + Style.theme + "/top_bar/plus_white.svg" // "qrc:/icons/" + Style.theme + "/navigation/home.svg"
+                    source: "qrc:/my_components/icons/" + Style.theme + "/top_bar/plus_white.svg"
                     onClicked_Signal: {
 
                        // console.log("picked_siteID = "  + picked_siteID , "picked_upNom = "  + picked_upNom , "picked_putNom = "  + picked_putNom )
@@ -241,18 +245,24 @@ Item{
 
                         var result = false
 
-                        if(roadInfo_TextField.check_text()){
+                        /*if(roadInfo_TextField.check_text()){
 
-                            if(startPoint_Row.check_text()){
 
-                                if(endPoint_Row.check_text()){
 
-                                    result = true
-                                    // нужно ли сравнивать километры
+                        }*/
 
-                                    Warnings.add_Warning(authorization_Account_Icon.authorization_id, 0, roadInfo_TextField.get_text(0), roadInfo_TextField.get_text(1), startPoint_Row.get_text(0), startPoint_Row.get_text(1), endPoint_Row.get_text(0), endPoint_Row.get_text(1), date_Block.get_dates(2), date_Block.get_dates(0), date_Block.get_dates(1), speed_ComboBox.speed)
+                        warning_Page.add_Warning(authorization_Account_Icon.authorization_id, 0, 1, 1, startPoint_Row.get_text(0), startPoint_Row.get_text(1), endPoint_Row.get_text(0), endPoint_Row.get_text(1), date_Block.get_dates(2), date_Block.get_dates(0), date_Block.get_dates(1), speed_ComboBox.speed)
 
-                                }
+
+                        /*if(startPoint_Row.check_text()){
+
+                            if(endPoint_Row.check_text()){
+
+                                result = true
+                                // нужно ли сравнивать километры
+
+
+                                //Warnings.add_Warning(authorization_Account_Icon.authorization_id, 0, roadInfo_TextField.get_text(0), roadInfo_TextField.get_text(1), startPoint_Row.get_text(0), startPoint_Row.get_text(1), endPoint_Row.get_text(0), endPoint_Row.get_text(1), date_Block.get_dates(2), date_Block.get_dates(0), date_Block.get_dates(1), speed_ComboBox.speed)
 
                             }
 
@@ -262,7 +272,7 @@ Item{
                         if(!result){
 
                             create_error_anim()
-                        }
+                        }*/
 
 
                      //   Warnings.add_Warning(road_ComboBox.num_Value, roadInfo_TextField.get_text(0), roadInfo_TextField.get_text(1), startPoint_Row.get_text(0), startPoint_Row.get_text(1), endPoint_Row.get_text(0), endPoint_Row.get_text(1), date_Block.get_dates(0), date_Block.get_dates(1), speed_ComboBox.speed)

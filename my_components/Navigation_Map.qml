@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtLocation 5.15
 import QtPositioning 5.15
 import QtQuick.Controls 2.15
+//import NavigationMap_Model 1.0
 
 import Style 1.0
 
@@ -44,6 +45,9 @@ Rectangle{
      property bool isCheck: false
 
 
+     //NavigationMap_Model{
+       // id: navigationMap_Model
+     //}
 
      Map {
          id: map
@@ -53,7 +57,7 @@ Rectangle{
         //  activeMapType:MapType.GrayStreetMap
 
 
-         center: QtPositioning.coordinate(59.9386300, 30.3141300) //positionSource.position.coordinate
+         center: NavigationMap_Model.position //positionSource.position.coordinate
 
          plugin: Plugin {
             id: osmPlugin
@@ -70,34 +74,28 @@ Rectangle{
 
              var longitude_point = map.toCoordinate(Qt.point(mouse.x,mouse.y)).longitude // Считываем Долготу Точки
 
-             console.log(latitude_point, " " + longitude_point)
+
+              console.log(latitude_point, " " + longitude_point)
          }
      }
 
-         MapPolyline {
-            id: line
-            line.width: 3
-            line.color:   Style.secondaryAccent_Color
-            path: [
-                { latitude:  59.93817932266637, longitude:  30.312217584972302 },
+         MapItemView{
+               model: NavigationMap_Model
+               delegate: MapPolyline{
+                   line.width: 3
+                   line.color: Style.secondaryAccent_Color
+                   path: NavigationMap_Model.path // navigationMap_Model.path
 
-                   { latitude:   59.938635685072356 , longitude:  30.312498546368516 }
+               }
 
-            ]
 
-            Component.onCompleted: {
-
-               // line.addCoordinate(QtPositioning.coordinate(map.center.latitude / 2, map.center.longitude / 15))
-
-                line.addCoordinate(map.center)
-            }
-         }
+           }
 
          MapQuickItem{
              id: cart_Marker
-             rotation: 0
+             rotation: sensorsVal.yaw_value
 
-             coordinate:  QtPositioning.coordinate(59.9386300, 30.3141300) //map.center // QtPositioning.coordinate(map.center., longitude)
+             coordinate: NavigationMap_Model.position // QtPositioning.coordinate(59.9386300, 30.3141300) //map.center // QtPositioning.coordinate(map.center., longitude)
              anchorPoint.x: cart_Marker.width / 2
              anchorPoint.y: cart_Marker.height / 2
              sourceItem: Image{
@@ -124,6 +122,17 @@ Rectangle{
                 anim_Coord.start()
             }
 
+
+         }
+
+         Label{
+             text: "pitch = " + sensorsVal.pitch_value
+         }
+
+         Label{
+             anchors.top: parent.top
+             anchors.topMargin: 30
+            text: "odometer = " + sensorsVal.odometer_value.toFixed(2)
 
          }
 
@@ -216,15 +225,21 @@ Rectangle{
          target: Mqqt_Client
 
 
-         function onNewGPS_signal(latitude, longitude, yaw) {
+         function onNewGPS_signal(latitude, longitude, yaw, pitch) {
 
-             cart_Marker.rotation = yaw
+             sensorsVal.setYaw(yaw)
 
-             cart_Marker.start_anim(QtPositioning.coordinate(latitude, longitude))
+             sensorsVal.setPitch(pitch)
 
-            // cart_Marker.coordinate =  QtPositioning.coordinate(latitude, longitude)
+            // cart_Marker.start_anim(QtPositioning.coordinate(latitude, longitude))
 
-             line.addCoordinate(cart_Marker.coordinate)
+             cart_Marker.coordinate =  QtPositioning.coordinate(latitude, longitude)
+
+            // navigationMap_Model.addPosition(cart_Marker.coordinate)
+
+             //line.addCoordinate(cart_Marker.coordinate)
+
+             NavigationMap_Model.addPosition(QtPositioning.coordinate(latitude, longitude))
 
              if(!isCheck){
 

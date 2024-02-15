@@ -54,8 +54,6 @@
         <file>my_components/Login_Elements/Account_Icon.qml</file>
         <file>my_components/Popups/Menus/Menu_Popup.qml</file>
         <file>my_components/Popups/Menus/Menu_Element.qml</file>
-        <file>my_components/Popups/Menus/ChartsMore_Model.qml</file>
-        <file>my_components/Popups/Menus/ChartsObjects_Model.qml</file>
         <file>my_components/Popups/Account_Popup.qml</file>
         <file>my_components/Login_Elements/Account_With_Title.qml</file>
         <file>my_components/Titles.qml</file>
@@ -70,7 +68,6 @@
         <file>my_components/Elements/Rows/Custom_Row_TextField.qml</file>
         <file>my_components/Mini_Title.qml</file>
         <file>my_components/Elements/Custom_Picked_Block.qml</file>
-        <file>my_components/Popups/Menus/ChartsScale_Model.qml</file>
         <file>my_components/Elements/Custom_Calendar.qml</file>
         <file>my_components/Popups/Calendar_Popup.qml</file>
         <file>my_components/Elements/Custom_Checkbox.qml</file>
@@ -78,7 +75,6 @@
         <file>my_components/Elements/Custom_Date_Block.qml</file>
         <file>my_components/Page_Components/Audio_Sounds.qml</file>
         <file>my_components/Page_Components/Back_Arrow.qml</file>
-        <file>my_components/Page_Components/Custom_TopBar.qml</file>
         <file>my_components/Page_Components/Flipable_Page.qml</file>
         <file>my_components/Page_Components/Page_Loader.qml</file>
         <file>my_components/Page_Components/test_Page/Page_1.qml</file>
@@ -108,5 +104,32 @@
         <file>my_components/Measure/Km/Km_Item.qml</file>
         <file>my_components/Popups/Stories/Stories_Block.qml</file>
         <file>my_components/Popups/Stories/Stories_Popup.qml</file>
+        <file>my_components/Measure/Chart/Custom_Chart.qml</file>
+        <file>my_components/Measure/Chart/ValueAxis_X.qml</file>
+        <file>my_components/Measure/Chart/ValueAxis_Y.qml</file>
+        <file>my_components/Chart_Elements/Sensors_Panel.qml</file>
+        <file>my_components/Popups/Objects/Objects_Popup.qml</file>
+        <file>my_components/Popups/Objects/Objects_Element.qml</file>
+        <file>my_components/Popups/Objects/All_ObjectsPage.qml</file>
+        <file>my_components/Popups/Objects/Object_Param.qml</file>
+        <file>my_components/Popups/Objects/Note_User.qml</file>
+        <file>my_components/Chart_Elements/Km_Counter.qml</file>
+        <file>my_components/Measure/Measure_Speed.qml</file>
+        <file>my_components/Measure/Basic_Line.qml</file>
+        <file>my_components/Measure/Lines_Logic.qml</file>
+        <file>my_components/Chart_Elements/Km_Tables.qml</file>
+        <file>my_components/Top_Bars/Custom_TopBar.qml</file>
+        <file>my_components/Top_Bars/Menu_Models/Chart_MenuModels.qml</file>
+        <file>my_components/Top_Bars/TopBar_MenuButton.qml</file>
+        <file>my_components/Popups/Menus/TopBar_Menu/Charts_Page/ChartsMore_Main_Model.qml</file>
+        <file>my_components/Popups/Menus/TopBar_Menu/Charts_Page/ChartsMore_Model.qml</file>
+        <file>my_components/Popups/Menus/TopBar_Menu/Charts_Page/ChartsObjects_Model.qml</file>
+        <file>my_components/Popups/Menus/TopBar_Menu/Charts_Page/ChartsScale_Model.qml</file>
+        <file>my_components/Popups/Menus/TopBar_Menu/Task_Page/Task_MoreModel.qml</file>
+        <file>my_components/Scheme_And_Map.qml</file>
+        <file>my_components/Elements/Custom_Flipable.qml</file>
+        <file>my_components/Touch_Image.qml</file>
+        <file>my_components/Top_Bars/Button_Models/Charts_TobBar_Buttons.qml</file>
+        <file>my_components/Top_Bars/Menu_Models/Task_MenuModels.qml</file>
     </qresource>
 </RCC>

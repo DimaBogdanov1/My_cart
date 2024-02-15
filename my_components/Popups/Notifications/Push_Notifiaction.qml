@@ -15,6 +15,8 @@ Popup {
 
     readonly property real start_y:  parent.height - ui.basic_spacing -  height_block
 
+    property bool isOpen: false
+
     y: start_y//+ ui.basic_spacing
 
     width: 345.6 // Ширина Как В Аккаунте Потом Поправлю!
@@ -31,6 +33,33 @@ Popup {
     exit: popups_Anim.get_notification_exit()
 
     //Overlay.modal:  Overlay_Popup {}
+
+    onOpened: {
+
+        popup.isOpen = true
+
+    }
+
+    onClosed: {
+
+        popup.isOpen = false
+
+    }
+
+    function openPush(message, status){
+
+        if(popup.isOpen){
+
+            popup.close()
+
+        }
+
+        textPush_Label.text = message
+
+        statusIndicator.status = status
+
+        popup.open()
+    }
 
 
     background:   Background_Popup{} //Blur{ x_start: popup.x + ui.width_Navigation}
@@ -83,12 +112,14 @@ Popup {
                          }
 
                          Status_Indicator{
+                             id: statusIndicator
 
                          }
 
                      }
 
                      Custom_Rectangle_Label {
+                         id: textPush_Label
                          width: parent.width - ui.icon_nav_size - ui.basic_spacing
                          height: parent.height * 0.7 - ui.basic_spacing / 2
                          wrap: Text.WordWrap

@@ -28,105 +28,55 @@ Item{
 
 
                 Custom_Row_TextField{
-                    source: "qrc:/icons/" + Style.theme + "/utils/lock.svg"
+                    source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
                     start_Keyboard: 0//root_Item.start_Keyboard + ui.block_height + ui.middle_spacing
-                    model: ListModel{
-
-                        ListElement{
-                            title: "Код дороги"
-                            isLetter: false
-                            maximumLength: 2
-                        }
-                    }
+                    model: [
+                           { title: my_str.siteID, text: "", maximumLength: ui.siteId_textLength}
+                       ]
                 }
 
                 Custom_Row_TextField{
-                    source: "qrc:/icons/" + Style.theme + "/utils/lock.svg"
+                    source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
                     start_Keyboard: 0 //root_Item.start_Keyboard + ui.block_height + ui.middle_spacing
+                    model: [
+                           { title: my_str.upNom, text: "", maximumLength: ui.upNom_textLength},
+                           { title: my_str.putNom, text: "", maximumLength: ui.putNom_textLength}
+                       ]
 
-                    model: ListModel{
-
-                        ListElement{
-                            title: "Код направления"
-                            isLetter: false
-                            maximumLength: 5
-
-                        }
-
-                        ListElement{
-                            title: "Номер пути"
-                            isLetter: false
-                            maximumLength: 1
-
-                        }
-
-                    }
                 }
 
                 Custom_Row_TextField{
                     id: startPoint_Row
-                    source:  "qrc:/icons/" + Style.theme + "/top_bar/location.svg"
+                    source:  "qrc:/my_components/icons/" + Style.theme + "/top_bar/location.svg"
                     start_Keyboard: 0
-                    model: ListModel{
 
-                        ListElement{
-                            title: "Километр"
-                            isLetter: false
-                            km: true
-
-                        }
-
-                        ListElement{
-                            title: "Метр"
-                            isLetter: false
-                            meter: true
-
-                        }
-
-                    }
+                    model: [
+                           { title: my_str.km, text: "", maximumLength: ui.km_textLength},
+                           { title: my_str.meter, text: "", maximumLength: ui.meter_textLength}
+                       ]
                 }
 
                 Custom_Row_TextField{
-                    source:  "qrc:/icons/" + Style.theme + "/top_bar/location.svg"
+                    source:  "qrc:/my_components/icons/" + Style.theme + "/top_bar/location.svg"
                     start_Keyboard: 0
-                    model: ListModel{
 
-                        ListElement{
-                            title: "Скорость пассажирских"
-                            isLetter: false
-                            maximumLength: 3
+                    model: [
+                           { title: "Скорость пассажирских", text: ""},
+                           { title: "Скорость грузовых", text: ""}
+                       ]
 
-                        }
-
-                        ListElement{
-                            title: "Скорость грузовых"
-                            isLetter: false
-                            maximumLength: 3
-
-                        }
-
-                    }
                 }
 
                 Custom_Row_ComboBox{
                     width: parent.width
                     height: ui.block_height
-                    source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
-                    model:ListModel {
+                    source: "qrc:/my_components/icons/" + Style.theme + "/home_page/pencil.svg"
 
-                        ListElement {
-                            title: "Ширина колеи"
-                            values: [
-                                ListElement { value: "1520 мм" },
-                                ListElement { value: "1524 мм" },
-                                ListElement { value: "1435 мм" },
-                                ListElement { value: "1680 мм" }
+                    property var width_TrackModel: [1520, 1524, 1435, 1680]
 
-                                ]
-
-                        }
-
-                    }
+                    model: [
+                        { title: my_str.widthTrack, combo_model: width_TrackModel, picked_index: 0}
+                    ]
 
 
                 }
@@ -134,20 +84,13 @@ Item{
                 Custom_Row_ComboBox{
                     width: parent.width
                     height: ui.block_height
-                    source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
-                    model:ListModel {
+                    source: "qrc:/my_components/icons/" + Style.theme + "/home_page/pencil.svg"
 
-                        ListElement {
-                            title: "Виды шпал"
-                            values: [
-                                ListElement { value: "После 1996 г." },
-                                ListElement { value: "До 1996 г." }
-                                ]
+                    property var sleepersModel: ["После 1996 г.", "До 1996 г."]
 
-                        }
-
-                    }
-
+                    model: [
+                        { title: "Виды шпал", combo_model: sleepersModel, picked_index: 0}
+                    ]
 
                 }
 

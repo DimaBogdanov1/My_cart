@@ -18,6 +18,7 @@ Custom_Picked_Block 1.0 Elements/Custom_Picked_Block.qml
 Custom_Calendar 1.0 Elements/Custom_Calendar.qml
 Custom_Checkbox 1.0 Elements/Custom_Checkbox.qml
 Custom_Date_Block 1.0 Elements/Custom_Date_Block.qml
+Custom_Flipable 1.0 Elements/Custom_Flipable.qml
 
 Custom_Row_Checkbox 1.0 Elements/Rows/Custom_Row_Checkbox.qml
 Custom_Row_TextField 1.0 Elements/Rows/Custom_Row_TextField.qml
@@ -38,6 +39,11 @@ TextField_Anim 1.0 Animations/TextField_Anim.qml
 # Measure
 Measure_Block 1.0 Measure/Measure_Block.qml
 Measure_Lines 1.0 Measure/Measure_Lines.qml
+Measure_Speed 1.0 Measure/Measure_Speed.qml
+
+Custom_Chart 1.0 Measure/Chart/Custom_Chart.qml
+ValueAxis_X 1.0 Measure/Chart/ValueAxis_X.qml
+ValueAxis_Y 1.0 Measure/Chart/ValueAxis_Y.qml
 
 Measure_Km 1.0 Measure/Km/Measure_Km.qml
 Measure_Rails 1.0 Measure/Km/Measure_Rails.qml
@@ -86,10 +92,15 @@ Admin_Block 1.0 Settings/Admin_Block.qml
 Content_Dialog 1.0 Popups/Content_Dialog.qml
 Loading_Popup 1.0 Popups/Loading_Popup.qml
 
+Objects_Popup 1.0 Popups/Objects/Objects_Popup.qml
+
 Menu_Popup 1.0 Popups/Menus/Menu_Popup.qml
-ChartsMore_Model 1.0 Popups/Menus/ChartsMore_Model.qml
-ChartsObjects_Model 1.0  Popups/Menus/ChartsObjects_Model.qml
-ChartsScale_Model 1.0 Popups/Menus/ChartsScale_Model.qml
+ChartsMore_Main_Model 1.0 Popups/Menus/TopBar_Menu/Charts_Page/ChartsMore_Main_Model.qml
+ChartsMore_Model 1.0 Popups/Menus/TopBar_Menu/Charts_Page/ChartsMore_Model.qml
+ChartsObjects_Model 1.0  Popups/Menus/TopBar_Menu/Charts_Page/ChartsObjects_Model.qml
+ChartsScale_Model 1.0 Popups/Menus/TopBar_Menu/Charts_Page/ChartsScale_Model.qml
+
+Task_MoreModel 1.0 Popups/Menus/TopBar_Menu/Task_Page/Task_MoreModel.qml
 
 Test_menu 1.0 Popups/Menus/Table_Menu/Test_menu.qml
 
@@ -116,23 +127,31 @@ Stories_Popup 1.0 Popups/Stories/Stories_Popup.qml
 Calib_Block 1.0 Calib_Elements/Calib_Block.qml
 Calib_Rail 1.0 Calib_Elements/Calib_Rail.qml
 
+#Chart_Elements
+Sensors_Panel 1.0 Chart_Elements/Sensors_Panel.qml
+Km_Counter 1.0 Chart_Elements/Km_Counter.qml
+Km_Tables 1.0 Chart_Elements/Km_Tables.qml
+
 # Login_Elements
 Account_Icon 1.0 Login_Elements/Account_Icon.qml
 Account_With_Title 1.0 Login_Elements/Account_With_Title.qml
 
 
 # Page_Components
-Custom_TopBar 1.0 Page_Components/Custom_TopBar.qml
 Audio_Sounds 1.0 Page_Components/Audio_Sounds.qml
 Flipable_Page 1.0 Page_Components/Flipable_Page.qml
 Back_Arrow 1.0 Page_Components/Back_Arrow.qml
 Page_Loader 1.0 Page_Components/Page_Loader.qml
 
 
+Custom_TopBar 1.0 Top_Bars/Custom_TopBar.qml
+Chart_MenuModels 1.0 Top_Bars/Menu_Models/Chart_MenuModels.qml
+
 Canvas_Rail 1.0 Canvas_Rail.qml
 
 Navigation_Map 1.0 Navigation_Map.qml
-
+Touch_Image 1.0 Touch_Image.qml
+Scheme_And_Map 1.0 Scheme_And_Map.qml
 
 
 Titles 1.0 Titles.qml

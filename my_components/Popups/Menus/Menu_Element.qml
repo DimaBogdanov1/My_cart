@@ -24,6 +24,8 @@ Item{
 
     property string text
 
+    property bool isNegative
+
     signal clicked_Signal
 
     Hover_Anim{
@@ -70,6 +72,7 @@ Item{
             needBack: false
             horizontal: Text.AlignLeft
             text: root_Item.text
+            text_color: !isNegative ? Style.primaryDark_Color : Style.error_Color
         }
 
         Custom_Icon{

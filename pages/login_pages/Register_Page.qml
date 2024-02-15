@@ -1,6 +1,7 @@
 import QtQuick 2.15
 
 import Style 1.0
+import Register_Page 1.0
 
 
 import my_components 1.0
@@ -10,6 +11,15 @@ Item{
     width: parent.width
     height: parent.height
 
+    Register_Page{
+        id: register_Page
+
+        onNew_notification: {
+
+            toast.show(value, 3000, 1) // Показываем Тоcт
+
+        }
+    }
 
     /* Component.onCompleted:{
 
@@ -96,47 +106,68 @@ Item{
 
         Custom_Row_TextField{
             id: name_and_surname_Row
-            source: "qrc:/icons/" + Style.theme + "/utils/user.svg"
+            source: "qrc:/my_components/icons/" + Style.theme + "/utils/user.svg"
             start_Keyboard: root_Item.start_Keyboard
-            model: ListModel{
 
-                ListElement{
-                    title: "Имя"
-                    password: false
-                    maximumLength: 15
-                    isLetter: true
+            model: [
+                   { title: my_str.name, text: register_Page.name},
+                   { title: my_str.surname, text: register_Page.surname}
+               ]
+
+            onTextChanged: {
+
+                switch(index_model){
+
+                case 0:
+
+                    register_Page.set_Name(text)
+
+                    break
+
+                case 1:
+
+                    register_Page.set_Surname(text)
+
+                    break
                 }
 
-                ListElement{
-                    title: "Фамилия"
-                    password: false
-                    maximumLength: 15
-                    isLetter: true
-
-                }
             }
         }
 
         Custom_Row_TextField{
             id: password_Row
-            source: "qrc:/icons/" + Style.theme + "/utils/lock.svg"
+            source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
             start_Keyboard: root_Item.start_Keyboard + ui.block_height + ui.middle_spacing
-            model: ListModel{
 
-                ListElement{
-                    title: "Пароль"
-                    password: true
-                    isLetter: false
-                }
+
+            model: [
+                   { title: my_str.password, text: register_Page.password, password: true}
+            ]
+
+            onTextChanged: {
+
+                register_Page.set_Password(text)
 
             }
+
         }
 
         Custom_Row_TextField{
             id: passwordRepeat_Row
-            source: "qrc:/icons/" + Style.theme + "/utils/lock.svg"
+            source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
             start_Keyboard: root_Item.start_Keyboard + (ui.block_height + ui.middle_spacing) * 2
-            model: ListModel{
+
+            model: [
+                   { title: my_str.addRepeat(my_str.password), text: register_Page.repeatPassword, password: true}
+            ]
+
+            onTextChanged: {
+
+                register_Page.set_RepeatPassword(text)
+
+            }
+
+            /*model: ListModel{
 
                 ListElement{
                     title: "Повторите пароль"
@@ -144,85 +175,20 @@ Item{
                     isLetter: false
                 }
 
-            }
+            }*/
         }
-
-       /* Row{
-            width: parent.width
-            height: ui.block_height
-            spacing: ui.basic_spacing
-
-            Custom_Icon{
-                height: ui.height_Button
-                anchors.bottom: parent.bottom
-                source: "qrc:/icons/" + Style.theme + "/utils/lock.svg"
-
-             }
-
-            Custom_TextField {
-                id: password_TextField
-                width: parent.width - ui.basic_spacing - ui.icon_nav_size
-                title: qsTr("Пароль")
-                password: true
-                maximumLength: 4
-                validator: IntValidator{}
-
-                onReady_to_write_signal: {
-
-                    keyboard.number = true
-
-                    keyboard.text_target = get_target()
-
-                    keyboard.open(root_Item.start_Keyboard + ui.block_height + ui.middle_spacing)
-
-                }
-
-            }
-
-        }
-
-        */
-       /* Row{
-            width: parent.width
-            height: ui.block_height
-            spacing: ui.basic_spacing
-
-            Custom_Icon{
-                height: ui.height_Button
-                anchors.bottom: parent.bottom
-                source: "qrc:/icons/" + Style.theme + "/utils/lock.svg"
-
-             }
-
-            Custom_TextField {
-                id: passwordRepeat_TextField
-                width: parent.width - ui.basic_spacing - ui.icon_nav_size
-                title: qsTr("Повторите пароль")
-                password: true
-                maximumLength: 4
-                validator: IntValidator{}
-
-                onReady_to_write_signal: {
-
-                    keyboard.number = true
-
-                    keyboard.text_target = get_target()
-
-                    keyboard.open(root_Item.start_Keyboard + ui.block_height + ui.middle_spacing)
-
-                }
-
-            }
-
-        }
-
-        */
 
         Custom_Button{
             id: addUser_Button
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
             text:  qsTr("Создать аккаунт")
+
+            function update_firstLetter(string){
+
+                return string.charAt(0).toUpperCase() + string.slice(1)
+            }
+
             onClicked_Signal: {
 
                 var name =  name_and_surname_Row.get_text(0)  //name_TextField.get_target().text
@@ -235,14 +201,18 @@ Item{
 
                 var check = false
 
+                register_Page.add_User("DDrtem Qasasas", 3333)
 
-                if(name_and_surname_Row.check_text()){
+               /* if(name_and_surname_Row.check_text()){
 
                     if(password_Row.check_password() ){
 
                         if(password === repeat_password){
 
-                            Accounts.add_User(update_firstLetter(name) + " " + update_firstLetter(surname), parseInt(password))
+                           // register_Page.add_User(update_firstLetter(name) + " " + update_firstLetter(surname), parseInt(password))
+
+
+                            //Accounts.add_User(update_firstLetter(name) + " " + update_firstLetter(surname), parseInt(password))
 
                             check = true
                         }
@@ -263,12 +233,9 @@ Item{
 
 
 
-            }
+            }*/
 
-            function update_firstLetter(string){
 
-                return string.charAt(0).toUpperCase() + string.slice(1)
-            }
 
         }
 

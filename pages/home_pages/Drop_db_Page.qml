@@ -99,7 +99,7 @@ Rectangle {
              Image {
                 sourceSize.width: ui.icon_nav_size //35// ui.icon_nav_size
                 sourceSize.height:  ui.icon_nav_size //35 //ui.icon_nav_size
-                source: "qrc:/icons/" + Style.theme + "/home_page/arrow_top.svg"
+                source: "qrc:/my_components/icons/" + Style.theme + "/home_page/arrow_top.svg"
                 anchors.horizontalCenter: parent.horizontalCenter
                 smooth: false // Убираем Сглаживание
                 fillMode: Image.TileVertically

@@ -54,6 +54,8 @@ Item {
 
                 chartView.scrollUp(1 * coef)
 
+                km_ChartView.scrollUp(1 * coef)
+
              //   km_ChartView.scrollUp(1)
 
             }
@@ -74,6 +76,8 @@ Item {
              //   console.log("c = " + coun_scroll)
 
                 chartView.scrollDown(1 * coef)
+
+                km_ChartView.scrollDown(1 * coef)
 
               //  km_ChartView.scrollDown(1)
 

@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
+import Finish_Task_Page 1.0
 import Style 1.0
 
 import my_components 1.0
@@ -27,7 +28,12 @@ Item{
 
     function clear(){
 
-        warning_ListModel.clear()
+       // warning_ListModel.clear()
+    }
+
+
+    Finish_Task_Page{
+        id: finish_Task_Page
     }
 
     Rectangle{
@@ -62,29 +68,16 @@ Item{
             Custom_Row_ComboBox{
                 width: parent.width
                 height: ui.block_height
-                source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
-                model:ListModel {
+                source: "qrc:/my_components/icons/" + Style.theme + "/home_page/pencil.svg"
 
-                    ListElement {
-                        title: "Вид проверки"
-                        values: [
-                            ListElement { value: "Рабочая" },
-                            ListElement { value: "Контрольная" },
-                            ListElement { value: "Дополнительная" }
-                            ]
+                property var typeCheck_Model: ["Рабочая", "Контрольная", "Дополнительная"]
 
-                    }
+                property var orientation_Model: ["Основное", "Дополнительное"]
 
-                    ListElement {
-                        title: "Положение тележки"
-                        values: [
-                            ListElement { value: "Основное" },
-                            ListElement { value: "Дополнительное" }
-                            ]
-
-                    }
-
-                }
+                model: [
+                    { title: "Вид проверки", combo_model: typeCheck_Model, picked_index: 0},
+                    { title: "Положение тележки", combo_model: orientation_Model, picked_index: 0}
+                ]
 
             }
 
@@ -103,7 +96,7 @@ Item{
                 width: parent.width // 2
                 height: 300
                 color: Style.light_Color
-                title_name_model: [ str.upNom, str.putNom, qsTr("Дистанция") , str.speed]
+                title_name_model: [ my_str.upNom, my_str.putNom, qsTr("Дистанция") , my_str.speed]
                 title_size_model: [0.35, 0.15, 0.25, 0.25 ]
 
                 onClickedDelegate_Signal: {
@@ -118,7 +111,9 @@ Item{
 
                 }
 
-                model: ListModel{
+                model: finish_Task_Page.My_Warnings_Model
+
+               /* model: ListModel{
                     id: warning_ListModel_2
 
                     ListElement{
@@ -147,7 +142,7 @@ Item{
                         end: "6 км 540 м"
                         speed: "90 км/ч"
                     }
-                }
+                }*/
 
                 delegate: List_Row{
                     //login: _login
@@ -156,7 +151,7 @@ Item{
                     listview: warning_List_2.get_list()
                     cur: warning_List_2.currentIndex
                     width: warning_List_2.width //- ui.big_spacing
-                    model: [ upNom, putNom, begin, speed]
+                    model: [ upNom, putNom, my_str.convertCoord(startKm, startM), speed]
                     sizes: warning_List_2.title_size_model
                 }
 
@@ -168,7 +163,7 @@ Item{
               //  login: root_Item.login
             //    color_value:  root_Item.color_value
                 width: 600 //parent.width //- ui.big_spacing
-                title_name_model:  [ str.user, str.data_Input, str.data_Start, str.data_End]
+                title_name_model:  [ my_str.user, my_str.date_Input, my_str.date_Start, my_str.date_End]
                title_size_model: [0.4, 0.2, 0.2, 0.2 ]
             }
             List_With_Title{
@@ -177,7 +172,7 @@ Item{
                 title:  qsTr("Предупреждения")
                 height: 300
                 color: Style.light_Color
-                title_name_model: [ str.user, str.upNom, str.putNom, qsTr("Начало") , qsTr("Конец") , str.speed, qsTr("Дата окончания") ]
+                title_name_model: [ my_str.user, my_str.upNom, my_str.putNom, qsTr("Начало") , qsTr("Конец") , my_str.speed, qsTr("Дата окончания") ]
                 title_size_model: [0.14, 0.14, 0.14, 0.14, 0.14, 0.14, 0.16 ]
 
                 model: ListModel{
@@ -335,17 +330,17 @@ Item{
     }
 
 
-    Connections{
+    /*Connections{
 
        target: Warnings
 
        function onNewWarning_signal(login, color, upNom,  putNom, begin_Km, begin_M, end_Km, end_M, input_Date, begin_Date, end_Date, speed){
 
-           var begin = begin_Km + str.km + " " + begin_M + str.meter
+           var begin = begin_Km + my_str.km + " " + begin_M + my_str.meter
 
-           var end = end_Km + str.km + " " + end_M + str.meter
+           var end = end_Km + my_str.km + " " + end_M + my_str.meter
 
-           var speed_km = speed + str.km_hour
+           var speed_km = speed + my_str.km_hour
 
 
            warning_ListModel.append({   "_login": login,
@@ -364,5 +359,5 @@ Item{
 
        }
 
-    }
+    }*/
 }

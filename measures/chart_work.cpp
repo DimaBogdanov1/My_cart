@@ -14,7 +14,6 @@
 #include <QQmlContext>
 
 #include <measures/measure.h>
-#include "measures/name_measures.h"
 
 #include <mythread.h>
 #include "chart_work.h"
@@ -37,7 +36,7 @@ using namespace std;
 
 Chart_Work::Chart_Work(QObject *parent) : QObject(parent)
 {    
-    count_measures = QMetaEnum::fromType<Name_Measures::Measures>().keyCount();
+    count_measures = 6; //QMetaEnum::fromType<Name_Measures::Measures>().keyCount();
 
     for(int i = 0; i < count_measures; i++){
 
@@ -47,9 +46,9 @@ Chart_Work::Chart_Work(QObject *parent) : QObject(parent)
 
     }
 
-    qRegisterMetaType<Status>("Name_Measures");
+  //  qRegisterMetaType<Status>("Name_Measures");
 
-    qmlRegisterUncreatableType<Name_Measures>("qml.measure", 1, 0, "Name_Measures", "Not creatable as it is an enum type");
+  //  qmlRegisterUncreatableType<Name_Measures>("qml.measure", 1, 0, "Name_Measures", "Not creatable as it is an enum type");
 
   //  qDebug() << "Создали Объекты для измерений";
 

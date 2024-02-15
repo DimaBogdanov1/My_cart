@@ -1,4 +1,6 @@
 import QtQuick 2.15
+
+import Pick_Account_Page 1.0
 import Style 1.0
 
 
@@ -7,6 +9,11 @@ import my_components 1.0
 Item {
     width: parent.width
     height: parent.height
+
+    Pick_Account_Page{
+        id: pick_Account_Page
+
+    }
 
     Column{
           width: 300
@@ -40,9 +47,9 @@ Item {
             text:  qsTr("Удалить аккаунт")
             onClicked_Signal: {
 
-                Accounts.delete_User(account_model.get(0).id_val)
+              //  Accounts.delete_User(account_model.get(0).id_val)
 
-                account_model.remove(0)
+                //account_model.remove(0)
             }
 
         }
@@ -65,8 +72,8 @@ Item {
            id: list
            width:  list.count * 130 + (ui.big_spacing * (list.count - 1)) //list.count * 130 > applicationWindow.width ? parent.width : list.count * 130
            height: ui.height_Button * 2 + ui.middle_spacing + ui.text_SmallSize
-           interactive:  false//list.count * 130 > applicationWindow.width
-           model: ListModel{id: account_model}
+           //interactive:  false//list.count * 130 > applicationWindow.width
+           model: pick_Account_Page.My_Accounts_Model // ListModel{id: account_model}
 
            snapMode: ListView.SnapToItem
            //clip: true
@@ -80,11 +87,9 @@ Item {
 
            delegate: Account_With_Title{
                width: 130
-               id_account:  id_val
-               login_account:login_val
-               color_account: color_val
-               isIcon: icon_val
-
+               id_account:  0 //index + 1
+               login_account: login //login_val
+               color_account:color // color_val
 
                onPickedAccount_Signal: {
 
@@ -110,7 +115,8 @@ Item {
                }
            }
 
-           populate: Transition {
+
+          /* populate: Transition {
                    id: _popuTrans
                    SequentialAnimation {
                        PropertyAction { property: "scale"; value: 0.0 }
@@ -121,7 +127,7 @@ Item {
 
                add: Transition {
                    NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 400 }
-               }
+               } */
 
 
 
@@ -129,9 +135,9 @@ Item {
 
            Component.onCompleted: {
 
-               account_model.append( {"id_val": -1, "login_val": "new user", "color_val": 4, "icon_val": true})
+//               account_model.append( {"id_val": -1, "login_val": "new user", "color_val": 4, "icon_val": true})
 
-               Accounts.get_All_Users()
+             //  Accounts.get_All_Users()
 
            }
 
@@ -139,7 +145,7 @@ Item {
 
 
 
-        Connections{
+        /*Connections{
             target: Accounts
 
             function onNewUser_signal(id, login, password, color){
@@ -150,7 +156,7 @@ Item {
 
                // account_model.append({"id_val": id, "login_val": login, "color_val": color, "icon_val": false})
             }
-        }
+        }*/
 
 
     }

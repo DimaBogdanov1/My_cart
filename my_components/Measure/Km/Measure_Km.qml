@@ -11,9 +11,9 @@ Item {
    // axisX: xKm_ValueAxis
   // axisYRight: yKm_ValueAxis
 
-    property real x_min: 1.2
+    property real x_min: 2.5 //1.2
 
-    property real x_max:  5.9
+    property real x_max: 10 //8// 5.9
 
     property var km_item_arr: []
 
@@ -21,9 +21,9 @@ Item {
 
 
 
-    property real width_Line: 1.5
+    property real width_Line: 2 //1.5
 
-    property real x_start:  (x_max + x_min) / 2 -  width_Line / 2  //- width_Line) / 2  //2.5 //(x_ValueAxis.max - width_Line) / 2
+    property real x_start:  (x_max + x_min) / 2 -  width_Line / 2  //- width_Line) / 2  //2.5 //(.max - width_Line) / 2
 
     property real x_finish: x_start + width_Line
 
@@ -40,7 +40,7 @@ Item {
 
   //  property var km_id: [0]
 
-    readonly property real tmp_offset_mes:  0.8 //0.38
+    readonly property real tmp_offset_mes: 1 // 0.8 //0.38
 
     readonly property int step_picket:  100 / 6   //   10
 
@@ -154,6 +154,12 @@ Item {
 
         }
 
+    }
+
+
+    function createRiht(y_start, isRight){
+
+        measure_Rails.create_Riht(y_start, isRight)
     }
 
     function test_f(y, color){

@@ -29,67 +29,16 @@ Item{
                 anchors.centerIn: parent
                 spacing: ui.middle_spacing //ui.basic_spacing * 2
 
-               /* Item{
-                    width: parent.width
-                    height: 30
-
-                    Custom_Label{
-                        id: title_1
-                        horizontalAlignment: Text.AlignHCenter
-                        font.weight:  ui.font_weight_Bigsize
-                        font.family: customTitle_FontLoader.name
-                        font.pixelSize:  ui.text_BigSize // Меняем Размер Шрифта
-                        color: Style.primaryDark_Color // Меняем Цвет Текста
-                        //visible: false
-                        text: qsTr("Создадим маршрут!")
-
-                    }
-
-
-                 //   Main_Gradient{anchors.fill: title_1; source: title_1}
-
-                }*/
-
-             /*   Custom_Row_ComboBox{
-                    id: road_ComboBox
-                    width: parent.width
-                    height: ui.block_height
-                    source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
-                    title: qsTr("Код дороги")
-                    model: ListModel {}
-
-                    property int num_Value: 1
-
-
-                    onCurrentIndexChanged: {
-
-                         num_Value = road_ComboBox.model.get(currentIndex).value.split(" - ")[0];
-
-                      //  toast.show(num_Value[0].toString(), 3000, 1)
-
-                        putNom_ListModel.clear()
-
-                        upNom_ListModel.clear()
-
-                        big_db.update_numRoad(num_Value)
-                    }
-                }*/
 
                 Custom_Row_ComboBox{
                     id: road_ComboBox
                     width: parent.width
                     height: ui.block_height
-                    source: "qrc:/icons/" + Style.theme + "/home_page/pencil.svg"
-                    //title: qsTr("Код дороги")
-                    model:ListModel {
+                    source: "qrc:/my_components/icons/" + Style.theme + "/home_page/pencil.svg"
 
-                        ListElement {
-                            title: "Код дороги"
-                            values: []
-
-                        }
-
-                    }
+                    model: [
+                        { title: my_str.siteID, combo_model: [], picked_index: 0}
+                    ]
 
 
                     property int num_Value: 1
@@ -129,155 +78,6 @@ Item{
 
                      }
                  }
-
-                  /*Row{
-                     id: row
-                     width: parent.width
-                     height: 150
-                     spacing: ui.basic_spacing
-
-
-                     function listModelSort(listModel, compareFunction) {
-
-                         let indexes = [ ...Array(listModel.count).keys() ]
-
-                         indexes.sort( (a, b) => compareFunction( listModel.get(a), listModel.get(b) ) )
-                         let sorted = 0
-
-                         console.log("11111111111")
-
-                         while ( sorted < indexes.length && sorted === indexes[sorted] ) sorted++
-
-                         console.log(listModel.get(0).code)
-
-                         if ( sorted === indexes.length ) return
-
-                         for ( let i = sorted; i < indexes.length; i++ ) {
-                             listModel.move( indexes[i], listModel.count - 1, 1 )
-                             listModel.insert( indexes[i], { } )
-                         }
-
-                         listModel.remove( sorted, indexes.length - sorted )
-
-                         console.log("wwwwwwwwwwwww")
-
-                     }
-
-                     Column{
-                         width: 300
-                         height: parent.height
-
-                         Row{
-                             width: parent.width
-                             height: parent.height / 2
-
-                             Button {
-                                 width: parent.width / 2
-                                         text: qsTr("  По возрастанию  ")
-                                         onClicked: row.listModelSort( upNom_ListModel,
-                                                                   (a, b) => (a.code - b.code) )
-
-
-                                     }
-
-                             Button {
-                                 width: parent.width / 2
-
-                                         text: qsTr("  По убыванию  ")
-                                         onClicked: row.listModelSort( upNom_ListModel,
-                                                                   (a, b) => (b.code - a.code) )
-
-
-                                     }
-                         }
-
-                         Row{
-                             width: parent.width
-                             height: parent.height / 2
-
-                             Button {
-                                 width: parent.width / 2
-                                         text: qsTr("  По возрастанию  ")
-                                         onClicked: row.listModelSort( upNom_ListModel,
-                                                                   (a, b) => a.name.localeCompare(b.name) )
-
-
-                                     }
-
-                             Button {
-                                 width: parent.width / 2
-
-                                         text: qsTr("  По убыванию  ")
-                                         onClicked: row.listModelSort( upNom_ListModel,
-                                                                   (a, b) => - a.name.localeCompare(b.name)  )
-
-
-                                     }
-                         }
-
-                     }
-
-
-
-                    Rectangle{
-                         width: parent.width //- ui.basic_spacing / 2
-                         height: parent.height
-                         color:  Style.light_Color // Style.background_Color
-                         radius: ui.radius
-                         clip: true
-
-                         Column{
-                             width: parent.width //- ui.big_spacing
-                             height:  parent.height - ui.basic_spacing / 2
-                             anchors.centerIn: parent
-                             spacing: ui.border_Size
-                             //layer.enabled: true
-                             //layer.effect: Mask_Rectangle{target: parent}
-
-                             List_Row{
-                                 id: title_Row
-                                 model: [ qsTr("Код"), qsTr("Направление")]
-                                 sizes: [0.3, 0.7]
-                             }
-
-                             Custom_Border{}
-
-                             My_List{
-                                id: list
-                                width: parent.width
-                                height: parent.height - title_Row.height - ui.border_Size * 2
-                                model: ListModel{id: upNom_ListModel}
-
-
-
-                                delegate: List_Row{
-                                    listview: list
-                                    width: list.width
-                                    model: [code, name]
-                                    sizes: title_Row.sizes
-                                    cur: list.currentIndex
-                                    needHighlight: true
-
-                                }
-
-                                onCurrentIndexChanged: {
-
-                                    //toast.show(currentIndex.toString(), 3000, 1)
-
-                                    putNom_ListModel.clear()
-
-                                    big_db.update_putNom(upNom_ListModel.get(currentIndex).code)
-                                }
-
-                             }
-
-                         }
-
-                     }
-
-
-
-                 }*/
 
                  List_With_Title{
                     id: list
@@ -462,25 +262,30 @@ Item{
 
                  Custom_Row_TextField{
                      id: startPoint_Row
-                     source:  "qrc:/icons/" + Style.theme + "/top_bar/location.svg"
+                     source:  "qrc:/my_components/icons/" + Style.theme + "/top_bar/location.svg"
                      start_Keyboard: 300
-                     model: ListModel{
 
-                         ListElement{
-                             title: "Километр"
-                             isLetter: false
-                             km: true
+                     model: [
+                            { title: my_str.km, text: ""},
+                            { title: my_str.meter, text: ""}
+                        ]
+
+                     onTextChanged: {
+
+                        /* if(index_model == 0){
+
+                             task_Page.set_StartKm(text)
                          }
 
-                         ListElement{
-                             title: "Метр"
-                             isLetter: false
-                             meter: true
+                         if(index_model == 1){
 
+                             console.log("sssssssssssssss")
 
-                         }
+                             task_Page.set_StartM(text)
+                         } */
 
                      }
+
                  }
 
 
@@ -488,7 +293,7 @@ Item{
                      id: start_Button
                      width: parent.width
                      icon_with_Text: true
-                     source:  "qrc:/icons/" + Style.theme + "/utils/arrow_right_mini_white.svg" // "qrc:/icons/" + Style.theme + "/navigation/home.svg"
+                     source:  "qrc:/my_components/icons/" + Style.theme + "/utils/arrow_right_mini_white.svg" // "qrc:/icons/" + Style.theme + "/navigation/home.svg"
                      text:  qsTr("Продолжить")
                      onClicked_Signal: {
 
@@ -577,9 +382,9 @@ Item{
            putNom_ListModel.append({"put": put, "type": type})
 
 
-           km_Text_Arrow.text_1 = km_start + str.km + " " + m_start + str.meter
+           km_Text_Arrow.text_1 = km_start + " км"+ " " + m_start + " м"
 
-           km_Text_Arrow.text_2 =  km_end + str.km + " " + m_end + str.meter
+           km_Text_Arrow.text_2 =  km_end + " км" + " " + m_end + " м"
 
        }
 

@@ -35,7 +35,7 @@ Popup {
 
     background:  Background_Popup{}
 
-    enum Status {
+    /*enum Status {
            Positive,
            Warning,
            Error
@@ -47,7 +47,7 @@ Popup {
 
     readonly property var message: [qsTr("До окончания срока юстировки осталось 29 дней!") ,
 
-    ]
+    ] */
 
 
     contentItem:
@@ -94,8 +94,8 @@ Popup {
                       delegate: Notification_Element{
                             width: list.width
                             height: popup.height_block
-                            text: message[text_notification]
-                            status: status_notification
+                            text:  Message   //text_notification
+                            status: Status //status_notification
                       }
 
                       remove: Transition {
@@ -113,7 +113,10 @@ Popup {
                        text:  qsTr("Отметить прочитанными")
                        onClicked_Signal: {
 
-                           model.clear()
+                           Notifications_Model.clear()
+                           //model.clear()
+
+                           notification_Element.count = Notifications_Model.rowCount()
 
                            popup.close()
 

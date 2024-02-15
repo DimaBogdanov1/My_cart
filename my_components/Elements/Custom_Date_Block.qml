@@ -20,9 +20,9 @@ Row{
 
     readonly property var currentDate: new Date()
 
-    property var left_Date: new Date()
+    property var left_Date // new Date()
 
-    property var right_Date: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + calendar.max_days)
+    property var right_Date // new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + calendar.max_days)
 
     readonly property var maximum: new Date(currentDate.getFullYear(), currentDate.getMonth() + 6, currentDate.getDate())
 

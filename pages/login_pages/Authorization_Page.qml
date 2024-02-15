@@ -1,6 +1,5 @@
 import QtQuick 2.15
 import Style 1.0
-import MyLang 1.0
 
 import my_components 1.0
 
@@ -35,17 +34,13 @@ Item {
 
         Custom_Row_TextField{
             id: password_Row
-            source: "qrc:/icons/" + Style.theme + "/utils/lock.svg"
+            source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
             start_Keyboard: 68
-            model: ListModel{
 
-                ListElement{
-                    title: "Пароль"
-                    password: true
-                    isLetter: false
-                }
+            model: [
+                   { title: "Пароль", text: ""}
+               ]
 
-            }
         }
 
         /*Row{
@@ -88,7 +83,7 @@ Item {
             id: signIn_Button
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
-            text:  qsTr("Войти") + mytrans.emptyString
+            text:  qsTr("Войти")
             onClicked_Signal: {
 
                 Accounts.check_Password(account_With_Title.login_account, parseInt(password_Row.get_text(0)), account_With_Title.color_account)

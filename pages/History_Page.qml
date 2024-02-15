@@ -16,8 +16,6 @@ Item {
     property int tmp_Index: 0
 
 
-    property var subscription: 0
-
     function addMessage(payload)
     {
         messageModel.insert(0, {"payload" : payload})
@@ -56,7 +54,7 @@ Item {
         Custom_TextField {
             id: textField_1
             width: parent.width
-            title: str.riht_Left
+            title: my_str.riht_Left
             maximumLength: 3
             validator: IntValidator{}
 
@@ -121,109 +119,178 @@ Item {
     }
 
 
+    Column{
+        width: parent.width
+        height: 100
+        anchors.bottom: parent.bottom
 
+        Row{
+             width: parent.width
+             height: 48
 
-    Row{
+             Button{
+                 width: 200
+                 height: parent.height
+                 text:  qsTr("Начать диагностику")
+                 property bool isStart: false
+                 onClicked: {
 
-         width: parent.width
-         height: 48
-         anchors.bottom: parent.bottom
+                     if(isStart){
 
-         Button{
-             width: 100
-             height: parent.height
-             text:  qsTr("back")
-             onClicked: {
+                         text = qsTr("Начать диагностику")
+                         isStart = false
+                     }
+                     else{
 
-               //  homePage_Loader.index_Page--
+                         text = qsTr("Остановить диагностику")
 
-                 index_swipe_Home--
+                         isStart = true
 
-             }
+                     }
 
-         }
+                     Mqqt_Client.get_Diagnostic(isStart)
 
-         Button{
-             width: 100
-             height: parent.height
-             text:  qsTr("next")
-             onClicked: {
-
-             //    homePage_Loader.index_Page++
-                 index_swipe_Home++
-             }
-
-         }
-
-         Button{
-             width: 100
-             height: parent.height
-             text:  qsTr("pdf / json")
-             onClicked: {
-
-              //   my_pdf.init()
-
-              //  my_pdf.create_json()
-                 my_pdf.print_pdf()
+                 }
 
              }
 
-         }
-
-
-         Button{
-             width: 100
-             height: parent.height
-             text:  qsTr("size+")
-             onClicked: {
-
-                 applicationWindow.width = 1920
-                 applicationWindow.height = 1080
+             Custom_Rectangle_Label {
+                 id: laser_1_Label
+                 width: 200
+                 height: parent.height
+                 color: "grey"
+                 text: "2"
 
              }
 
-         }
-
-         Button{
-             width: 100
-             height: parent.height
-             text:  qsTr("back 1")
-             onClicked: {
-
-                 tmp_Index = page_Loader.open_back(tmp_Index, 0)
-
-
+             Custom_Rectangle_Label {
+                 id: laser_2_Label
+                 width: 200
+                 height: parent.height
+                 color: "grey"
+                 text: "2"
 
              }
 
-         }
+        }
+        Row{
 
-         Button{
-             width: 100
-             height: parent.height
-             text:  qsTr("page 2")
-             onClicked: {
+             width: parent.width
+             height: 48
 
-              tmp_Index = page_Loader.open_next(1)
+             Button{
+                 width: 100
+                 height: parent.height
+                 text:  qsTr("back")
+                 onClicked: {
 
-             }
+                   //  homePage_Loader.index_Page--
 
-         }
+                     index_swipe_Home--
 
-         Button{
-             width: 100
-             height: parent.height
-             text:  qsTr("page 3")
-             onClicked: {
-
-              tmp_Index = page_Loader.open_next(2)
+                 }
 
              }
 
-         }
+             Button{
+                 width: 100
+                 height: parent.height
+                 text:  qsTr("next")
+                 onClicked: {
 
+                 //    homePage_Loader.index_Page++
+                     index_swipe_Home++
+                 }
+
+             }
+
+
+             Connections{
+                 target: Mqqt_Client
+
+
+
+                 function onNewDiagnostic_signal(laser_left, laser_right){
+
+                     if(laser_left){
+
+                         laser_1_Label.text = "левый лазер работает"
+                     }
+                     else{
+
+                         laser_1_Label.text = "левый лазер не работает"
+
+                     }
+
+                     if(laser_right){
+
+                         laser_2_Label.text = "правый лазер работает"
+                     }
+                     else{
+
+                         laser_2_Label.text = "правый лазер не работает"
+
+                     }
+                 }
+             }
+
+             Button{
+                 width: 100
+                 height: parent.height
+                 text:  qsTr("size+")
+                 onClicked: {
+
+                     applicationWindow.width = 1920
+                     applicationWindow.height = 1080
+
+                 }
+
+             }
+
+             Button{
+                 width: 100
+                 height: parent.height
+                 text:  qsTr("back 1")
+                 onClicked: {
+
+                     tmp_Index = page_Loader.open_back(tmp_Index, 0)
+
+
+
+                 }
+
+             }
+
+             Button{
+                 width: 100
+                 height: parent.height
+                 text:  qsTr("page 2")
+                 onClicked: {
+
+                  tmp_Index = page_Loader.open_next(1)
+
+                 }
+
+             }
+
+             Button{
+                 width: 100
+                 height: parent.height
+                 text:  qsTr("page 3")
+                 onClicked: {
+
+                  tmp_Index = page_Loader.open_next(2)
+
+                 }
+
+             }
+
+
+        }
 
     }
+
+
 
 
     Page_Loader{
@@ -242,6 +309,7 @@ Item {
 
 
     }
+
 
 
 
