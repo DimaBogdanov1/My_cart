@@ -96,7 +96,8 @@ Item {
                 Custom_Button{
                     width: 200
                     height: ui.height_Button
-                     outlined: true
+                    type_Button:  Custom_Button.Type_Button.Outlined_Button
+
                     anchors.horizontalCenter: parent.horizontalCenter
                     text:  qsTr("add person")
                     onClicked_Signal: {
@@ -110,7 +111,8 @@ Item {
                 Custom_Button{
                     width: 200
                     height: ui.height_Button
-                     outlined: true
+                    type_Button:  Custom_Button.Type_Button.Outlined_Button
+
                     anchors.horizontalCenter: parent.horizontalCenter
                     text:  qsTr("delete_person")
                     onClicked_Signal: {
@@ -125,7 +127,8 @@ Item {
                 Custom_Button{
                     width: 200
                     height: ui.height_Button
-                     outlined: true
+                    type_Button:  Custom_Button.Type_Button.Outlined_Button
+
                     anchors.horizontalCenter: parent.horizontalCenter
                     text:  qsTr("get all")
                     onClicked_Signal: {
@@ -140,7 +143,8 @@ Item {
                 Custom_Button{
                     id: signIn_Button
                     width: 200
-                    outlined: true
+                    type_Button:  Custom_Button.Type_Button.Outlined_Button
+
                     anchors.horizontalCenter: parent.horizontalCenter
                     text:  qsTr("flip")
                     onClicked_Signal: {

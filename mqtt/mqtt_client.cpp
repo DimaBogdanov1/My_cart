@@ -4,10 +4,10 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QQmlApplicationEngine>
+#include <QRandomGenerator>
 
 #include "mqtt_client.h"
 
-#include "export_microservice.h"
 #include "sensors/sensorsregister_microservice.h"
 
 
@@ -31,6 +31,9 @@
 
 #include "../Notifications_Lib/notifications_lib.h"
 #include "../Export_Lib/export_lib.h"
+
+
+
 
 MQTT_Client::MQTT_Client(QObject *parent) : QObject(parent) //  () //(QObject *parent) : QObject(parent)
 {
@@ -73,7 +76,7 @@ MQTT_Client::MQTT_Client(QObject *parent) : QObject(parent) //  () //(QObject *p
 
     m_client = new QMqttClient;
 
-    m_client->setHostname("192.168.1.157");  //MQTT_Help::getAddress()  // "192.168.1.157" //  "localhost" "172.27.2.33"
+    m_client->setHostname(MQTT_Help::getAddress());  //MQTT_Help::getAddress()  // "192.168.1.157" //  "localhost" "172.27.2.33"
 
     m_client->setPort(1883);
 
@@ -178,29 +181,10 @@ void MQTT_Client::onNew_message(const QByteArray &message, const QMqttTopicName 
         break;
     }
 
-    case 2: {
-
-        Export_Microservice export_Microservice(this);
-
-        export_Microservice.add_Command(commandPair.second, message);
-
-        break;
 
     }
 
-    case 3:
 
-        qDebug() << "qqqqqqqqqqqqqqqqqqq";
-
-       //Task_Microservice task_Microservice(this);
-
-        qDebug() << "wwwwwwwwww";
-
-        // Здесь будет приёмка сервиса, который будет работать с априорной базой данных
-
-
-        break;
-    }
 
     // Здесь должна быть проверка на второе слово
 
@@ -288,6 +272,7 @@ void MQTT_Client::test_slot_NewKm(){
     Export_Lib a;
 
     Export_Lib::addNew_Km(Km_Info(0,
+                                  "Октябрьская",
                                   "Новосокльники направление",
                                   112233,
                                   1,
@@ -298,7 +283,11 @@ void MQTT_Client::test_slot_NewKm(){
                                   70,
                                   80,
                                   20,
-                                  "12:30:30"));
+                                  1730,
+                                  0,
+                                  0,0,0,0,0,"Пред: -КрдПЧ",
+                                  "2024-01-07 12:30:30",
+                                  "2024-01-07 00:00:00"));
 
 
    // Export_Microservice::add_NewKm();
@@ -323,11 +312,11 @@ void MQTT_Client::test_slot_NewGeneralInfo(){
                                                 "МДК: МДК-498",
                                                 "Анциферов И.Н.",
                                                 "2022-12-12",
-                                                "Октябрьская",
-                                                false,
-                                                false,
-                                                0,
-                                                "2023-04-12"));
+                                                "Прямой",
+                                                "Базовая",
+                                                "Рабочая",
+                                                "2023-04-12",
+                                                1));
 
    // Export_Microservice::add_NewGeneralInfo();
 
@@ -335,6 +324,94 @@ void MQTT_Client::test_slot_NewGeneralInfo(){
 
 void MQTT_Client::test_slot_CloseExportMicroservice(){
 
-    Export_Microservice::close_Microservice();
+    Export_DB export_DB(Export_Lib::db_path);
+
+    QRandomGenerator *rg = QRandomGenerator::global();
+
+    for(int i = 0; i < 1730; i++){
+
+        int paramValue = rg->bounded(-5, 5);
+
+
+        int a = 0;
+
+        if(50 < i && i < 100){
+
+            a = -5;
+        }
+
+
+        if(1100 < i && i < 1500){
+
+            a = -5;
+        }
+
+
+      if(150 < i){
+
+       //   a = -5;
+
+         paramValue = 0;
+      }
+
+
+      export_DB.insertPoint(Name_Measures::Level_Measure, paramValue , i);
+
+       export_DB.insertPoint(Name_Measures::Riht_Right_Measure, a , i);
+
+        export_DB.insertPoint(Name_Measures::Riht_Left_Measure, a , i);
+
+      //  export_DB.insertPoint(Name_Measures::Riht_Right_Measure, -5 , i);
+
+       // Export_Lib::addPoints_To_File(5,-5 , i);
+
+
+    }
+
+   /* for(int i = 200; i < 1730; i++){
+
+        export_DB.insertPoint(Name_Measures::Riht_Right_Measure, 4 , i);
+
+        export_DB.insertPoint(Name_Measures::Level_Measure, 0 , i);
+
+    }*/
+
+
+   // Export_Lib::addPoints_To_File(index, pair.second, Sensors_Values::odometer_value);
+
+   // Export_Microservice::close_Microservice();
+
+}
+
+void MQTT_Client::test_slot_add_sleepers(){
+
+
+    Export_Lib::addNew_Sleepers(Sleepers(Type_Sleepers::Wood, 0, 400, 38));
+}
+
+void MQTT_Client::test_slot_add_bridge(){
+
+    Export_Lib::addNew_Bridge(Bridge(100, 150, 38));
+
+
+}
+
+void MQTT_Client::test_slot_add_arrow(){
+
+    Export_Lib::addNew_Arrow(Arrow(Type_Arrows::Bottom_left,38, 120, true, false, 12));
+
+}
+
+void MQTT_Client::test_slot_add_object(){
+
+    Export_Lib::addNew_Object(Chart_Object(Type_Object::Isolated_Junction, 38, 140));
+
+}
+
+void MQTT_Client::test_slot_helpLine() {
+
+    Export_Lib::addNew_Line(Km_Help_Line(Type_Km_Help_Lines::Help_Line, 0, 400, 38));
+
+    Export_Lib::addNew_Line(Km_Help_Line(Type_Km_Help_Lines::Earth_Line, 200, 800, 38));
 
 }

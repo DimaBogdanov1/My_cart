@@ -23,6 +23,14 @@ Item {
         id: task_Page
     }
 
+    function changeEnabled_TaskBlock(value){
+
+        road_ComboBox.enabled = value
+
+        roadInfo_TextField.enabled = value
+
+    }
+
     Column{
       width: parent.width
       height: parent.height
@@ -69,296 +77,448 @@ Item {
             }
         }
 
-        Item{
-            width: parent.width
-            height: parent.height - ui.toolBar_Size - ui.basic_spacing
 
-            Row{
-                width: parent.width - ui.big_spacing
-                height: parent.height
-                anchors.centerIn: parent
+        Column{
+          width: parent.width
+          height: parent.height - ui.toolBar_Size - ui.basic_spacing
+          spacing: ui.basic_spacing
 
-                Rectangle{
-                    width: parent.width / 2
-                    height: parent.height
-                    radius: ui.radius
-                    color: Style.background_Color
+          Item{
+              width: parent.width
+              height: parent.height / 2 - ui.basic_spacing
 
-                    Column{
-                        width: parent.width - ui.big_spacing
-                        height: parent.height
-                        anchors.centerIn: parent
+              Row{
+                  width: parent.width - ui.big_spacing
+                  height: parent.height
+                  anchors.centerIn: parent
+                  spacing: ui.basic_spacing
 
-                        spacing: ui.basic_spacing
+                  Item{
+                      width: parent.width / 2 - parent.spacing / 2
+                      height: parent.height
+                      //radius: ui.radius
+                      //color: "red"//Style.background_Color
 
-                        Column{ // Создаём Основную Колонку
-                            width: parent.width
-                            height: parent.height / 2 - parent.spacing / 2
-                            spacing: ui.middle_spacing //ui.basic_spacing * 2
+                      Column{ // Создаём Основную Колонку
+                          width: parent.width //- ui.big_spacing
+                          height: parent.height
+                          spacing: ui.middle_spacing //ui.basic_spacing * 2
+                          anchors.centerIn: parent
 
-                            Custom_Row_ComboBox{
-                                id: road_ComboBox
-                                width: parent.width
-                                source: "qrc:/my_components/icons/" + Style.theme + "/home_page/pencil.svg"
+                          Custom_Row_ComboBox{
+                              id: road_ComboBox
+                              width: parent.width
+                              source: "qrc:/my_components/icons/" + Style.theme + "/home_page/pencil.svg"
 
-                                model: [
-                                    { title: my_str.siteID, combo_model: task_Page.SiteId_Model, picked_index: task_Page.pickedindex_SiteIDModel},
-                                    { title: my_str.typeTracks, combo_model: task_Page.Type_Tracks_Model, picked_index: task_Page.pickedindex_Type_Tracks_Model}
-                                ]
+                              model: [
+                                  { title: my_str.siteID, combo_model: task_Page.SiteId_Model, picked_index: task_Page.pickedindex_SiteIDModel},
+                                  { title: my_str.typeTracks, combo_model: task_Page.Type_Tracks_Model, picked_index: task_Page.pickedindex_Type_Tracks_Model}
+                              ]
 
 
-                                onChange_index_signal: {
+                              onChange_index_signal: {
 
-                                    if(index_model == 0){
+                                  if(index_model == 0){
 
-                                        task_Page.set_pickedindex_SiteIDModel(index)
+                                      task_Page.set_pickedindex_SiteIDModel(index)
 
-                                        task_Page.set_SiteID(task_Page.SiteId_Model.get(index).name)
+                                      task_Page.set_SiteID(task_Page.SiteId_Model.get(index).name)
 
-                                        console.log(task_Page.SiteId_Model.get(index).name)
-                                    }
+                                      console.log(task_Page.SiteId_Model.get(index).name)
+                                  }
 
-                                    if(index_model == 1){
+                                  if(index_model == 1){
 
-                                        console.log("index = " + index)
+                                      console.log("index = " + index)
 
-                                        task_Page.set_TypeTrack(index)
+                                      task_Page.set_TypeTrack(index)
 
-                                    }
-                                }
+                                  }
+                              }
 
-                            }
+                          }
 
-                            Custom_Row_ComboBox{
-                                id: roadInfo_TextField
-                                source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
+                          Custom_Row_ComboBox{
+                              id: roadInfo_TextField
+                              source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
 
-                                model: [
-                                    { title: my_str.upNom, combo_model: task_Page.Up_Nom_Model, picked_index: task_Page.pickedindex_Up_Nom_Model},
-                                    { title: my_str.putNom, combo_model: task_Page.Put_Nom_Model, picked_index: task_Page.pickedindex_Put_Nom_Model}
-                                ]
+                              model: [
+                                  { title: my_str.upNom, combo_model: task_Page.Up_Nom_Model, picked_index: task_Page.pickedindex_Up_Nom_Model},
+                                  { title: my_str.putNom, combo_model: task_Page.Put_Nom_Model, picked_index: task_Page.pickedindex_Put_Nom_Model}
+                              ]
 
-                                onChange_index_signal: {
+                              onChange_index_signal: {
 
-                                    if(index_model == 0){
+                                  if(index_model == 0){
 
-                                        task_Page.set_pickedindex_Up_Nom_Model(index)
+                                      task_Page.set_pickedindex_Up_Nom_Model(index)
 
-                                        //task_Page.set_pickedindex_Put_Nom_Model(0)
+                                      //task_Page.set_pickedindex_Put_Nom_Model(0)
 
-                                        task_Page.set_UpNom(task_Page.Up_Nom_Model.get(index).name)
+                                      task_Page.set_UpNom(task_Page.Up_Nom_Model.get(index).name)
 
-                                    }
+                                  }
 
-                                    if(index_model == 1){
+                                  if(index_model == 1){
 
-                                        task_Page.set_pickedindex_Put_Nom_Model(index)
+                                      task_Page.set_pickedindex_Put_Nom_Model(index)
 
 
-                                    }
-                                }
-                            }
+                                  }
+                              }
+                          }
 
-                            Custom_Row_TextField{
-                                id: startPoint_Row
-                                source:  "qrc:/my_components/icons/" + Style.theme + "/top_bar/location.svg"
-                                start_Keyboard: 0 //400
+                         /* Custom_Row_ComboBox{
+                              source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
 
-                                model: [
-                                       { title: my_str.km, text: task_Page.start_Km, maximumLength: ui.km_textLength},
-                                       { title: my_str.meter, text: task_Page.start_M, maximumLength: ui.meter_textLength}
-                                   ]
+                              model: [
+                                  { title: my_str.upNom, combo_model: task_Page.Up_Nom_Model, picked_index: task_Page.pickedindex_Up_Nom_Model},
+                                  { title: my_str.putNom, combo_model: task_Page.Put_Nom_Model, picked_index: task_Page.pickedindex_Put_Nom_Model}
+                              ]
 
-                                onTextChanged: {
+                              onChange_index_signal: {
 
-                                    if(index_model == 0){
+                                  if(index_model == 0){
 
-                                        task_Page.set_StartKm(text)
-                                    }
+                                      task_Page.set_pickedindex_Up_Nom_Model(index)
 
-                                    if(index_model == 1){
+                                      //task_Page.set_pickedindex_Put_Nom_Model(0)
 
-                                        console.log("sssssssssssssss")
+                                      task_Page.set_UpNom(task_Page.Up_Nom_Model.get(index).name)
 
-                                        task_Page.set_StartM(text)
-                                    }
+                                  }
 
-                                }
+                                  if(index_model == 1){
 
-                            }
+                                      task_Page.set_pickedindex_Put_Nom_Model(index)
 
-                            Custom_Rectangle_Label{
-                                width: parent.width
-                                height: parent.height - road_ComboBox.height * 3 - parent.spacing * 3
-                                color: Style.light_Color
-                                //text: "Это место нужно чем-то забить"
 
-                                Label{
-                                    text: my_str.convertCoord(task_Page.coordList[0], task_Page.coordList[1]) + " " + my_str.convertCoord(task_Page.coordList[2], task_Page.coordList[3])
-                                    anchors.centerIn: parent
-                                }
-                            }
+                                  }
+                              }
+                          }
 
-                        }
+                          Custom_Row_ComboBox{
+                              source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
 
-                        Fragments_List{
-                            title: my_str.fragments_task
-                            model: task_Page.My_Fragments_Model
+                              model: [
+                                  { title: my_str.upNom, combo_model: task_Page.Up_Nom_Model, picked_index: task_Page.pickedindex_Up_Nom_Model},
+                                  { title: my_str.putNom, combo_model: task_Page.Put_Nom_Model, picked_index: task_Page.pickedindex_Put_Nom_Model}
+                              ]
 
-                        }
+                              onChange_index_signal: {
 
-                    }
+                                  if(index_model == 0){
 
+                                      task_Page.set_pickedindex_Up_Nom_Model(index)
 
-                }
+                                      //task_Page.set_pickedindex_Put_Nom_Model(0)
 
-                Item{
-                    width: parent.width / 2
-                    height: parent.height
+                                      task_Page.set_UpNom(task_Page.Up_Nom_Model.get(index).name)
 
-                    Column{
-                        width: parent.width
-                        height: parent.height
-                        spacing: ui.basic_spacing
+                                  }
 
-                        Scheme_And_Map{
-                            id: sheme_and_map
-                            width: parent.width
-                            height: parent.height / 2 - parent.spacing / 2
-                            flipped: task_Page.flip_card
-                            source: "qrc:/my_components/images/station_light.jpg" //"qrc:/images/original.jpg"
+                                  if(index_model == 1){
 
-                            Component.onCompleted: {
+                                      task_Page.set_pickedindex_Put_Nom_Model(index)
 
-                                console.log("value = " + task_Page.flip_card)
-                            }
-                        }
 
-                        Item{
-                            width: parent.width
-                            height: parent.height / 2 - parent.spacing / 2
-                            //radius: ui.radius
-                            //color: Style.light_Color
+                                  }
+                              }
+                          }
 
-                            Fragments_List{
-                                id: list
-                                title: my_str.addPicked(my_str.fragments_task)
-                                model: task_Page.My_Picked_Fragments_Model
+                          */
 
-                            }
+                          // Стартовую точку выберем на финальном слое
+                         /* Custom_Row_TextField{
+                              id: startPoint_Row
+                              source:  "qrc:/my_components/icons/" + Style.theme + "/top_bar/location.svg"
+                              start_Keyboard: 0 //400
 
-                            /*List_With_Title{
-                               id: list
-                               width: parent.width
-                               height: parent.height //- ui.height_Button - ui.basic_spacing
-                               title: qsTr("Выбранные фрагменты маршрута")
-                               color: Style.light_Color
-                               title_name_model: [ qsTr("№"), qsTr("Код"), qsTr("Путь"), qsTr("Начало"), qsTr("Конец"), qsTr("Название")]
-                               title_size_model: [0.1, 0.1, 0.1, 0.125, 0.125, 0.45]
-                               title_Type: List_With_Title.Title_Types.Title_Sort_All
+                              model: [
+                                     { title: my_str.km, text: task_Page.start_Km, maximumLength: ui.km_textLength},
+                                     { title: my_str.meter, text: task_Page.start_M, maximumLength: ui.meter_textLength}
+                                 ]
 
-                               sort_func: [
+                              onTextChanged: {
 
-                                   [(a, b) => (a.code - b.code),  (a, b) => (b.code - a.code)],
-                                   [(a, b) => a.name.localeCompare(b.name),   (a, b) => - a.name.localeCompare(b.name)],
-                               ]
+                                  if(index_model == 0){
 
+                                      task_Page.set_StartKm(text)
+                                  }
 
-                               model: task_Page.My_Fragments_Model //Fragments_Model //ListModel{id: upNom_ListModel}
+                                  if(index_model == 1){
 
-                               delegate: List_Row{
-                                   listview: list.get_list()
-                                   width: list.width
-                                   model: [index + 1,  upNom , putNom, list.convertCoord(startKm, startM), list.convertCoord(endKm, endM), name]
+                                      console.log("sssssssssssssss")
 
-                                   //model:[Fragments_Model.rowCount(), upNom + "  " + name, putNom, startCoord, endCoord, name]
-                                   sizes: list.title_size_model
-                                   needHighlight: true
-                                   cur: list.currentIndex
+                                      task_Page.set_StartM(text)
+                                  }
 
+                              }
 
+                          }*/
 
-                               }
+                          Custom_Rectangle_Label{
+                              width: parent.width
+                              height: parent.height - road_ComboBox.height * 3 - parent.spacing * 3
+                              needBack: true
+                              color: Style.light_Color
+                              //text: "Это место нужно чем-то забить"
 
-                               function sort(index, isAscending){
+                              Component.onCompleted: {
 
-                                   listModelSort(list.model, list.sort_func[index][isAscending])
+                                  console.log("parent.height =    " + parent.height  + " road_ComboBox.height * 3 = " + road_ComboBox.height * 3 + "  parent.spacing * 3 = " + parent.spacing * 3)
+                              }
 
-                               }
+                              Label{
+                                  text: my_str.convertCoord(task_Page.coordList[0], task_Page.coordList[1]) + " " + my_str.convertCoord(task_Page.coordList[2], task_Page.coordList[3])
+                                  anchors.centerIn: parent
+                              }
 
-                               Component.onCompleted: {
+                              Column{
+                                  width: parent.width
+                                  height: parent.height
 
-                                   console.log("qqqqqqqqqqq = " + task_Page.My_Fragments_Model.rowCount())
+                                  Row{
+                                      width: parent.width
+                                      height: parent.height / 2
+                                      spacing: 10
 
-                                  // task_Page.My_Fragments_Model.clear();
+                                      Custom_Button{
+                                          width: 200
+                                          text: "Добавить фрагменты"
 
-                                   //task_Page.My_Fragments_Model.addFragment(1, 1, 2, 230, 3, 340, "dsdsadasd");
+                                          onClicked_Signal: {
 
-                                  // console.log("qqqqqqqqqqq = " + task_Page.My_Fragments_Model.get(0))
+                                              task_Page.set_Fragments(task_Page.SiteId_Model.get(task_Page.pickedindex_SiteIDModel).name,
+                                                                      task_Page.Up_Nom_Model.get(task_Page.pickedindex_Up_Nom_Model).name,
+                                                                      task_Page.Put_Nom_Model.get(task_Page.pickedindex_Put_Nom_Model).name,
+                                                                      check_Moving.checked
+                                                                      )
 
-                               }
-                           }
 
-                            */
+                                          }
 
-                            /*Row{
-                               width: parent.width
-                               height: ui.height_Button
-                               anchors.horizontalCenter: parent.horizontalCenter
-                               anchors.bottom: parent.bottom
+                                      }
 
-                               Custom_Button{
-                                   id: start_Button
-                                   width: parent.width / 2
-                                   outlined: true
-                                   isOnlyText: true
+                                      CheckBox{
+                                          id: check_Moving
+                                          checked: true
+                                          text: "Движение по возрастанию"
+                                      }
 
-                                   text:  qsTr("Начать маршрут")
-                                   onClicked_Signal: {
+                                      Custom_Button{
+                                          width: 300
+                                          text: "Удалить последний элемент из выбранных"
 
-                                       sub_index_HomePage = page_Loader.open_next(2)
+                                          onClicked_Signal: {
 
-                                   //    sub_index_HomePage = 2
+                                               toast.show(task_Page.My_Picked_Fragments_Model.rowCount(), 3000, 1)
 
+                                              task_Page.remove_PickedFragment(task_Page.My_Picked_Fragments_Model.rowCount() - 1, check_Moving.checked)
 
-                                   }
+                                          }
+                                      }
 
-                               }
 
-                               Custom_Button{
-                                   width: parent.width / 2
+                                  }
 
-                                   text:  qsTr("Начать маршрут")
-                                   onClicked_Signal: {
+                                  Row{
+                                      width: parent.width
+                                      height: parent.height // 2
+                                      spacing: 10
 
-                                       sub_index_HomePage = page_Loader.open_next(2)
+                                      Custom_Button{
+                                          width: 200
+                                          text: "Анимация"
 
-                                   //    sub_index_HomePage = 2
+                                          onClicked_Signal: {
 
+                                              if(!isCheck){
+                                                  isCheck = true
 
-                                   }
+                                                  table_Anim_open.start()
 
-                               }
-                            }
-                            */
+                                              }
+                                              else{
+                                                  isCheck = false
 
+                                                  table_Anim_close.start()
 
-                        }
+                                              }
 
+                                          }
 
+                                      }
 
-                    }
+                                      Custom_Button{
+                                          width: 300
+                                          text: "Выбрать новую дорогу или направление"
 
+                                          onClicked_Signal: {
 
-                }
+                                              //Нужно очистить таблицу и заново
+                                              toast.show("Возвращаем enabled", 3000, 1)
 
-            }
+                                              changeEnabled_TaskBlock(true)
+
+                                              task_Page.set_Filter(-1, 0, false)
+                                               //toast.show(task_Page.My_Picked_Fragments_Model.rowCount(), 3000, 1)
+
+                                             // task_Page.remove_PickedFragment(task_Page.My_Picked_Fragments_Model.rowCount() - 1, check_Moving.checked)
+
+                                          }
+                                      }
+                                  }
+                              }
+
+
+
+                          }
+
+
+                      }
+
+
+
+                  }
+
+                  Item{
+                      width: parent.width / 2 - parent.spacing / 2
+                      height: parent.height
+
+                      Column{
+                          width: parent.width
+                          height: parent.height
+                          spacing: ui.basic_spacing
+
+                          Scheme_And_Map{
+                              id: sheme_and_map
+                              width: parent.width
+                              height: parent.height
+                              flipped: task_Page.flip_card
+                              source: task_Page.schemePath // "qrc:/my_components/images/station_light.jpg" //"qrc:/images/original.jpg"
+
+                              onNewScheme_Signal: {
+
+                                  task_Page.set_SchemePath(path)
+                              }
+
+                              Component.onCompleted: {
+
+                                  console.log("value = " + task_Page.flip_card)
+                              }
+                          }
+
+                      }
+
+
+                  }
+
+              }
+
+          }
+
+          Row{
+              id: tables_Row
+              width: parent.width - ui.big_spacing
+              height: parent.height / 2
+              spacing: ui.basic_spacing
+
+              anchors {
+                left: parent.left
+                leftMargin: ui.basic_spacing
+               }
+
+              Fragments_List{
+                  width: parent.width / 2 - parent.spacing / 2
+                  title: my_str.fragments_task
+                  model: task_Page.My_Sort_Fragments_Model
+
+                  onFirst_Row_Signal: {
+
+                      toast.show("Cтавим enabled false", 3000, 1)
+
+                      changeEnabled_TaskBlock(false)
+
+                  }
+
+              }
+
+              Fragments_List{
+                  id: pickedFragment_list
+                  width: parent.width / 2 - parent.spacing / 2
+                  title: my_str.addPicked(my_str.fragments_task)
+                  model: task_Page.My_Picked_Fragments_Model
+                  isPicked_List: true
+
+              }
+          }
 
         }
 
 
     }
 
+
+    SequentialAnimation{
+
+       id: table_Anim_open
+
+       ParallelAnimation{
+
+
+           NumberAnimation {target: tables_Row; property: "anchors.leftMargin"; from: tables_Row.anchors.leftMargin; to: - 1 * tables_Row.width / 2 + ui.basic_spacing / 2 ; duration: 250 }
+
+           NumberAnimation {target: pickedFragment_list; property: "width"; from: pickedFragment_list.width; to: parent.width - ui.big_spacing  ; duration: 250 }
+
+       }
+
+       onRunningChanged: {
+
+           if(!running){
+
+               pickedFragment_list.updateHeader(true)
+
+               pickedFragment_list.open_Titles()
+
+           }
+       }
+
+     //  NumberAnimation {target: defect_List; property: "width"; from: defect_List.width; to: bootom_Row.width * 0.6 -  ui.basic_spacing ; duration: 500 }
+
+
+    }
+
+
+
+    SequentialAnimation{
+
+       id: table_Anim_close
+
+       ParallelAnimation{
+
+
+           NumberAnimation {target: tables_Row; property: "anchors.leftMargin"; from: tables_Row.anchors.leftMargin; to: ui.basic_spacing ; duration: 250 }
+
+           NumberAnimation {target: pickedFragment_list; property: "width"; from: pickedFragment_list.width; to: parent.width / 2 - ui.basic_spacing * 1.5  ; duration: 250 }
+
+       }
+
+       onRunningChanged: {
+
+           if(!running){
+
+               pickedFragment_list.updateHeader(false)
+
+               pickedFragment_list.open_Titles()
+
+           }
+       }
+
+     //  NumberAnimation {target: defect_List; property: "width"; from: defect_List.width; to: bootom_Row.width * 0.6 -  ui.basic_spacing ; duration: 500 }
+
+
+    }
 
 
 
@@ -397,7 +557,10 @@ Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 16
 
-        text:  qsTr("Начать маршрут")
+        text: my_str.next
+        type_Content: Custom_Button.Type_Content_Button.Text_And_Icon_Content
+        iconHelp_source:  Custom_Button.Type_SubIcon.Next_Icon
+
         onClicked_Signal: {
 
             sub_index_HomePage = page_Loader.open_next(2)
@@ -409,4 +572,156 @@ Item {
 
     }
 
+
+
+
+    Column{
+        width:1000
+        height: 48 * 2
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+
+        Row{
+            width:parent.width
+            height: 48
+
+            Button{
+                width: 200
+                height: parent.height
+                text:  qsTr("Новый мост")
+                onClicked: {
+
+                   Mqqt_Client.test_slot_add_bridge()
+
+                }
+
+            }
+
+            Button{
+                width: 200
+                height: parent.height
+                text:  qsTr("Новая стрелка")
+                onClicked: {
+
+                   Mqqt_Client.test_slot_add_arrow()
+
+                }
+
+            }
+
+            Button{
+                width: 200
+                height: parent.height
+                text:  qsTr("Новый объект")
+                onClicked: {
+
+                   Mqqt_Client.test_slot_add_object()
+
+                }
+
+            }
+
+            Button{
+                width: 200
+                height: parent.height
+                text:  qsTr("Новая линия помощи")
+                onClicked: {
+
+                   Mqqt_Client.test_slot_helpLine()
+
+                }
+
+            }
+
+            Button{
+                width: 200
+                height: parent.height
+                text:  qsTr("print_pdf")
+                onClicked: {
+
+                   // km_ChartView.scrollDown(20)
+
+                    Mqqt_Client.print_pdf()
+
+                    //my_pdf.print_pdf()
+
+                  //  chartView.scrollRight(100)
+
+                  //  viser_Line.update_ViserLine(50)
+
+
+                }
+
+            }
+
+        }
+
+
+       Row{
+           width:parent.width
+           height: 48
+
+           Button{
+               width: 200
+               height: parent.height
+               text:  qsTr("Новый километр")
+               onClicked: {
+
+                  Mqqt_Client.test_slot_NewKm()
+
+               }
+
+           }
+
+           Button{
+               width: 200
+               height: parent.height
+               text:  qsTr("Новые параметры")
+               onClicked: {
+
+                  Mqqt_Client.test_slot_NewParams()
+
+               }
+
+           }
+
+           Button{
+               width: 200
+               height: parent.height
+               text:  qsTr("Новая общая информация")
+               onClicked: {
+
+                  Mqqt_Client.test_slot_NewGeneralInfo()
+
+               }
+
+           }
+
+           Button{
+               width: 200
+               height: parent.height
+               text:  qsTr("Добавит точки")
+               onClicked: {
+
+                  Mqqt_Client.test_slot_CloseExportMicroservice()
+
+               }
+
+           }
+
+           Button{
+               width: 200
+               height: parent.height
+               text:  qsTr("Новые шпалы")
+               onClicked: {
+
+                  Mqqt_Client.test_slot_add_sleepers()
+
+               }
+
+           }
+
+       }
+
+    }
 }

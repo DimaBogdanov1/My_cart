@@ -80,13 +80,13 @@ ApplicationWindow {
 
     FontLoader {  // Создаём Загрузчик Шрифтов
         id: custom_FontLoader
-        source: "qrc:/my_components/fonts/CircularStd_Book.ttf"
+        source: "qrc:/my_components/fonts/CircularStd_Book.ttf" //"qrc:/my_components/fonts/Manrope-Medium.ttf" //"qrc:/my_components/fonts/CircularStd_Book.ttf"
 
     }
 
     FontLoader {  // Создаём Загрузчик Шрифтов
         id: customTitle_FontLoader
-        source: "qrc:/my_components/fonts/Circular_Std_Bold.ttf"
+        source: "qrc:/my_components/fonts/Circular_Std_Bold.ttf" //"qrc:/my_components/fonts/Manrope-Bold.ttf" //"qrc:/my_components/fonts/Circular_Std_Bold.ttf"
 
     }
 

@@ -7,7 +7,7 @@
 #include <QDate>
 
 #include "../Passport_DB_Lib/passport_db_lib.h"
-#include "../User_DB_Lib/user_db_lib.h"
+#include "../User_DB_Lib/warnings/warnings.h"
 
 class Warning_Page : public QObject
 {
@@ -72,7 +72,7 @@ public:
 
     Q_INVOKABLE void add_Warning(int account_ID, int siteID, int upNom, int putNom, int begin_Km, int begin_M, int end_Km, int end_M, QString input_Date, QString begin_Date, QString end_Date, int speed){
 
-        User_DB_Lib::add_Warning(account_ID, siteID, upNom, putNom, begin_Km, begin_M, end_Km, end_M, input_Date, begin_Date, end_Date, speed);
+        Warnings::add_Warning(account_ID, siteID, upNom, putNom, begin_Km, begin_M, end_Km, end_M, input_Date, begin_Date, end_Date, speed);
     }
 
 private:

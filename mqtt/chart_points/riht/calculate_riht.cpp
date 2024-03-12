@@ -26,7 +26,7 @@ void Calculate_Riht::add_Riht(double odo, double move_horizontal_left, double mo
 
 
 
-    if(rihtList.length() == 3){
+    if(rihtList.length() == 1){ // 3
 
         test_Calculate(move_horizontal_left);
 

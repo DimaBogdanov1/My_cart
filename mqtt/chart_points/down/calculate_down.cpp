@@ -28,7 +28,7 @@ void Calculate_Down::add_Down(double odo, double move_vertical_left, double move
 
 
 
-    if(downList.length() == 3){
+    if(downList.length() == 1){ //3
 
         test_Calculate();
 

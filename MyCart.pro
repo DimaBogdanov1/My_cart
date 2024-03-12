@@ -46,7 +46,6 @@ SOURCES += \
         mqtt/chart_points/down/down.cpp \
         mqtt/chart_points/riht/calculate_riht.cpp \
         mqtt/chart_points/riht/riht.cpp \
-        mqtt/export_microservice.cpp \
         mqtt/mqtt_client.cpp \
         mqtt/mqtt_help.cpp \
         mqtt/sensors/sensorsregister_microservice.cpp \
@@ -163,7 +162,6 @@ HEADERS += \
     mqtt/chart_points/name_measures.h \
     mqtt/chart_points/riht/calculate_riht.h \
     mqtt/chart_points/riht/riht.h \
-    mqtt/export_microservice.h \
     mqtt/mqtt_client.h \
     mqtt/mqtt_help.h \
     mqtt/sensors/sensors_values.h \
@@ -179,8 +177,9 @@ HEADERS += \
     mqtt/task/task_microservice.h \
     mqtt/task/task_values.h \
     mythread.h \
-    pages/authorized_account.h \
     pages/chart_page.h \
+    pages/custom_task_page.h \
+    pages/enums/name_main_pages.h \
     pages/finish_task_page.h \
     pages/pick_account_page.h \
     pages/register_page.h \

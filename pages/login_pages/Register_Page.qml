@@ -16,6 +16,12 @@ Item{
 
         onNew_notification: {
 
+            //Authorized_Account.login = "dsd"
+
+           // Authorized_Account.password = 1111
+
+           // Authorized_Account.color = 3
+
             toast.show(value, 3000, 1) // Показываем Тоcт
 
         }
@@ -110,8 +116,8 @@ Item{
             start_Keyboard: root_Item.start_Keyboard
 
             model: [
-                   { title: my_str.name, text: register_Page.name},
-                   { title: my_str.surname, text: register_Page.surname}
+                   { title: my_str.name, text: register_Page.name, isLetter_Keyboard: true},
+                   { title: my_str.surname, text: register_Page.surname, isLetter_Keyboard: true}
                ]
 
             onTextChanged: {
@@ -201,15 +207,18 @@ Item{
 
                 var check = false
 
-                register_Page.add_User("DDrtem Qasasas", 3333)
 
-               /* if(name_and_surname_Row.check_text()){
+               // register_Page.add_User("DDrtem Qasasas", 3333)
+
+                //name_and_surname_Row.open_error(0, "sdsd")
+
+                if(name_and_surname_Row.check_text()){
 
                     if(password_Row.check_password() ){
 
                         if(password === repeat_password){
 
-                           // register_Page.add_User(update_firstLetter(name) + " " + update_firstLetter(surname), parseInt(password))
+                            register_Page.add_User(update_firstLetter(name) + " " + update_firstLetter(surname), parseInt(password))
 
 
                             //Accounts.add_User(update_firstLetter(name) + " " + update_firstLetter(surname), parseInt(password))
@@ -233,7 +242,7 @@ Item{
 
 
 
-            }*/
+            }
 
 
 
@@ -245,37 +254,6 @@ Item{
 
     }
 
-    Connections{
-        target: Accounts
-
-        function onResult_of_Adding_signal(value){
-
-            if(value){
-
-                if(!applicationWindow.flipped){
-
-                    applicationWindow.flipped = true
-                }
-                else{
-                    /// ???
-
-                  //  back_Loader.item.index_Page = 0
-
-                   // back_Loader.item.sub_index_HomePage = 1
-                }
-
-            }
-            else{
-
-                addUser_Button.create_error_anim()
-
-            }
-
-            console.log("результат добавления " + value.toString())
-
-            toast.show("результат добавления " + value.toString(), 3000, 1) // Показываем Тоcт
-        }
-    }
 
     }
 

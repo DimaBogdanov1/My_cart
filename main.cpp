@@ -47,15 +47,21 @@
 #include "../Strings_Lib/strings_lib.h"
 
 #include "../User_DB_Lib/accounts/colors_profile.h"
+#include "../User_DB_Lib/accounts/authorized_account.h"
+#include "../Export_Lib/file/data_types/chart_types/type_sleepers.h"
+#include "../Export_Lib/file/data_types/chart_types/type_arrows.h"
+#include "../Export_Lib/file/data_types/chart_types/type_objects.h"
 
 
 #include "pages/task_page.h"
 #include "pages/chart_page.h"
 #include "pages/warning_page.h"
 #include "pages/register_page.h"
-#include "pages/authorized_account.h"
+//#include "pages/authorized_account.h"
 #include "pages/pick_account_page.h"
 #include "pages/finish_task_page.h"
+#include "pages/custom_task_page.h"
+#include "pages/enums/name_main_pages.h"
 
 //#include <QtQuickTest>
 //QUICK_TEST_MAIN(example)
@@ -81,6 +87,17 @@ void registerPages(){
     qmlRegisterType<Pick_Account_Page>("Pick_Account_Page", 1, 0, "Pick_Account_Page");
 
     qmlRegisterType<Finish_Task_Page>("Finish_Task_Page", 1, 0, "Finish_Task_Page");
+
+    qmlRegisterType<Custom_Task_Page>("Custom_Task_Page", 1, 0, "Custom_Task_Page");
+
+
+    qmlRegisterUncreatableType<Type_Sleepers>("Type_Sleepers", 1, 0, "Type_Sleepers", "Not creatable as it is an enum type");
+
+    qmlRegisterUncreatableType<Type_Arrows>("Type_Arrows", 1, 0, "Type_Arrows", "Not creatable as it is an enum type");
+
+    qmlRegisterUncreatableType<Type_Objects>("Type_Objects", 1, 0, "Type_Objects", "Not creatable as it is an enum type");
+
+    qmlRegisterUncreatableType<Name_Main_Pages>("Name_Main_Pages", 1, 0, "Name_Main_Pages", "Not creatable as it is an enum type");
 
 }
 
@@ -159,7 +176,7 @@ int main(int argc, char *argv[])
     //SensorsRegister_Microservice sensorsRegister_Microservice;
 
 
-    qmlRegisterSingletonType(QUrl("qrc:/Style.qml"), "Style", 1, 0, "Style"); // Регестрируем Тип Style В QML Для Изменения Темы В Приложении
+    qmlRegisterSingletonType(QUrl("qrc:/my_components/Style.qml"), "Style", 1, 0, "Style"); // Регестрируем Тип Style В QML Для Изменения Темы В Приложении
 
    // qmlRegisterType<MyLang>("MyLang", 1, 0, "MyLang");
 

@@ -4,7 +4,6 @@ import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.3
 
 import Style 1.0
-import MyLang 1.0
 import my_components 1.0
 
 Rectangle {

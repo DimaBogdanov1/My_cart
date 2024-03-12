@@ -6,9 +6,9 @@
 #include <QQmlApplicationEngine>
 
 
-#include "authorized_account.h"
+//#include "authorized_account.h"
 
-#include "../User_DB_Lib/user_db_lib.h"
+#include "../User_DB_Lib/accounts/accounts.h"
 
 #include "../Log_Lib/log_info.h"
 
@@ -41,7 +41,7 @@ public:
 
     Q_INVOKABLE void add_User(QString login, int password){
 
-        Log_Info log_info = User_DB_Lib::add_User(login, password);
+        Log_Info log_info = Accounts::add_User(login, password);
 
         emit new_notification(log_info.get_Info());
 

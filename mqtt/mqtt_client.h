@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QMqttClient>
 #include "mqtt/sensors/sensors_values.h"
+//#include "mqtt/chart_points/chartpoints_microservice.h"
 
 //#include "sensorsregister_microservice.h"
 
@@ -23,6 +24,9 @@ public slots:
 
     void get_Diagnostic(bool start);
 
+
+
+
     void test_slot();
 
     void test_slot_NewKm();
@@ -33,11 +37,24 @@ public slots:
 
     void test_slot_CloseExportMicroservice();
 
+    void test_slot_add_sleepers();
+
+    void test_slot_add_bridge();
+
+    void test_slot_add_arrow();
+
+    void test_slot_add_object();
+
+    void test_slot_helpLine();
+
 private:
 
     inline static QMqttClient *m_client;
 
     QString subscribe_topic = "ui/#";
+
+
+  //  ChartPoints_Microservice *chartPoints_Microservice;
 
     //SensorsRegister_Microservice sensorsRegister_Microservice;
 

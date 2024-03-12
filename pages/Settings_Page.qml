@@ -16,6 +16,8 @@ Item {
 
     readonly property var sourcePages_Array: [
                                                "qrc:/pages/settings_pages/General_Settings_Page.qml",
+                                               "qrc:/pages/Calib_Page.qml",
+
                                                "qrc:/pages/settings_pages/ProgButon_Settings_Page.qml",
                                                "qrc:/pages/settings_pages/AboutApp_Settings_Page.qml"
                                             ]
@@ -47,12 +49,23 @@ Item {
                 }
 
                 Custom_Picked_Block{
+                    source:  "qrc:/icons/" + Style.theme + "/utils/lock.svg"
+                    text:  qsTr("Настройки железа")
+
+                    onClicked_Signal :{
+
+
+                        index_Page = 1
+                    }
+                }
+
+                Custom_Picked_Block{
                     source:  "qrc:/icons/" + Style.theme + "/utils/add.svg"
                     text: qsTr("Программируемая кнопка")
 
                     onClicked_Signal :{
 
-                        index_Page = 1
+                        index_Page = 2
                     }
                 }
 
@@ -62,7 +75,7 @@ Item {
 
                     onClicked_Signal :{
 
-                        index_Page = 2
+                        index_Page = 3
                     }
                 }
 
@@ -99,7 +112,7 @@ Item {
 
                     onClicked_Signal :{
 
-                        index_Page = 2
+                        index_Page = 3
                     }
                 }
             }

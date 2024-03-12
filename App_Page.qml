@@ -6,6 +6,7 @@ import QtQuick.Dialogs 1.3
 
 //import Authorized_Account 1.0
 import Style 1.0
+import Name_Main_Pages 1.0
 import my_components 1.0
 
 Item {
@@ -17,13 +18,16 @@ Item {
 
     property int sub_index_HomePage: 2 // 1 //2  // Я его сюда вынес чисто из за флипа на старт мы падаем сюда
 
+
     readonly property var sourcePages_Array: [
-                                               "../pages/Home_Page.qml",
-                                               "../pages/Calib_Page.qml",
-                                               "../pages/History_Page.qml",
-                                               "../pages/Login_Page.qml",
-                                               "../pages/Settings_Page.qml",
-                                               "../pages/Help_Page.qml"
+                                              {index: Name_Main_Pages.Home_Page,  source: "../pages/Home_Page.qml"},
+                                              {index: Name_Main_Pages.Diagnostic_Page,  source: "../pages/Diagnostic_Page.qml"},
+                                              {index: Name_Main_Pages.History_Page,  source: "../pages/History_Page.qml"},
+                                              {index: Name_Main_Pages.Login_Page,  source: "../pages/Login_Page.qml"},
+                                              {index: Name_Main_Pages.Settings_Page,  source: "../pages/Settings_Page.qml"},
+                                              {index: Name_Main_Pages.Help_Page,  source: "../pages/Help_Page.qml"},
+                                              {index: 6,  source: "qrc:/pages/home_pages/Start_Page.qml"}
+
                                             ]
 
    // "../pages/Defect_Charts.qml",
@@ -87,12 +91,12 @@ Item {
                       width:  parent.width - 16
                       anchors.horizontalCenter: parent.horizontalCenter
                       height: ui.iconBlock_Size
-                      isChecked: index_Page == 0
-                      icon_path: "qrc:/my_components/icons/" + Style.theme + "/navigation/home.svg"
+                      isChecked: index_Page == Name_Main_Pages.Home_Page
+                      source: "qrc:/my_components/icons/" + Style.theme + "/navigation/home.svg"
                       icon_checked_path: "qrc:/my_components/icons/"+ Style.theme + "/navigation/home_accent.svg"
                       onClicked_Signal: {
 
-                          opacity_Anim.create_page_anim(0)  // Переходим На Старт
+                          opacity_Anim.create_page_anim(Name_Main_Pages.Home_Page)  // Переходим На Старт
 
                       }
                   }
@@ -101,12 +105,12 @@ Item {
                       width:  parent.width - 16
                       anchors.horizontalCenter: parent.horizontalCenter
                       height: ui.iconBlock_Size
-                      isChecked: index_Page == 1
-                      icon_path: "qrc:/my_components/icons/" + Style.theme + "/navigation/edit.svg"
+                      isChecked: index_Page == Name_Main_Pages.Diagnostic_Page
+                      source: "qrc:/my_components/icons/" + Style.theme + "/navigation/edit.svg"
                       icon_checked_path: "qrc:/my_components/icons/" + Style.theme + "/navigation/edit_accent.svg"
                       onClicked_Signal: {
 
-                          opacity_Anim.create_page_anim(1) // Переходим На Калибровку
+                          opacity_Anim.create_page_anim(Name_Main_Pages.Diagnostic_Page) // Переходим На Калибровку
 
                       }
                   }
@@ -115,7 +119,7 @@ Item {
                       width:  parent.width - 16
                       anchors.horizontalCenter: parent.horizontalCenter
                       height: ui.iconBlock_Size
-                      icon_path: "qrc:/icons/" + Style.theme + "/navigation/add.svg"
+                      source: "qrc:/icons/" + Style.theme + "/navigation/add.svg"
                       onClicked_Signal: {
 
                          // loading_popup.open()
@@ -134,12 +138,12 @@ Item {
                       width:  parent.width - 16
                       anchors.horizontalCenter: parent.horizontalCenter
                       height: ui.iconBlock_Size
-                      isChecked: index_Page == 2
-                      icon_path: "qrc:/my_components/icons/" + Style.theme + "/navigation/document.svg"
+                      isChecked: index_Page == Name_Main_Pages.History_Page
+                      source: "qrc:/my_components/icons/" + Style.theme + "/navigation/document.svg"
                       icon_checked_path: "qrc:/my_components/icons/"+ Style.theme + "/navigation/document_accent.svg"
                       onClicked_Signal: {
 
-                          opacity_Anim.create_page_anim(2) // Переходим В Историю
+                          opacity_Anim.create_page_anim(Name_Main_Pages.History_Page) // Переходим В Историю
 
                       }
                   }
@@ -150,12 +154,26 @@ Item {
                       width:  parent.width - 16
                       anchors.horizontalCenter: parent.horizontalCenter
                       height: ui.iconBlock_Size
-                      isChecked: index_Page == 4
-                      icon_path: "qrc:/my_components/icons/" + Style.theme + "/navigation/setting.svg"
+                      isChecked: index_Page == Name_Main_Pages.Settings_Page
+                      source: "qrc:/my_components/icons/" + Style.theme + "/navigation/setting.svg"
                       icon_checked_path: "qrc:/my_components/icons/" + Style.theme + "/navigation/setting_accent.svg"
                       onClicked_Signal: {
 
-                          opacity_Anim.create_page_anim(4) // Переходим В Настройки
+                          opacity_Anim.create_page_anim(Name_Main_Pages.Settings_Page) // Переходим В Настройки
+
+                      }
+                  }
+
+                  Custom_Icon_Button{
+                      width:  parent.width - 16
+                      anchors.horizontalCenter: parent.horizontalCenter
+                      height: ui.iconBlock_Size
+                      isChecked: index_Page == Name_Main_Pages.History_Page
+                      source: "qrc:/my_components/icons/" + Style.theme + "/navigation/document.svg"
+                      icon_checked_path: "qrc:/my_components/icons/"+ Style.theme + "/navigation/document_accent.svg"
+                      onClicked_Signal: {
+
+                          opacity_Anim.create_page_anim(6)
 
                       }
                   }
@@ -177,13 +195,13 @@ Item {
                    width:  parent.width - 16
                    anchors.horizontalCenter: parent.horizontalCenter
                    height: ui.iconBlock_Size
-                   isChecked: index_Page == 5
-                   icon_path: "qrc:/my_components/icons/" + Style.theme + "/navigation/question.svg"
+                   isChecked: index_Page == Name_Main_Pages.Help_Page
+                   source: "qrc:/my_components/icons/" + Style.theme + "/navigation/question.svg"
                    icon_checked_path: "qrc:/my_components/icons/"+ Style.theme + "/navigation/question_accent.svg"
                    onClicked_Signal: {
 
                       // push_Notification.open()
-                       opacity_Anim.create_page_anim(5)  // Переходим В Справку
+                       opacity_Anim.create_page_anim(Name_Main_Pages.Help_Page)  // Переходим В Справку
 
                    }
                }
@@ -194,14 +212,14 @@ Item {
                   // needBorder: true
                   // color_border: Style.light_Color
                    anchors.horizontalCenter: parent.horizontalCenter
-                   icon_path: "qrc:/my_components/icons/" + Style.theme + "/utils/moon.svg"
+                   source: "qrc:/my_components/icons/" + Style.theme + "/utils/moon.svg"
                    icon_checked_path: "qrc:/my_components/icons/" + Style.theme + "/utils/sun.svg"
 
                    onClicked_Signal: {
 
                        create_icon_anim()
 
-                       toast.show("Login ==== " + Authorized_Account.login, 3000, 1) // Показываем Тоcт
+                       toast.show("Login ==== " + Authorized_Account.authorized_Login, 3000, 1) // Показываем Тоcт
 
                    }
 
@@ -253,14 +271,10 @@ Item {
 
                } */
 
-               Label{
-                   text: Authorized_Account.login
-               }
-
                Account_Icon{
                    id: authorization_Account_Icon
-                   login: Authorized_Account.login
-                   color_value: 1 // authorized_Account.color
+                   login: Authorized_Account.authorized_Login
+                   color_value: Authorized_Account.color // authorized_Account.color
                   // isIcon: true
                   // source: "qrc:/my_components/images/memoji_2.png"
 
@@ -326,8 +340,8 @@ Item {
                 width: parent.width
                 height: parent.height
                 focus: true
-                source: sourcePages_Array[index_Page]
-                Component.onCompleted: index_Page = 5 // 0 //4 //2 //0 //1 //source = sourcePages_Array[index_Page]
+                source: sourcePages_Array[index_Page].source
+                Component.onCompleted: index_Page = Name_Main_Pages.Help_Page // 0 //4 //2 //0 //1 //source = sourcePages_Array[index_Page]
 
                 onSourceChanged: {
 
@@ -383,14 +397,6 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
     }*/
 
-    Loader{
-        id: utils_Loader
-        width: parent.width
-        height: parent.height
-        //focus: true
-        Component.onCompleted: source = "../Utils.qml"
-
-    }
 
 
     Loading_Popup{
@@ -414,7 +420,7 @@ Item {
         //index_Page = 1
     }
 
-    FileDialog {
+    /*FileDialog {
         id: fileDialog
         title: qsTr("Выберите базу данных")
         folder: shortcuts.documents
@@ -433,7 +439,7 @@ Item {
 
         }
 
-    }
+    }*/
 
     Content_Dialog{
         id:dialog

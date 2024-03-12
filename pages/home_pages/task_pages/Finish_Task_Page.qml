@@ -96,53 +96,17 @@ Item{
                 width: parent.width // 2
                 height: 300
                 color: Style.light_Color
-                title_name_model: [ my_str.upNom, my_str.putNom, qsTr("Дистанция") , my_str.speed]
-                title_size_model: [0.35, 0.15, 0.25, 0.25 ]
 
-                onClickedDelegate_Signal: {
+                header_model: [
+                        { title: my_str.upNom, size: 0.35},
+                        { title: my_str.putNom, size: 0.15},
+                        { title: qsTr("Дистанция"), size: 0.25},
+                        { title: my_str.speed, size: 0.25},
+                    ]
 
-                    toast.show(index, 3000, 1) // Показываем Тоcт
 
-                    warning_Popup.open_Popup(warning_ListModel_2.get(index)._login,
-                                             warning_ListModel_2.get(index)._color_value,
-                                             warning_ListModel_2.get(index).date_input,
-                                             warning_ListModel_2.get(index).date_begin,
-                                             warning_ListModel_2.get(index).date_end)
-
-                }
 
                 model: finish_Task_Page.My_Warnings_Model
-
-               /* model: ListModel{
-                    id: warning_ListModel_2
-
-                    ListElement{
-                        _login:"Dima Bogdanov"
-                        _color_value: 4
-                        upNom: 1
-                        putNom: 1
-                        date_input: "12.03.29"
-                        date_begin: "12.03.29"
-                        date_end: "12.03.29"
-                        begin: "5 км 130 м"
-                        end: "6 км 540 м"
-                        speed: "90 км/ч"
-
-                    }
-
-                    ListElement{
-                        _login: "Artem Ivanov"
-                        _color_value: 2
-                        upNom: 1
-                        putNom: 1
-                        date_input: "12.03.29"
-                        date_begin: "12.03.29"
-                        date_end: "12.03.29"
-                        begin: "5 км 130 м"
-                        end: "6 км 540 м"
-                        speed: "90 км/ч"
-                    }
-                }*/
 
                 delegate: List_Row{
                     //login: _login
@@ -152,7 +116,22 @@ Item{
                     cur: warning_List_2.currentIndex
                     width: warning_List_2.width //- ui.big_spacing
                     model: [ upNom, putNom, my_str.convertCoord(startKm, startM), speed]
-                    sizes: warning_List_2.title_size_model
+                    header_model: warning_List_2.header_model
+
+                    onClickedDelegate_Signal: {
+
+                        toast.show(index, 3000, 1) // Показываем Тоcт
+
+                        warning_Popup.open_Popup(finish_Task_Page.My_Warnings_Model.get(index).login,
+                                                 finish_Task_Page.My_Warnings_Model.get(index).color,
+                                                 finish_Task_Page.My_Warnings_Model.get(index).dateInput,
+                                                 finish_Task_Page.My_Warnings_Model.get(index).dateInput,
+                                                 finish_Task_Page.My_Warnings_Model.get(index).dateStart,
+                                                 finish_Task_Page.My_Warnings_Model.get(index).dateEnd
+
+                                                 )
+
+                    }
                 }
 
 
@@ -163,8 +142,13 @@ Item{
               //  login: root_Item.login
             //    color_value:  root_Item.color_value
                 width: 600 //parent.width //- ui.big_spacing
-                title_name_model:  [ my_str.user, my_str.date_Input, my_str.date_Start, my_str.date_End]
-               title_size_model: [0.4, 0.2, 0.2, 0.2 ]
+
+                header_model: [
+                        { title: my_str.user, size: 0.4},
+                        { title: my_str.date_Input, size: 0.2},
+                        { title: my_str.date_Start, size: 0.2},
+                        { title: my_str.date_End, size: 0.2},
+                    ]
             }
             List_With_Title{
                 id: warning_List
@@ -172,8 +156,19 @@ Item{
                 title:  qsTr("Предупреждения")
                 height: 300
                 color: Style.light_Color
-                title_name_model: [ my_str.user, my_str.upNom, my_str.putNom, qsTr("Начало") , qsTr("Конец") , my_str.speed, qsTr("Дата окончания") ]
-                title_size_model: [0.14, 0.14, 0.14, 0.14, 0.14, 0.14, 0.16 ]
+
+                header_model: [
+                        { title: my_str.user, size: 0.14},
+                        { title: my_str.upNom, size: 0.14},
+                        { title: my_str.putNom, size: 0.14},
+                        { title: qsTr("Начало"), size: 0.14},
+                        { title: qsTr("Конец"), size: 0.14},
+                        { title: my_str.speed, size: 0.14},
+                        { title:  qsTr("Дата окончания"), size: 0.16}
+                    ]
+
+               // title_name_model: [ my_str.user, my_str.upNom, my_str.putNom, qsTr("Начало") , qsTr("Конец") , my_str.speed, qsTr("Дата окончания") ]
+               // title_size_model: [0.14, 0.14, 0.14, 0.14, 0.14, 0.14, 0.16 ]
 
                 model: ListModel{
                     id: warning_ListModel
@@ -212,100 +207,11 @@ Item{
                     listview: warning_List.get_list()
                     width: warning_List.width //- ui.big_spacing
                     model: [ upNom, putNom, begin, end, speed, date_end]
-                    sizes: warning_List.title_size_model
-                }
-
-               /* delegate: List_Row{
-                    listview: warning_List.get_list()
-                    width: warning_List.width //- ui.big_spacing
-                    model: [put, begin, end, speed]
-                    sizes: warning_List.title_size_model
-                    cur: listview.currentIndex
-
-                }*/
-
-
-               /* delegate: Row{
-                    Loader {
-                            sourceComponent: warning_List.internalDelegate
-                          }
+                    sizes: warning_List.header_model
 
                 }
-
-                internalDelegate:  List_Row{
-                    width: warning_List.width
-                    model: [code, name]
-                    sizes: warning_List.title_size_model
-                    //cur: list.currentIndex
-
-                } */
-
-
 
             }
-
-            /*
-                             List_Row{
-                                 id: title_Row2
-                                 model: [ qsTr("Путь"), qsTr("Тип")]
-                                 sizes: [0.3, 0.7]
-                             }
-
-                             Custom_Border{}
-
-                             My_List{
-                                id: list2
-                                width: parent.width
-                                height: parent.height - title_Row.height - ui.border_Size * 2
-                                model: ListModel{id: putNom_ListModel}
-
-
-
-                                delegate: List_Row{
-                                    listview: list2
-                                    width: list2.width
-                                    model: [put, type]
-                                    sizes: title_Row2.sizes
-                                    cur: list2.currentIndex
-
-                                }
-
-                             }
-
-              */
-
-            /*Rectangle{
-                width: parent.width //- ui.basic_spacing / 2
-                height: 80
-                color: Style.background_Color
-                radius: ui.radius
-                clip: true
-
-                My_List{
-                   id: list
-                   width: parent.width
-                   height: parent.height //- title_Row.height - ui.border_Size * 2
-                   model: ListModel{id: upNom_ListModel}
-
-                }
-
-            }*/
-
-            /*Item{
-                width: parent.width
-                height: ui.block_height
-
-                Custom_Slider{
-                    width: 200
-                    minimumValue: 15
-                    stepSize: 15
-                    value: stepSize * 5
-                    maximumValue: 150
-                    anchors.centerIn: parent
-
-                }
-            }*/
-
 
             Custom_Button{
                 id: start_Button

@@ -235,8 +235,9 @@ Item{
                 Custom_Button{
                     width: parent.width
                     text:  qsTr("Добавить предупреждение")
-                    icon_with_Text: true
-                    source: "qrc:/my_components/icons/" + Style.theme + "/top_bar/plus_white.svg"
+                    type_Content: Custom_Button.Type_Content_Button.Text_And_Icon_Content
+                    iconHelp_source: Custom_Button.Type_SubIcon.Add_Icon
+
                     onClicked_Signal: {
 
                        // console.log("picked_siteID = "  + picked_siteID , "picked_upNom = "  + picked_upNom , "picked_putNom = "  + picked_putNom )

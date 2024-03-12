@@ -10,13 +10,20 @@
 #include "mqtt/task/task_data.h"
 #include "mqtt/task/task_microservice.h"
 
-#include "mqtt/export_microservice.h"
+//#include "mqtt/export_microservice.h"
+
+#include "../Export_Lib/export_lib.h"
+
+//#include "../Export_Lib/file/export_db.h"
 
 ChartPoints_Microservice::ChartPoints_Microservice(MQTT_Client *pointer)
 {
 
     m_pointer = pointer;
 
+     //Export_DB export_db(Export_Lib::db_path);
+
+   // export_db = new Export_DB(Export_Lib::db_path);
 }
 
 void ChartPoints_Microservice::add_Command(int num, const QByteArray &message){
@@ -268,11 +275,17 @@ void ChartPoints_Microservice::check_Point(int index, float value){
            // emit m_pointer->newPoint_Chart_signal(index, pair.second, Sensors_Values::odometer_value);
             emit m_pointer->newPoint_Chart_signal(index, pair.second, 0);
 
-            qDebug() << "level = " + QString::number(pair.second);
+            //qDebug() << "level = " + QString::number(pair.second);
 
         }
 
-        Export_Microservice::add_PointsInFile(index, pair.second, Sensors_Values::odometer_value);
+        //Export_Lib::addPoints_To_File(index, pair.second, Sensors_Values::odometer_value);
+
+
+        Export_DB export_db(Export_Lib::db_path);
+        export_db.insertPoint(index, pair.second, Sensors_Values::odometer_value);
+
+        //Export_Microservice::add_PointsInFile(index, pair.second, Sensors_Values::odometer_value);
 
     }
 

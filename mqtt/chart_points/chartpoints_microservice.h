@@ -38,6 +38,8 @@ private:
 
     void check_Signal_Forward(bool forwardCheck);
 
+
+  //  Export_DB *export_db;
 };
 
 

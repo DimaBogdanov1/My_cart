@@ -58,7 +58,7 @@ Item{
 
                     model_Menu: [
                     ListElement { value: 3 },
-                    ListElement { value: 1 }
+                    ListElement { value: 2 }
                     ]
 
                 }
@@ -527,7 +527,7 @@ Item{
 
                                                 Custom_Chart {
                                                    id: km_ChartView
-                                                  // plotAreaColor: "red" //Style.background_Color
+                                                   //plotAreaColor: "#DBDAFF" // "red" //Style.background_Color
 
                                                    property real coef:  chart_Rectangle.width / chart_Rectangle.height
 
@@ -748,7 +748,7 @@ Item{
                                         height: 48 //ui.iconBlock_Size
                                         isNeedRectangle: true
                                         color_rec: Style.background_Color
-                                        icon_path: "qrc:/my_components/icons/" + Style.theme + "/top_bar/location.svg"
+                                        source: "qrc:/my_components/icons/" + Style.theme + "/top_bar/location.svg"
                                        // needTip: true
                                         //tip_text: qsTr("Отметить пикет")
                                         onClicked_Signal: {
@@ -830,8 +830,9 @@ Item{
                                     id: startStop_Button
                                     width: parent.width
                                     height: ui.height_Button
-                                    outlined: true
-                                    isIcon: true
+                                    type_Button:  Custom_Button.Type_Button.Outlined_Button
+                                    type_Content:  Custom_Button.Type_Content_Button.Icon_Content
+
                                     isCheck: sensorsVal.isPlay_Chart
 
                                     source: isCheck ? "qrc:/my_components/icons/"+ Style.theme + "/utils/pause.svg" : "qrc:/my_components/icons/"+ Style.theme + "/utils/play.svg"
@@ -964,63 +965,10 @@ Item{
 
             Column{
                 width:1000
-                height: 48 * 3
+                height: 48 * 2
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
 
-
-               Row{
-                   width:parent.width
-                   height: 48
-
-                   Button{
-                       width: 200
-                       height: parent.height
-                       text:  qsTr("Новый километр")
-                       onClicked: {
-
-                          Mqqt_Client.test_slot_NewKm()
-
-                       }
-
-                   }
-
-                   Button{
-                       width: 200
-                       height: parent.height
-                       text:  qsTr("Новые параметры")
-                       onClicked: {
-
-                          Mqqt_Client.test_slot_NewParams()
-
-                       }
-
-                   }
-
-                   Button{
-                       width: 200
-                       height: parent.height
-                       text:  qsTr("Новая общая информация")
-                       onClicked: {
-
-                          Mqqt_Client.test_slot_NewGeneralInfo()
-
-                       }
-
-                   }
-
-                   Button{
-                       width: 200
-                       height: parent.height
-                       text:  qsTr("Закрыть микросервис")
-                       onClicked: {
-
-                          Mqqt_Client.test_slot_CloseExportMicroservice()
-
-                       }
-
-                   }
-               }
 
                 Row{
                     width:parent.width
@@ -1232,26 +1180,6 @@ Item{
 
                      }
 
-                     Button{
-                         width: 100
-                         height: parent.height
-                         text:  qsTr("print_pdf")
-                         onClicked: {
-
-                            // km_ChartView.scrollDown(20)
-
-                             Mqqt_Client.print_pdf()
-
-                             //my_pdf.print_pdf()
-
-                           //  chartView.scrollRight(100)
-
-                           //  viser_Line.update_ViserLine(50)
-
-
-                         }
-
-                     }
 
                      Button{
                          width: 100

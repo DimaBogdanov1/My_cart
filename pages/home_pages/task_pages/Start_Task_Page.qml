@@ -117,7 +117,7 @@ Item{
 
             Custom_Button{
                 width: 200
-                 outlined: true
+                type_Button:  Custom_Button.Type_Button.Outlined_Button
                 anchors.horizontalCenter: parent.horizontalCenter
                 text:  qsTr("finish task")
                 onClicked_Signal: {
@@ -131,7 +131,7 @@ Item{
 
             Custom_Button{
                 width: 200
-                 outlined: true
+                type_Button:  Custom_Button.Type_Button.Outlined_Button
                 anchors.horizontalCenter: parent.horizontalCenter
                 text:  qsTr("custom task")
                 onClicked_Signal: {
@@ -144,7 +144,7 @@ Item{
 
             Custom_Button{
                 width: 200
-                 outlined: true
+                type_Button:  Custom_Button.Type_Button.Outlined_Button
                 anchors.horizontalCenter: parent.horizontalCenter
                 text:  qsTr("basic task")
                 onClicked_Signal: {
@@ -173,7 +173,7 @@ Item{
              Custom_Button{
                  width: 200
                  height: ui.height_Button
-                  outlined: true
+                 type_Button:  Custom_Button.Type_Button.Outlined_Button
                  anchors.horizontalCenter: parent.horizontalCenter
                  text:  qsTr("Down")
                  onClicked_Signal: {
@@ -188,7 +188,7 @@ Item{
              Custom_Button{
                  width: 200
                  height: ui.height_Button
-                  outlined: true
+                 type_Button:  Custom_Button.Type_Button.Outlined_Button
                  anchors.horizontalCenter: parent.horizontalCenter
                  text:  qsTr("next")
                  onClicked_Signal: {
@@ -203,7 +203,7 @@ Item{
              Custom_Button{
                  width: 200
                  height: ui.height_Button
-                  outlined: true
+                 type_Button:  Custom_Button.Type_Button.Outlined_Button
                  anchors.horizontalCenter: parent.horizontalCenter
                  text:  qsTr("open db")
                  onClicked_Signal: {
@@ -218,7 +218,7 @@ Item{
              Custom_Button{
                  width: 200
                  height: ui.height_Button
-                  outlined: true
+                 type_Button:  Custom_Button.Type_Button.Outlined_Button
                  anchors.horizontalCenter: parent.horizontalCenter
                  text:  qsTr("dialog")
                  onClicked_Signal: {
@@ -233,7 +233,7 @@ Item{
              Custom_Button{
                  width: 200
                  height: ui.height_Button
-                  outlined: true
+                 type_Button:  Custom_Button.Type_Button.Outlined_Button
                  anchors.horizontalCenter: parent.horizontalCenter
                  text:  qsTr("add old warning")
                  onClicked_Signal: {
@@ -248,7 +248,7 @@ Item{
              Custom_Button{
                  width: 200
                  height: ui.height_Button
-                  outlined: true
+                 type_Button:  Custom_Button.Type_Button.Outlined_Button
                  anchors.horizontalCenter: parent.horizontalCenter
                  text:  qsTr("delete old warning")
                  onClicked_Signal: {

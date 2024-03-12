@@ -85,8 +85,11 @@ Item{
                     height: 150
                     noTitle: true
                     color: Style.light_Color
-                    title_name_model: [ qsTr("Код"), qsTr("Направление")]
-                    title_size_model: [0.3, 0.7]
+
+                    header_model: [
+                            { title: qsTr("Код"), size: 0.3},
+                            { title: qsTr("Направление"), size: 0.7}
+                        ]
                     title_Type: List_With_Title.Title_Types.Title_Sort_All
 
                     sort_func: [
@@ -102,7 +105,7 @@ Item{
                         listview: list.get_list()
                         width: list.width
                         model:[code, name]
-                        sizes: list.title_size_model
+                        header_model: list.header_model
                         needHighlight: true
                         cur: list.currentIndex
 
@@ -132,8 +135,11 @@ Item{
                     height: 150
                     noTitle: true
                     color: Style.light_Color
-                    title_name_model: [ qsTr("Путь"), qsTr("Тип")]
-                    title_size_model: [0.3, 0.7]
+                    header_model: [
+                            { title: qsTr("Путь"), size: 0.3},
+                            { title: qsTr("Тип"), size: 0.7}
+                        ]
+
                     title_Type: List_With_Title.Title_Types.Title_Sort_All
 
                     sort_func: [
@@ -149,7 +155,7 @@ Item{
                         listview: list2.get_list()
                         width: list2.width
                         model:[put, type]
-                        sizes: list2.title_size_model
+                        header_model: list2.header_model
                         needHighlight: true
                         cur: list2.currentIndex
 
@@ -292,8 +298,8 @@ Item{
                  Custom_Button{
                      id: start_Button
                      width: parent.width
-                     icon_with_Text: true
-                     source:  "qrc:/my_components/icons/" + Style.theme + "/utils/arrow_right_mini_white.svg" // "qrc:/icons/" + Style.theme + "/navigation/home.svg"
+                     type_Content: Custom_Button.Type_Content_Button.Text_And_Icon_Content
+                     iconHelp_source:  Custom_Button.Type_SubIcon.Next_Icon
                      text:  qsTr("Продолжить")
                      onClicked_Signal: {
 

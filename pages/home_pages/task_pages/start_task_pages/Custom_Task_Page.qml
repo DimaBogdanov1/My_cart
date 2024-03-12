@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
+import Custom_Task_Page 1.0
 import Style 1.0
 
 import my_components 1.0
@@ -9,6 +10,10 @@ Item{
     id: root_Item
     width: parent.width
     height: parent.height
+
+    Custom_Task_Page{
+        id: custom_Task_Page
+    }
 
     Row{
         width: parent.width
@@ -31,18 +36,41 @@ Item{
                     source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
                     start_Keyboard: 0//root_Item.start_Keyboard + ui.block_height + ui.middle_spacing
                     model: [
-                           { title: my_str.siteID, text: "", maximumLength: ui.siteId_textLength}
+                           { title: my_str.siteID, text: custom_Task_Page.siteId, maximumLength: ui.siteId_textLength}
                        ]
+
+                    onTextChanged: {
+
+                        custom_Task_Page.set_SiteId(text)
+
+                    }
                 }
 
                 Custom_Row_TextField{
                     source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
                     start_Keyboard: 0 //root_Item.start_Keyboard + ui.block_height + ui.middle_spacing
                     model: [
-                           { title: my_str.upNom, text: "", maximumLength: ui.upNom_textLength},
-                           { title: my_str.putNom, text: "", maximumLength: ui.putNom_textLength}
+                           { title: my_str.upNom, text: custom_Task_Page.upNom, maximumLength: ui.upNom_textLength},
+                           { title: my_str.putNom, text: custom_Task_Page.putNom, maximumLength: ui.putNom_textLength}
                        ]
 
+                    onTextChanged: {
+
+                        switch(index_model){
+
+                        case 0:
+
+                            custom_Task_Page.set_UpNom(text)
+
+                            break
+
+                        case 1:
+
+                            custom_Task_Page.set_PutNom(text)
+
+                            break
+                        }
+                    }
                 }
 
                 Custom_Row_TextField{
@@ -51,9 +79,27 @@ Item{
                     start_Keyboard: 0
 
                     model: [
-                           { title: my_str.km, text: "", maximumLength: ui.km_textLength},
-                           { title: my_str.meter, text: "", maximumLength: ui.meter_textLength}
+                           { title: my_str.km, text: custom_Task_Page.startKm, maximumLength: ui.km_textLength},
+                           { title: my_str.meter, text: custom_Task_Page.startM, maximumLength: ui.meter_textLength}
                        ]
+
+                    onTextChanged: {
+
+                        switch(index_model){
+
+                        case 0:
+
+                            custom_Task_Page.set_StartKm(text)
+
+                            break
+
+                        case 1:
+
+                            custom_Task_Page.set_StartM(text)
+
+                            break
+                        }
+                    }
                 }
 
                 Custom_Row_TextField{
@@ -61,9 +107,27 @@ Item{
                     start_Keyboard: 0
 
                     model: [
-                           { title: "Скорость пассажирских", text: ""},
-                           { title: "Скорость грузовых", text: ""}
+                           { title: "Скорость пассажирских", text: custom_Task_Page.speed_Pass},
+                           { title: "Скорость грузовых", text: custom_Task_Page.speed_Freight}
                        ]
+
+                    onTextChanged: {
+
+                        switch(index_model){
+
+                        case 0:
+
+                            custom_Task_Page.set_Speed_Pass(text)
+
+                            break
+
+                        case 1:
+
+                            custom_Task_Page.set_Speed_Freight(text)
+
+                            break
+                        }
+                    }
 
                 }
 

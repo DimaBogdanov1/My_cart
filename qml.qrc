@@ -2,11 +2,9 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>translator/England.qm</file>
-        <file>Style.qml</file>
         <file>My_Settings.qml</file>
         <file>Toast.qml</file>
         <file>ToastManager.qml</file>
-        <file>Utils.qml</file>
         <file>pages/Home_Page.qml</file>
         <file>starts_elements/Splash_Screen.qml</file>
         <file>starts_elements/Onboard_Screen.qml</file>
@@ -22,7 +20,6 @@
         <file>sqlite/ROAD.SQL</file>
         <file>sqlite/NAIM.SQL</file>
         <file>sqlite/ITEMCORRECT.SQL</file>
-        <file>Strings.qml</file>
         <file>pages/Login_Page.qml</file>
         <file>pages/login_pages/Register_Page.qml</file>
         <file>pages/login_pages/Authorization_Page.qml</file>
@@ -37,5 +34,7 @@
         <file>pages/settings_pages/ProgButon_Settings_Page.qml</file>
         <file>pages/settings_pages/AboutApp_Settings_Page.qml</file>
         <file>pages/home_pages/task_pages/start_task_pages/Warning_Page.qml</file>
+        <file>pages/Diagnostic_Page.qml</file>
+        <file>pages/home_pages/Start_Page.qml</file>
     </qresource>
 </RCC>
