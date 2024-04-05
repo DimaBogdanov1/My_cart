@@ -3,7 +3,11 @@
 
 #include <QObject>
 #include <QMqttClient>
-#include "mqtt/sensors/sensors_values.h"
+
+#include "mqtt/chart_points/chartpoints_microservice.h"
+#include "../Export_Lib/file/points/name_measures.h"
+//#include "mqtt/chart_points/export_point_thread.h"
+
 //#include "mqtt/chart_points/chartpoints_microservice.h"
 
 //#include "sensorsregister_microservice.h"
@@ -20,32 +24,10 @@ public:
 
 public slots:
 
-    void print_pdf();
-
     void get_Diagnostic(bool start);
-
-
-
 
     void test_slot();
 
-    void test_slot_NewKm();
-
-    void test_slot_NewParams();
-
-    void test_slot_NewGeneralInfo();
-
-    void test_slot_CloseExportMicroservice();
-
-    void test_slot_add_sleepers();
-
-    void test_slot_add_bridge();
-
-    void test_slot_add_arrow();
-
-    void test_slot_add_object();
-
-    void test_slot_helpLine();
 
 private:
 
@@ -53,8 +35,6 @@ private:
 
     QString subscribe_topic = "ui/#";
 
-
-  //  ChartPoints_Microservice *chartPoints_Microservice;
 
     //SensorsRegister_Microservice sensorsRegister_Microservice;
 
@@ -68,6 +48,9 @@ private:
     void onConnect();
 
     void onStateChange();
+
+
+    //Export_Point_Thread *export_Point_Thread;
 
 signals:
 

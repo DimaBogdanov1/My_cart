@@ -9,15 +9,15 @@ class Sensors_Values : public QObject
 
     Q_PROPERTY(bool isPlay_Chart MEMBER isPlay_Chart  WRITE setPlay NOTIFY playChanged)
 
-    Q_PROPERTY(float charge_percent MEMBER charge_percent WRITE setCharge NOTIFY chargeChanged)
+    Q_PROPERTY(float charge_percent MEMBER charge_percent WRITE setCharge NOTIFY floatChanged)
 
-    Q_PROPERTY(float speed MEMBER speed WRITE setSpeed NOTIFY speedChanged)
+    Q_PROPERTY(float speed MEMBER speed WRITE setSpeed NOTIFY floatChanged)
 
-    Q_PROPERTY(float odometer_value MEMBER odometer_value WRITE setOdometer NOTIFY odometerChanged)
+    Q_PROPERTY(float odometer_value MEMBER odometer_value WRITE setOdometer NOTIFY floatChanged)
 
-    Q_PROPERTY(float yaw_value MEMBER yaw_value WRITE setYaw NOTIFY yawChanged)
+    Q_PROPERTY(float yaw_value MEMBER yaw_value WRITE setYaw NOTIFY floatChanged)
 
-    Q_PROPERTY(float pitch_value MEMBER pitch_value WRITE setPitch NOTIFY pitchChanged)
+    Q_PROPERTY(float pitch_value MEMBER pitch_value WRITE setPitch NOTIFY floatChanged)
 
 public:
 
@@ -61,23 +61,26 @@ public slots:
         emit playChanged(value);
     }
 
-    void setCharge(float value) { charge_percent = value; emit chargeChanged(value);}
+    void setCharge(float value) { charge_percent = value; emit floatChanged(value);}
 
-    void setSpeed(float value) { speed = value; emit speedChanged(value);}
+    void setSpeed(float value) { speed = value; emit floatChanged(value);}
 
-    void setOdometer(float value) { odometer_value = value; emit odometerChanged(value);}
+    void setOdometer(float value) { odometer_value = value; emit floatChanged(value);}
 
-    void setYaw(float value) { yaw_value = value; emit yawChanged(value);}
+    void setYaw(float value) { yaw_value = value; emit floatChanged(value);}
 
-    void setPitch(float value) { pitch_value = value; emit pitchChanged(value);}
+    void setPitch(float value) { pitch_value = value; emit floatChanged(value);}
 
 signals:
     void playChanged(bool);
-    void chargeChanged(float);
+
+    void floatChanged(float);
+
+    /*void chargeChanged(float);
     void speedChanged(float);
     void odometerChanged(float);
     void yawChanged(float);
-    void pitchChanged(float);
+    void pitchChanged(float);*/
 
 };
 

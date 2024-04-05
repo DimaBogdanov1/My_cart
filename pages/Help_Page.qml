@@ -105,14 +105,21 @@ Item {
                           spacing: ui.middle_spacing //ui.basic_spacing * 2
                           anchors.centerIn: parent
 
+                          Task_Info_Column{
+                              task_Page: task_Page.task_Passport_DB
+
+                          }
+
+                          /*
                           Custom_Row_ComboBox{
                               id: road_ComboBox
                               width: parent.width
                               source: "qrc:/my_components/icons/" + Style.theme + "/home_page/pencil.svg"
+                              start_index_model: [task_Page.pickedindex_SiteIDModel, task_Page.pickedindex_Type_Tracks_Model]
 
                               model: [
-                                  { title: my_str.siteID, combo_model: task_Page.SiteId_Model, picked_index: task_Page.pickedindex_SiteIDModel},
-                                  { title: my_str.typeTracks, combo_model: task_Page.Type_Tracks_Model, picked_index: task_Page.pickedindex_Type_Tracks_Model}
+                                  { title: my_str.siteID, combo_model: task_Page.SiteId_Model},
+                                  { title: my_str.typeTracks, combo_model: task_Page.Type_Tracks_Model}
                               ]
 
 
@@ -122,19 +129,19 @@ Item {
 
                                       task_Page.set_pickedindex_SiteIDModel(index)
 
-                                      task_Page.set_SiteID(task_Page.SiteId_Model.get(index).name)
-
-                                      console.log(task_Page.SiteId_Model.get(index).name)
                                   }
 
                                   if(index_model == 1){
 
-                                      console.log("index = " + index)
-
-                                      task_Page.set_TypeTrack(index)
+                                      task_Page.set_pickedindex_Type_Tracks_Model(index)
 
                                   }
+
+                                  task_Page.set_UpNom(task_Page.SiteId_Model.get(task_Page.pickedindex_SiteIDModel).name)
+
                               }
+
+
 
                           }
 
@@ -142,20 +149,23 @@ Item {
                               id: roadInfo_TextField
                               source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
 
+                              start_index_model: [task_Page.pickedindex_Up_Nom_Model, task_Page.pickedindex_Put_Nom_Model]
+                              model_1: task_Page.Up_Nom_Model
+                              model_2: task_Page.Put_Nom_Model
                               model: [
-                                  { title: my_str.upNom, combo_model: task_Page.Up_Nom_Model, picked_index: task_Page.pickedindex_Up_Nom_Model},
-                                  { title: my_str.putNom, combo_model: task_Page.Put_Nom_Model, picked_index: task_Page.pickedindex_Put_Nom_Model}
+                                  { title: my_str.upNom}, // combo_model: task_Page.Up_Nom_Model}, // pickedindex_Up_Nom_Model
+                                  { title: my_str.putNom} // combo_model: task_Page.Put_Nom_Model} // pickedindex_Put_Nom_Model
                               ]
 
                               onChange_index_signal: {
+
+                                  //console.log("Сработал клик Help Page index = " + index)
 
                                   if(index_model == 0){
 
                                       task_Page.set_pickedindex_Up_Nom_Model(index)
 
-                                      //task_Page.set_pickedindex_Put_Nom_Model(0)
-
-                                      task_Page.set_UpNom(task_Page.Up_Nom_Model.get(index).name)
+                                      task_Page.set_PutNom(task_Page.SiteId_Model.get(task_Page.pickedindex_SiteIDModel).name, task_Page.Up_Nom_Model.get(index).name)
 
                                   }
 
@@ -167,6 +177,62 @@ Item {
                                   }
                               }
                           }
+
+
+                          */
+
+
+
+
+
+
+
+                         /* Custom_Row_ComboBox{
+                              source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
+
+                              start_index_model: [task_Page.pickedindex_Up_Nom_Model]
+
+                              model: [
+                                  { title: my_str.upNom, combo_model: task_Page.Up_Nom_Model} // pickedindex_Up_Nom_Model
+                              ]
+
+                              onChange_index_signal: {
+
+                                  console.log("Сработал клик Help Page index = " + index)
+
+                                  if(index_model == 0){
+
+                                      task_Page.set_pickedindex_Up_Nom_Model(index)
+
+                                      task_Page.set_PutNom(task_Page.SiteId_Model.get(task_Page.pickedindex_SiteIDModel).name, task_Page.Up_Nom_Model.get(index).name)
+
+                                  }
+
+                              }
+                          }
+
+
+                          Custom_Row_ComboBox{
+                              source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
+
+                              start_index_model: [task_Page.pickedindex_Put_Nom_Model]
+
+                              model: [
+                                  { title: my_str.putNom, combo_model: task_Page.Put_Nom_Model} // pickedindex_Put_Nom_Model
+                              ]
+
+                              onChange_index_signal: {
+
+                                  console.log("Сработал клик Help Page index = " + index)
+
+                                  if(index_model == 0){
+
+                                      task_Page.set_pickedindex_Put_Nom_Model(index)
+
+                                  }
+
+                              }
+                          } */
 
                          /* Custom_Row_ComboBox{
                               source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
@@ -229,44 +295,44 @@ Item {
                           */
 
                           // Стартовую точку выберем на финальном слое
-                         /* Custom_Row_TextField{
+                          Custom_Row_TextField{
                               id: startPoint_Row
                               source:  "qrc:/my_components/icons/" + Style.theme + "/top_bar/location.svg"
                               start_Keyboard: 0 //400
 
                               model: [
-                                     { title: my_str.km, text: task_Page.start_Km, maximumLength: ui.km_textLength},
-                                     { title: my_str.meter, text: task_Page.start_M, maximumLength: ui.meter_textLength}
+                                     { title: my_str.km, text: task_Page.task_Passport_DB.start_Km, maximumLength: ui.km_textLength},
+                                     { title: my_str.meter, text: task_Page.task_Passport_DB.start_M, maximumLength: ui.meter_textLength}
                                  ]
 
                               onTextChanged: {
 
                                   if(index_model == 0){
 
-                                      task_Page.set_StartKm(text)
+                                      task_Page.task_Passport_DB.set_StartKm(text)
                                   }
 
                                   if(index_model == 1){
 
                                       console.log("sssssssssssssss")
 
-                                      task_Page.set_StartM(text)
+                                      task_Page.task_Passport_DB.set_StartM(text)
                                   }
 
                               }
 
-                          }*/
+                          }
 
                           Custom_Rectangle_Label{
                               width: parent.width
-                              height: parent.height - road_ComboBox.height * 3 - parent.spacing * 3
+                              height: parent.height - startPoint_Row.height * 3 - parent.spacing * 3
                               needBack: true
                               color: Style.light_Color
                               //text: "Это место нужно чем-то забить"
 
                               Component.onCompleted: {
 
-                                  console.log("parent.height =    " + parent.height  + " road_ComboBox.height * 3 = " + road_ComboBox.height * 3 + "  parent.spacing * 3 = " + parent.spacing * 3)
+                                  //console.log("parent.height =    " + parent.height  + " road_ComboBox.height * 3 = " + road_ComboBox.height * 3 + "  parent.spacing * 3 = " + parent.spacing * 3)
                               }
 
                               Label{
@@ -289,11 +355,13 @@ Item {
 
                                           onClicked_Signal: {
 
+
                                               task_Page.set_Fragments(task_Page.SiteId_Model.get(task_Page.pickedindex_SiteIDModel).name,
                                                                       task_Page.Up_Nom_Model.get(task_Page.pickedindex_Up_Nom_Model).name,
                                                                       task_Page.Put_Nom_Model.get(task_Page.pickedindex_Put_Nom_Model).name,
                                                                       check_Moving.checked
                                                                       )
+
 
 
                                           }
@@ -577,9 +645,39 @@ Item {
 
     Column{
         width:1000
-        height: 48 * 2
+        height: 48 * 3
         anchors.right: parent.right
+
+        anchors.rightMargin: 150
         anchors.bottom: parent.bottom
+
+
+        Row{
+            width:parent.width
+            height: 48
+
+            Button{
+                width: 200
+                height: parent.height
+                text:  qsTr("Получить объекты из бд")
+                onClicked: {
+
+                   console.log(task_Page.task_Passport_DB.SiteId_Model.get(task_Page.task_Passport_DB.pickedindex_SiteIDModel).name)
+
+
+                   /* task_Page.get_Objects(
+                                  task_Page.task_Passport_DB.SiteId_Model.get(task_Page.task_Passport_DB.pickedindex_SiteIDModel).name,
+                                  task_Page.task_Passport_DB.Up_Nom_Model.get(task_Page.task_Passport_DB.pickedindex_Up_Nom_Model).name,
+                                  task_Page.task_Passport_DB.Put_Nom_Model.get(task_Page.task_Passport_DB.pickedindex_Put_Nom_Model).name,
+                                  129) */
+
+
+                    task_Page.get_Objects("", "", "", 2)
+                }
+
+            }
+
+        }
 
         Row{
             width:parent.width
@@ -591,7 +689,7 @@ Item {
                 text:  qsTr("Новый мост")
                 onClicked: {
 
-                   Mqqt_Client.test_slot_add_bridge()
+                   Test_Class.test_slot_add_bridge()
 
                 }
 
@@ -603,7 +701,7 @@ Item {
                 text:  qsTr("Новая стрелка")
                 onClicked: {
 
-                   Mqqt_Client.test_slot_add_arrow()
+                   Test_Class.test_slot_add_arrow()
 
                 }
 
@@ -615,7 +713,7 @@ Item {
                 text:  qsTr("Новый объект")
                 onClicked: {
 
-                   Mqqt_Client.test_slot_add_object()
+                   Test_Class.test_slot_add_object()
 
                 }
 
@@ -627,7 +725,7 @@ Item {
                 text:  qsTr("Новая линия помощи")
                 onClicked: {
 
-                   Mqqt_Client.test_slot_helpLine()
+                   Test_Class.test_slot_helpLine()
 
                 }
 
@@ -641,7 +739,7 @@ Item {
 
                    // km_ChartView.scrollDown(20)
 
-                    Mqqt_Client.print_pdf()
+                    Test_Class.print_pdf()
 
                     //my_pdf.print_pdf()
 
@@ -667,7 +765,7 @@ Item {
                text:  qsTr("Новый километр")
                onClicked: {
 
-                  Mqqt_Client.test_slot_NewKm()
+                  Test_Class.test_slot_NewKm()
 
                }
 
@@ -679,7 +777,7 @@ Item {
                text:  qsTr("Новые параметры")
                onClicked: {
 
-                  Mqqt_Client.test_slot_NewParams()
+                  Test_Class.test_slot_NewParams()
 
                }
 
@@ -691,7 +789,7 @@ Item {
                text:  qsTr("Новая общая информация")
                onClicked: {
 
-                  Mqqt_Client.test_slot_NewGeneralInfo()
+                  Test_Class.test_slot_NewGeneralInfo()
 
                }
 
@@ -703,7 +801,7 @@ Item {
                text:  qsTr("Добавит точки")
                onClicked: {
 
-                  Mqqt_Client.test_slot_CloseExportMicroservice()
+                  Test_Class.test_slot_CloseExportMicroservice()
 
                }
 
@@ -715,7 +813,7 @@ Item {
                text:  qsTr("Новые шпалы")
                onClicked: {
 
-                  Mqqt_Client.test_slot_add_sleepers()
+                  Test_Class.test_slot_add_sleepers()
 
                }
 

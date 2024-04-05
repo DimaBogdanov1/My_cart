@@ -36,12 +36,12 @@ Item{
                     source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
                     start_Keyboard: 0//root_Item.start_Keyboard + ui.block_height + ui.middle_spacing
                     model: [
-                           { title: my_str.siteID, text: custom_Task_Page.siteId, maximumLength: ui.siteId_textLength}
+                           { title: my_str.siteID, text: custom_Task_Page.task_Passport_DB.siteId, maximumLength: ui.siteId_textLength}
                        ]
 
                     onTextChanged: {
 
-                        custom_Task_Page.set_SiteId(text)
+                        custom_Task_Page.task_Passport_DB.set_Custom_SiteId(text)
 
                     }
                 }
@@ -50,8 +50,8 @@ Item{
                     source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
                     start_Keyboard: 0 //root_Item.start_Keyboard + ui.block_height + ui.middle_spacing
                     model: [
-                           { title: my_str.upNom, text: custom_Task_Page.upNom, maximumLength: ui.upNom_textLength},
-                           { title: my_str.putNom, text: custom_Task_Page.putNom, maximumLength: ui.putNom_textLength}
+                           { title: my_str.upNom, text: custom_Task_Page.task_Passport_DB.upNom, maximumLength: ui.upNom_textLength},
+                           { title: my_str.putNom, text: custom_Task_Page.task_Passport_DB.putNom, maximumLength: ui.putNom_textLength}
                        ]
 
                     onTextChanged: {
@@ -60,13 +60,13 @@ Item{
 
                         case 0:
 
-                            custom_Task_Page.set_UpNom(text)
+                            custom_Task_Page.task_Passport_DB.set_Custom_UpNom(text)
 
                             break
 
                         case 1:
 
-                            custom_Task_Page.set_PutNom(text)
+                            custom_Task_Page.task_Passport_DB.set_Custom_PutNom(text)
 
                             break
                         }
@@ -79,8 +79,8 @@ Item{
                     start_Keyboard: 0
 
                     model: [
-                           { title: my_str.km, text: custom_Task_Page.startKm, maximumLength: ui.km_textLength},
-                           { title: my_str.meter, text: custom_Task_Page.startM, maximumLength: ui.meter_textLength}
+                           { title: my_str.km, text: custom_Task_Page.task_Passport_DB.start_Km, maximumLength: ui.km_textLength},
+                           { title: my_str.meter, text: custom_Task_Page.task_Passport_DB.start_M, maximumLength: ui.meter_textLength}
                        ]
 
                     onTextChanged: {
@@ -89,13 +89,13 @@ Item{
 
                         case 0:
 
-                            custom_Task_Page.set_StartKm(text)
+                            custom_Task_Page.task_Passport_DB.set_StartKm(text)
 
                             break
 
                         case 1:
 
-                            custom_Task_Page.set_StartM(text)
+                            custom_Task_Page.task_Passport_DB.set_StartM(text)
 
                             break
                         }
@@ -107,8 +107,8 @@ Item{
                     start_Keyboard: 0
 
                     model: [
-                           { title: "Скорость пассажирских", text: custom_Task_Page.speed_Pass},
-                           { title: "Скорость грузовых", text: custom_Task_Page.speed_Freight}
+                           { title: "Скорость пассажирских", text: custom_Task_Page.task_Passport_DB.speed_Pass},
+                           { title: "Скорость грузовых", text: custom_Task_Page.task_Passport_DB.speed_Freight}
                        ]
 
                     onTextChanged: {
@@ -117,13 +117,13 @@ Item{
 
                         case 0:
 
-                            custom_Task_Page.set_Speed_Pass(text)
+                            custom_Task_Page.task_Passport_DB.set_Speed_Pass(text)
 
                             break
 
                         case 1:
 
-                            custom_Task_Page.set_Speed_Freight(text)
+                            custom_Task_Page.task_Passport_DB.set_Speed_Freight(text)
 
                             break
                         }

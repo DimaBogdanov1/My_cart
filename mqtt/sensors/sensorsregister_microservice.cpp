@@ -5,6 +5,8 @@
 
 #include "../Notifications_Lib/notifications_lib.h"
 
+#include "pages/values/map_values.h"
+
 SensorsRegister_Microservice::SensorsRegister_Microservice(MQTT_Client *pointer)
 {
 
@@ -116,6 +118,18 @@ void SensorsRegister_Microservice::add_INS_Command(const QByteArray &message){
     QList<double> ins_values =  MQTT_Help::getValueFrom_JSON(message, QList<QString> {"latitude", "longitude", "yaw", "pitch" });
 
     if(ins_values.length() == 4){
+
+       /* Map_Values a;
+
+        a.setYaw(ins_values.at(2));
+
+        a.setPosition(QGeoCoordinate(ins_values.at(0), ins_values.at(1)));
+
+        a.add_Coordinate(QGeoCoordinate(ins_values.at(0), ins_values.at(1)));
+
+        a.floatChanged(ins_values.at(2)); */
+
+        //Map_Values::setYaw(ins_values.at(2));
 
         Sensors_Values::yaw_value = ins_values.at(2);
 

@@ -10,7 +10,7 @@ class Calculate_Riht
 public:
     Calculate_Riht();
 
-    static void add_Riht(double odo, double move_horizontal_left, double move_horizontal_right, double yaw);
+    static void add_Riht(double odo, double move_horizontal_left, double move_horizontal_right, double yaw, bool isForward);
 
  private:
 
@@ -18,7 +18,7 @@ public:
 
     inline static QList<Riht> rihtList;
 
-    static void test_Calculate(double move_horizontal_left);
+    static void test_Calculate(double move_horizontal_left, bool isForward);
 
 };
 

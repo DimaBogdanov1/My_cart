@@ -2,7 +2,6 @@
 #include "riht.h"
 #include "mqtt/mqtt_client.h"
 #include "mqtt/chart_points/chartpoints_microservice.h"
-#include "mqtt/chart_points/name_measures.h"
 
 #include <QDebug>
 #include <QRandomGenerator>
@@ -12,7 +11,7 @@ Calculate_Riht::Calculate_Riht()
 
 }
 
-void Calculate_Riht::add_Riht(double odo, double move_horizontal_left, double move_horizontal_right, double yaw){
+void Calculate_Riht::add_Riht(double odo, double move_horizontal_left, double move_horizontal_right, double yaw, bool isForward){
 
    // Riht riht(double odo, double move_horizontal_left, double move_horizontal_right, double yaw);
 
@@ -28,14 +27,14 @@ void Calculate_Riht::add_Riht(double odo, double move_horizontal_left, double mo
 
     if(rihtList.length() == 1){ // 3
 
-        test_Calculate(move_horizontal_left);
+        test_Calculate(move_horizontal_left, isForward);
 
         rihtList.clear();
     }
 
 }
 
-void Calculate_Riht::test_Calculate(double move_horizontal_left){
+void Calculate_Riht::test_Calculate(double move_horizontal_left, bool isForward){
 
     QRandomGenerator *rg = QRandomGenerator::global();
 
@@ -64,7 +63,9 @@ void Calculate_Riht::test_Calculate(double move_horizontal_left){
     //ChartPoints_Microservice::check_Point(Name_Measures::Riht_Right_Measure, right_value);
 
 
+    ChartPoints_Microservice::check_Point(Name_Measures::Riht_Left_Measure, value, isForward);
 
-    ChartPoints_Microservice::check_Riht(value, value);
+    ChartPoints_Microservice::check_Point(Name_Measures::Riht_Right_Measure, value, isForward);
+
 
 }

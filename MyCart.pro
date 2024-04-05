@@ -36,14 +36,11 @@ SOURCES += \
         databases/big_database.cpp \
         databases/my_database.cpp \
         main.cpp \
-        measures/chart_work.cpp \
-        measures/measure.cpp \
-        models/chartpoints_model.cpp \
         models/navigationmap_model.cpp \
         mqtt/chart_points/chartpoints_microservice.cpp \
-        mqtt/chart_points/correct_points.cpp \
         mqtt/chart_points/down/calculate_down.cpp \
         mqtt/chart_points/down/down.cpp \
+        mqtt/chart_points/export_point_thread.cpp \
         mqtt/chart_points/riht/calculate_riht.cpp \
         mqtt/chart_points/riht/riht.cpp \
         mqtt/mqtt_client.cpp \
@@ -53,6 +50,7 @@ SOURCES += \
         mqtt/task/task_data.cpp \
         mqtt/task/task_microservice.cpp \
         mythread.cpp \
+        test_class.cpp \
         test_smart.cpp
 
 
@@ -150,16 +148,12 @@ HEADERS += \
     databases/aprior/peregon.h \
     databases/big_database.h \
     databases/my_database.h \
-    measures/chart_work.h \
-    measures/measure.h \
-    models/chartpoints_model.h \
     models/navigationmap_model.h \
     models_headers/big_database.h \
     mqtt/chart_points/chartpoints_microservice.h \
-    mqtt/chart_points/correct_points.h \
     mqtt/chart_points/down/calculate_down.h \
     mqtt/chart_points/down/down.h \
-    mqtt/chart_points/name_measures.h \
+    mqtt/chart_points/export_point_thread.h \
     mqtt/chart_points/riht/calculate_riht.h \
     mqtt/chart_points/riht/riht.h \
     mqtt/mqtt_client.h \
@@ -175,16 +169,17 @@ HEADERS += \
     mqtt/task/task_elements/station.h \
     mqtt/task/task_elements/task.h \
     mqtt/task/task_microservice.h \
-    mqtt/task/task_values.h \
     mythread.h \
     pages/chart_page.h \
-    pages/custom_task_page.h \
     pages/enums/name_main_pages.h \
     pages/finish_task_page.h \
     pages/pick_account_page.h \
     pages/register_page.h \
-    pages/task_page.h \
+    pages/values/map_values.h \
+    pages/values/moving_values.h \
+    pages/values/my_sensors_values.h \
     pages/warning_page.h \
+    test_class.h \
     test_smart.h \
     translate_headers/mylang.h \
     translate_headers/mytranslator.h

@@ -31,7 +31,12 @@ Item{
                 anchors.centerIn: parent
                 spacing: ui.middle_spacing //ui.basic_spacing * 2
 
-                Custom_Row_ComboBox{
+                Task_Info_Column{
+                    task_Page: warning_Page.task_Passport_DB
+
+                }
+
+                /*Custom_Row_ComboBox{
                     width: parent.width
                     height: ui.block_height
                     source: "qrc:/my_components/icons/" + Style.theme + "/home_page/pencil.svg"
@@ -56,6 +61,8 @@ Item{
 
                     }
                 }
+
+                */
 
                 Custom_Row_ComboBox{
                     id: speed_ComboBox
@@ -110,8 +117,8 @@ Item{
                     start_Keyboard: 300
 
                     model: [
-                         { title: "Начальный километр", text: warning_Page.start_Km, maximumLength: ui.km_textLength},
-                         { title: "Начальный метр", text: warning_Page.start_M, maximumLength: ui.meter_textLength}
+                         { title: "Начальный километр", text: warning_Page.task_Passport_DB.start_Km, maximumLength: ui.km_textLength},
+                         { title: "Начальный метр", text: warning_Page.task_Passport_DB.start_M, maximumLength: ui.meter_textLength}
                     ]
 
                     onTextChanged: {
@@ -120,13 +127,13 @@ Item{
 
                         case 0:
 
-                            warning_Page.set_StartKm(text)
+                            warning_Page.task_Passport_DB.set_StartKm(text)
 
                             break
 
                         case 1:
 
-                            warning_Page.set_StartM(text)
+                            warning_Page.task_Passport_DB.set_StartM(text)
 
                             break
                         }
@@ -141,8 +148,8 @@ Item{
                     start_Keyboard: 300
 
                     model: [
-                         { title: "Конечный километр", text:  warning_Page.end_Km, maximumLength: ui.km_textLength},
-                         { title: "Конечный метр", text: warning_Page.end_M, maximumLength: ui.meter_textLength}
+                         { title: "Конечный километр", text:  warning_Page.task_Passport_DB.end_Km, maximumLength: ui.km_textLength},
+                         { title: "Конечный метр", text: warning_Page.task_Passport_DB.end_M, maximumLength: ui.meter_textLength}
                     ]
 
                     onTextChanged: {
@@ -151,13 +158,13 @@ Item{
 
                         case 0:
 
-                            warning_Page.set_EndKm(text)
+                            warning_Page.task_Passport_DB.set_EndKm(text)
 
                             break
 
                         case 1:
 
-                            warning_Page.set_EndM(text)
+                            warning_Page.task_Passport_DB.set_EndM(text)
 
                             break
                         }

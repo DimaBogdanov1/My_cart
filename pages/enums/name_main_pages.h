@@ -25,4 +25,4 @@ private:
     explicit Name_Main_Pages();
 };
 
-typedef Name_Main_Pages::Main_Pages Status;
+typedef Name_Main_Pages::Main_Pages Status_Name;

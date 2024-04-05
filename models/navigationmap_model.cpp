@@ -3,7 +3,7 @@
 NavigationMap_Model::NavigationMap_Model(QObject *parent) : QAbstractListModel(parent)
 {
 
-    connect(this, &QAbstractListModel::dataChanged, this, &NavigationMap_Model::pathChanged);
+    //connect(this, &QAbstractListModel::dataChanged, this, &NavigationMap_Model::pathChanged);
 
 }
 
@@ -52,10 +52,6 @@ void NavigationMap_Model::addPosition(const QGeoCoordinate &coordinate) {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
 
     m_coordinates.append(QVariant::fromValue(coordinate));
-
-    position = coordinate;
-
-    emit pathChanged();
 
     endInsertRows();
 }

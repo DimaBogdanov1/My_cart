@@ -7,9 +7,12 @@ import QtGraphicalEffects 1.15
 
 import qml.measure 1.0
 import Style 1.0
-import Sensors_Values 1.0
-import Task_Values 1.0
+import My_Sensors_Values 1.0
 import Chart_Page 1.0
+import Type_Sleepers 1.0
+import Type_Picket_Position 1.0
+import SubTypes_Line 1.0
+import Type_Trains 1.0
 
 import my_components 1.0
 
@@ -25,13 +28,67 @@ Item{
 
     property real y_0: 0
 
-    Task_Values{
-        id: task_Values
-
-    }
 
     Chart_Page{
         id: charts_Page
+
+        onPlayChart_Changed: {
+
+            startStop_Button.create_rotation_anim()
+
+        }
+
+        onChart_Km_Values_Changed: {
+
+            measure_Rails.draw_New_Km_Block()
+
+        }
+
+        onNew_Riht_Signal: {
+
+            measure_Rails.draw_One_Riht()
+
+        }
+
+        onNew_Area_Signal: {
+
+            widthTrack_MeasureLines.draw_Area()
+        }
+
+        onNew_Moving_Signal: {
+
+            sensors_Panel.change_Moving(value)
+
+        }
+
+        onNew_BackLine_Signal: {
+
+            chartView.get_line(index).add_new_Line(SubTypes_Line.Back_Correct_Line, index_list)
+
+        }
+
+        onNew_Line_Signal: {
+
+            chartView.get_line(index).add_new_Line(subType, index_list)
+
+         //   console.log("qqqqqqqqqqqqqqqqqqqqqq ")
+
+       //     sensors_Panel.change_Moving(true)
+
+        }
+
+
+        onNew_SpeedLine_Signal: {
+
+            speed_MeasureLines.draw_New_SpeedLine(type)
+        }
+
+
+    }
+
+
+    My_Sensors_Values{
+        id: sensorsVal
     }
 
     Column{
@@ -161,7 +218,7 @@ Item{
 
                                              Component.onCompleted: {
 
-                                                 speed_MeasureLines.create_SpeedLine()
+                                                 //speed_MeasureLines.create_SpeedLine()
 
                                                 // speed_MeasureLines.create_BorderSeries()
                                              }
@@ -199,17 +256,12 @@ Item{
                                                  id: level_MeasureBlock
                                                  width: parent.width * 0.2 - measure_Row.spacing_value
                                                  height:  parent.height
-                                                 measure_model: [-75, -35, -6, 0, 6, 35, 75]
-                                                 no_values_model: [-6, 6]
-                                                 x_start: 3 //19.2 //- 4.8
-                                                 x_finish: 19 //- 4.8
-                                                 //value: ChartPoints_Model.value.toFixed(2) //1
+                                                 measure_model: charts_Page.chart_Block.level_Chart_Lines.measure_Values.values_List  //[-75, -35, -6, 0, 6, 35, 75]
+                                                 no_values_model: charts_Page.chart_Block.level_Chart_Lines.measure_Values.invisible_UI_values_List
+                                                 x_start:  charts_Page.chart_Block.level_Chart_Lines.measure_Values.x_start //3 //19.2 //- 4.8
+                                                 x_finish: charts_Page.chart_Block.level_Chart_Lines.measure_Values.x_finish  //19 //- 4.8
+                                                 value: charts_Page.chart_Block.level_Chart_Lines.value  //ChartPoints_Model.value.toFixed(2) //1
                                                  title: my_str.level
-
-                                                 Component.onCompleted: {
-
-                                                     level_MeasureLines.create_BorderSeries()
-                                                 }
 
                                              }
 
@@ -217,91 +269,66 @@ Item{
                                                  id: riht_Left_MeasureBlock
                                                  width:  parent.width * 0.15 - measure_Row.spacing_value
                                                  height:  parent.height
-                                                 measure_model: [-30, 0, 3, 30]
-                                                 no_values_model: [ 3, 30]
+                                                 measure_model: charts_Page.chart_Block.rihtLeft_Chart_Lines.measure_Values.values_List
+                                                 no_values_model: charts_Page.chart_Block.rihtLeft_Chart_Lines.measure_Values.invisible_UI_values_List
                                                  no_x_index: 3
-                                                 x_start: 23 //- 3.95
-                                                 x_finish: 32  //- 3.95 //41.355 // x_start + 0.17 * (level_MeasureBlock.x_finish - level_MeasureBlock.x_start) / 0.2
-                                                 value: 1
+                                                 x_start: charts_Page.chart_Block.rihtLeft_Chart_Lines.measure_Values.x_start
+                                                 x_finish: charts_Page.chart_Block.rihtLeft_Chart_Lines.measure_Values.x_finish  //- 3.95 //41.355 // x_start + 0.17 * (level_MeasureBlock.x_finish - level_MeasureBlock.x_start) / 0.2
+                                                 value: charts_Page.chart_Block.rihtLeft_Chart_Lines.value
                                                  title: my_str.riht_Left
 
-                                                 Component.onCompleted: {
-
-                                                     riht_Left_MeasureLines.create_BorderSeries()
-                                                 }
                                              }
 
                                              Measure_Block {
                                                  id: riht_Right_MeasureBlock
                                                  width:  parent.width * 0.15 - measure_Row.spacing_value
                                                  height:  parent.height
-                                                 measure_model: [-30, -3, 0, 30]
-                                                 no_values_model: [-30, -3]
+                                                 measure_model: charts_Page.chart_Block.rihtRight_Chart_Lines.measure_Values.values_List
+                                                 no_values_model: charts_Page.chart_Block.rihtRight_Chart_Lines.measure_Values.invisible_UI_values_List
                                                  no_x_index: 0
-                                                 x_start: 39 //- 2.95
-                                                 x_finish: x_start + riht_Left_MeasureBlock.x_finish - riht_Left_MeasureBlock.x_start
-                                                 value: 1
+                                                 x_start: charts_Page.chart_Block.rihtRight_Chart_Lines.measure_Values.x_start
+                                                 x_finish: charts_Page.chart_Block.rihtRight_Chart_Lines.measure_Values.x_finish
+                                                 value: charts_Page.chart_Block.rihtRight_Chart_Lines.value
                                                  title: my_str.riht_Right
 
-                                                 Component.onCompleted: {
-
-                                                     riht_Right_MeasureLines.create_BorderSeries()
-
-                                                 }
                                              }
 
                                              Measure_Block {
-                                                 id: sample_MeasureBlock
+                                                 id: widthTrack_MeasureBlock
                                                  width:  parent.width * 0.2 - measure_Row.spacing_value
                                                  height:  parent.height
-                                                 measure_model: [1510, 1512, 1520, 1538, 1546]
-                                                 no_values_model: [1510]
-                                                 x_start: 52 //- 2.3
-                                                 x_finish: 68 //- 2.3
-                                                 value: 1
+                                                 measure_model: charts_Page.chart_Block.widthTrack_Chart_Lines.measure_Values.values_List
+                                                 no_values_model: charts_Page.chart_Block.widthTrack_Chart_Lines.measure_Values.invisible_UI_values_List
+                                                 x_start: charts_Page.chart_Block.widthTrack_Chart_Lines.measure_Values.x_start
+                                                 x_finish: charts_Page.chart_Block.widthTrack_Chart_Lines.measure_Values.x_finish
+                                                 value: charts_Page.chart_Block.widthTrack_Chart_Lines.value
                                                  title: my_str.widthTrack
 
-                                                 Component.onCompleted: {
 
-                                                     tmp_offset = tmp_offset + 10
-
-                                                     sample_MeasureLines.create_BorderSeries()
-
-                                                 }
                                              }
 
                                              Measure_Block {
                                                  id: down_Left_MeasureBlock
                                                  width:  parent.width * 0.15 - measure_Row.spacing_value
                                                  height:  parent.height
-                                                 measure_model: [-10, 0, 10]
-                                                 x_start: 72 //- 1
-                                                 x_finish: 83 //- 1
-                                                 value: 8
+                                                 measure_model: charts_Page.chart_Block.downLeft_Chart_Lines.measure_Values.values_List
+                                                 x_start: charts_Page.chart_Block.downLeft_Chart_Lines.measure_Values.x_start
+                                                 x_finish: charts_Page.chart_Block.downLeft_Chart_Lines.measure_Values.x_finish
+                                                 value: charts_Page.chart_Block.downLeft_Chart_Lines.value
                                                  title: my_str.down_Left
 
-                                                 Component.onCompleted: {
-
-                                                     down_Left_MeasureLines.create_BorderSeries()
-
-                                                 }
                                              }
 
                                              Measure_Block {
                                                  id: down_Right_MeasureBlock
                                                  width:  parent.width * 0.15 - measure_Row.spacing_value
                                                  height:  parent.height
-                                                 measure_model: [-10, 0, 10]
-                                                 x_start: 86 //- 0.5
-                                                 x_finish: x_start + down_Left_MeasureBlock.x_finish - down_Left_MeasureBlock.x_start
-                                                 value: 10
+                                                 measure_model: charts_Page.chart_Block.downRight_Chart_Lines.measure_Values.values_List
+                                                 x_start: charts_Page.chart_Block.downRight_Chart_Lines.measure_Values.x_start
+                                                 x_finish: charts_Page.chart_Block.downRight_Chart_Lines.measure_Values.x_finish
+                                                 value: charts_Page.chart_Block.downRight_Chart_Lines.value
                                                  title: my_str.down_Right
 
-                                                 Component.onCompleted: {
-
-                                                     down_Right_MeasureLines.create_BorderSeries()
-
-                                                 }
                                              }
 
 
@@ -505,13 +532,37 @@ Item{
                                 Item{
                                    width: parent.width
                                    height:  parent.height - 48 - ui.basic_spacing / 2
+                                   clip:true
+
+                                   NumberAnimation {id: test_anim;  target: chart_Rectangle; property: "anchors.bottomMargin"; from: 400; to: 0; duration: 20000 }
 
                                    Rectangle{
                                        id: chart_Rectangle
                                        width: parent.width //- viser_Rectangle.width - ui.basic_spacing / 2
                                        height:  parent.height
-                                       anchors.left: parent.left
+
+
+                                       anchors{
+
+                                           left: parent.left
+
+                                           //bottom: parent.bottom
+
+                                          // bottomMargin: 400// chart_Rectangle.width - 400
+
+                                       }
+
+                                       Component.onCompleted: {
+
+                                        //   test_anim.start()
+                                       }
+
+
+
+
                                        color: Style.light_Color //"transparent"
+
+
                                        radius: ui.radius
                                        layer.enabled: true
                                        layer.effect: Mask_Rectangle{target: parent}
@@ -539,13 +590,19 @@ Item{
 
                                                        Component.onCompleted: {
 
-                                                          // km_ChartView.setAxisY(yKm_ValueAxis)
+                                                           measure_Rails.draw_Last_Line()
 
-                                                           create_RailsLine()
+                                                           //console.log("aaaaaaaaaa coef === " + km_ChartView.coef)
 
-                                                        //   create_KmLine(20)
+                                                         //  create_RailsLine()
+
                                                        }
 
+
+                                                   }
+
+                                                   Measure_Rails{
+                                                       id: measure_Rails
 
                                                    }
 
@@ -586,6 +643,36 @@ Item{
 
                                                    property int max: 100
 
+                                                   function get_line(index){
+
+                                                       switch(index){
+
+                                                       case Name_Measures.Level_Measure:
+
+                                                           return level_MeasureLines
+
+                                                       case Name_Measures.Riht_Left_Measure:
+
+                                                           return riht_Left_MeasureLines
+
+                                                       case Name_Measures.Riht_Right_Measure:
+
+                                                           return riht_Right_MeasureLines
+
+                                                       case Name_Measures.WidthTrack_Measure:
+
+                                                           return widthTrack_MeasureLines
+
+                                                       case Name_Measures.Down_Left_Measure:
+
+                                                           return down_Left_MeasureLines
+
+                                                       case Name_Measures.Down_Right_Measure:
+
+                                                           return down_Right_MeasureLines
+
+                                                       }
+                                                   }
 
                                                    Charts_Anim{
                                                        id: chart_anim
@@ -631,6 +718,9 @@ Item{
                                                      model: level_MeasureBlock.x_values_model
                                                      x_start: level_MeasureBlock.x_start
                                                      x_finish: level_MeasureBlock.x_finish
+                                                     mapper_series: charts_Page.chart_Block.level_Chart_Lines
+
+
 
                                                    }
 
@@ -641,6 +731,7 @@ Item{
                                                      no_values_model: [30]
                                                      x_start: riht_Left_MeasureBlock.x_start
                                                      x_finish: riht_Left_MeasureBlock.x_finish
+                                                     mapper_series: charts_Page.chart_Block.rihtLeft_Chart_Lines
 
                                                    }
 
@@ -650,14 +741,18 @@ Item{
                                                      model: riht_Right_MeasureBlock.x_values_model
                                                      x_start: riht_Right_MeasureBlock.x_start
                                                      x_finish: riht_Right_MeasureBlock.x_finish
+                                                     mapper_series: charts_Page.chart_Block.rihtRight_Chart_Lines
+
                                                    }
 
                                                    Measure_Lines{ // Шаблон
-                                                     id: sample_MeasureLines
-                                                     line_name: Name_Measures.Sample_Measure
-                                                     model: sample_MeasureBlock.x_values_model
-                                                     x_start: sample_MeasureBlock.x_start
-                                                     x_finish: sample_MeasureBlock.x_finish
+                                                     id: widthTrack_MeasureLines
+                                                     line_name: Name_Measures.WidthTrack_Measure
+                                                     model: widthTrack_MeasureBlock.x_values_model
+                                                     x_start: widthTrack_MeasureBlock.x_start
+                                                     x_finish: widthTrack_MeasureBlock.x_finish
+                                                     mapper_series: charts_Page.chart_Block.widthTrack_Chart_Lines
+
 
                                                    }
 
@@ -667,6 +762,7 @@ Item{
                                                      model: down_Left_MeasureBlock.x_values_model
                                                      x_start: down_Left_MeasureBlock.x_start
                                                      x_finish: down_Left_MeasureBlock.x_finish
+                                                     mapper_series: charts_Page.chart_Block.downLeft_Chart_Lines
 
                                                    }
 
@@ -676,6 +772,8 @@ Item{
                                                      model: down_Right_MeasureBlock.x_values_model
                                                      x_start: down_Right_MeasureBlock.x_start
                                                      x_finish: down_Right_MeasureBlock.x_finish
+                                                     mapper_series: charts_Page.chart_Block.downRight_Chart_Lines
+
                                                    }
 
 
@@ -816,16 +914,6 @@ Item{
                                 height: ui.height_Button
 
 
-                                Sensors_Values{
-                                    id: sensorsVal
-
-                                    onIsPlay_ChartChanged: {
-
-                                        startStop_Button.create_rotation_anim()
-
-                                    }
-                                }
-
                                 Custom_Button{
                                     id: startStop_Button
                                     width: parent.width
@@ -833,43 +921,17 @@ Item{
                                     type_Button:  Custom_Button.Type_Button.Outlined_Button
                                     type_Content:  Custom_Button.Type_Content_Button.Icon_Content
 
-                                    isCheck: sensorsVal.isPlay_Chart
+                                    isCheck: charts_Page.moving_Values.isPlay_Chart
 
                                     source: isCheck ? "qrc:/my_components/icons/"+ Style.theme + "/utils/pause.svg" : "qrc:/my_components/icons/"+ Style.theme + "/utils/play.svg"
 
                                     onClicked_Signal: {
 
-                                        //console.log("Sensors_Values.isPlay_Chart = " + sensorsVal.isPlay_Chart)
-                                       // create_rotation_anim()
-
-                                        sensorsVal.setPlay(true);
-
-                                        //Mqqt_Client.playPause_Chart()
-
-                                        //Chart_Work.change_check_Draw(isCheck)
-
-
-                                       /* if(outlined){
-
-                                            outlined = false
-
-                                            source = "qrc:/icons/"+ Style.theme + "/utils/play.svg"
-
-                                        }
-                                        else{
-
-                                            outlined = true
-
-                                            source = "qrc:/icons/"+ Style.theme + "/utils/pause.svg"
-
-
-
-                                        } */
+                                        charts_Page.moving_Values.setPlay(true);
 
                                     }
 
                                 }
-
 
                             }
 
@@ -967,6 +1029,7 @@ Item{
                 width:1000
                 height: 48 * 2
                 anchors.right: parent.right
+                anchors.rightMargin: 100
                 anchors.bottom: parent.bottom
 
 
@@ -1102,6 +1165,38 @@ Item{
                            Mqqt_Client.test_slot()
 
                         }
+
+                    }
+
+                    Button{
+                        width: 200
+                        height: parent.height
+                        text:  qsTr("Километр 2")
+
+                        property bool check: false
+
+                        onClicked: {
+
+                            charts_Page.set_New_Km("38", 320, Type_Sleepers.Reinforced_Concrete, Type_Picket_Position.Pickets_Ascending)
+
+
+                        }
+
+
+                    }
+
+                    Button{
+                        width: 100
+                        height: parent.height
+                        text:  qsTr("Новая скорость")
+
+                        onClicked: {
+
+                            charts_Page.set_New_Speed(Type_Trains.Pass_Train, 10)
+
+
+                        }
+
 
                     }
 
@@ -1261,6 +1356,44 @@ Item{
 
 
                      }
+                     
+                     
+                     Button{
+                         width: 200
+                         height: parent.height
+                         text:  qsTr("Километр 1")
+
+                         property bool check: false
+
+                         onClicked: {
+
+                             charts_Page.set_New_Km("12", 480, Type_Sleepers.Before_1996, Type_Picket_Position.Pickets_Descending)
+                             
+
+                         }
+
+
+                     }
+
+                     Button{
+                         width: 100
+                         height: parent.height
+                         text:  qsTr("Зоны")
+
+                         property bool check: false
+
+                         onClicked: {
+
+                             charts_Page.set_New_Area()
+
+
+                         }
+
+
+                     }
+
+                     
+                     
                  }
 
             }
@@ -1275,10 +1408,8 @@ Item{
 
             }
 
-            Component.onDestruction: {
 
-                Chart_Work.clearPoints()
-            }
+
 
         }
 
@@ -1303,7 +1434,12 @@ Item{
             bottomMargin: ui.big_spacing / 2
         }
 
+        Label{
+            anchors.top: parent.top
+            anchors.topMargin: 30
+           text: "odometer = " + charts_Page.moving_Values.odometer_value //a.toFixed(2)
 
+        }
 
 
     }

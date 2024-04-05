@@ -1,25 +1,28 @@
 #include "chartpoints_microservice.h"
-#include "mqtt/mqtt_client.h"
-#include "mqtt/sensors/sensors_values.h"
 #include "mqtt/mqtt_help.h"
 
-#include "mqtt/chart_points/name_measures.h"
-#include "mqtt/chart_points/correct_points.h"
+#include "pages/chart_page.h"
+
 #include "mqtt/chart_points/riht/calculate_riht.h"
 #include "mqtt/chart_points/down/calculate_down.h"
-#include "mqtt/task/task_data.h"
-#include "mqtt/task/task_microservice.h"
 
-//#include "mqtt/export_microservice.h"
+
+//#include "mqtt/task/task_data.h"
+//#include "mqtt/task/task_microservice.h"
+
+
+#include "pages/values/moving_values.h"
+#include "pages/values/map_values.h"
 
 #include "../Export_Lib/export_lib.h"
 
-//#include "../Export_Lib/file/export_db.h"
 
-ChartPoints_Microservice::ChartPoints_Microservice(MQTT_Client *pointer)
+
+ChartPoints_Microservice::ChartPoints_Microservice()
 {
 
-    m_pointer = pointer;
+    //chart_Page = new Chart_Page();
+
 
      //Export_DB export_db(Export_Lib::db_path);
 
@@ -36,7 +39,7 @@ void ChartPoints_Microservice::add_Command(int num, const QByteArray &message){
 
         break;
 
-    case Name_Measures::Sample_Measure:
+    case Name_Measures::WidthTrack_Measure:
 
         add_Sample(num, message);
 
@@ -69,16 +72,13 @@ void ChartPoints_Microservice::add_Command(int num, const QByteArray &message){
     }
 }
 
-
 void ChartPoints_Microservice::add_Level(int index, const QByteArray &message){
 
     QList<double> list_values = MQTT_Help::getValueFrom_JSON(message, QList<QString> {"level", "odo"});
 
-    if(check_Forward(list_values.at(1))){
+    check_Point(index, list_values.at(0), check_Forward(list_values.at(1)));
 
-        check_Point(index, list_values.at(0));
 
-    }
 }
 
 void ChartPoints_Microservice::add_Sample(int index, const QByteArray &message){
@@ -86,22 +86,23 @@ void ChartPoints_Microservice::add_Sample(int index, const QByteArray &message){
     QList<double> list_values = MQTT_Help::getValueFrom_JSON(message, QList<QString> {"widthTrack", "odo", "move_horizontal_left", "move_horizontal_right"});
 
 
-    if(check_Forward(list_values.at(1))){
-
-        check_Point(index, list_values.at(0));
+    bool isForward = check_Forward(list_values.at(1));
 
 
-        Calculate_Riht::add_Riht(list_values.at(1), list_values.at(2), list_values.at(3), Sensors_Values::yaw_value);
+    check_Point(index, list_values.at(0), isForward);
+
+
+    Calculate_Riht::add_Riht(list_values.at(1), list_values.at(2), list_values.at(3), Map_Values::yaw_value, isForward);
 
 
 
-        double move_vertical_left = 1;
+    double move_vertical_left = 1;
 
-        double move_vertical_right = 1;
+    double move_vertical_right = 1;
 
-        Calculate_Down::add_Down(list_values.at(1), move_vertical_left, move_vertical_right, Sensors_Values::pitch_value);
+    Calculate_Down::add_Down(list_values.at(1), move_vertical_left, move_vertical_right, Map_Values::pitch_value, isForward);
 
-    }
+
 
 
 }
@@ -111,9 +112,9 @@ void ChartPoints_Microservice::add_Side_Damage_Measure(int index, const QByteArr
 
     QList<double> list_values = MQTT_Help::getValueFrom_JSON(message, QList<QString> {"sideDamage_Left", "sideDamage_Right"});
 
-    check_Point(index, list_values.at(0));
+    check_Point(index, list_values.at(0), true);
 
-    check_Point(index + 1, list_values.at(1));
+    check_Point(index + 1, list_values.at(1), true);
 
 }
 
@@ -121,7 +122,7 @@ void ChartPoints_Microservice::add_Vertical_Damage_Measure(int index, const QByt
 
     QList<double> list_values = MQTT_Help::getValueFrom_JSON(message, QList<QString> {"verticalDamage"});
 
-    check_Point(index, list_values.at(0));
+    check_Point(index, list_values.at(0), true);
 
 }
 
@@ -129,7 +130,7 @@ void ChartPoints_Microservice::add_Bowing_Measure(int index, const QByteArray &m
 
     QList<double> list_values = MQTT_Help::getValueFrom_JSON(message, QList<QString> {"bowing"});
 
-    check_Point(index, list_values.at(0));
+    check_Point(index, list_values.at(0), true);
 
 }
 
@@ -137,157 +138,102 @@ void ChartPoints_Microservice::add_Rolling_Surface_Measure(int index, const QByt
 
     QList<double> list_values = MQTT_Help::getValueFrom_JSON(message, QList<QString> {"rollingSurface"});
 
-    check_Point(index, list_values.at(0));
+    check_Point(index, list_values.at(0), true);
 
 }
 
-
-void ChartPoints_Microservice::check_Signal_Forward(bool forwardCheck){
-
-    bool isForward = Sensors_Values::forward;
-
-    if(!forwardCheck){
-
-        isForward = !isForward;
-    }
-
-    if(!isForward){
-
-        emit m_pointer->newDirection_movement_signal(isForward);
-
-        Sensors_Values::forward = isForward;
-    }
-
-}
 
 bool ChartPoints_Microservice::check_Forward(float value){
 
     bool moving = true;
 
-    if(Sensors_Values::odometer_value < value){
+    if(value <= Moving_Values::odometer_value){
 
-      //  check_Signal_Forward(true);
-
-        if(!Sensors_Values::forward){
-
-            emit m_pointer->newDirection_movement_signal(true);
-
-            Sensors_Values::forward = true;
-
-        }
-    }
-    else{
-
-        if(Sensors_Values::odometer_value == value){
-
-            moving = false;
-
-            qDebug() << "Стоим на месте!!!!";
-        }
-
-        //check_Signal_Forward(false);
-
-
-        if(Sensors_Values::forward){
-
-            emit m_pointer->newDirection_movement_signal(false);
-
-            Sensors_Values::forward = false;
-
-        }
-        /*else{
-
-            // Пока тестово
-            if(!Sensors_Values::checkFirstMove){
-
-                qDebug() << "yyyyyyyyyyyyyyy";
-                emit m_pointer->newDirection_movement_signal(false);
-
-                Sensors_Values::forward = false;
-
-                Sensors_Values::checkFirstMove = true;
-            }
-
-        }*/
+        moving = false;
 
     }
 
-    emit m_pointer->newSystemCoord_signal(value);
+    Moving_Values::odometer_value = value;
 
 
-    Sensors_Values::odometer_value = value;
+   // Task_Microservice z(m_pointer);
+
+   // z.add_TaskValues(value);
 
 
-    Task_Microservice z(m_pointer);
-
-    z.add_TaskValues(value);
+    //QPair<bool, QPair<QString, QString>> station = Task_Values::get_Station(value);
 
 
-    /*QPair<bool, QPair<QString, QString>> station = Task_Values::get_Station(value);
-
-    if(station.first){
-
-        emit m_pointer->newStation_signal(station.second.first, station.second.second);
-
-    }*/
-
-
-
-    qDebug() << "odometer_value = " + QString::number(Sensors_Values::odometer_value);
 
     return moving;
 }
 
-void ChartPoints_Microservice::check_Riht(float value_left, float value_right){
 
-    bool isRight = false;
+void ChartPoints_Microservice::check_Point(int index, float value, bool isForwardMoving){
 
-    if(0 <= value_left){
+    // Тестовый обыгрыш (поймали пропуск)
+    if(index == Name_Measures::Level_Measure && value == -5000){
 
-        isRight = true;
+        qDebug() << "ПРОПУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУСК";
 
-    }
-
-    if(Sensors_Values::isRight_Riht != isRight){
-
-        Sensors_Values::isRight_Riht = isRight;
-
-        emit m_pointer->newRihtPosition_signal(isRight);
+        Chart_Page::add_Point(index, SubTypes_Line::Null_Line, 0, QPoint(0, 0));
 
     }
+    else{
 
-    check_Point(Name_Measures::Riht_Left_Measure, value_left);
+        Chart_Point chart_Point = Correct_Points::check_Point(index, value);
 
-    check_Point(Name_Measures::Riht_Right_Measure, value_right);
 
-}
+        //Chart_Page *chart_Page = new Chart_Page();
 
-void ChartPoints_Microservice::check_Point(int index, float value){
+        if(Chart_Page::get_Moving_Values()->get_isPlay_Chart()){ // Sensors_Values::isPlay_Chart
 
-    QPair<bool, float> pair = Correct_Points::check_Point(index, value);
 
-    if(Sensors_Values::isPlay_Chart){
+            if(isForwardMoving){
 
-        if(pair.first){
+                int sub_TypeLine;
 
-            qDebug() << "odometer_value = " + QString::number(Sensors_Values::odometer_value);
+                if(chart_Point.get_is_Correct()){
 
-           // emit m_pointer->newPoint_Chart_signal(index, pair.second, Sensors_Values::odometer_value);
-            emit m_pointer->newPoint_Chart_signal(index, pair.second, 0);
+                    sub_TypeLine = SubTypes_Line::Correct_Line;
 
-            //qDebug() << "level = " + QString::number(pair.second);
+                }
+                else{
+
+                    sub_TypeLine = SubTypes_Line::Error_Line;
+
+                }
+
+                Chart_Page::add_Point(index, sub_TypeLine, chart_Point.get_Border_Value(), QPoint(chart_Point.get_Value(), 0));
+
+
+            }
+            else{
+
+                Chart_Page::remove_Point(index);
+
+                qDebug() << "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz";
+            }
+
+
+
+            //Export_Lib::addPoints_To_File(index, pair.second, Sensors_Values::odometer_value);
+
+
+            //Export_DB export_db(Export_Lib::db_path);
+
+            //export_db.insertPoint(index, chart_Point.get_Value(), 0);
+
+
+
+
+            //Export_Microservice::add_PointsInFile(index, pair.second, Sensors_Values::odometer_value);
 
         }
-
-        //Export_Lib::addPoints_To_File(index, pair.second, Sensors_Values::odometer_value);
-
-
-        Export_DB export_db(Export_Lib::db_path);
-        export_db.insertPoint(index, pair.second, Sensors_Values::odometer_value);
-
-        //Export_Microservice::add_PointsInFile(index, pair.second, Sensors_Values::odometer_value);
-
     }
+
+
+
 
 
 

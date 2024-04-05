@@ -19,25 +19,17 @@
 #include "translate_headers/mytranslator.h"
 
 #include "databases/big_database.h"
-//#include "databases/my_database.h"
-
-//#include "databases/accounts/accounts.h"
-//#include "databases/warnings/warnings.h"
 
 
-#include "measures/chart_work.h"
 
 #include "test_smart.h"
 
+#include "test_class.h"
+
 #include "mqtt/mqtt_client.h"
 #include "mqtt/sensors/sensorsregister_microservice.h"
-#include "models/navigationmap_model.h"
-#include "models/chartpoints_model.h"
 
 
-
-//#include <lib/test_lib_7.h>
-//#include <lib/log_lib.h>
 
 #include "../Test_Dynamic_Lib/test_dynamic_lib.h"
 #include "../Log_Lib/log_lib.h"
@@ -48,19 +40,30 @@
 
 #include "../User_DB_Lib/accounts/colors_profile.h"
 #include "../User_DB_Lib/accounts/authorized_account.h"
-#include "../Export_Lib/file/data_types/chart_types/type_sleepers.h"
-#include "../Export_Lib/file/data_types/chart_types/type_arrows.h"
-#include "../Export_Lib/file/data_types/chart_types/type_objects.h"
+#include "../Export_Lib/file/data_types/chart_types/enums/type_sleepers.h"
+#include "../Export_Lib/file/data_types/chart_types/enums/type_arrows.h"
+#include "../Export_Lib/file/data_types/chart_types/enums/type_objects.h"
+#include "../Export_Lib/file/data_types/chart_types/enums/type_picket_position.h"
+#include "../Export_Lib/file/data_types/chart_types/enums/types_line.h"
+#include "../Export_Lib/file/data_types/chart_types/enums/subtypes_line.h"
+#include "../Export_Lib/file/data_types/chart_types/enums/type_areas.h"
+#include "../Export_Lib/file/data_types/chart_types/enums/type_trains.h"
 
 
-#include "pages/task_page.h"
+
 #include "pages/chart_page.h"
 #include "pages/warning_page.h"
 #include "pages/register_page.h"
 //#include "pages/authorized_account.h"
 #include "pages/pick_account_page.h"
 #include "pages/finish_task_page.h"
-#include "pages/custom_task_page.h"
+#include "pages/values/map_values.h"
+#include "pages/values/my_sensors_values.h"
+
+#include "../Passport_DB_Lib/pages/custom_task_page.h"
+#include "../Passport_DB_Lib/pages/task_page.h"
+
+
 #include "pages/enums/name_main_pages.h"
 
 //#include <QtQuickTest>
@@ -97,7 +100,23 @@ void registerPages(){
 
     qmlRegisterUncreatableType<Type_Objects>("Type_Objects", 1, 0, "Type_Objects", "Not creatable as it is an enum type");
 
+    qmlRegisterUncreatableType<Type_Picket_Position>("Type_Picket_Position", 1, 0, "Type_Picket_Position", "Not creatable as it is an enum type");
+
     qmlRegisterUncreatableType<Name_Main_Pages>("Name_Main_Pages", 1, 0, "Name_Main_Pages", "Not creatable as it is an enum type");
+
+
+    qmlRegisterType<Map_Values>("Map_Values", 1, 0, "Map_Values");
+
+    qmlRegisterType<My_Sensors_Values>("My_Sensors_Values", 1, 0, "My_Sensors_Values");
+
+
+    qmlRegisterUncreatableType<Types_Line>("Types_Line", 1, 0, "Types_Line", "Not creatable as it is an enum type");
+
+    qmlRegisterUncreatableType<SubTypes_Line>("SubTypes_Line", 1, 0, "SubTypes_Line", "Not creatable as it is an enum type");
+
+    qmlRegisterUncreatableType<Type_Areas>("Type_Areas", 1, 0, "Type_Areas", "Not creatable as it is an enum type");
+
+    qmlRegisterUncreatableType<Type_Trains>("Type_Trains", 1, 0, "Type_Trains", "Not creatable as it is an enum type");
 
 }
 
@@ -156,19 +175,15 @@ int main(int argc, char *argv[])
 
     big_database big_db;
 
-    Chart_Work chart_work;
 
-    //My_pdf my_pdf;
 
-    //My_Database my_db;
-
-    Accounts accounts;
+   /* Accounts accounts;
 
     accounts.create_table();
 
     Warnings warnings;
 
-    warnings.create_table();
+    warnings.create_table(); */
 
 
     MQTT_Client mqtt_Client;
@@ -202,20 +217,11 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("big_db", &big_db);
 
-    engine.rootContext()->setContextProperty("Chart_Work", &chart_work);
-
-   // engine.rootContext()->setContextProperty("Accounts", &accounts);
-
-   // engine.rootContext()->setContextProperty("Warnings", &warnings);
 
 
     engine.rootContext()->setContextProperty("Mqqt_Client", &mqtt_Client);
 
 
-
-    NavigationMap_Model nav;
-
-    engine.rootContext()->setContextProperty("NavigationMap_Model", &nav);
 
 
 
@@ -242,25 +248,11 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("ui", &design_Values_Lib);
 
-  //  qmlRegisterType<NavigationMap_Model>("NavigationMap_Model", 1, 0, "NavigationMap_Model");
 
 
-    ChartPoints_Model *chartPoints_Model = new ChartPoints_Model();
+    Test_Class test_Class;
 
-    auto mapper = new QtCharts::QVXYModelMapper();
-
-    mapper->setModel(chartPoints_Model);
-
-    mapper->setXColumn(0);
-
-    mapper->setYColumn(1);
-
-
-    engine.rootContext()->setContextProperty("ChartPoints_Model", chartPoints_Model);
-
-   engine.rootContext()->setContextProperty("mapper", mapper);
-
-
+    engine.rootContext()->setContextProperty("Test_Class", &test_Class);
 
 
 
