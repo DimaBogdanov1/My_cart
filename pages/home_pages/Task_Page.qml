@@ -5,7 +5,7 @@ import QtCharts 2.15
 import QtQuick.Dialogs 1.0
 import QtQuick.Layouts 1.15
 
-import Style 1.0
+
 
 import my_components 1.0
 

@@ -1,7 +1,5 @@
 import QtQuick 2.15
 
-import Style 1.0
-import MyLang 1.0
 
 Item {
     id: root_Item

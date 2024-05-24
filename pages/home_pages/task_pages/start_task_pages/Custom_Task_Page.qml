@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 import Custom_Task_Page 1.0
-import Style 1.0
+
 
 import my_components 1.0
 
@@ -36,7 +36,7 @@ Item{
                     source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
                     start_Keyboard: 0//root_Item.start_Keyboard + ui.block_height + ui.middle_spacing
                     model: [
-                           { title: my_str.siteID, text: custom_Task_Page.task_Passport_DB.siteId, maximumLength: ui.siteId_textLength}
+                           { title: my_str.siteID, text: custom_Task_Page.task_Passport_DB.siteId, maximumLength: ui.text_Values.siteId_textLength}
                        ]
 
                     onTextChanged: {
@@ -50,8 +50,8 @@ Item{
                     source: "qrc:/my_components/icons/" + Style.theme + "/utils/lock.svg"
                     start_Keyboard: 0 //root_Item.start_Keyboard + ui.block_height + ui.middle_spacing
                     model: [
-                           { title: my_str.upNom, text: custom_Task_Page.task_Passport_DB.upNom, maximumLength: ui.upNom_textLength},
-                           { title: my_str.putNom, text: custom_Task_Page.task_Passport_DB.putNom, maximumLength: ui.putNom_textLength}
+                           { title: my_str.upNom, text: custom_Task_Page.task_Passport_DB.upNom, maximumLength: ui.text_Values.upNom_textLength},
+                           { title: my_str.putNom, text: custom_Task_Page.task_Passport_DB.putNom, maximumLength: ui.text_Values.putNom_textLength}
                        ]
 
                     onTextChanged: {
@@ -79,8 +79,8 @@ Item{
                     start_Keyboard: 0
 
                     model: [
-                           { title: my_str.km, text: custom_Task_Page.task_Passport_DB.start_Km, maximumLength: ui.km_textLength},
-                           { title: my_str.meter, text: custom_Task_Page.task_Passport_DB.start_M, maximumLength: ui.meter_textLength}
+                           { title: my_str.km, text: custom_Task_Page.task_Passport_DB.start_Km, maximumLength: ui.text_Values.km_textLength},
+                           { title: my_str.meter, text: custom_Task_Page.task_Passport_DB.start_M, maximumLength: ui.text_Values.meter_textLength}
                        ]
 
                     onTextChanged: {

@@ -36,5 +36,6 @@
         <file>pages/home_pages/task_pages/start_task_pages/Warning_Page.qml</file>
         <file>pages/Diagnostic_Page.qml</file>
         <file>pages/home_pages/Start_Page.qml</file>
+        <file>pages/home_pages/Test_Page_2.qml</file>
     </qresource>
 </RCC>

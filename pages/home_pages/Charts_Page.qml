@@ -6,7 +6,7 @@ import QtQuick.Controls.Material 2.15
 import QtGraphicalEffects 1.15
 
 import qml.measure 1.0
-import Style 1.0
+
 import My_Sensors_Values 1.0
 import Chart_Page 1.0
 import Type_Sleepers 1.0
@@ -34,53 +34,56 @@ Item{
 
         onPlayChart_Changed: {
 
-            startStop_Button.create_rotation_anim()
+            chart_Block_Page.update_Play_Button()
 
         }
 
         onChart_Km_Values_Changed: {
 
-            measure_Rails.draw_New_Km_Block()
-
+            chart_Block_Page.draw_New_Km_Block()
         }
 
         onNew_Riht_Signal: {
 
-            measure_Rails.draw_One_Riht()
+            chart_Block_Page.draw_One_Riht()
 
         }
 
         onNew_Area_Signal: {
 
-            widthTrack_MeasureLines.draw_Area()
+            chart_Block_Page.draw_Area(index)
+
         }
 
         onNew_Moving_Signal: {
 
-            sensors_Panel.change_Moving(value)
+            chart_Block_Page.change_Moving(value)
 
         }
 
         onNew_BackLine_Signal: {
 
-            chartView.get_line(index).add_new_Line(SubTypes_Line.Back_Correct_Line, index_list)
+            chart_Block_Page.add_new_Line(index, SubTypes_Line.Back_Correct_Line, index_list)
 
         }
 
         onNew_Line_Signal: {
 
-            chartView.get_line(index).add_new_Line(subType, index_list)
-
-         //   console.log("qqqqqqqqqqqqqqqqqqqqqq ")
-
-       //     sensors_Panel.change_Moving(true)
+            chart_Block_Page.add_new_Line(index, subType, index_list)
 
         }
 
 
         onNew_SpeedLine_Signal: {
 
-            speed_MeasureLines.draw_New_SpeedLine(type)
+            chart_Block_Page.draw_New_SpeedLine(type)
+
+        }
+
+        onRemove_Fisrst_Km_Signal: {
+
+            chart_Block_Page.remove_first_Km()
+
         }
 
 
@@ -91,7 +94,511 @@ Item{
         id: sensorsVal
     }
 
+
+    Chart_Block_Page{
+        id: chart_Block_Page
+        width: parent.width
+        height: parent.height
+        charts_Page: charts_Page
+
+        onBack_Click_Signal: {
+
+            sub_index_HomePage = page_Loader.open_back(sub_index_HomePage, 1)
+
+        }
+    }
+
+    List_With_Title{
+               id: defect_List
+               width:  800
+               height: 400 //parent.height
+               title: "Маршруты"
+
+               header_model: [
+                       { title: qsTr("Устройство"), size: 0.3},
+                       { title: qsTr("checked"), size: 0.3},
+                       { title: qsTr("checkable"), size: 0.4},
+
+
+                   ]
+
+
+               model: charts_Page.top_Bars_Models.zoom_Model
+
+               delegate: List_Row{
+                   model: [text, checked, checkable ]
+
+                   header_model: defect_List.header_model
+
+               }
+
+               Component.onCompleted: {
+
+                   console.log("ssssssssssssss rowCount() =" + charts_Page.top_Bars_Models.zoom_Model.rowCount())
+               }
+           }
+
+
+    Button{
+        width: 100
+        height: 40
+        text: "Test2"
+
+        anchors.top: parent.top
+
+        anchors.topMargin: 600
+
+        onClicked: {
+
+            charts_Page.top_Bars_Models.zoom_Model.update_All_Checked_Menu(1)
+
+            console.log("ssssssssssssss checked =" + charts_Page.top_Bars_Models.zoom_Model.get(1).checked)
+
+
+            charts_Page.top_Bars_Models.menu_Model_Element_Clicked(0, 8)
+
+
+        }
+
+    }
+
+
+
+    Menu_Block{
+        id: tmp_menu
+        height: 400 //get_height(popup.model[index].count) //  parent.height / model.length
+
+        title: charts_Page.top_Bars_Models.zoom_Model.menu_title
+        model: charts_Page.top_Bars_Models.zoom_Model
+
+        anchors{
+
+         top: parent.top
+
+         topMargin: 400
+
+         left: parent.left
+
+         leftMargin: 400
+        }
+
+
+    }
+
+
+
     Column{
+        width:1000
+        height: 48 * 2
+        anchors.right: parent.right
+        anchors.rightMargin: 100
+        anchors.bottom: parent.bottom
+
+
+        Row{
+            width:parent.width
+            height: 48
+
+            Button{
+                width: 100
+                height: parent.height
+                text:  qsTr("вниз")
+                onClicked: {
+
+                    if(!chart_anim.checkScroll){
+
+                        chart_anim.create_Scroll_on_Pause(chart_Rectangle.height / 10, true)
+
+                    }
+                    else{
+
+                        toast.show("график не на паузе!!!", 3000, 1)
+                    }
+
+
+                }
+
+            }
+
+            Button{
+                width: 100
+                height: parent.height
+                text:  qsTr("вверх")
+                onClicked: {
+
+                    if(!chart_anim.checkScroll){
+
+                        chart_anim.create_Scroll_on_Pause(chart_Rectangle.height / 10, false)
+
+                    }
+                    else{
+
+                        toast.show("график не на паузе!!!", 3000, 1)
+
+                    }
+
+
+                }
+
+            }
+
+            Button{
+                id: coun_y_Btn
+                width: 100
+                height: parent.height
+                onClicked: {
+
+
+                }
+
+            }
+
+            Button{
+                width: 100
+                height: parent.height
+                text:  qsTr("Drop line")
+                onClicked: {
+
+                   //chartView.drop_value += measure_Logic.dropLine(40)
+
+                    charts_Page.remove_First_Km()
+
+
+                   // Chart_Work.dropLine(40)
+                }
+
+            }
+
+            Button{
+                width: 100
+                height: parent.height
+                text:  qsTr("Доп. параметры")
+                property bool check: false
+
+                onClicked: {
+
+                    if(!check){
+
+                        chartView.scrollRight(allMeasure_Row.width)
+
+                        animMeasure.to = -1 * allMeasure_Row.width - ui.basic_spacing
+
+                        check = true
+
+                    }
+                    else{
+
+                        chartView.scrollLeft(allMeasure_Row.width)
+
+                        animMeasure.to = 0
+
+                        check = false
+
+                    }
+
+                    animMeasure.stop()
+
+                    animMeasure.start()
+
+                     //level_MeasureLines.add_point_border()
+
+                }
+
+
+            }
+
+            Button{
+                width: 100
+                height: parent.height
+                text:  qsTr("test")
+                onClicked: {
+
+                   charts_Page.tmp_func()
+
+                   // Chart_Work.dropLine(40)
+                }
+
+            }
+
+
+            Button{
+                width: 100
+                height: parent.height
+                text:  qsTr("Reset odometer")
+                onClicked: {
+
+                   Mqqt_Client.test_slot()
+
+                }
+
+            }
+
+            Button{
+                width: 200
+                height: parent.height
+                text:  qsTr("Километр 2")
+
+                property bool check: false
+
+                onClicked: {
+
+                    charts_Page.set_New_Km("38", 320, Type_Sleepers.Reinforced_Concrete, Type_Picket_Position.Pickets_Ascending)
+
+
+                }
+
+
+            }
+
+            Button{
+                width: 100
+                height: parent.height
+                text:  qsTr("Новая скорость")
+
+                onClicked: {
+
+                    charts_Page.set_New_Speed(Type_Trains.Pass_Train, 120)
+
+
+                }
+
+
+            }
+
+
+            Button{
+                width: 100
+                height: parent.height
+                text:  qsTr("pdf из файла")
+
+                onClicked: {
+
+                    charts_Page.add_Pdf_Info()
+
+
+                }
+
+
+            }
+
+
+        }
+
+        Row{
+
+             width:parent.width
+             height: 48
+
+
+             Button{
+                 width: 100
+                 height: parent.height
+                 text:  qsTr("csv")
+                 onClicked: Chart_Work.openCSV()
+
+             }
+
+             Button{
+                 width: 100
+                 height: parent.height
+                 text:  qsTr("Уведомление")
+                 onClicked: {
+
+                    // sample_MeasureLines.add_area(10, 1, 20, 5)
+
+                     push_Notification.open()
+
+                  //   chartView.zoomIn(Qt.rect(0, 0, charts_Item.width, charts_Item.height))
+
+                //     chartView.zoomIn(Qt.rect(0, 0, charts_Item.width, 300))
+
+                     //chartView.zoom(2)
+
+                 }
+
+
+             }
+
+             Button{
+                 width: 100
+                 height: parent.height
+                 text:  qsTr("Пауза для скрола")
+
+                 property bool checkButton: true
+
+
+                 onClicked: {
+
+
+
+                     chart_anim.change_Pause(checkButton, y_0)
+
+                    // chartView.zoomReset()
+                     //main_ChartView.zoom(1)
+
+                 }
+
+             }
+
+             Button{
+                 width: 100
+                 height: parent.height
+                 text:  qsTr("добавить")
+                 onClicked: {
+
+                     level_MeasureLines.add_point_border()
+
+                    // applicationWindow.flipped = false
+
+                    // chartView.scrollLeft(100)
+
+                 }
+
+             }
+
+
+             Button{
+                 width: 100
+                 height: parent.height
+                 text:  qsTr("вниз")
+                 onClicked: {
+
+                    // chart_anim.create_Main_Scroll(chart_Rectangle.height / 10, false)
+
+                     chart_Block_Page.create_Main_Scroll(30, false)
+
+                    // console.log("chart height = " + charts_Item.height)
+
+                     //chartView.scrollDown(100)
+
+                     //measure_Km.update_Pickets(100)
+
+                 }
+
+             }
+
+             Button{
+                 width: 100
+                 height: parent.height
+                 text:  qsTr("вверх")
+                 onClicked: {
+
+
+                     // Пропорция такая 20 - 446
+
+
+                     //chart_anim.create_Main_Scroll(30, false)
+
+                    // chart_anim.create_Main_Scroll(30, true)
+
+                     chart_Block_Page.create_Main_Scroll(30, true)
+
+
+                     //chartView.scrollDown(charts_Item.height / 10)
+                    // measure_Km.updatePointPosition();
+
+
+                    // chart_anim.create_Main_Scroll(charts_Item.height / 20, false)
+
+
+                    // chartView.scrollUp(100)
+
+                    // measure_Km.update_Pickets(-100)
+
+                 }
+
+             }
+
+             Button{
+                 width: 100
+                 height: parent.height
+                 text:  qsTr("анимация")
+
+                 property bool check: false
+
+                 onClicked: {
+
+                     if(!check){
+
+                         check = true
+
+                       //  km_Tables.open()
+
+                     }
+                     else{
+
+                         check = false
+
+                       //  km_Tables.close()
+
+
+                     }
+
+                     chart_Block_Page.change_Table_Position(check)
+
+                      //level_MeasureLines.add_point_border()
+
+                 }
+
+
+             }
+
+
+             Button{
+                 width: 200
+                 height: parent.height
+                 text:  qsTr("Открыть файл")
+
+                 property bool check: false
+
+                 onClicked: {
+
+                     charts_Page.open_file()
+
+                 }
+
+
+             }
+
+             Button{
+                 width: 100
+                 height: parent.height
+                 text:  qsTr("Зоны")
+
+                 property bool check: false
+
+                 onClicked: {
+
+                     charts_Page.set_New_Area()
+
+
+                 }
+
+
+             }
+
+             Button{
+                 width: 100
+                 height: parent.height
+                 text:  qsTr("линия из бд")
+
+                 onClicked: {
+
+                     charts_Page.get_DB_Line()
+
+
+                 }
+
+
+             }
+
+
+
+         }
+
+    }
+
+    /*Column{
       width: parent.width
       height: parent.height
 
@@ -153,17 +660,40 @@ Item{
                     anchors.centerIn: parent
                     spacing: ui.basic_spacing /// 2 /// 2
 
+                    Row{
+                        id: sensors_Row
+                        width: parent.width
+                        height: 40
+                        spacing: ui.basic_spacing / 2
 
-                    Sensors_Panel{
-                        id: sensors_Panel
-                        height:  40 //96
+                        Task_Values_Panel{
+                            id: task_values_Panel
+                            width: parent.width * 0.85 - parent.spacing / 2
+                            height: parent.height
+                            full_siteId: charts_Page.chart_Block.task_Values.full_siteId
+                            full_upNom: charts_Page.chart_Block.task_Values.full_upNom
+                            full_putNom: charts_Page.chart_Block.task_Values.full_putNom
+                            pch: charts_Page.chart_Block.task_Values.pch
+                            pchy: charts_Page.chart_Block.task_Values.pchy
+                            pd: charts_Page.chart_Block.task_Values.pd
+                            pdb: charts_Page.chart_Block.task_Values.pdb
+                            station_1: charts_Page.chart_Block.task_Values.station_1
+                            station_2: charts_Page.chart_Block.task_Values.station_2
 
+                        }
+
+                        Sensors_Panel{
+                            id: sensors_Panel
+                            width: parent.width * 0.15 - parent.spacing / 2
+                            height: parent.height
+
+                        }
                     }
 
                     Item{ // Грaфик
                         id: charts_Item
                          width: parent.width
-                         height:  parent.height - bootom_Row.height - sensors_Panel.height -  ui.basic_spacing * 2
+                         height:  parent.height - bootom_Row.height - sensors_Row.height -  ui.basic_spacing * 2
                        //radius: ui.radius
                         // color: Style.secondaryAccent_Color
 
@@ -687,31 +1217,6 @@ Item{
                                                     //  onHeightChanged: measure_Km.updatePointPosition();
 
 
-
-                                                   /*Measure_Km{
-                                                       id: measure_Km
-
-                                                       Component.onCompleted: {
-
-                                                          // km_ChartView.setAxisY(yKm_ValueAxis)
-
-                                                           create_RailsLine()
-
-                                                        //   create_KmLine(20)
-                                                       }
-
-                                                   } */
-
-                                                   /*Measure_Lines{  // Скорость
-                                                     id: speed_MeasureLines
-                                                     line_name: 60
-                                                     model: speed_MeasureBlock.x_values_model
-                                                     x_start: speed_MeasureBlock.x_start
-                                                     x_finish: speed_MeasureBlock.x_finish
-
-                                                   }*/
-
-
                                                    Measure_Lines{  // Уровень
                                                      id: level_MeasureLines
                                                      line_name: Name_Measures.Level_Measure
@@ -944,85 +1449,19 @@ Item{
                         Km_Tables{
                             id: km_Tables
                             width: parent.width
+                            defect_model: charts_Page.chart_Block.My_Defect_Model
+                            km_mark_model: charts_Page.chart_Block.My_Km_Mark_Model
 
                         }
 
-                       /* List_With_Title{
-                               id: defect_List
-                               width: parent.width * 0.85 - ui.basic_spacing // //0.6 - ui.basic_spacing / 2
-                               height: parent.height
-                               noTitle: true
-                               title_name_model: [qsTr("Координата"), qsTr("Отстпуление"), str.extent, qsTr("Размер"), qsTr("Длинна"), qsTr("Признак"), str.set_speed, str.limit_speed]
-                               title_size_model: [0.12, 0.16, 0.1, 0.12, 0.1, 0.12, 0.14, 0.14]
 
-                               model: ListModel{
-
-                                   ListElement{
-                                       coord: "256 км 5 м"
-                                       defect: 1
-                                       st: 1
-                                       amp: 1
-                                       dl: 1
-                                       cou: 1
-                                       speed: "60 км/ч"
-                                       limit_speed: "100 км/ч"
-
-
-                                   }
-
-
-                               }
-
-                               delegate: List_Row{
-                                 //  listview: defect_ListView
-                                   model: [coord, defect, st, amp, dl, cou, speed, limit_speed]
-                                   sizes: defect_List.title_size_model
-                                  // cur: defect_ListView.currentIndex
-
-                               }
-
-                           }
-
-                        List_With_Title{
-                               id: km_rating_List
-                               width: parent.width * 0.4 // - ui.basic_spacing //- ui.basic_spacing // 2
-                               height: parent.height
-                               noTitle: true
-                               title_name_model: [ str.km_big, str.set_speed, str.limit_speed, str.extent , qsTr("Оценка") ]
-                               title_size_model: [0.18, 0.23, 0.23, 0.23, 0.13]
-
-                               model: ListModel{
-                                   id: warning_ListModel
-
-                                   ListElement{
-                                      km:"256 км"
-                                      speed: "60 км/ч"
-                                      limit_speed: "100 км/ч"
-                                      extent: "121"
-                                      mark: "Отлично"
-
-                                   }
-
-
-                               }
-
-                               delegate: List_Row{
-                                   width: km_rating_List.width
-                                   model: [km, speed, limit_speed, extent, mark]
-                                   sizes: km_rating_List.title_size_model
-                                  // needHighlight: true
-
-                               }
-
-                           }
-
-                        */
                     }
 
                 }
 
 
             }
+
 
 
             Column{
@@ -1097,7 +1536,10 @@ Item{
                         text:  qsTr("Drop line")
                         onClicked: {
 
-                           chartView.drop_value += measure_Logic.dropLine(40)
+                           //chartView.drop_value += measure_Logic.dropLine(40)
+
+                            charts_Page.remove_First_Km()
+
 
                            // Chart_Work.dropLine(40)
                         }
@@ -1145,10 +1587,10 @@ Item{
                     Button{
                         width: 100
                         height: parent.height
-                        text:  qsTr("Task Values")
+                        text:  qsTr("test")
                         onClicked: {
 
-                           Mqqt_Client.test_slot()
+                           charts_Page.tmp_func()
 
                            // Chart_Work.dropLine(40)
                         }
@@ -1192,7 +1634,23 @@ Item{
 
                         onClicked: {
 
-                            charts_Page.set_New_Speed(Type_Trains.Pass_Train, 10)
+                            charts_Page.set_New_Speed(Type_Trains.Pass_Train, 120)
+
+
+                        }
+
+
+                    }
+
+
+                    Button{
+                        width: 100
+                        height: parent.height
+                        text:  qsTr("pdf из файла")
+
+                        onClicked: {
+
+                            charts_Page.add_Pdf_Info()
 
 
                         }
@@ -1361,14 +1819,13 @@ Item{
                      Button{
                          width: 200
                          height: parent.height
-                         text:  qsTr("Километр 1")
+                         text:  qsTr("Открыть файл")
 
                          property bool check: false
 
                          onClicked: {
-
-                             charts_Page.set_New_Km("12", 480, Type_Sleepers.Before_1996, Type_Picket_Position.Pickets_Descending)
                              
+                             charts_Page.open_file()
 
                          }
 
@@ -1385,6 +1842,21 @@ Item{
                          onClicked: {
 
                              charts_Page.set_New_Area()
+
+
+                         }
+
+
+                     }
+
+                     Button{
+                         width: 100
+                         height: parent.height
+                         text:  qsTr("линия из бд")
+
+                         onClicked: {
+
+                             charts_Page.get_DB_Line()
 
 
                          }
@@ -1413,10 +1885,10 @@ Item{
 
         }
 
-    }
+    } */
 
 
-    Navigation_Map{
+ /*   Navigation_Map{
         id: map
         start_width: button_Map_Column.width
         start_height: button_Map_Column.height - ui.height_Button -  ui.basic_spacing
@@ -1444,7 +1916,7 @@ Item{
 
     }
 
-
+*/
 
 
 }

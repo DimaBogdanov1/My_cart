@@ -1,6 +1,6 @@
 import QtQuick 2.15
 
-import Style 1.0
+
 import Register_Page 1.0
 
 

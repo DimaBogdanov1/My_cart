@@ -36,6 +36,8 @@
 #include "../Passport_DB_Lib/passport_db_lib.h"
 #include "../Notifications_Lib/models/notifications_model.h"
 #include "../Design_Values_Lib/design_values_lib.h"
+#include "../Design_Values_Lib/style.h"
+
 #include "../Strings_Lib/strings_lib.h"
 
 #include "../User_DB_Lib/accounts/colors_profile.h"
@@ -48,6 +50,7 @@
 #include "../Export_Lib/file/data_types/chart_types/enums/subtypes_line.h"
 #include "../Export_Lib/file/data_types/chart_types/enums/type_areas.h"
 #include "../Export_Lib/file/data_types/chart_types/enums/type_trains.h"
+#include "../Export_Lib/pages/history_charts_page.h"
 
 
 
@@ -92,6 +95,8 @@ void registerPages(){
     qmlRegisterType<Finish_Task_Page>("Finish_Task_Page", 1, 0, "Finish_Task_Page");
 
     qmlRegisterType<Custom_Task_Page>("Custom_Task_Page", 1, 0, "Custom_Task_Page");
+
+    qmlRegisterType<History_Charts_Page>("History_Charts_Page", 1, 0, "History_Charts_Page");
 
 
     qmlRegisterUncreatableType<Type_Sleepers>("Type_Sleepers", 1, 0, "Type_Sleepers", "Not creatable as it is an enum type");
@@ -191,7 +196,6 @@ int main(int argc, char *argv[])
     //SensorsRegister_Microservice sensorsRegister_Microservice;
 
 
-    qmlRegisterSingletonType(QUrl("qrc:/my_components/Style.qml"), "Style", 1, 0, "Style"); // Регестрируем Тип Style В QML Для Изменения Темы В Приложении
 
    // qmlRegisterType<MyLang>("MyLang", 1, 0, "MyLang");
 
@@ -247,6 +251,13 @@ int main(int argc, char *argv[])
     Design_Values_Lib design_Values_Lib;
 
     engine.rootContext()->setContextProperty("ui", &design_Values_Lib);
+
+
+    //qmlRegisterSingletonType(QUrl("qrc:/my_components/Style.qml"), "Style", 1, 0, "Style"); // Регестрируем Тип Style В QML Для Изменения Темы В Приложении
+
+    Style style;
+
+    engine.rootContext()->setContextProperty("Style", &style);
 
 
 

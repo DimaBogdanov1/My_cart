@@ -5,7 +5,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.3
 
 //import Authorized_Account 1.0
-import Style 1.0
+//import Style 1.0
 import Name_Main_Pages 1.0
 import my_components 1.0
 
@@ -26,7 +26,8 @@ Item {
                                               {index: Name_Main_Pages.Login_Page,  source: "../pages/Login_Page.qml"},
                                               {index: Name_Main_Pages.Settings_Page,  source: "../pages/Settings_Page.qml"},
                                               {index: Name_Main_Pages.Help_Page,  source: "../pages/Help_Page.qml"},
-                                              {index: 6,  source: "qrc:/pages/home_pages/Start_Page.qml"}
+                                              {index: 6,  source: "qrc:/pages/home_pages/Start_Page.qml"},
+                                              {index: 7,  source: "qrc:/pages/home_pages/Test_Page_2.qml"}
 
                                             ]
 
@@ -174,6 +175,20 @@ Item {
                       onClicked_Signal: {
 
                           opacity_Anim.create_page_anim(6)
+
+                      }
+                  }
+
+                  Custom_Icon_Button{
+                      width:  parent.width - 16
+                      anchors.horizontalCenter: parent.horizontalCenter
+                      height: ui.iconBlock_Size
+                      isChecked: index_Page == Name_Main_Pages.History_Page
+                      source: "qrc:/my_components/icons/" + Style.theme + "/navigation/document.svg"
+                      icon_checked_path: "qrc:/my_components/icons/"+ Style.theme + "/navigation/document_accent.svg"
+                      onClicked_Signal: {
+
+                          opacity_Anim.create_page_anim(7)
 
                       }
                   }

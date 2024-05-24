@@ -2,6 +2,7 @@
 #define EXPORT_POINT_THREAD_H
 
 #include <QThread>
+#include "../Export_Lib/file/export_db.h"
 #include "../Export_Lib/export_lib.h"
 
 class Export_Point_Thread : public QThread

@@ -68,7 +68,7 @@ MQTT_Client::MQTT_Client(QObject *parent) : QObject(parent) //  () //(QObject *p
 
     m_client = new QMqttClient;
 
-    m_client->setHostname(MQTT_Help::getAddress());  //MQTT_Help::getAddress()  // "192.168.1.157" //  "localhost" "172.27.2.33"
+    m_client->setHostname("127.0.0.1");  //MQTT_Help::getAddress()  // "192.168.1.157" //  "localhost" "172.27.2.33"
 
     m_client->setPort(1883);
 

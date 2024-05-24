@@ -15,6 +15,7 @@
 #include "pages/values/map_values.h"
 
 #include "../Export_Lib/export_lib.h"
+#include "../Export_Lib/file/export_db.h"
 
 
 
@@ -171,25 +172,34 @@ bool ChartPoints_Microservice::check_Forward(float value){
 
 void ChartPoints_Microservice::check_Point(int index, float value, bool isForwardMoving){
 
+
+     Chart_Page::add_Point_Measure(index, value, isForwardMoving);
+
     // Тестовый обыгрыш (поймали пропуск)
-    if(index == Name_Measures::Level_Measure && value == -5000){
+  /*  if(index == Name_Measures::Level_Measure && value == -5000){
 
         qDebug() << "ПРОПУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУУСК";
 
-        Chart_Page::add_Point(index, SubTypes_Line::Null_Line, 0, QPoint(0, 0));
+        //Chart_Page::add_Point(index, SubTypes_Line::Null_Line, 0, QPoint(0, 0));
+
+        //Chart_Page::get_Chart_Block()->add_Point(index, SubTypes_Line::Null_Line, 0, QPoint(0, 0));
+
+        Chart_Page::get_Chart_Block()->add_Measure_Point_Step_2(index, SubTypes_Line::Null_Line, 0, QPoint(0, 0));
 
     }
     else{
 
-        Chart_Point chart_Point = Correct_Points::check_Point(index, value);
+
+      //  Chart_Point chart_Point = Correct_Points::check_Point(index, QPoint(value, 0));
 
 
         //Chart_Page *chart_Page = new Chart_Page();
 
         if(Chart_Page::get_Moving_Values()->get_isPlay_Chart()){ // Sensors_Values::isPlay_Chart
 
+            Chart_Page::get_Chart_Block()->add_Measure_Point_Step_1(index, value, isForwardMoving);
 
-            if(isForwardMoving){
+            /*if(isForwardMoving){
 
                 int sub_TypeLine;
 
@@ -204,16 +214,20 @@ void ChartPoints_Microservice::check_Point(int index, float value, bool isForwar
 
                 }
 
-                Chart_Page::add_Point(index, sub_TypeLine, chart_Point.get_Border_Value(), QPoint(chart_Point.get_Value(), 0));
+               // Chart_Page::add_Point(index, sub_TypeLine, chart_Point.get_Border_Value(), chart_Point.get_Value() );
 
+
+                Chart_Page::get_Chart_Block()->add_Point(index, sub_TypeLine, chart_Point.get_Border_Value(), chart_Point.get_Value() );
 
             }
             else{
 
-                Chart_Page::remove_Point(index);
+                Chart_Page::get_Chart_Block()->remove_Point(index);
+
+                //Chart_Page::remove_Point(index);
 
                 qDebug() << "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz";
-            }
+            } */
 
 
 
@@ -229,8 +243,8 @@ void ChartPoints_Microservice::check_Point(int index, float value, bool isForwar
 
             //Export_Microservice::add_PointsInFile(index, pair.second, Sensors_Values::odometer_value);
 
-        }
-    }
+       // }
+    //} */
 
 
 

@@ -6,7 +6,7 @@ import QtQuick.Controls.Material 2.1
 import QtQuick.Controls.Material.impl 2.12 // Библиотека Для Эффекта Высоты
 import QtQml.Models 2.2
 import QtQml 2.2
-import Style 1.0 // Импорт QML синглетона
+ // Импорт QML синглетона
 
 
 

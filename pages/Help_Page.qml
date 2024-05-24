@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
-import Style 1.0
+
 import Task_Page 1.0
 
 
@@ -645,7 +645,7 @@ Item {
 
     Column{
         width:1000
-        height: 48 * 3
+        height: 48 //* 3
         anchors.right: parent.right
 
         anchors.rightMargin: 150
@@ -665,7 +665,7 @@ Item {
                    console.log(task_Page.task_Passport_DB.SiteId_Model.get(task_Page.task_Passport_DB.pickedindex_SiteIDModel).name)
 
 
-                   /* task_Page.get_Objects(
+                  /*  task_Page.get_Objects(
                                   task_Page.task_Passport_DB.SiteId_Model.get(task_Page.task_Passport_DB.pickedindex_SiteIDModel).name,
                                   task_Page.task_Passport_DB.Up_Nom_Model.get(task_Page.task_Passport_DB.pickedindex_Up_Nom_Model).name,
                                   task_Page.task_Passport_DB.Put_Nom_Model.get(task_Page.task_Passport_DB.pickedindex_Put_Nom_Model).name,
@@ -677,19 +677,13 @@ Item {
 
             }
 
-        }
-
-        Row{
-            width:parent.width
-            height: 48
-
             Button{
                 width: 200
                 height: parent.height
-                text:  qsTr("Новый мост")
+                text:  qsTr("Новая оценка в таблицу")
                 onClicked: {
 
-                   Test_Class.test_slot_add_bridge()
+                   Test_Class.test_slot_NewKm()
 
                 }
 
@@ -698,10 +692,10 @@ Item {
             Button{
                 width: 200
                 height: parent.height
-                text:  qsTr("Новая стрелка")
+                text:  qsTr("Общая информация в файл")
                 onClicked: {
 
-                   Test_Class.test_slot_add_arrow()
+                   Test_Class.addGeneral_Info()
 
                 }
 
@@ -710,10 +704,10 @@ Item {
             Button{
                 width: 200
                 height: parent.height
-                text:  qsTr("Новый объект")
+                text:  qsTr("Новый километр в файл")
                 onClicked: {
 
-                   Test_Class.test_slot_add_object()
+                   Test_Class.addNew_Km()
 
                 }
 
@@ -722,10 +716,10 @@ Item {
             Button{
                 width: 200
                 height: parent.height
-                text:  qsTr("Новая линия помощи")
+                text:  qsTr("Добавит точки")
                 onClicked: {
 
-                   Test_Class.test_slot_helpLine()
+                   Test_Class.test_slot_CloseExportMicroservice()
 
                 }
 
@@ -752,74 +746,12 @@ Item {
 
             }
 
+
+
         }
 
 
-       Row{
-           width:parent.width
-           height: 48
 
-           Button{
-               width: 200
-               height: parent.height
-               text:  qsTr("Новый километр")
-               onClicked: {
-
-                  Test_Class.test_slot_NewKm()
-
-               }
-
-           }
-
-           Button{
-               width: 200
-               height: parent.height
-               text:  qsTr("Новые параметры")
-               onClicked: {
-
-                  Test_Class.test_slot_NewParams()
-
-               }
-
-           }
-
-           Button{
-               width: 200
-               height: parent.height
-               text:  qsTr("Новая общая информация")
-               onClicked: {
-
-                  Test_Class.test_slot_NewGeneralInfo()
-
-               }
-
-           }
-
-           Button{
-               width: 200
-               height: parent.height
-               text:  qsTr("Добавит точки")
-               onClicked: {
-
-                  Test_Class.test_slot_CloseExportMicroservice()
-
-               }
-
-           }
-
-           Button{
-               width: 200
-               height: parent.height
-               text:  qsTr("Новые шпалы")
-               onClicked: {
-
-                  Test_Class.test_slot_add_sleepers()
-
-               }
-
-           }
-
-       }
 
     }
 }

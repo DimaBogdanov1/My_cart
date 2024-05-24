@@ -4,322 +4,173 @@ import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.3
 import QtCharts 2.15
 
-import Style 1.0
+
+import History_Charts_Page 1.0
 
 import my_components 1.0
 
 Item {
-    id:row
+    id: root_Item
     width: parent.width
     height: parent.height
 
-    property int tmp_Index: 0
+    History_Charts_Page{
+        id: history_Page
+
+        onChart_Km_Values_Changed: {
+
+            chart_Block_Page.draw_New_Km_Block()
+
+        }
+
+        onNew_Riht_Signal: {
+
+            chart_Block_Page.draw_One_Riht()
+
+        }
+
+        onNew_Line_Signal: {
+
+            chart_Block_Page.add_new_Line(index, subType, index_list)
+
+        }
 
 
-    function addMessage(payload)
-    {
-        messageModel.insert(0, {"payload" : payload})
+        onNew_SpeedLine_Signal: {
 
-        if (messageModel.count >= 100)
-            messageModel.remove(99)
+            chart_Block_Page.draw_New_SpeedLine(type)
 
+        }
 
-        Chart_Work.add_ChartPoint(0, 10, 10)
+        onNew_Area_Signal: {
+
+            chart_Block_Page.draw_Area(index)
+
+        }
+
 
     }
 
-
-
-
-    Rectangle {
+    Chart_Block_Page{
+        id: chart_Block_Page
         width: parent.width
         height: parent.height
-        color: Style.blue_Color
+        movingChart: false
+        charts_Page: history_Page
 
+        onBack_Click_Signal: {
 
+            toast.show("Нажали назад!", 3000, 1)
 
-
-
+        }
     }
-
-
-    Column {
-        width: parent.width
-        height: parent.height
-        spacing: 30
-
-
-
-
-        Custom_TextField {
-            id: textField_1
-            width: parent.width
-            title: my_str.riht_Left
-            maximumLength: 3
-            validator: IntValidator{}
-
-            onReady_to_write_signal: {
-
-                keyboard.text_target = textField_1.get_target()
-
-                keyboard.open(0)
-
-            }
-
-        }
-
-        Stories_Block{
-
-            onClicked_Signal: {
-
-             //   stories_Popup.open()
-
-            }
-        }
-
-
-        Stories_Popup{
-            id: stories_Popup
-        }
-
-
-
-        Rectangle {
-            width: 300
-            height: width
-            color: "brown"
-
-
-            Hover_Anim{
-                id: hover_Anim
-                width: parent.width
-                height: parent.height
-               // outlined: root_Item.outlined
-               // color: root_Item.color
-
-                onClicked_Signal: {
-
-                  //  button_Anim.create_scale_anim()
-
-                  //  glow.change_glow(true)
-
-                   /// root_Item.clicked_Signal()
-
-                }
-
-                onHover_Signal: {
-
-                   // glow.change_glow(value)
-
-                }
-            }
-        }
-
-
-    }
-
 
     Column{
-        width: parent.width
-        height: 100
-        anchors.bottom: parent.bottom
+        width: 1000
+        height: 48
 
-        Row{
-             width: parent.width
-             height: 48
-
-             Button{
-                 width: 200
-                 height: parent.height
-                 text:  qsTr("Начать диагностику")
-                 property bool isStart: false
-                 onClicked: {
-
-                     if(isStart){
-
-                         text = qsTr("Начать диагностику")
-                         isStart = false
-                     }
-                     else{
-
-                         text = qsTr("Остановить диагностику")
-
-                         isStart = true
-
-                     }
-
-                     Mqqt_Client.get_Diagnostic(isStart)
-
-                 }
-
-             }
-
-             Custom_Rectangle_Label {
-                 id: laser_1_Label
-                 width: 200
-                 height: parent.height
-                 color: "grey"
-                 text: "2"
-
-             }
-
-             Custom_Rectangle_Label {
-                 id: laser_2_Label
-                 width: 200
-                 height: parent.height
-                 color: "grey"
-                 text: "2"
-
-             }
-
-        }
-        Row{
-
-             width: parent.width
-             height: 48
-
-             Button{
-                 width: 100
-                 height: parent.height
-                 text:  qsTr("back")
-                 onClicked: {
-
-                   //  homePage_Loader.index_Page--
-
-                     index_swipe_Home--
-
-                 }
-
-             }
-
-             Button{
-                 width: 100
-                 height: parent.height
-                 text:  qsTr("next")
-                 onClicked: {
-
-                 //    homePage_Loader.index_Page++
-                     index_swipe_Home++
-                 }
-
-             }
-
-
-             Connections{
-                 target: Mqqt_Client
-
-
-
-                 function onNewDiagnostic_signal(laser_left, laser_right){
-
-                     if(laser_left){
-
-                         laser_1_Label.text = "левый лазер работает"
-                     }
-                     else{
-
-                         laser_1_Label.text = "левый лазер не работает"
-
-                     }
-
-                     if(laser_right){
-
-                         laser_2_Label.text = "правый лазер работает"
-                     }
-                     else{
-
-                         laser_2_Label.text = "правый лазер не работает"
-
-                     }
-                 }
-             }
-
-             Button{
-                 width: 100
-                 height: parent.height
-                 text:  qsTr("size+")
-                 onClicked: {
-
-                     applicationWindow.width = 1920
-                     applicationWindow.height = 1080
-
-                 }
-
-             }
-
-             Button{
-                 width: 100
-                 height: parent.height
-                 text:  qsTr("back 1")
-                 onClicked: {
-
-                     tmp_Index = page_Loader.open_back(tmp_Index, 0)
-
-
-
-                 }
-
-             }
-
-             Button{
-                 width: 100
-                 height: parent.height
-                 text:  qsTr("page 2")
-                 onClicked: {
-
-                  tmp_Index = page_Loader.open_next(1)
-
-                 }
-
-             }
-
-             Button{
-                 width: 100
-                 height: parent.height
-                 text:  qsTr("page 3")
-                 onClicked: {
-
-                  tmp_Index = page_Loader.open_next(2)
-
-                 }
-
-             }
-
-
+        anchors{
+            right: parent.right
+            rightMargin: 100
+            bottom: parent.bottom
         }
 
+        Row{
+            width: parent.width
+            height: 48
+
+            Button{
+                width: 200
+                height: parent.height
+                text:  qsTr("Открыть файл")
+
+                onClicked: {
+
+                    history_Page.open_file()
+
+                }
+
+
+            }
+
+            Button{
+                width: 200
+                height: parent.height
+                text:  qsTr("вниз")
+                onClicked: {
+
+                    chart_Block_Page.create_Main_Scroll(30, false)
+
+                }
+
+            }
+
+            Button{
+                width: 200
+                height: parent.height
+                text:  qsTr("вверх")
+                onClicked: {
+
+                    chart_Block_Page.create_Main_Scroll(30, true)
+
+                }
+
+            }
+
+            Button{
+                width: 200
+                height: parent.height
+                text:  qsTr("Поиск файлов")
+
+                onClicked: {
+
+                    history_Page.search_file()
+                    //history_Page.open_file()
+
+                }
+
+
+            }
+
+        }
     }
 
 
 
+    /*List_With_Title{
+           id: defect_List
+           width:  800
+           height: 400 //parent.height
+           title: "Маршруты"
 
-    Page_Loader{
-
-        id: page_Loader
-
-        width: 300
-        height: 300
-
-        anchors.centerIn: parent
-        model: [
-            "qrc:/my_components/Page_Components/test_Page/Page_1.qml",
-            "qrc:/my_components/Page_Components/test_Page/Page_2.qml",
-            "qrc:/my_components/Page_Components/test_Page/Page_3.qml"
-         ]
-
-
-    }
+           header_model: [
+                   { title: qsTr("Устройство"), size: 0.2},
+                   { title: my_str.siteID, size: 0.2},
+                   { title: qsTr("Год"), size: 0.15},
+                   { title: qsTr("Месяц"), size: 0.15},
+                   { title: qsTr("Вид проверки"), size: 0.15},
+                   { title: qsTr("Статус"), size: 0.15}
 
 
+               ]
 
+           //title_name_model: [qsTr("Координата"), qsTr("Отстпуление"), my_str.extent, qsTr("Размер"), qsTr("Длинна"), qsTr("Признак"), my_str.set_speed, my_str.speed_limit]
+           //title_size_model: [0.12, 0.16, 0.1, 0.12, 0.1, 0.12, 0.14, 0.14]
 
-    Custom_Slider{
-        width: 200
-        anchors.right: parent.right
-        anchors.top: parent.top
+           model: history_Page.file_Model //   defect_model //charts_Page.chart_Block.My_Defect_Model  //Defect_Model
 
-        anchors.margins: 50
+           delegate: List_Row{
+               //listview: defect_ListView
+               model: [device_Name, siteId, year, month, type_Check, type_Processed] //[coord, defect, extent, amp, width_defect, sign, speed, speed_limit]
 
-    }
+               header_model: defect_List.header_model
 
+              // sizes: defect_List.title_size_model
+               //cur: defect_ListView.currentIndex
+
+           }
+
+       }
+
+    */
 }
