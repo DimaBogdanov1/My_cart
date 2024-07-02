@@ -148,6 +148,7 @@ HEADERS += \
     databases/aprior/peregon.h \
     databases/big_database.h \
     databases/my_database.h \
+    main_page.h \
     models/navigationmap_model.h \
     models_headers/big_database.h \
     mqtt/chart_points/chartpoints_microservice.h \
@@ -170,11 +171,16 @@ HEADERS += \
     mqtt/task/task_elements/task.h \
     mqtt/task/task_microservice.h \
     mythread.h \
+    pages/app_page.h \
     pages/chart_page.h \
+    pages/enums/home_page_names.h \
     pages/enums/name_main_pages.h \
     pages/finish_task_page.h \
-    pages/pick_account_page.h \
-    pages/register_page.h \
+    pages/history_chart_page.h \
+    pages/main_page.h \
+    pages/main_pages/home_custom_task_page.h \
+    pages/main_pages/home_start_page.h \
+    pages/task_db_page.h \
     pages/values/map_values.h \
     pages/values/moving_values.h \
     pages/values/my_sensors_values.h \

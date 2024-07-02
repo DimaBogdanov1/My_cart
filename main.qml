@@ -2,7 +2,9 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtCharts 2.15
-//import Style 1.0
+import QtQuick.Layouts 1.3
+
+import Main_Page 1.0
 
 import Qt.labs.platform 1.1 as Labs
 
@@ -20,7 +22,7 @@ ApplicationWindow {
 
     property bool flipped: false
 
-    title: qsTr("Проект")
+   // title: qsTr("Проект")
 
     Component.onCompleted: {
 
@@ -43,31 +45,59 @@ ApplicationWindow {
 
     }
 
-    ToastManager {
-         id: toast_tmp
-     } */
+ */
 
-    Flipable_Page{
-        id: flipable_Page
-        front_source: "qrc:/App_Page.qml" //"qrc:/pages/Login_Page.qml"
-        back_source:  ""
-        flipped: applicationWindow.flipped
+
+    Main_Page{
+        id: main_Page
     }
 
-
-
-    Loader{
-        id: start_Loader
-        property int index_Start: -1
-        readonly property var sourceStarts_Array: [ "../starts_elements/Splash_Screen.qml","../starts_elements/Onboard_Screen.qml"]
-
+    StackLayout {
+        id: stackLayout
         width: parent.width
         height: parent.height
-        //source: sourceStarts_Array[index_Start]
-        Component.onCompleted: index_Start =  0
+        currentIndex: 3 // //2 // main_Page.main_Frame_Page.page_num
 
+        Splash_Screen_Page_UI{
+            width: parent.width
+            height: parent.height
+
+            onNext_Page_Signal: {
+
+                //stackLayout.currentIndex = 2
+            }
+        }
+
+        First_Launch_Frame_Page_UI{
+            width: parent.width
+            height: parent.height
+        }
+
+        Onboard_Page_UI{
+            width: parent.width
+            height: parent.height
+
+            onNext_Page_Signal: {
+
+                stackLayout.currentIndex = 2
+            }
+        }
+
+        Flipable_Page{
+            id: flipable_Page
+            front_source: "qrc:/App_Page_UI.qml"  //"qrc:/pages/account_pages/Account_Pick_Page_UI.qml" // "qrc:/App_Page_UI.qml" //"qrc:/pages/Login_Page.qml"
+            back_source:  "" //"qrc:/App_Page_UI.qml"
+            flipped: applicationWindow.flipped
+        }
     }
 
+    Stories_Popup{
+        id: stories_Popup
+    }
+
+    ToastManager {
+         id: toast
+     }
 
 
 

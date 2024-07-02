@@ -17,6 +17,7 @@
 #include "../Export_Lib/file/export_db.h"
 
 #include "../Export_Lib/chart/chart_block.h"
+#include "../Export_Lib/chart/chart_pick_object.h"
 
 
 //#include "../Passport_DB_Lib/pages/task_values.h"
@@ -25,7 +26,10 @@
 //#include "../Export_Lib/task_values/task_km_values_2.h"
 #include "../Passport_DB_Lib/my_database.h"
 
-#include "../Design_Values_Lib/models/top_bars_models.h"
+#include "../Design_Values_Lib/top_bars_and_menu/models/chart_top_bars_models.h"
+#include "../Design_Values_Lib/top_bars_and_menu/models/map_models.h"
+
+//#include "../Export_Lib/top_bars_and_menu/models/top_bars_models.h"
 
 
 class Chart_Page : public QObject
@@ -34,9 +38,14 @@ class Chart_Page : public QObject
 
     Q_PROPERTY(Chart_Block* chart_Block MEMBER chart_Block NOTIFY chart_Block_Changed)
 
+    Q_PROPERTY(Chart_Pick_Object* chart_Pick_Object MEMBER chart_Pick_Object NOTIFY chart_Pick_Object_Changed)
+
     Q_PROPERTY(Moving_Values* moving_Values MEMBER moving_Values NOTIFY moving_Values_Changed)
 
-    Q_PROPERTY(Top_Bars_Models* top_Bars_Models MEMBER top_Bars_Models NOTIFY top_Bars_Models_Changed)
+    Q_PROPERTY(Chart_Top_Bars_Models* top_Bars_Models MEMBER top_Bars_Models NOTIFY top_Bars_Models_Changed)
+
+    Q_PROPERTY(Map_Models* map_top_Bars_Models MEMBER map_top_Bars_Models NOTIFY map_top_Bars_Models_Changed)
+
 
 public:
 
@@ -51,8 +60,10 @@ public:
         }
 
 
-        connect(top_Bars_Models, &Top_Bars_Models::menu_Model_Element_Clicked, this, &Chart_Page::slot_m);
+        //connect(top_Bars_Models, &Top_Bars_Models::menu_Model_Element_Clicked, this, &Chart_Page::slot_m);
 
+
+      //  connect(top_Bars_Models->get_Menu_Model(Top_Bars::Zoom_Model_Index), &Menu_Model::dataChanged, this, &Chart_Page::slot_w);
 
 
 
@@ -84,14 +95,34 @@ public:
 
         connect(chart_Block->get_Chart_Km_Values(), &Chart_Km_Values::remove_Fisrst_Km_Signal, this, &Chart_Page::slot_Remove_Fisrst_Km);
 
+     //   connect(chart_Pick_Object, &Chart_Top_Bars_Models::end_Route_Signal, this, &Chart_Page::slot_Open_Dialog);
+
+
+
+
+        connect(top_Bars_Models, &Chart_Top_Bars_Models::grid_View_Changed, this, &Chart_Page::slot_change_Grid_View);
+
+        connect(top_Bars_Models, &Chart_Top_Bars_Models::markTable_View_Changed, this, &Chart_Page::slot_change_MarkTable_View);
+
+        connect(top_Bars_Models, &Chart_Top_Bars_Models::additionalMeasure_View_Changed, this, &Chart_Page::slot_change_AdditionalMeasure_View);
+
+
+        connect(top_Bars_Models, &Chart_Top_Bars_Models::end_Route_Signal, this, &Chart_Page::slot_Open_Dialog);
+
+
+        connect(chart_Pick_Object, &Chart_Pick_Object::add_New_Object_Signal, this, &Chart_Page::slot_add_New_Object);
+
+
+
+
 
     }
 
     Q_INVOKABLE void set_New_Km(QString name, int finish_y, int sleepers_Type, int picket_position) {
 
-        QList<My_Pdf_Info*> list = {  test_get_My_Pdf_Info(43, "Октябрьская", 1, 600),
-                                      test_get_My_Pdf_Info(12, "Северная", 18, 600),
-                                      test_get_My_Pdf_Info(8, "Московская", 11, 600),
+        QList<My_Pdf_Info*> list = {  test_get_My_Pdf_Info(43, "Октябрьская", 1, 1000),
+                                     // test_get_My_Pdf_Info(12, "Северная", 18, 600),
+                                     // test_get_My_Pdf_Info(8, "Московская", 11, 600),
 
                                    };
 
@@ -175,7 +206,7 @@ public:
 
         Mark_Info *mark_Info = new Mark_Info(20, 2, 5, 15, 14, 7, "Пред: -КрдПЧ");
 
-        export_DB.addNew_Mark_Info(mark_Info, 0);
+        export_DB.addNew_Mark_Info(mark_Info, 1);
 
         export_DB.addNew_My_Pdf_Info(*my_Pdf_Info);
 
@@ -245,6 +276,7 @@ public:
 
                 chart_Block->add_Measure_Point_Step_1(index, value, isForwardMoving);
 
+
             }
         }
 
@@ -265,31 +297,28 @@ private:
 
     inline static Chart_Block *chart_Block = new Chart_Block;
 
+    inline static Chart_Pick_Object *chart_Pick_Object = new Chart_Pick_Object;
+
     inline static Moving_Values *moving_Values = new Moving_Values;
 
 
-    inline static Top_Bars_Models *top_Bars_Models = new Top_Bars_Models;
+    inline static Chart_Top_Bars_Models *top_Bars_Models = new Chart_Top_Bars_Models;
 
+    inline static Map_Models *map_top_Bars_Models = new Map_Models;
 
 
 
     inline static bool first_check = false;
 
 
-    void slot_m(int menu_index, int menu_element){
 
-        qDebug() << "eeeeeeeeeeeeeeeee menu_index = " + QString::number(menu_index);
-
-        qDebug() << "eeeeeeeeeeeeeeeee menu_element = " + QString::number(menu_element);
-
-    }
 
 
 
     My_Pdf_Info* test_get_My_Pdf_Info(int num_km, QString name_SiteId, int site_Id, int distance){
 
         QList<Sleepers> sleepers_List = {Sleepers(Type_Sleepers::Wood, 0, 300),
-                                        Sleepers(Type_Sleepers::Reinforced_Concrete, 300, 500)
+                                        Sleepers(Type_Sleepers::Reinforced_Concrete, 300, distance)
                                         };
 
         QList<Km_Help_Line> help_Line_List;
@@ -299,11 +328,11 @@ private:
 
                                                   };
         QList<Bridge> bridge_List = {
-                                     // Bridge(300, 350),
+                                      Bridge(300, 350),
                                      // Bridge(50, 100)
                                     };
 
-        QList<Arrow> arrow_List = { Arrow(Type_Arrows::Bottom_left, 250, 50, false, false, "6w"),
+        QList<Arrow> arrow_List = { Arrow(Type_Arrows::Bottom_left, 250, 50, false, false, "6a"),
                                    // Arrow(Type_Arrows::Bottom_right, 360, 50, false, true, "56"),
 
                                   //  Arrow(Type_Arrows::Double, 300, true, false, 202),
@@ -320,16 +349,16 @@ private:
 
 
         QList<Km_Help_Line>  railRoad_List = {//Km_Help_Line(200, 210),
-                                                 //Km_Help_Line(600, 640)
+                                                 Km_Help_Line(500, 515)
 
                                                   };
 
         QList<Chart_Object> chart_Object_List = { //Chart_Object(Type_Object::End_Of_The_Road, 500),
                                                   //Chart_Object(Type_Object::Path_Boundary, 300)
 
-                                                  Chart_Object(Type_Object::Km_Pillar, 300),
+                                                 // Chart_Object(Type_Object::Km_Pillar, 300),
 
-                                                   Chart_Object(Type_Object::Km_Mark, 500),
+                                                 //  Chart_Object(Type_Object::Km_Mark, 500),
 
                                                   /*Chart_Object(Type_Object::Km_Pillar, 200),
 
@@ -344,8 +373,8 @@ private:
 
         Km_Info *km_Info = new Km_Info(site_Id, //0,
                                        name_SiteId, //"Октябрьская",
-                                       "Новосокльники направление",
-                                       112233,
+                                       "Николаевская ветвь", // направление
+                                       10431,
                                        1,
                                        "Главный",
                                        /*22,
@@ -362,11 +391,11 @@ private:
         Pch_Info *pch_Info = new Pch_Info(22, 43, 11, 2);
 
         QList<Km_Help_Line> speed_PassTrain = {Km_Help_Line(0, 300, 80),
-                                                  Km_Help_Line(300, 500, 120)
+                                                  Km_Help_Line(300, distance, 120)
 
                                                  };
 
-        QList<Km_Help_Line> speed_FreightTrain = {Km_Help_Line(0, 500, 40),
+        QList<Km_Help_Line> speed_FreightTrain = {Km_Help_Line(0, distance, 40),
                                                   //Km_Help_Line(300, 500, 60)
 
                                                  };
@@ -434,15 +463,38 @@ private:
 
                     chart_Block->get_Chart_Km_Values());}
 
+
+    void slot_change_Grid_View(bool value){ emit grid_View_Changed(value);}
+
+    void slot_change_MarkTable_View(bool value){ emit markTable_View_Changed(value);}
+
+    void slot_change_AdditionalMeasure_View(bool value){ emit additionalMeasure_View_Changed(value);}
+
+    void slot_Open_Dialog(){ emit open_Dialog_Signal();}
+
+    void slot_add_New_Object(const User_Objects *user_Objects){
+
+        qDebug() << "Новый объект = " + user_Objects->get_note_text();
+
+        Export_DB export_DB(Export_Lib::db_path);
+
+        export_DB.addNew_UserObject(user_Objects, 0);
+    }
+
 signals:
 
 
    void chart_Block_Changed(const Chart_Block *value);
 
+   void chart_Pick_Object_Changed(const Chart_Pick_Object *value);
+
+
    void moving_Values_Changed(const Moving_Values *value);
 
 
-   void top_Bars_Models_Changed(const Top_Bars_Models *value);
+   void top_Bars_Models_Changed(const Chart_Top_Bars_Models *value);
+
+   void map_top_Bars_Models_Changed(const Map_Models *value);
 
 
    void chart_Km_Values_Changed(const Chart_Km_Values *value);
@@ -462,6 +514,19 @@ signals:
    void new_SpeedLine_Signal(const int type);
 
    void remove_Fisrst_Km_Signal();
+
+
+
+
+
+   void grid_View_Changed(const bool value);
+
+   void markTable_View_Changed(const bool value);
+
+   void additionalMeasure_View_Changed(const bool value);
+
+
+   void open_Dialog_Signal();
 
 };
 

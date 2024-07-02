@@ -3,6 +3,8 @@ import QtQuick.Controls 2.15
 
 
 import Warning_Page 1.0
+import Type_Content_Button 1.0
+import Type_SubIcon_Button 1.0
 
 import my_components 1.0
 
@@ -242,8 +244,8 @@ Item{
                 Custom_Button{
                     width: parent.width
                     text:  qsTr("Добавить предупреждение")
-                    type_Content: Custom_Button.Type_Content_Button.Text_And_Icon_Content
-                    iconHelp_source: Custom_Button.Type_SubIcon.Add_Icon
+                    type_Content: Type_Content_Button.Text_And_Icon_Content
+                    iconHelp_source: Type_SubIcon_Button.Add_Icon
 
                     onClicked_Signal: {
 
@@ -300,4 +302,5 @@ Item{
 
         }
     }
+
 }

@@ -5,7 +5,8 @@ import QtQuick.Layouts 1.3
 import QtCharts 2.15
 
 
-import History_Charts_Page 1.0
+import History_Chart_Page 1.0
+import History_Page_Names 1.0
 
 import my_components 1.0
 
@@ -14,7 +15,9 @@ Item {
     width: parent.width
     height: parent.height
 
-    History_Charts_Page{
+    signal back_Page_Signal
+
+    History_Chart_Page{
         id: history_Page
 
         onChart_Km_Values_Changed: {
@@ -56,11 +59,17 @@ Item {
         width: parent.width
         height: parent.height
         movingChart: false
+        top_bar_title: my_str.page_Names.chart_Page
+        top_bar_needNotification: false
+        top_bar_mainModel: [history_Page.top_Bars_Models.chartMain_Model]
+
         charts_Page: history_Page
 
         onBack_Click_Signal: {
 
-            toast.show("Нажали назад!", 3000, 1)
+            back_Page_Signal()
+
+            //toast.show("Нажали назад!", 3000, 1)
 
         }
     }

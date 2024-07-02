@@ -68,7 +68,7 @@ MQTT_Client::MQTT_Client(QObject *parent) : QObject(parent) //  () //(QObject *p
 
     m_client = new QMqttClient;
 
-    m_client->setHostname("127.0.0.1");  //MQTT_Help::getAddress()  // "192.168.1.157" //  "localhost" "172.27.2.33"
+    m_client->setHostname("127.0.0.1");  // "192.168.1.152" // "127.0.0.1" //MQTT_Help::getAddress()  // "192.168.1.157" //  "localhost" "172.27.2.33"
 
     m_client->setPort(1883);
 
@@ -104,36 +104,6 @@ void MQTT_Client::get_Diagnostic(bool start){
 void MQTT_Client::onNew_message(const QByteArray &message, const QMqttTopicName &topic) {
 
 
-    /*const QString content = message;
-
- //   qDebug() << "Topic: = " +  topic.name();
-
- //   qDebug() << "Message: = " + content;
-
-
-
-    QStringList myOptions;
-    myOptions << "chart" << "ins" << "export";
-
-
-
-    QStringList parts = topic.name().split('/');
-
-    int num_command;
-
-    QString topic_name;
-
-    topic_name = parts[1];
-
-    if(parts.length() > 2){
-
-        num_command = parts[2].toInt();
-    }
-
- //   qDebug() << "parts.length() = " + QString::number(parts.length() );
-
-    qDebug() << "topic_name = " + topic_name; */
-
 
     QPair<int, int> commandPair = MQTT_Help::getNumCommand(message, topic);
 
@@ -141,8 +111,6 @@ void MQTT_Client::onNew_message(const QByteArray &message, const QMqttTopicName 
     switch(commandPair.first){
 
     case 0: {
-
-        //ChartPoints_Microservice chartPoints_Microservice(this);
 
         ChartPoints_Microservice::add_Command(commandPair.second, message);
 

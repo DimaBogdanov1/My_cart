@@ -37,7 +37,7 @@ QList<double> MQTT_Help::getValueFrom_JSON(const QByteArray &message, QList<QStr
     QString formatted = doc.toJson(QJsonDocument::Indented);
 
 
-    qWarning().noquote() << formatted;
+    //qWarning().noquote() << formatted;
 
 
     QJsonObject jsonObject = doc.object();
@@ -62,9 +62,9 @@ QPair<int, int> MQTT_Help::getNumCommand(const QByteArray &message, const QMqttT
 
     const QString content = message;
 
- //   qDebug() << "Topic: = " +  topic.name();
+   // qDebug() << "Topic: = " +  topic.name();
 
- //   qDebug() << "Message: = " + content;
+   // qDebug() << "Message: = " + content;
 
 
 
@@ -88,7 +88,7 @@ QPair<int, int> MQTT_Help::getNumCommand(const QByteArray &message, const QMqttT
 
  //   qDebug() << "parts.length() = " + QString::number(parts.length() );
 
-    qDebug() << "topic_name = " + topic_name;
+    //qDebug() << "topic_name = " + topic_name;
 
     return QPair{myOptions.indexOf(topic_name), num_command};
 }

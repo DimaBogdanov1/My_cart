@@ -24,7 +24,7 @@ Item {
             model: [
                 "qrc:/pages/home_pages/Drop_db_Page.qml",
                 "qrc:/pages/home_pages/Task_Page.qml",
-                "qrc:/pages/home_pages/Charts_Page.qml"
+                 "qrc:/pages/main_pages/Home_Chart_Page_UI.qml" //"qrc:/pages/home_pages/Charts_Page.qml"
              ]
 
         }

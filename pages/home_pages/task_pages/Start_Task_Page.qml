@@ -5,6 +5,7 @@ import QtCharts 2.15
 import QtQuick.Dialogs 1.0
 import QtQuick.Layouts 1.15
 
+import Type_Button 1.0
 
 
 import my_components 1.0
@@ -117,9 +118,10 @@ Item{
 
             Custom_Button{
                 width: 200
-                type_Button:  Custom_Button.Type_Button.Outlined_Button
+                type_Button:  Type_Button.Outlined_Button
                 anchors.horizontalCenter: parent.horizontalCenter
                 text:  qsTr("finish task")
+                color: Style.background_Color
                 onClicked_Signal: {
 
 
@@ -131,7 +133,9 @@ Item{
 
             Custom_Button{
                 width: 200
-                type_Button:  Custom_Button.Type_Button.Outlined_Button
+                type_Button:  Type_Button.Outlined_Button
+                color: Style.background_Color
+
                 anchors.horizontalCenter: parent.horizontalCenter
                 text:  qsTr("custom task")
                 onClicked_Signal: {
@@ -144,7 +148,9 @@ Item{
 
             Custom_Button{
                 width: 200
-                type_Button:  Custom_Button.Type_Button.Outlined_Button
+                type_Button:  Type_Button.Outlined_Button
+                color: Style.background_Color
+
                 anchors.horizontalCenter: parent.horizontalCenter
                 text:  qsTr("basic task")
                 onClicked_Signal: {
@@ -173,7 +179,9 @@ Item{
              Custom_Button{
                  width: 200
                  height: ui.height_Button
-                 type_Button:  Custom_Button.Type_Button.Outlined_Button
+                 type_Button:  Type_Button.Outlined_Button
+                 color: Style.background_Color
+
                  anchors.horizontalCenter: parent.horizontalCenter
                  text:  qsTr("Down")
                  onClicked_Signal: {
@@ -188,7 +196,9 @@ Item{
              Custom_Button{
                  width: 200
                  height: ui.height_Button
-                 type_Button:  Custom_Button.Type_Button.Outlined_Button
+                 type_Button:  Type_Button.Outlined_Button
+                 color: Style.background_Color
+
                  anchors.horizontalCenter: parent.horizontalCenter
                  text:  qsTr("next")
                  onClicked_Signal: {
@@ -203,8 +213,10 @@ Item{
              Custom_Button{
                  width: 200
                  height: ui.height_Button
-                 type_Button:  Custom_Button.Type_Button.Outlined_Button
+                 type_Button:  Type_Button.Outlined_Button
                  anchors.horizontalCenter: parent.horizontalCenter
+                 color: Style.background_Color
+
                  text:  qsTr("open db")
                  onClicked_Signal: {
 
@@ -218,7 +230,9 @@ Item{
              Custom_Button{
                  width: 200
                  height: ui.height_Button
-                 type_Button:  Custom_Button.Type_Button.Outlined_Button
+                 type_Button:  Type_Button.Outlined_Button
+                 color: Style.background_Color
+
                  anchors.horizontalCenter: parent.horizontalCenter
                  text:  qsTr("dialog")
                  onClicked_Signal: {
@@ -233,7 +247,9 @@ Item{
              Custom_Button{
                  width: 200
                  height: ui.height_Button
-                 type_Button:  Custom_Button.Type_Button.Outlined_Button
+                 type_Button:  Type_Button.Outlined_Button
+                 color: Style.background_Color
+
                  anchors.horizontalCenter: parent.horizontalCenter
                  text:  qsTr("add old warning")
                  onClicked_Signal: {
@@ -248,7 +264,9 @@ Item{
              Custom_Button{
                  width: 200
                  height: ui.height_Button
-                 type_Button:  Custom_Button.Type_Button.Outlined_Button
+                 type_Button:  Type_Button.Outlined_Button
+                 color: Style.background_Color
+
                  anchors.horizontalCenter: parent.horizontalCenter
                  text:  qsTr("delete old warning")
                  onClicked_Signal: {

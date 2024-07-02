@@ -19,6 +19,8 @@ private:
 
     MQTT_Client *m_pointer;
 
+    inline static int coun_Point = 0, frequency_Point_In_UI = 1; //500; //1; //500;
+
     enum Command{
         Result_Diagnostic_Command,
         Ins_Command,

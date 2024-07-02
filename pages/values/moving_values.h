@@ -66,7 +66,7 @@ public:
 
     inline static bool checkFirstMove = false;
 
-    inline static float speed = 6;
+    inline static float speed = 0;
 
 
 

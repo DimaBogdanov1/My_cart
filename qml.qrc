@@ -6,36 +6,44 @@
         <file>Toast.qml</file>
         <file>ToastManager.qml</file>
         <file>pages/Home_Page.qml</file>
-        <file>starts_elements/Splash_Screen.qml</file>
-        <file>starts_elements/Onboard_Screen.qml</file>
-        <file>App_Page.qml</file>
+        <file>App_Page_UI.qml</file>
         <file>test_qml.qml</file>
         <file>pages/Calib_Page.qml</file>
-        <file>pages/History_Page.qml</file>
         <file>pages/Settings_Page.qml</file>
         <file>pages/home_pages/Task_Page.qml</file>
-        <file>pages/home_pages/Charts_Page.qml</file>
         <file>pages/home_pages/Drop_db_Page.qml</file>
         <file>sqlite/PUT.SQL</file>
         <file>sqlite/ROAD.SQL</file>
         <file>sqlite/NAIM.SQL</file>
         <file>sqlite/ITEMCORRECT.SQL</file>
-        <file>pages/Login_Page.qml</file>
-        <file>pages/login_pages/Register_Page.qml</file>
-        <file>pages/login_pages/Authorization_Page.qml</file>
-        <file>pages/login_pages/Pick_Account_Page.qml</file>
-        <file>pages/Help_Page.qml</file>
         <file>pages/home_pages/task_pages/start_task_pages/Basic_Task_Page.qml</file>
         <file>pages/home_pages/task_pages/start_task_pages/Custom_Task_Page.qml</file>
         <file>pages/home_pages/task_pages/Finish_Task_Page.qml</file>
         <file>pages/home_pages/task_pages/Start_Task_Page.qml</file>
-        <file>pages/settings_pages/Admin_Page.qml</file>
-        <file>pages/settings_pages/General_Settings_Page.qml</file>
-        <file>pages/settings_pages/ProgButon_Settings_Page.qml</file>
-        <file>pages/settings_pages/AboutApp_Settings_Page.qml</file>
         <file>pages/home_pages/task_pages/start_task_pages/Warning_Page.qml</file>
         <file>pages/Diagnostic_Page.qml</file>
         <file>pages/home_pages/Start_Page.qml</file>
         <file>pages/home_pages/Test_Page_2.qml</file>
+        <file>pages/history_pages/History_File_Page_UI.qml</file>
+        <file>pages/history_pages/History_Chart_Page_UI.qml</file>
+        <file>pages/history_pages/History_Frame_Page_UI.qml</file>
+        <file>pages/main_pages/Home_Frame_Page_UI.qml</file>
+        <file>pages/main_pages/Home_Start_Page_UI.qml</file>
+        <file>pages/main_pages/Home_Task_DB_Page_UI.qml</file>
+        <file>pages/main_pages/Home_Custom_Task_Page_UI.qml</file>
+        <file>pages/main_pages/Home_Warning_Page_UI.qml</file>
+        <file>pages/main_pages/Home_Finish_Task_Page_UI.qml</file>
+        <file>pages/main_pages/Home_Chart_Page_UI.qml</file>
+        <file>pages/account_pages/Account_Register_Page_UI.qml</file>
+        <file>pages/account_pages/Account_Pick_Page_UI.qml</file>
+        <file>pages/help_pages/Help_Pick_Question_Page_UI.qml</file>
+        <file>pages/help_pages/Help_Frame_Page_UI.qml</file>
+        <file>pages/help_pages/Help_Answer_Question_Page_UI.qml</file>
+        <file>pages/settings_pages/Settings_Frame_Page_UI.qml</file>
+        <file>pages/settings_pages/Settings_General_Page_UI.qml</file>
+        <file>pages/settings_pages/Settings_Sensors_Page_UI.qml</file>
+        <file>pages/settings_pages/Settings_Admin_Page_UI.qml</file>
+        <file>pages/settings_pages/Settings_Update_Page_UI.qml</file>
+        <file>pages/settings_pages/Settings_Developer_Page_UI.qml</file>
     </qresource>
 </RCC>

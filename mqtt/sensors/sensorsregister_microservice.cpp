@@ -117,19 +117,20 @@ void SensorsRegister_Microservice::add_INS_Command(const QByteArray &message){
 
     QList<double> ins_values =  MQTT_Help::getValueFrom_JSON(message, QList<QString> {"latitude", "longitude", "yaw", "pitch" });
 
-    if(ins_values.length() == 4){
+    /*if(ins_values.length() == 4){
 
-       /* Map_Values a;
 
-        a.setYaw(ins_values.at(2));
-
-        a.setPosition(QGeoCoordinate(ins_values.at(0), ins_values.at(1)));
-
-        a.add_Coordinate(QGeoCoordinate(ins_values.at(0), ins_values.at(1)));
-
-        a.floatChanged(ins_values.at(2)); */
 
         //Map_Values::setYaw(ins_values.at(2));
+
+
+
+
+    }*/
+
+   // qDebug() << "coun_Point = " + QString::number(coun_Point) + " frequency_Point_In_UI = " + QString::number(frequency_Point_In_UI);
+
+    if(coun_Point == frequency_Point_In_UI){
 
         Sensors_Values::yaw_value = ins_values.at(2);
 
@@ -137,7 +138,13 @@ void SensorsRegister_Microservice::add_INS_Command(const QByteArray &message){
 
         emit m_pointer->newGPS_signal(ins_values.at(0), ins_values.at(1), ins_values.at(2), ins_values.at(3));
 
+        coun_Point = 0;
+
     }
+
+    coun_Point++;
+
+
 }
 
 

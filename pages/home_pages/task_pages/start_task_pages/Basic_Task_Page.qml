@@ -2,6 +2,8 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 
+import Type_Content_Button 1.0
+import Type_SubIcon_Button 1.0
 
 import my_components 1.0
 
@@ -298,8 +300,8 @@ Item{
                  Custom_Button{
                      id: start_Button
                      width: parent.width
-                     type_Content: Custom_Button.Type_Content_Button.Text_And_Icon_Content
-                     iconHelp_source:  Custom_Button.Type_SubIcon.Next_Icon
+                     type_Content: Type_Content_Button.Text_And_Icon_Content
+                     iconHelp_source:  Type_SubIcon_Button.Next_Icon
                      text:  qsTr("Продолжить")
                      onClicked_Signal: {
 

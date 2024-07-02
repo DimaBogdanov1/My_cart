@@ -316,7 +316,7 @@ void Test_Class::add_New_Km(int num_Km, QString name_SiteId, int site_Id, int di
     QList<Chart_Object> chart_Object_List = { Chart_Object(Type_Object::Isolated_Junction, 100),
                                              // Chart_Object(Type_Object::Km_Pillar, 200),
 
-                                              Chart_Object(Type_Object::Km_Pillar, 250),
+                                              //Chart_Object(Type_Object::Km_Pillar, 250),
 
                                               Chart_Object(Type_Object::End_Of_The_Road, 930),
                                               Chart_Object(Type_Object::Path_Boundary, 300)

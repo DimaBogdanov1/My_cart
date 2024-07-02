@@ -86,14 +86,13 @@ void ChartPoints_Microservice::add_Sample(int index, const QByteArray &message){
 
     QList<double> list_values = MQTT_Help::getValueFrom_JSON(message, QList<QString> {"widthTrack", "odo", "move_horizontal_left", "move_horizontal_right"});
 
-
     bool isForward = check_Forward(list_values.at(1));
 
 
     check_Point(index, list_values.at(0), isForward);
 
 
-    Calculate_Riht::add_Riht(list_values.at(1), list_values.at(2), list_values.at(3), Map_Values::yaw_value, isForward);
+   // Calculate_Riht::add_Riht(list_values.at(1), list_values.at(2), list_values.at(3), Map_Values::yaw_value, isForward);
 
 
 
@@ -101,7 +100,7 @@ void ChartPoints_Microservice::add_Sample(int index, const QByteArray &message){
 
     double move_vertical_right = 1;
 
-    Calculate_Down::add_Down(list_values.at(1), move_vertical_left, move_vertical_right, Map_Values::pitch_value, isForward);
+  //  Calculate_Down::add_Down(list_values.at(1), move_vertical_left, move_vertical_right, Map_Values::pitch_value, isForward);
 
 
 
@@ -174,6 +173,9 @@ void ChartPoints_Microservice::check_Point(int index, float value, bool isForwar
 
 
      Chart_Page::add_Point_Measure(index, value, isForwardMoving);
+
+    // Chart_Page::add_Point_Measure(index, value, true);
+
 
     // Тестовый обыгрыш (поймали пропуск)
   /*  if(index == Name_Measures::Level_Measure && value == -5000){

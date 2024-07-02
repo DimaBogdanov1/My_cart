@@ -34,14 +34,25 @@
 #include "../Test_Dynamic_Lib/test_dynamic_lib.h"
 #include "../Log_Lib/log_lib.h"
 #include "../Passport_DB_Lib/passport_db_lib.h"
-#include "../Notifications_Lib/models/notifications_model.h"
+
+//#include "../Notifications_Lib/models/notifications_model.h"
+#include "../Notifications_Lib/notification_page.h"
+
 #include "../Design_Values_Lib/design_values_lib.h"
 #include "../Design_Values_Lib/style.h"
+#include "../Design_Values_Lib/navigation_values.h"
+#include "../Design_Values_Lib/stories_values.h"
+
 
 #include "../Strings_Lib/strings_lib.h"
 
 #include "../User_DB_Lib/accounts/colors_profile.h"
-#include "../User_DB_Lib/accounts/authorized_account.h"
+
+#include "../User_DB_Lib/pages/register_page.h"
+#include "../User_DB_Lib/pages/authorized_account.h"
+#include "../User_DB_Lib/pages/pick_account_page.h"
+
+
 #include "../Export_Lib/file/data_types/chart_types/enums/type_sleepers.h"
 #include "../Export_Lib/file/data_types/chart_types/enums/type_arrows.h"
 #include "../Export_Lib/file/data_types/chart_types/enums/type_objects.h"
@@ -50,24 +61,32 @@
 #include "../Export_Lib/file/data_types/chart_types/enums/subtypes_line.h"
 #include "../Export_Lib/file/data_types/chart_types/enums/type_areas.h"
 #include "../Export_Lib/file/data_types/chart_types/enums/type_trains.h"
-#include "../Export_Lib/pages/history_charts_page.h"
+//#include "../Export_Lib/pages/history_charts_page.h"
+#include "../Export_Lib/pages/enums/history_page_names.h"
 
 
 
 #include "pages/chart_page.h"
+#include "pages/task_db_page.h"
+#include "pages/history_chart_page.h"
+
 #include "pages/warning_page.h"
-#include "pages/register_page.h"
-//#include "pages/authorized_account.h"
-#include "pages/pick_account_page.h"
+
 #include "pages/finish_task_page.h"
+#include "pages/app_page.h"
+#include "pages/main_page.h"
+#include "pages/main_pages/home_start_page.h"
+#include "pages/main_pages/home_custom_task_page.h"
+
 #include "pages/values/map_values.h"
 #include "pages/values/my_sensors_values.h"
 
-#include "../Passport_DB_Lib/pages/custom_task_page.h"
-#include "../Passport_DB_Lib/pages/task_page.h"
+//#include "../Passport_DB_Lib/pages/custom_task_page.h"
+//#include "../Passport_DB_Lib/pages/task_page.h"
 
 
 #include "pages/enums/name_main_pages.h"
+#include "pages/enums/home_page_names.h"
 
 //#include <QtQuickTest>
 //QUICK_TEST_MAIN(example)
@@ -78,25 +97,31 @@
 
 void registerPages(){
 
-    qmlRegisterType<Task_Page>("Task_Page", 1, 0, "Task_Page");
+   // qmlRegisterType<Task_Page>("Task_Page", 1, 0, "Task_Page");
 
     qmlRegisterType<Chart_Page>("Chart_Page", 1, 0, "Chart_Page");
+
+    qmlRegisterType<Task_DB_Page>("Task_DB_Page", 1, 0, "Task_DB_Page");
+
 
     qmlRegisterType<Warning_Page>("Warning_Page", 1, 0, "Warning_Page");
 
     qmlRegisterType<Register_Page>("Register_Page", 1, 0, "Register_Page");
 
-    //qmlRegisterType<Authorized_Account>("Authorized_Account", 1, 0, "Authorized_Account");
 
     qmlRegisterType<Colors_Profile>("Colors_Profile", 1, 0, "Colors_Profile");
 
     qmlRegisterType<Pick_Account_Page>("Pick_Account_Page", 1, 0, "Pick_Account_Page");
 
+
+
     qmlRegisterType<Finish_Task_Page>("Finish_Task_Page", 1, 0, "Finish_Task_Page");
 
-    qmlRegisterType<Custom_Task_Page>("Custom_Task_Page", 1, 0, "Custom_Task_Page");
+    qmlRegisterType<Home_Start_Page>("Home_Start_Page", 1, 0, "Home_Start_Page");
 
-    qmlRegisterType<History_Charts_Page>("History_Charts_Page", 1, 0, "History_Charts_Page");
+    qmlRegisterType<Home_Custom_Task_Page>("Home_Custom_Task_Page", 1, 0, "Home_Custom_Task_Page");
+
+    qmlRegisterType<History_Chart_Page>("History_Chart_Page", 1, 0, "History_Chart_Page");
 
 
     qmlRegisterUncreatableType<Type_Sleepers>("Type_Sleepers", 1, 0, "Type_Sleepers", "Not creatable as it is an enum type");
@@ -122,6 +147,24 @@ void registerPages(){
     qmlRegisterUncreatableType<Type_Areas>("Type_Areas", 1, 0, "Type_Areas", "Not creatable as it is an enum type");
 
     qmlRegisterUncreatableType<Type_Trains>("Type_Trains", 1, 0, "Type_Trains", "Not creatable as it is an enum type");
+
+
+
+
+    qmlRegisterType<App_Page>("App_Page", 1, 0, "App_Page");
+
+    qmlRegisterUncreatableType<History_Page_Names>("History_Page_Names", 1, 0, "History_Page_Names", "Not creatable as it is an enum type");
+
+
+
+
+    qmlRegisterUncreatableType<Home_Page_Names>("Home_Page_Names", 1, 0, "Home_Page_Names", "Not creatable as it is an enum type");
+
+
+    qmlRegisterType<Main_Page>("Main_Page", 1, 0, "Main_Page");
+
+
+   // qmlRegisterType<Notifications>("Notifications", 1, 0, "Notifications");
 
 }
 
@@ -216,6 +259,30 @@ int main(int argc, char *argv[])
     app.installTranslator(&mTranslator);
 
 
+    Notification_Page notification_page;
+
+
+   // Notifications_Model notification_model;
+
+   // notification_model.addNotification("Закончился срок юстировки!", 1);
+
+
+    Strings_Lib strings_Lib;
+
+    Authorized_Account authorized_Account;
+
+    Design_Values_Lib design_Values_Lib;
+
+    Style style;
+
+    Navigation_Values navigation_Values;
+
+    Stories_Values stories_Values;
+
+
+    Test_Class test_Class;
+
+
     QQmlApplicationEngine engine;    
    // engine.rootContext()->setContextProperty("mytrans", (QObject*)&mTrans);
 
@@ -228,46 +295,42 @@ int main(int argc, char *argv[])
 
 
 
+    //engine.rootContext()->setContextProperty("Notifications_Model", &notification_model);
 
-    Notifications_Model notification_model;
-
-    notification_model.addNotification("У нас всё работает", 1);
-
-    engine.rootContext()->setContextProperty("Notifications_Model", &notification_model);
+    engine.rootContext()->setContextProperty("Notification_Page", &notification_page);
 
 
-    Authorized_Account authorized_Account;
-
-    engine.rootContext()->setContextProperty("Authorized_Account", &authorized_Account);
-
-
-    Strings_Lib strings_Lib;
 
     engine.rootContext()->setContextProperty("my_str", &strings_Lib);
 
 
 
+    engine.rootContext()->setContextProperty("authorized_Account", &authorized_Account);
 
-    Design_Values_Lib design_Values_Lib;
+
 
     engine.rootContext()->setContextProperty("ui", &design_Values_Lib);
 
 
     //qmlRegisterSingletonType(QUrl("qrc:/my_components/Style.qml"), "Style", 1, 0, "Style"); // Регестрируем Тип Style В QML Для Изменения Темы В Приложении
 
-    Style style;
 
     engine.rootContext()->setContextProperty("Style", &style);
 
+    engine.rootContext()->setContextProperty("Navigation_Values", &navigation_Values);
+
+    engine.rootContext()->setContextProperty("Stories_Values", &stories_Values);
 
 
-    Test_Class test_Class;
 
     engine.rootContext()->setContextProperty("Test_Class", &test_Class);
 
 
 
     engine.addImportPath("qrc:/");
+
+
+
 
 
     engine.load(QUrl("qrc:/main.qml")); // Загружаем QML
